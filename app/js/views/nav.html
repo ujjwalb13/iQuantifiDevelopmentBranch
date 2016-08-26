@@ -1,0 +1,117 @@
+<div ng-controller="NavCtrl">
+
+  <div ng-if="showMenu('default')">
+    <!-- Desktop and tablet nav -->
+    <div class="container container-fluid hidden-xs">
+      <div class="row">
+        <div class="nav-content">
+          <div class="navbar-header col-sm-4">
+            <a class="navbar-brand" href="/#/"><img class="logo" ng-src="/images/organization-logos/{{organizationSlug()}}.png"></a>
+          </div>
+          <div class="navbar-header-center col-sm-4" ng-controller="AlertsCtrl">
+            <!--
+            <span ng-repeat="alert in alerts" class="alert-shortage" ng-show="alert.id == 'shortage'">
+              <i class="icon icon-ft-fix-shotage"></i>
+              <span ng-click="goToCashfinder()" class="visible-lg">
+                You have a shortage. Fix It
+              </span>
+              <span ng-click="goToCashfinder()" class="hidden-lg">
+                Shortage
+              </span>
+              <i class="fa fa-angle-right"></i>
+            </span>
+            -->
+          </div>
+          <div class="navbar-right col-sm-4">
+            <ul class="nav navbar-nav">
+              <li>
+                <a>{{ currentUser.email }}</a>
+              <li>
+                <a ng-click="toggleMainMenu()">Menu</a>
+              </li>
+            </ul>
+          </div>
+          <div ng-include src="'views/main_menu.html'"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Phone nav -->
+    <div class="nav-container container-fluid visible-xs">
+      <ul class="nav navbar-nav">
+        <li class="user-dropdown-container dropdown admin">
+          <a href="#my-menu" class="user mobile-toggle slide-link" ng-hide="backPath"><i class="fa fa-bars fa-lg"></i></a>
+          <a ng-href="{{backPath}}" class="mobile-toggle" ng-show="backPath"><i class="fa fa-chevron-left fa-lg"></i></a>
+          <h1 ng-show="location.path()=='/'">Dashboard</h1>
+          <h1 ng-show="location.path()=='/add-goal'">Add a Goal</h1>
+          <h1 ng-show="location.path().split('/')[1]=='people'">Household</h1>
+          <h1 ng-show="location.path().split('/')[1]=='accounts'">Accounts</h1>
+          <h1 ng-show="location.path()=='/expenses'">Monthly Expenses</h1>
+          <h1 ng-show="location.path()=='/experience'">Experience</h1>
+          <h1 ng-show="location.path()=='/feedback'">Feedback</h1>
+          <h1 ng-show="location.path().split('/')[1]=='incomes'">Income</h1>
+          <h1 ng-show="location.path()=='/settings'">Settings</h1>
+          <h1 ng-show="location.path().split('/')[1]=='actions'">Actions</h1>
+          <h1 ng-show="location.path().split('/')[1]=='summaries'">{{summaryGoal.name}}</h1>
+          <h1 ng-show="location.path()=='/what-if'">What If&hellip;</h1>
+          <h1 ng-show="location.path()=='/can-i-buy'">Can I Buy&hellip;</h1>
+          <h1 ng-show="location.path().split('/')[1]=='cashfinder'">Cashfinder</h1>
+          <h1 ng-show="location.path().split('/')[1]=='policies'">Policies</h1>
+
+          <h1 ng-show="location.path()=='/onboard/family'">Family</h1>
+          <h1 ng-show="location.path()=='/onboard/experience'">Experience</h1>
+          <h1 ng-show="location.path().split('/')[2]=='accounts'">Accounts</h1>
+          <h1 ng-show="location.path()=='/onboard/manual-expenses'">Expenses</h1>
+          <h1 ng-show="location.path()=='/onboard/manual-income'">Income</h1>
+          <h1 ng-show="location.path()=='/onboard/goals'">Set Up Your Goals</h1>
+
+          <div class="right-action col-xs-3" ng-show="location.path().split('/')[1]=='cashfinder'">
+            <span>Shortage</span>
+            <span>{{shortage | dollars}}</span>
+          </div>
+
+          <div class="edit right-action col-xs-3" ng-show="location.path().split('/')[1]=='summaries' && location.path().split('/')[2] != 'reserves'">
+            <button class="iq-submit-btn btn btn-success" ng-click="openEditModal(summaryGoal.goal_type, 'Edit', summaryGoal.category, summaryGoal)"><i class="fa fa-pencil"></i></button>
+          </div>
+
+          <nav id="my-menu" mobile-nav>
+            <ul>
+              <img class="logo" src="/images/iquantifi_logo_md.png">
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/timeline">Dashboard</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/actions">Action List <span class="badge pull-right">{{incompleteActionsCount}}</span></a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/what-if">What If&hellip;</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/can-i-buy">Can I Buy&hellip;</a></li>
+              <li ng-show="currentUser" class="nav-break"><a>Manage Your Cash Flow</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/incomes">Income</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/expenses">Expenses</a></li>
+              <li ng-show="currentUser" class="nav-break"><a>Settings and Customization</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/people">Household</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/accounts">Accounts</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/experience">Experience</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/feedback">Feedback</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/settings">Settings</a></li>
+              <li ng-show="currentUser.is_setup_complete"><a href="/#/faq">FAQ</a></li>
+              <li ng-show="currentUser" id="dropdown-logout"><a href ng-click="logout()">Logout</a></li>
+              <li ng-hide="currentUser"><a href="/#/login">Log In</a></li>
+            </ul>
+          </nav>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div ng-if="showMenu('demo-login')" ng-include src="'/views/demo/nav.html'"></div>
+
+  <div ng-if="showMenu('demo-dash')" ng-include src="'/views/demo/nav-dash.html'"></div>
+
+
+  <!-- save timeline drop down -->
+  <div class="save-dropdown-menu" ng-class="{'ui-show': saveMenu}">
+    <div>
+      <span>A new plan has been created for you based on the changes you've made.</span>
+      <button type="button" class="cancel btn btn-default" ng-click="cancel()">Cancel</button>
+      <button type="button" class="save btn btn-success" ng-click="save()">Save</button>
+    </div>
+  </div>
+</div>

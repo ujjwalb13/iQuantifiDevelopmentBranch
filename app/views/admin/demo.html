@@ -1,0 +1,70 @@
+<div class="container">
+  <h3>Create Demo Account</h3>
+
+  <form class="demo-form" name="demoForm" role="form" ng-submit="submit(demoForm.$valid)" novalidate>
+    <div class="form-group name" ng-class="{'has-error': submitted && demoForm.name.$invalid}">
+      <label class="control-label" for="name">Email</label>
+      <input type="email" class="form-control" name="name" required ng-model="demo.name">
+      <span ng-show="submitted && demoForm.name.$error.required" class="help-block">Email is required.</span>
+    </div>
+
+    <div class="form-group password" ng-class="{'has-error': submitted && demoForm.password.$invalid}">
+      <label class="control-label" for="password">Password</label>
+      <input type="text" class="form-control" name="password" required ng-model="demo.password">
+      <span ng-show="submitted && demoForm.password.$error.required" class="help-block">Password is required.</span>
+    </div>
+
+    <div class="form-group organization" ng-class="{'has-error': submitted && demoForm.organization.$invalid}">
+      <label class="control-label" for="organization">Organization</label>
+      <select class="form-control" id="organization" name="organization" required ng-model="demo.organization_id" ng-options="organization.id as organization.name for organization in organizations"></select>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <strong>Please choose to either have the client onboard or prefill the account.</strong>
+      </div>
+      <div class="col-sm-6">
+        <h3>Empty account</h3>
+        <div class="form-group" ng-class="{'has-error': submitted && demoForm.goals.$invalid}">
+          <label class="control-label">Force on-boarding?</label>
+          <label class="radio-inline">
+            <input type="radio" name="onboard" id="onboardRadio1" ng-value="true" ng-model="demo.onboard"> Yes
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="onboard" id="onboardRadio2" ng-value="false" ng-model="demo.onboard"> No
+          </label>
+        </div>
+
+      </div>
+      <div class="col-sm-6">
+        <h3>Prefill account</h3>
+
+        <div class="form-group" ng-class="{'has-error': submitted && demoForm.goals.$invalid}">
+          <label class="control-label">Create goals for this account?</label>
+          <label class="radio-inline">
+            <input type="radio" name="goals" id="goalsRadio1" ng-value="true" ng-model="demo.goals"> Yes
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="goals" id="goalsRadio2" ng-value="false" ng-model="demo.goals"> No
+          </label>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': submitted && demoForm.debts.$invalid}">
+          <label class="control-label">Create debts for this account?</label>
+          <label class="radio-inline">
+            <input type="radio" name="debts" id="debtsRadio1" ng-value="true" ng-model="demo.debts"> Yes
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="debts" id="debtsRadio2" ng-value="false" ng-model="demo.debts"> No
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+
+    <button type="submit" class="iq-submit-btn btn-primary btn" ng-disabled="submitted && accountForm.$invalid" ng-hide="processing">Save</button>
+    <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+    <a class="iq-submit-btn btn" href="/#/admin">Back</a>
+  </form>
+</div>

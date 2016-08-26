@@ -1,0 +1,73 @@
+<div class="sc-overview blue" ng-class="{'sc-insurance-cover': !$first}">
+  <div class="container sc-container">
+    <div class="arrow-down" ng-if="!$first"></div>
+    <div class="heading-block text-center blue shield-bg" ng-if="$first">
+      <div class="icon">
+        <img class="shadow" src="/images/summaries/heading-shadow.png" ng-if="goalKind!='protection'">
+        <img class="icon-img" ng-src="/images/ignore/goal-huge-{{goalKind}}.png">
+      </div>
+      <span class="amt-target">
+        <img src="/images/summaries/shadow-top.png" class="img-responsive shadow-top">
+        <img src="/images/summaries/shadow-bottom.png" class="img-responsive shadow-bottom">
+        {{insuranceHeading}} Insurance
+      </span>
+    </div>
+    <div class="row text-center">
+      <h1 class="main-heading">{{policy.user.first_name}}'s {{ goalKind == 'care_policy' ? 'Long Term Care' : 'Insurance' }} Coverage</h1>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 date-block clearfix" ng-class="{orange: goalType=='debt', green: goalType!='debt'}">
+        <div class="skew-neg clearfix" ng-if="goalKind != 'care_policy'">
+          <div class="skew-pos text-left">
+            <span>Annual Income</span>
+            <span>{{policy.income | dollars}}</span>
+          </div>
+        </div>
+        <div class="tabular-data clearfix" ng-if="goalKind != 'care_policy'">
+          <div class="clearfix" ng-repeat="part in tableParts">
+            <div class="col-sm-8 text-left">{{part['title']}}</div>
+            <div class="col-sm-4 text-right">{{policy[part['attribute']] | dyno:part['filter']}}</div>
+          </div>
+        </div>
+        <div class="skew-neg clearfix pull-right">
+          <div class="skew-pos text-right">
+            <span>{{amountTitle}}</span>
+            <span>{{policy.need | dollars}}</span>
+          </div>
+        </div>
+        <p class="calculation-info" ng-if="goalKind=='life_policy'">*Calculation includes additional factors such as Inflation, Future Value, etc.</p>
+      </div>
+      <div class="col-sm-4">
+        <div class="donut-chart-container clearfix" ng-class="{policy: goalKind=='life_policy' || goalKind=='disability_policy' || goalKind=='care_policy'}">
+          <div class="current text-center">{{policy.total | dollars}} Current</div>
+          <track-donut complete="policy.percentComplete" incomplete="policy.percentIncomplete" per-month="currentPeriod.amount" status="status" goal-type="goalType" goal-kind="goalKind"></track-donut>
+          <div class="needed text-center">{{policy.needed| dollars}} Needed</div>
+        </div>
+      </div>
+      <div class="col-sm-4 policy-holder-details">
+        <div class="no-policies" ng-show="!policy.policies.length">{{policy.user.first_name}} has no coverage accounts.</div>
+        <div ng-repeat="policy in policy.policies">
+          <div class="policy-holder">{{policy.company}}</div>
+          <div class="sc-separator"><span></span></div>
+          <div>
+            <span class="policy-amt">{{policy.amount | dollars}}</span>
+            -
+            <span class="policy-term">{{policy.kind || 'Monthly Coverage' | translate}}</span>
+          </div>
+        </div>
+        <a class="iq-submit-btn btn-primary btn-lg btn" href="/#/policies">Add/Edit Policies</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sc-next-action">
+  <div class="sc-container container text-center">
+    <div class="arrow-down"></div>
+    <h1>Recommendations</h1>
+    <div class="skew-neg action">
+      <div class="skew-pos">
+        <p ng-click="addPolicies()" ng-class="{cursor: cursor()}">{{policy.action}}</p>
+      </div>
+    </div>
+  </div>
+</div>

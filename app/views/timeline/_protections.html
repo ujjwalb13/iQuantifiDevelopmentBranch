@@ -1,0 +1,60 @@
+<div class="protections-container pull-right" ng-controller="ProtectionsCtrl">
+  <div class="expander-features" ng-click="featureExpanderOpen = !featureExpanderOpen">
+    <span class="labels">Features</span>
+    <span class="fa-stack expandicons">
+      <i class="fa fa-circle-o fa-stack-2x"></i>
+      <i class="goals fa fa-stack-1x" ng-class="{'fa-plus': !featureExpanderOpen, 'fa-minus': featureExpanderOpen}"></i>
+    </span>
+  </div>
+  <div class="features-slideout" ng-show="featureExpanderOpen">
+    <ul>
+      <li><a class="icon-whatif-sm pull-left" href="/#/what-if" tooltip-placement="bottom" tooltip="What If&hellip;" tooltip-append-to-body="true"></a></li>
+    </ul>
+  </div>
+
+  <div class="protections" ng-click="protectionExpanderOpen = !protectionExpanderOpen">
+    <span class="labels">Protections</span>
+    <span class="fa-stack expandicons">
+      <i class="fa fa-circle-o fa-stack-2x"></i>
+      <i class="goals fa fa-stack-1x" ng-class="{'fa-plus': !protectionExpanderOpen, 'fa-minus': protectionExpanderOpen}"></i>
+    </span>
+  </div>
+  <div class="icons protections-slideout" ng-show="protectionExpanderOpen">
+    <span>
+      <a ng-href="/#/summaries/reserves/{{currentCR.guid}}" tooltip-placement="bottom" tooltip="Cash Reserves" tooltip-append-to-body="true" ng-if="currentCR.kind == '1CR'">
+        <img src="/images/svg/protection-achieved-1-lb.svg" class="badge-svg">
+        <div ng-hide="has.reserve" class="alert-badge">!</div>
+      </a>
+    </span>
+    <span>
+      <a ng-href="/#/summaries/reserves/{{currentCR.guid}}" tooltip-placement="bottom" tooltip="Cash Reserves" tooltip-append-to-body="true" ng-if="currentCR.kind == '3CR'">
+        <img src="/images/svg/protection-achieved-3-lb.svg" class="badge-svg">
+        <div ng-hide="has.reserve" class="alert-badge">!</div>
+      </a>
+    </span>
+    <span>
+      <a ng-href="/#/summaries/reserves/{{currentCR.guid}}" tooltip-placement="bottom" tooltip="Cash Reserves" tooltip-append-to-body="true" ng-if="currentCR.kind == '6CR'">
+        <img src="/images/svg/protection-achieved-6-lb.svg" class="badge-svg">
+        <div ng-hide="has.reserve" class="alert-badge">!</div>
+      </a>
+    </span>
+    <span>
+      <a href="/#/summaries/policies/disability" tooltip-placement="bottom" tooltip="Long Term Disability" tooltip-append-to-body="true">
+        <img src="/images/svg/protection-dp-lb.svg" class="badge-svg">
+        <div ng-hide="has.disability" class="alert-badge">!</div>
+      </a>
+    </span>
+    <span>
+      <a href="/#/summaries/policies/life" tooltip-placement="bottom" tooltip="Life Insurance" tooltip-append-to-body="true">
+        <img src="/images/svg/protection-lp-lb.svg" class="badge-svg">
+        <div ng-show="lifeAlert()" class="alert-badge">!</div>
+      </a>
+    </span>
+    <span ng-show="showLTC">
+      <a href="/#/summaries/policies/care" tooltip-placement="bottom" tooltip="Long Term Care" tooltip-append-to-body="true">
+        <img src="/images/svg/protection-ltc-lb.svg" class="badge-svg">
+        <div ng-show="careAlert()" class="alert-badge">!</div>
+      </a>
+    </span>
+  </div>
+</div>

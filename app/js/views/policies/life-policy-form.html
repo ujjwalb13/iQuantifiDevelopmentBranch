@@ -1,0 +1,119 @@
+<style>
+body, footer { background-color: #f1f1e8; }
+</style>
+
+<div class="container dropdown-container">
+  <div class="row">
+    <div class="col-sm-12 header">
+      <h3 class="text-center" ng-show="lifePolicy.guid">Edit Life Policy</h3>
+      <h3 class="text-center" ng-hide="lifePolicy.guid">Add New Life Policy</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <form name="lifePolicyForm" role="form" ng-submit="submit(lifePolicyForm.$valid)" novalidate>
+        <div class="form-group" ng-class="{'has-error': submitted && lifePolicyForm.lifePolicy.$invalid}">
+        <label class="control-label" for="type">Type</label>
+          <select name="type" class="form-control" ng-model="lifePolicy.kind" required>
+            <option value=""></option>
+            <option value="term_5">5 Year Term</option>
+            <option value="term_10">10 Year Term</option>
+            <option value="term_15">15 Year Term</option>
+            <option value="term_20">20 Year Term</option>
+            <option value="term_25">25 Year Term</option>
+            <option value="term_30">30 Year Term</option>
+            <option value="whole_life">Whole Life Policy</option>
+            <option value="ul">Universal Life</option>
+            <option value="vul">Variable Universal Life</option>
+          </select>
+          <p ng-show="lifePolicy.errors.kind" class="help-block" ng-repeat="err in lifePolicy.errors.kind">{{err}}</p>
+          <p ng-show="submitted && lifePolicyForm.type.$error.required" class="help-block">Type is required.</p>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="company">Insurance Company</label>
+          <input type="text" name="company" id="company" class="form-control" ng-model="lifePolicy.company" required ng-pattern="/^.{2,}$/">
+            <p ng-show="lifePolicy.errors.name" class="help-block" ng-repeat="err in lifePolicy.errors.name">{{err}}</p>
+            <p ng-show="submitted && lifePolicyForm.company.$error.required" class="help-block">Company is required.</p>
+            <p ng-show="submitted && lifePolicyForm.company.$error.pattern" class="help-block">Company is invalid.</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && lifePolicyForm.lifePolicy.$invalid}">
+          <label class="control-label" for="person">Owner</label>
+          <select class="form-control" id="person" name="person" required ng-model="lifePolicy.person.guid" ng-options="person.guid as (person.first_name + ' ' + person.last_name) for person in people"></select>
+          <p ng-show="submitted && lifePolicyForm.owner.$error.required" class="help-block">Person is required.</p>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': submitted && (lifePolicyForm.start_on.$invalid || lifePolicyForm.originationMonth.$invalid || lifePolicyForm.originationDay.$invalid || lifePolicyForm.originationYear.$invalid)}">
+          <label class="control-label" for="origination">Origination Date</label>
+
+          <div class="row" ng-if="!isPhone">
+            <div class="col-sm-4">
+              <select name="originationMonth" class="form-control" ng-model="lifePolicy.month" required data-placeholder="Month" ng-options="months.indexOf(month) as month for month in months"></select>
+              <span class="help-block" ng-show="submitted && lifePolicyForm.originationMonth.$error.required">Month is required.</span>
+            </div>
+            <div class="col-sm-4">
+              <select name="originationDay" class="form-control" ng-model="lifePolicy.day" required data-placeholder="Day" ng-options="day for day in days"></select>
+              <span class="help-block" ng-show="submitted && lifePolicyForm.originationDay.$error.required">Day is required.</span>
+            </div>
+            <div class="col-sm-4">
+              <select name="originationYear" class="form-control" ng-model="lifePolicy.year" required data-placeholder="Year" ng-options="year for year in years"></select>
+              <span class="help-block" ng-show="submitted && lifePolicyForm.originationYear.$error.required">Year is required.</span>
+            </div>
+          </div>
+
+          <input ng-if="isPhone" type="date" class="form-control" name="origination" id="origination" required ng-model="lifePolicy.origination">
+          <span ng-show="submitted && lifePolicyForm.start_on.$error.required" class="help-block">Origination date is required.</span>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': submitted && lifePolicyForm.amount.$invalid}">
+          <label class="control-label" for="amount">Monthly Payment</label>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="text" class="form-control" name="payment" id="payment" required ng-model="lifePolicy.payment" currency-input>
+          </div>
+          <p ng-show="submitted && lifePolicyForm.amount.$error.required" class="help-block">Amount is required.</p>
+          <p ng-show="submitted && lifePolicyForm.amount.$error.pattern" class="help-block">Amount is invalid.</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && lifePolicyForm.amount.$invalid}">
+          <label class="control-label" for="amount">Benefit Amount</label>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="text" class="form-control" name="amount" id="amount" required ng-model="lifePolicy.amount" currency-input>
+          </div>
+          <p ng-show="submitted && lifePolicyForm.amount.$error.required" class="help-block">Amount is required.</p>
+          <p ng-show="submitted && lifePolicyForm.amount.$error.pattern" class="help-block">Amount is invalid.</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': submitted && lifePolicyForm.amount.$invalid}">
+          <label>Is Spouse Beneficiary?</label>
+          <input type="radio" id="yes{{$index}}" ng-value="true" ng-model="lifePolicy.beneficiary" checked>
+          <label for="yes{{$index}}" class="radio-btn green">Yes</label>
+          <input type="radio" id="no{{$index}}" ng-value="false" ng-model="lifePolicy.beneficiary">
+          <label for="no{{$index}}" class="radio-btn grey">No</label>
+          <p ng-show="lifePolicy.errors.beneficiary" class="help-block" ng-repeat="err in lifePolicy.errors.beneficiary">{{err}}</p>
+        </div>
+        <div class="row dropdown-btns">
+          <div class="col-sm-12 text-center">
+            <button ng-hide="pending" class="iq-submit-btn btn-success btn" ng-disabled="lifePolicyForm.$invalid">Save</button>
+            <button ng-show="pending" class="iq-submit-btn btn-success btn" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+            <a class="iq-submit-btn btn" href="/#/policies">Back</a>
+            <button type="button" class="iq-submit-btn btn-danger btn" ng-click="openDeleteModal(lifePolicy)" ng-show="lifePolicy.guid">Delete</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="deletePolicyModal">
+  <div class="modal-header delete-modal-header text-center">
+    <button type="button" class="close" ng-click="close()" aria-hidden="true">&times;</button>
+    <h3 class="modal-title">Delete Policy</h3>
+  </div>
+  <div class="modal-body delete-modal-body">
+    <p class="text-center">Are you <em>sure</em> you want to remove this policy?</p>
+  </div>
+  <div class="modal-footer text-center delete-modal-footer">
+    <button class="iq-submit-btn btn btn-lg" ng-click="deletePolicy()">Delete Policy</button>
+    <button class="iq-submit-btn btn btn-lg" ng-click="close()">Close</button>
+  </div>
+</script>
+

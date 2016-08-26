@@ -1,0 +1,78 @@
+<div class="onboarding">
+<div class="content container">
+<div ng-include src="'/views/onboard/welcome-box.html'"></div>
+<onboard-nav current-step='currentStep'></onboard-nav>
+<div class="app-wizard-step1">
+  <div class="app-wizard-form container">
+    <div class="row">
+      <div class="col-sm-12 sub-headers">
+        <h3>Link Your Accounts</h3>
+        <p>Search for an institution and login with your online banking credentials. We’ll do the rest.</p>
+      </div>
+    </div>
+    <div class="row link-or-manual">
+      <div class="col-md-6 col-xs-10 link-option clearfix">
+        <label>Name of Institution</label>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-fw" ng-class="{'fa-bank': !loadingInstitutions, 'fa-refresh fa-spin': loadingInstitutions}"></i></span>
+            <input class="form-control" type="text" ng-model="selected" typeahead="institution.name for institution in searchInstitutions($viewValue)" typeahead-loading="loadingInstitutions" typeahead-on-select="goToInstitution($item, $model, $label)" typeahead-wait-ms="750" ng-change="credentials = []" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xs-12 link-box option-description clearfix">
+        <div>
+          <p>One­-time set­up allows for your account information to be automatically and accurately updated. It is easy, convenient, and secure.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row link-or-manual">
+      <div class="col-sm-12">
+        <hr class="or-style link-manual"/>
+      </div>
+    </div>
+
+    <div class="row link-or-manual">
+      <div class="col-md-6 col-xs-10 manual-option clearfix text-center">
+        <a href="/#/onboard/accounts/new"><button class="iq-submit-btn btn-default btn-lg btn">Add Manual Account</button></a>
+      </div>
+      <div class="col-md-6 col-xs-12 option-description clearfix">
+        <div>
+          <p>Don't have your account credentials readily available? You can manually enter your financial information to get the advice you need.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row break-line"></div>
+    <div class="row">
+      <div class="col-sm-12 help-block notes">
+        <b>Note:</b>
+        A checking account is required, whether linked or manually entered.
+      </div>
+    </div>
+  </div>
+  <div class="form-footer">
+    <a href="{{backPath}}" ng-show="!pending" class="iq-submit-btn btn">Back to Previous Step</a>
+    <a ng-href="/#/onboard/accounts" ng-show="!pending" class="iq-submit-btn btn-success btn">Continue to Next Step</a>
+    <button ng-show="pending" class="iq-submit-btn btn-success btn" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+  </div>
+</div>
+
+<script type="text/ng-template" id="linkDisabled">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="close()" aria-hidden="true">&times;</button>
+    <h3 class="modal-title text-success">Linking Disabled</h3>
+  </div>
+  <div class="modal-body text-heavy">
+    <p>Linking accounts has been disabled for the pilot program. Please manually add your accounts.</p>
+
+  </div>
+  <div class="modal-footer">
+    <div class="col-xs-12">
+      <button class="btn btn-default" ng-click="close()">Close</button>
+    </div>
+  </div>
+</script>
+</div>
+</div>

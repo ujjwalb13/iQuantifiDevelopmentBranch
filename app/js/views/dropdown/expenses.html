@@ -1,0 +1,44 @@
+<style>
+body, footer { background-color: #ecf4f4; }
+</style>
+
+<div class="expenses-container container">
+  <div class="app-wizard-form">
+    <div class="row header visible-xs" scroll-to-fixed>
+      <div class="col-sm-12 text-center">
+        <p><strong class="danger">DO NOT</strong> include debts like student loans, mortgage, credit
+          cards and car payments.</p>
+        <h4>Total: <span class="expense-total">{{monthlyExpenses | dollars}}</span></h4>
+      </div>
+    </div>
+
+    <div class="row header hidden-xs">
+      <div class="col-sm-12 text-center">
+        <h3 class="hidden-xs">Monthly Expense List</h3>
+        <p><strong class="danger">DO NOT</strong> include debts like student loans, mortgage, credit
+          cards and car payments.</p>
+        <h4>Total: <span class="expense-total">{{monthlyExpenses | dollars}}</span></h4>
+      </div>
+    </div>
+
+    <div class="worksheet row col-sm-6" ng-repeat-start="expense in expenses" attr="{{$index}}">
+      <div class="col-sm-5">
+        <label>{{expense.kind.replace('hobbies_travel', 'Hobbies / Travel').replace('cable_internet', 'Cable / Internet') | titleize}}</label>
+      </div>
+      <div class="col-sm-7">
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <input type="text" name="amt" placeholder="Amount" class="form-control" ng-model="expense.amount" ng-change="showTotal()" maxlength="10" currency-input>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix hidden-xs-block" ng-if="$index%2==1" ng-repeat-end></div>
+
+    <div class="row text-center">
+      <div class="col-sm-12">
+        <button type="submit" class="iq-submit-btn btn-primary btn" ng-click="saveMonthlyExpenses()" ng-hide="processing">Update</button>
+        <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+      </div>
+    </div>
+  </div>
+</div>

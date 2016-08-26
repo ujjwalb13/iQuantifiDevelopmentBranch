@@ -1,0 +1,38 @@
+<div class="main-title">
+  <div class="container">
+    <h3 class="visible-xs"><i class="icon icon-al-faqs"></i> FAQ</h3>
+    <h3 class="hidden-xs"><i class="icon icon-al-faqs"></i> Frequently Asked Questions</h3>
+  </div>
+</div>
+<div class="container main-wrapper">
+  <div class="row">
+    <div class="left-side-bar col-lg-3">
+      <ul>
+        <li ng-repeat="section in sections" ng-click="toogleSection(section)" >
+          <a href="javascript:void(0)" ng-class="{ active: isActiveSection(section) }">
+            <span>{{ section | translate }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="right-content col-lg-9">
+      <div ng-repeat="section in sections" ng-show="isActiveSection(section)">
+        <div class="section-header faqs">
+          {{section | translate}}
+        </div>
+        <div class="content-wrapper">
+          <div ng-repeat="f in faqs[section]">
+            <div class="wrapper-detail">
+              <div class="section-header">
+                {{f.question}}
+              </div>
+              <p>
+                {{f.answer}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

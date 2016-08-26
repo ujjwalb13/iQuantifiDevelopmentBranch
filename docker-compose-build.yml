@@ -1,0 +1,12 @@
+version: '2'
+services:
+  frontend_build:
+    image: iquandev/agera
+    command: sh -c "bower install; ./build.sh"
+    volumes:
+      - "./app:/home/dev/agera/app"
+      - "./build.sh:/home/dev/agera/build.sh"
+      - "./Gruntfile.js:/home/dev/agera/Gruntfile.js"
+      - "./bower.json:/home/dev/agera/bower.json"
+      - "./release:/home/dev/agera/release"
+    container_name: frontend_build

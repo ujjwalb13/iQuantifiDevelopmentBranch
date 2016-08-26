@@ -1,0 +1,92 @@
+<div>
+  <div class="row form-group" ng-class="{'has-error': submitted && (errors.name || objForm.name.$invalid)}">
+    <div class="col-lg-6 col-md-8 col-sm-8">
+      <label class="control-label">Name of Goal</label>
+      <input type="text" name="name" id="name" class="form-control" ng-model="obj.name" required ng-minlength="2">
+      <span ng-repeat="error in errors.name" class="help-block">{{ error }}</span>
+      <span ng-messages="submitted && objForm.name.$error" ng-messages-include="error-messages"></span>
+    </div>
+  </div>
+
+  <div class="row form-group" ng-class="{'has-error': submitted && (errors.transition_on || objForm.transitionMonth.$invalid || objForm.transitionYear.$invalid)}">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+      <label class="control-label">Move Date</label>
+      <select ng-model="obj.transition_month" name="transitionMonth" id="months-transitionOn" class="form-control" data-placeholder="{{ thisMonth }}" tabindex="2" required ng-change="filterRelated()">
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <span ng-repeat="error in errors.transition_on" class="help-block">{{ error }}</span>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+      <label class="control-label">&nbsp;</label>
+      <select ng-model="obj.transition_year" name="transitionYear" id="years-transitionOn" class="form-control" data-placeholder="{{ thisYear }}" tabindex="2" required ng-options="year for year in years" ng-change="filterRelated()">
+      </select>
+    </div>
+  </div>
+
+  <flexible-months model="obj.FlexibleTimeFrameMonths"></flexible-months>
+
+  <div class="row form-group" ng-class="{'has-error': submitted && (errors.monthly_rent || objForm.monthlyRent.$invalid)}">
+    <div class="col-lg-6 col-md-8 col-sm-8">
+      <label class="control-label">Monthly Rent</label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" name="monthlyRent" id="monthlyRent" class="form-control" ng-model="obj.monthly_rent" min="1" required placeholder="0.00" maxlength="10" currency-input>
+      </div>
+      <span ng-repeat="error in errors.monthly_rent" class="help-block">{{ error }}</span>
+      <span ng-messages="submitted && objForm.monthlyRent.$error" ng-messages-include="error-messages"></span>
+    </div>
+  </div>
+
+  <flexible-percentages model="obj.FlexibleAmountPercentage" amount="obj.amount"></flexible-percentages>
+
+  <div class="row form-group" ng-class="{'has-error': submitted && (errors.amount || objForm.amount.$invalid)}">
+    <div class="col-lg-6 col-md-8 col-sm-8">
+      <label class="control-label">Security Deposit</label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" name="amount" id="amount" class="form-control" ng-model="obj.amount" min="0" placeholder="0.00" maxlength="10" currency-input>
+      </div>
+      <span ng-repeat="error in errors.amount" class="help-block">{{ error }}</span>
+      <span ng-messages="submitted && objForm.amount.$error" ng-messages-include="error-messages"></span>
+    </div>
+  </div>
+
+  <div class="row form-group" ng-repeat="goal in related.goals" ng-if="goal.filtered">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <label class="control-label" ng-hide="goal.goal_type === 'Rent'">Will {{goal.name}} be sold once you rent this property?</label>
+      <label class="control-label" ng-show="goal.goal_type === 'Rent'">Will {{goal.name}} no longer be paid once you rent this property?</label>
+      <br/>
+      <input type="radio" id="related-{{goal.guid}}-true" ng-value="true" ng-model="goal.value" required>
+      <label class="radio-btn green" for="related-{{goal.guid}}-true">Yes</label>
+      <input type="radio" id="related-{{goal.guid}}-false" ng-value="false" ng-model="goal.value">
+      <label class="radio-btn grey" for="related-{{goal.guid}}-false">No</label>
+    </div>
+  </div>
+
+  <div class="row form-group" ng-repeat="expense in related.expenses" ng-if="expense.filtered">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <ng-form name="radioGroup">
+        <label class="control-label" ng-show="expense.kind === 'rent'">Will this new rent goal replace your current rent expense of {{expense.amount | dollars}}?</label>
+        <br/>
+        <input type="radio" id="related-{{expense.id}}-true" ng-value="true" ng-model="obj.replace_rent_expense" required>
+        <label class="radio-btn green" for="related-{{expense.id}}-true">Yes</label>
+        <input type="radio" id="related-{{expense.id}}-false" ng-value="false" ng-model="obj.replace_rent_expense" required>
+        <label class="radio-btn grey" for="related-{{expense.id}}-false">No</label>
+      </ng-form>
+      <br>
+      <span ng-show="submitted && !objForm.radioGroup.$valid" class="has-error help-block">This field is required.</span>
+    </div>
+  </div>
+
+</div>

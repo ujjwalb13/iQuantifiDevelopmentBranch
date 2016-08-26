@@ -1,0 +1,111 @@
+<div ng-include src="'/views/dropdown/_profile-header.html'" class="main-title"></div>
+<div class="container main-wrapper">
+  <div class="row">
+    <div class="left-side-bar col-lg-2 visible-lg">
+      <profile-sidebar current-page='/permissions'></profile-sidebar>
+    </div>
+    <div class="right-content col-lg-7">
+      <div class="section-header myfeatures">
+        Permissions
+      </div>
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="table-static col-lg-12">
+            <table class="hovered">
+              <thead class="dark">
+                <th>Name</th>
+                <th class="hidden-xs">Date of Birth</th>
+                <th>Permission</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="person in people" ng-click="selectPerson(person)" ng-class="{'active': selectedPerson == person}">
+                  <td>{{person.full_name | titleize}}</td>
+                  <td class="hidden-xs">{{person.dob | monthYear}}</td>
+                  <td>{{person.permission_status | titleize}}</td>
+                  <td class="text-right selected-indicator-wrapper">
+                    <i class="fa fa-chevron-right"></i>
+                    <i class="visible-lg selected-indicator" ng-show="selectedPerson == person"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="beside-right-content col-lg-3" ng-controller="PermissionsFormCtrl">
+      <div class="beside-right-wrapper">
+        <div class="row">
+          <div class="col-sm-12">
+            <form name="EditPermissionsForm">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="control-label">Edit Permissions</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="control-label" for="firstName">Name of The Member</label>
+                    <br/>
+                    {{person.full_name | titleize}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="control-label" for="firstName">Relationship</label>
+                    <br/>
+                    {{person.relationship | titleize}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="control-label" for="firstName">Permission Status</label>
+                      <select class="form-control" name="permission_status" ng-model="person.permission_status" ng-change="getStatusExplaination()">
+                        <option ng-repeat="option in statusOptions" value="{{option.value}}">{{option.display}}</option>
+                      </select>
+                    <div class="help-block">
+                      <i>
+                        <strong>{{permission}}</strong>
+                        <span>{{statusExplaination}}</span>
+                      </i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="control-label" for="firstName">Do you also want to remove this household member?</label>
+                    <div class="help-block permissions-notes">
+                      <i>Note: Removing a household member may affect your income and expenses.  Also, this user’s individual accounts will be removed.</i>
+                    </div>
+                    <div>
+                      <input type="radio" name="radio1" id="yes" ng-value="true" ng-model="person.is_removed">
+                      <label for="yes" class="radio-btn green">Yes</label>
+                      <input type="radio" name="radio1" id="no" ng-value="false" ng-model="person.is_removed">
+                      <label for="no" class="radio-btn grey">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <button type="submit" class="iq-submit-btn btn-primary btn btn-lg" ng-hide="submitted">Save Changes</button>
+                  <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="submitted" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

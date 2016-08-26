@@ -1,0 +1,17 @@
+<div class="sc-next-action">
+  <div class="sc-container container text-center">
+    <div class="arrow-down"></div>
+    <h1>Next <ng-pluralize count="actions.length"
+                           when="{'0': 'Action',
+                                  '1': 'Action',
+                                  'other': 'Actions'}">
+    </ng-pluralize>
+    </h1>
+    <div class="skew-neg action" ng-repeat="action in actions">
+      <div class="skew-pos">
+        <p ng-click="addMortgage()" ng-class="{cursor: cursor()}">{{action.description.replace(' with the following allocation:', '.')}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

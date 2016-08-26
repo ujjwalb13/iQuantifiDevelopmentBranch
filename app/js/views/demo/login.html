@@ -1,0 +1,237 @@
+<style>
+  body, footer {
+    background-color: #3d5253;
+  }
+
+  footer p {
+    display: none;
+  }
+
+  footer.demo p {
+    display: block;
+    color: #bdc1c2;
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  .white {
+    color: #fff;
+  }
+
+  .primary-container {
+    background-image: url("/images/demo/main-banner.jpg");
+  }
+
+  .auth-form {
+    opacity: .9;
+    color: #000;
+  }
+
+  .auth-form h2 {
+    margin-top: 0;
+  }
+
+  .auth-form a {
+    color: #aaa;
+  }
+
+  .auth-links {
+    list-style: none;
+  }
+
+  .new-user {
+    margin: 30px 0 0 0;
+  }
+
+  .green {
+    color: #8ec34a;
+  }
+
+  .block-apr {
+    background: #3c5157;
+    opacity: .9;
+    padding: 20px;
+    min-height: 138px;
+  }
+
+  .apr {
+    font-size: 40px;
+  }
+  sup {
+    top: -2.5em;
+  }
+
+  .block-plan {
+    background: #448484;
+    opacity: .9;
+    padding: 15px;
+  }
+
+  .savings {
+    color: #89c25d;
+    font-size: 35px;
+  }
+
+  .comp {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .news {
+    background: #fff;
+    margin-left: 0;
+    padding: 20px 0;
+  }
+  .news .info {
+    background: #f0f6f6;
+    padding: 20px;
+    min-height: 300px;
+  }
+
+</style>
+
+<div class="container auth-container">
+
+  <div class="row">
+    <div class="col-sm-3 col-sm-offset-9">
+      <form class="auth-form" name="loginForm" role="form" ng-submit="submit(loginForm.$valid)" novalidate>
+
+      <h2>Online Banking</h2>
+
+        <p class="text-danger" ng-show="error.error">{{error.error}}</p>
+
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <input type="email" class="form-control" name="email" id="email" required ng-model="$parent.$parent.user.email" placeholder="username">
+        </div>
+        <br>
+
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+          <input type="password" class="form-control" name="password" id="password" required ng-model="$parent.$parent.user.password" placeholder="password">
+        </div>
+
+        <ul class="auth-links">
+          <li><a href="#">Forgot password?</a></li>
+        </ul>
+
+        <div class="text-center">
+          <button ng-show="processing" type="button" class="iq-submit-btn btn btn-success" disabled="">
+            <i class="fa fa-circle-o-notch fa-spin"></i> Processing
+          </button>
+          <button ng-show="!processing" type="submit" class="iq-submit-btn btn btn-success btn-block">Log in</button>
+        </div>
+
+        <div class="new-user clearfix text-right">
+          <a href="#">New User? Enroll Now <i class="fa fa-arrow-right green"></i></a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">&nbsp;</div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-7 block-apr">
+      <div class="row">
+        <div class="col-xs-12 col-sm-5">
+          Home loan rates as low as <br>
+          <span class="apr">4.00%</span> <sup>apr</sup>
+        </div>
+        <div class="col-xs-12 col-sm-7">
+          <span class="savings">Load Up on Savings!</span>
+          <br>
+          <br>
+
+          <div>
+            Learn More <i class="fa fa-arrow-right green"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-1">&nbsp;</div>
+    <div class="col-xs-12 col-sm-4 block-plan">
+      We offer a goal based
+      <br>
+      <span class="comp">Comprehensive Financial Plan</span>
+      <br>
+      to help you meet your financial goals.
+      <br>
+      <br>
+      Learn More <i class="fa fa-arrow-right green"></i>
+    </div>
+  </div>
+
+</div>
+
+<div class="row news">
+  <div class="col-xs-12 col-sm-2 col-sm-offset-2 info">
+    <h2>Latest News</h2>
+    <p>
+      ZBank Named One of the 50 Best Workplaces for Camaraderie
+      <br>
+      Dec. 22, 2015
+    </p>
+    <p>
+      Great Place to Work and Fortune have recognized ZBank as one of the 50 Best Workplaces for Camaraderie.
+    </p>
+
+    <p>More News <i class="fa fa-arrow-right green"></i></p>
+  </div>
+  <div class="col-xs-12 col-sm-2 col-sm-offset-1 info">
+    <h2>Superior Service</h2>
+    <p>
+      "Big shout out to the awesome people at ZBank - thank you so much for the awesome service. The past eight weeks
+      will have a lasting impact on my business."
+    </p>
+    <p>
+      Steve Smith
+      <br>
+      Financial Marketing Solutions
+    </p>
+    <p>More News <i class="fa fa-arrow-right green"></i></p>
+
+
+  </div>
+  <div class="col-xs-12 col-sm-2 col-sm-offset-1 info">
+    <h2>Learn</h2>
+    <p>
+      <i class="fa fa-arrow-right"></i> Start Planning 2016 Finances
+    </p>
+    <p>
+      <i class="fa fa-arrow-right"></i> Plan Year End Giving Wisely
+    </p>
+    <p>
+      <i class="fa fa-arrow-right"></i> Is Cybersecurity A Top Priority?
+    </p>
+    <p>
+      <i class="fa fa-arrow-right"></i> 5 Tips For Investing In Property
+    </p>
+    <p>
+      Learn More <i class="fa fa-arrow-right green"></i>
+    </p>
+
+
+  </div>
+
+</div>
+
+<footer class="demo text-center">
+  <img src="/images/demo/zbank-footer-links.jpg">
+  <p>
+    &copy; {{ footerDate | date:'yyyy' }} ZBank Financial Corporation. All rights reserved. Terms Of Use | Sitemap | Follow Us
+    &nbsp;
+    &nbsp;
+    <i class="fa fa-facebook fa-2x white"></i>
+    &nbsp;
+    &nbsp;
+    <i class="fa fa-twitter fa-2x white"></i>
+    &nbsp;
+    &nbsp;
+    <i class="fa fa-youtube fa-2x white"></i>
+  </p>
+</footer>

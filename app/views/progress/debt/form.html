@@ -1,0 +1,170 @@
+<div class="main-title">
+  <div class="container">
+    <h3 class="pull-left">
+      <span ng-hide="editMode">
+        Add New Debt
+      </span>
+      <span ng-show="editMode">
+        Edit Debt
+      </span>
+    </h3>
+    <h3 class="pull-right">
+      <a href="/#/progress">&times;</a>
+    </h3>
+  </div>
+</div>
+<div class="container main-wrapper">
+  <div class="section-header debts">
+    <i class="icon {{obj.kind | debtIconClass}}  icon-36"></i> {{obj.kind | debtTypeName}}
+  </div>
+  <div class="content-wrapper">
+    <div class="form-wrapper">
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">
+          <form name="objForm" role="form" ng-submit="save(objForm.$valid)" novalidate>
+            <div class="form-group row" ng-class="{'has-error': submitted && (errors.name || objForm.name.$invalid)}">
+              <div class="col-lg-6 col-sm-8">
+                <label class="control-label">Name of Debt</label>
+                <input type="text" name="name" id="name" class="form-control" ng-model="obj.name" required ng-minlength="2">
+                <span ng-repeat="error in errors.name" class="help-block">{{ error }}</span>
+                <span ng-messages="submitted && objForm.name.$error" ng-messages-include="error-messages"></span>
+              </div>
+            </div>
+
+            <div class="form-group row" ng-class="{'has-error': submitted && (errors.person || objForm.person.$invalid)}">
+              <div class="col-lg-6 col-sm-8">
+                <label class="control-label">Name of the Owner</label>
+                <select ng-model="obj.person.guid" id="person" name="person" class="form-control" tabindex="1" required ng-options="person.guid as (person.first_name + ' ' + person.last_name) for person in people"></select>
+                <span ng-repeat="error in errors.person" class="help-block">{{ error }}</span>
+                <span ng-messages="submitted && objForm.person.$error" ng-messages-include="error-messages"></span>
+              </div>
+            </div>
+            <div class="form-group row" ng-class="{'has-error': submitted && (errors.amount || objForm.amount.$invalid)}">
+              <div class="col-lg-6 col-sm-8">
+                <label class="control-label">Current Balance</label>
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="text" name="amount" id="amount" class="form-control" ng-model="obj.amount" min="1" required placeholder="0.00" maxlength="10" currency-input>
+                </div>
+                <span ng-repeat="error in errors.amount" class="help-block">{{ error }}</span>
+                <span ng-messages="submitted && objForm.amount.$error" ng-messages-include="error-messages"></span>
+              </div>
+            </div>
+
+            <div class="form-group row visible-sm visible-md visible-lg" ng-class="{'has-error': submitted && (errors.rate || objForm.rate.$invalid)}">
+              <div class="col-lg-3 col-sm-4">
+                <label class="control-label">Interest Rate</label>
+                <div class="input-group">
+                  <input type="number" name="rate" id="rate" class="form-control" ng-model="obj.rate" min="1">
+                  <span class="input-group-addon">%</span>
+                </div>
+                <span ng-repeat="error in errors.rate" class="help-block">{{ error }}</span>
+                <span ng-messages="submitted && objForm.rate.$error" ng-messages-include="error-messages"></span>
+              </div>
+              <div class="col-lg-3 col-sm-4" ng-if="isInstallment()">
+                <label class="control-label">Term (in years)</label>
+                <input type="number" name="terms" id="terms" class="form-control" ng-model="obj.originate_terms" min="1" required>
+                <span ng-repeat="error in errors.originate_terms" class="help-block">{{ error }}</span>
+                <span ng-messages="submitted && objForm.terms.$error" ng-messages-include="error-messages"></span>
+              </div>
+            </div>
+
+            <div class="form-group row visible-xs" ng-class="{'has-error': submitted && (errors.rate || objForm.rate.$invalid)}">
+              <div class="col-lg-6 col-sm-8">
+                <label class="control-label">Interest Rate</label>
+                <div class="input-group">
+                  <input type="number" name="rate" id="rate" class="form-control" ng-model="obj.rate" min="1">
+                  <span class="input-group-addon">%</span>
+                </div>
+                <span ng-repeat="error in errors.rate" class="help-block">{{ error }}</span>
+                <span ng-messages="submitted && objForm.rate.$error" ng-messages-include="error-messages"></span>
+              </div>
+            </div>
+            <div class="form-group row visible-xs" ng-class="{'has-error': submitted && (errors.rate || objForm.rate.$invalid)}">
+              <div class="col-lg-6 col-sm-8" ng-if="isInstallment()">
+                <label class="control-label">Term (in years)</label>
+                <input type="number" name="terms" id="terms" class="form-control" ng-model="obj.originate_terms" min="1" required>
+                <span ng-repeat="error in errors.originate_terms" class="help-block">{{ error }}</span>
+                <span ng-messages="submitted && objForm.terms.$error" ng-messages-include="error-messages"></span>
+              </div>
+            </div>
+
+            <div ng-if="!isInstallment()" class="form-group row">
+              <div class="col-lg-12">
+                <input type="radio" id="is-credit-card-debt-true" ng-value="true" ng-model="obj.is_credit_card_debt" required>
+                <label class="radio-btn green" for="is-credit-card-debt-true">This is a card that I want to payoff. (Will be added to your debt total.)</label>
+                <br/>
+                <input type="radio" id="is-credit-card-debt-false" ng-value="false" ng-model="obj.is_credit_card_debt">
+                <label class="radio-btn grey" for="is-credit-card-debt-false">This card is actively used for expenses and I try to pay the balance each month. (Will not be added to your debt total, but used to capture expense information.)</label>
+              </div>
+            </div>
+
+            <div ng-if="isInstallment()" class="form-group row" ng-class="{'has-error': submitted && (errors.originate_payment || objForm.originatePayment.$invalid)}">
+              <div class="col-lg-6 col-sm-8">
+                <label class="control-label" ng-hide="obj.kind == 'mortgage'">Minimum Payment</label>
+
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="text" name="originatePayment" id="originatePayment" class="form-control" ng-model="obj.originate_payment" min="1" y placeholder="0.00" maxlength="10" currency-input>
+                </div>
+                <span ng-repeat="error in errors.originate_payment" class="help-block">{{ error }}</span>
+                <span ng-messages="submitted && objForm.originatePayment.$error" ng-messages-include="error-messages"></span>
+              </div>
+            </div>
+            <div ng-if="isInstallment()" class="form-group row" ng-class="{'has-error': submitted && (errors.transition_on || objForm.transitionMonth.$invalid || objForm.transitionYear.$invalid)}">
+              <div class="col-lg-3 col-sm-4">
+                <label class="control-label">Origination Date</label>
+                <select ng-model="obj.transition_month" name="transitionMonth" id="months-transitionOn" class="form-control" placeholder="{{ thisMonth }}" tabindex="2" required>
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                <span ng-repeat="error in errors.transition_on" class="help-block">{{ error }}</span>
+              </div>
+              <div class="col-lg-3 col-sm-4">
+                <label class="control-label">&nbsp;</label>
+                <select ng-model="obj.transition_year" name="transitionYear" id="years-transitionOn" class="form-control" placeholder="{{ thisYear }}" tabindex="2" required ng-options="year for year in years">
+                </select>
+              </div>
+            </div>
+          </form>
+          <div class="row row-gutter-20">
+            <button class="btn-delete col-margin-20 pull-left" ng-show="editMode" ng-disabled="pending" ng-click="openDeleteModal(obj)"><span class="fa fa-trash"></span></button>
+            <button class="iq-submit-btn btn hidden-xs col-margin-20 pull-left" ng-disabled="pending" ng-click="cancel()">Cancel</button>
+            <button type="submit" class="iq-submit-btn btn-primary btn col-margin-20 pull-left" ng-disabled="pending || objForm.$invalid" ng-hide="pending" ng-click="save(objForm.$valid)">{{editMode? 'Save Changes' : 'Add Debt'}}</button>
+            <button type="submit" class="iq-submit-btn btn-primary btn col-margin-20 pull-left" ng-show="pending" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/ng-template" id="deleteDebtModal">
+  <div class="modal-header delete-modal-header text-center">
+    <button type="button" class="close" ng-click="close()" aria-hidden="true">&times;</button>
+    <h3 class="modal-title">Delete the debt?</h3>
+  </div>
+  <div class="modal-body delete-modal-body">
+    <p class="text-center">
+      <i class="icon {{debt.kind | debtIconClass}} icon-80 inline"></i>
+    </p>
+    <p class="text-center">
+      {{debt.name | titleize}}
+    </p>
+    <p class="text-center">Do you want to continue?</p>
+  </div>
+  <div class="modal-footer text-center delete-modal-footer">
+    <button class="iq-submit-btn btn btn-lg" ng-click="close()">Cancel</button>
+    <button class="iq-submit-btn btn btn-primary" ng-hide="pending" ng-click="deleteDebt()">Yes, Delete</button>
+    <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="pending" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+  </div>
+</script>

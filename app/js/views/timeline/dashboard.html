@@ -1,0 +1,25 @@
+<div ng-include src="'/views/timeline/_action-header.html'" class="main-title"></div>
+<div class="main-content-style hidden-xs">
+  <div ng-include src="'/views/timeline/_timeline-widget.html'" class="container main-wrapper"></div>
+  <div ng-include src="'/views/timeline/_dashboard-summary.html'" class="dashboard-3col"></div>
+</div>
+<div class="visible-xs" ng-include="'/views/timeline/mobile-dashboard.html'"></div>
+<script type="text/ng-template" id="guidedModalContent">
+  <wizard on-finish="finishedWizard()" template="/views/timeline/tour-wizard.html">
+      <wz-step wz-title="step-1">
+        <div ng-include src="'/views/timeline/guided-steps/step-1.html'" />
+      </wz-step>
+      <wz-step wz-title="step-2">
+        <div ng-include src="'/views/timeline/guided-steps/step-2.html'" />
+      </wz-step>
+      <wz-step wz-title="step-3">
+        <div ng-include src="'/views/timeline/guided-steps/step-3.html'" />
+      </wz-step>
+      <wz-step wz-title="step-4">
+        <div ng-include src="'/views/timeline/guided-steps/step-4.html'" />
+      </wz-step>
+      <wz-step wz-title="step-5">
+        <div ng-include src="'/views/timeline/guided-steps/step-5.html'" />
+      </wz-step>
+  </wizard>
+</script>

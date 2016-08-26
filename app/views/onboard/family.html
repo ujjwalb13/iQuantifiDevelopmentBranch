@@ -1,0 +1,216 @@
+<div class="onboarding family">
+<div class="content container">
+  <div ng-include src="'/views/onboard/welcome-box.html'"></div>
+  <onboard-nav current-step='currentStep'></onboard-nav>
+  <form  name="frmFamily" role="form" ng-submit="processForm(frmFamily)" novalidate>
+    <div class="app-wizard-step1">
+      <div class="fix-container">
+      <div class="app-wizard-form container">
+        <div class="row">
+          <div class="col-sm-12 sub-headers">
+            <h3>Great to have you on board with us!</h3>
+            <h4>Tell us a little about yourself and your family and we can get started!</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 col-xs-5">
+            <div class="form-group" ng-class="{'has-error': submitted && (frmFamily.primaryFirstName.$invalid || primary.errors.first_name)}">
+              <label class="">First Name</label>
+              <input type="text" name="primaryFirstName" class="form-control" required ng-model="primary.first_name">
+              <span ng-show="primary.errors.first_name" class="help-block" ng-repeat="err in primary.errors.first_name">{{err}}</span>
+              <span ng-show="submitted && frmFamily.primaryFirstName.$error.required" class="help-block">First name is required.</span>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-xs-5">
+            <div class="form-group no-margin" ng-class="{'has-error': submitted && (frmFamily.primaryLastName.$invalid || primary.errors.last_name)}">
+              <label class="">Last Name</label>
+              <input type="text" class="form-control" name="primaryLastName" required ng-model="primary.last_name">
+              <span ng-show="primary.errors.last_name" class="help-block" ng-repeat="err in primary.errors.last_name">{{err}}</span>
+              <span ng-show="submitted && frmFamily.primaryLastName.$error.required" class="help-block">Last name is required.</span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xs-12">
+            <div class="birth-date-group">
+              <div class="row">
+                <div class="col-xs-12">
+                  <label class="">Birth Date <span class="hint">(Will be used to calculate your retirement goal.)</span></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-5">
+                  <div class="form-group" ng-class="{'has-error': submitted && frmFamily.primaryMonth.$invalid}">
+                    <select name="primaryMonth" class="form-control" ng-model="primary.month" required data-placeholder="Month" ng-options="months.indexOf(month) as month for month in months">
+                        <option value="" disabled>Month</option>
+                    </select>
+                    <span class="help-block" ng-show="submitted && frmFamily.primaryMonth.$invalid">Month is required.</span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-5">
+                  <div class="form-group" ng-class="{'has-error': submitted && frmFamily.primaryYear.$invalid}">
+                    <select name="primaryYear" class="form-control" ng-model="primary.year" required data-placeholder="Year" ng-options="year for year in years">
+                      <option value="" disabled>Year</option>
+                    </select>
+                    <span class="help-block" ng-show="submitted && frmFamily.primaryYear.$invalid">Year is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-xs-5">
+            <div class="form-group" ng-class="{'has-error': submitted && (frmFamily.zip.$invalid || primary.errors.zip)}">
+              <label class="">ZIP Code</label>
+              <input type="text" name="zip" class="form-control" required ng-model="primary.ZIP">
+              <span ng-show="primary.errors.ZIP" class="help-block" ng-repeat="err in primary.errors.ZIP">{{err}}</span>
+              <span ng-show="submitted && frmFamily.zip.$error.required" class="help-block">ZIP code is required.</span>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="form-group row spouse-row-radio">
+          <div class="col-md-4 col-xs-5">
+            <label class="control-label ">Do you have a spouse/partner?</label>
+          </div>
+          <div class="col-md-6 col-xs-5">
+            <input type="radio" name="radio1" id="yes" ng-value="true" ng-model="hasSpouse">
+            <label for="yes" class="radio-btn green">Yes</label>
+            <input type="radio" name="radio1" id="no" ng-value="false" ng-model="hasSpouse">
+            <label for="no" class="radio-btn grey">No</label>
+          </div>
+        </div>
+        <div class="row spouse-row" ng-if="hasSpouse">
+          <div class="col-md-3 col-xs-5">
+            <div class="form-group" ng-class="{'has-error': submitted && (frmFamily.spouseFirstName.$invalid || spouse.errors.first_name)}">
+              <label class="">First Name</label>
+              <input type="text" name="spouseFirstName" class="form-control" required ng-model="spouse.first_name">
+              <span ng-show="spouse.errors.first_name" class="help-block" ng-repeat="err in spouse.errors.first_name">{{err}}</span>
+              <span ng-show="submitted && frmFamily.spouseFirstName.$error.required" class="help-block">First name is required.</span>
+            </div>
+          </div>
+          <div class="col-md-3 col-xs-5">
+            <div class="form-group" ng-class="{'has-error': submitted && (frmFamily.spouseLastName.$invalid || spouse.errors.last_name)}">
+              <label class="">Last Name</label>
+              <input type="text" class="form-control" name="spouseLastName" required ng-model="spouse.last_name">
+              <span ng-show="spouse.errors.last_name" class="help-block" ng-repeat="err in spouse.errors.last_name">{{err}}</span>
+              <span ng-show="submitted && frmFamily.spouseLastName.$error.required" class="help-block">Last name is required.</span>
+              <span ng-show="submitted && (frmFamily.spouseFirstName.$invalid || spouse.errors.first_name) && !(frmFamily.spouseLastName.$invalid || spouse.errors.last_name)" class="help-block">&nbsp;</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <div class="birth-date-group">
+              <div class="row">
+                <div class="col-sm-12">
+                  <label class="">Birth Date <span class="hint">(Will be used to calculate your insurance needs.)</span></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-5">
+                  <div class="form-group" ng-class="{'has-error': submitted && frmFamily.spouseMonth.$invalid}">
+                    <select name="spouseMonth" class="form-control" ng-model="spouse.month" required data-placeholder="Month" ng-options="months.indexOf(month) as month for month in months">
+                        <option value="" disabled>Month</option>
+                    </select>
+                    <span class="help-block" ng-show="submitted && frmFamily.spouseMonth.$invalid">Month is required.</span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-5">
+                  <div class="form-group" ng-class="{'has-error': submitted && frmFamily.spouseYear.$invalid}">
+                    <select name="spouseYear" class="form-control" ng-model="spouse.year" required data-placeholder="Year" ng-options="year for year in years">
+                      <option value="" disabled>Year</option>
+                    </select>
+                    <span class="help-block" ng-show="submitted && frmFamily.spouseYear.$invalid">Year is required.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="form-group row child-row-radio">
+          <div class="col-md-4 col-xs-5">
+            <label class="control-label ">Do you have children?</label>
+          </div>
+          <div class="col-md-6 col-xs-5">
+            <input type="radio" name="radio2" id="yes2" ng-value="true" ng-model="hasChild">
+            <label for="yes2" class="radio-btn green">Yes</label>
+            <input type="radio" name="radio2" id="no2" ng-value="false" ng-model="hasChild">
+            <label for="no2" class="radio-btn grey" checked>No</label>
+          </div>
+        </div>
+
+        <div ng-if="hasChild">
+          <div ng-repeat="c in children" class="row child-row" ng-form="childProfile" ng-if="hasChild">
+            <div class="col-md-3 col-xs-5">
+              <div class="form-group" ng-class="{'has-error': submitted && (childProfile.childFirstName.$invalid || c.errors.first_name)}">
+                <label class="">First Name</label>
+                <input type="text" name="childFirstName" class="form-control" ng-model="c.first_name" required>
+                <span ng-show="c.errors.first_name" class="help-block" ng-repeat="err in c.errors.first_name">{{err}}</span>
+                <span ng-show="submitted && childProfile.childFirstName.$error.required" class="help-block">First name is required.</span>
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-5">
+              <div class="form-group" ng-class="{'has-error': submitted && (childProfile.childLastName.$invalid || c.errors.last_name)}">
+                <label class="">Last Name</label>
+                <input type="text" class="form-control" ng-model="c.last_name" name="childLastName" required>
+                <span ng-show="c.errors.last_name" class="help-block" ng-repeat="err in c.errors.last_name">{{err}}</span>
+                <span ng-show="submitted && childProfile.childLastName.$error.required" class="help-block">Last name is required.</span>
+                <span ng-show="submitted && (childProfile.childFirstName.$invalid || c.errors.first_name) && !(childProfile.childLastName.$invalid || c.errors.last_name)" class="help-block">&nbsp;</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <div class="birth-date-group">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label class="">Birth Date <span class="hint">(Will be used to calculate a college goal.)</span></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5 col-xs-5">
+                    <div class="form-group" ng-class="{'has-error': submitted && childProfile.childMonth.$invalid}">
+                      <select name="childMonth" class="form-control" ng-model="c.month" required data-placeholder="Month" ng-options="months.indexOf(month) as month for month in months">
+                          <option value="" disabled>Month</option>
+                      </select>
+                      <span class="help-block" ng-show="submitted && childProfile.childMonth.$invalid">Month is required.</span>
+                    </div>
+                  </div>
+                  <div class="col-md-5 col-xs-5">
+                    <div class="form-group" ng-class="{'has-error': submitted && childProfile.childYear.$invalid}">
+                      <select name="childYear" class="form-control" ng-model="c.year" required data-placeholder="Year" ng-options="year for year in years">
+                        <option value="" disabled>Year</option>
+                      </select>
+                      <span class="help-block" ng-show="submitted && childProfile.childYear.$invalid">Year is required.</span>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-xs-1">
+                    <div class="form-group">
+                      <div class="corner-btn">
+                        <a class="btn-delete" ng-click="deleteChild($index,c.id)" ng-if="$index>=0">
+                          <span class="fa fa-trash" aria-hidden="true"></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row child-buttons-container">
+            <div class="col-xs-12 col-sm-4">
+              <a class="child-btn iq-submit-btn btn-success btn btn-add" ng-click="addChild()">
+                <span class="icon-add"></span>
+                <span class="text-add">Add Child</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="form-footer">
+            <button type="submit" ng-show="!pending" class="iq-submit-btn btn-success btn">Continue to Next Step</button>
+            <button type="button" ng-show="pending" class="iq-submit-btn btn-success btn" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>

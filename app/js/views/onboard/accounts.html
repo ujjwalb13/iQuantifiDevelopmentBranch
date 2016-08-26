@@ -1,0 +1,116 @@
+<style>
+</style>
+
+<div class="onboarding">
+<div class="content container">
+<div ng-include src="'/views/onboard/welcome-box.html'"></div>
+<onboard-nav current-step='currentStep'></onboard-nav>
+<div class="app-wizard-step1">
+  <div class="fix-container">
+  <div class="app-wizard-form account-form container">
+    <div class="row sub-headers">
+      <div class="col-sm-12">
+        <h3>Accounts</h3>
+      </div>
+    </div>
+    <div class="row sub-headers">
+      <div class="col-sm-12">
+        <div>
+          <span>You’ve successfully synced the following accounts with iQuantifi. You can add new accounts or edit/remove existing ones.</span>
+          <br/>
+          <span><strong>Note:</strong> A checking account is REQUIRED, whether linked or entered manually.</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-lg-12">
+            <label>Linked Accounts</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 table-static clearfix">
+            <table>
+              <thead>
+                <tr>
+                <th>Account Name</th>
+                <th>Type</th>
+                <th>Owner</th>
+                <th>Balance</th>
+                <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="account in linkedAccounts">
+                <td>{{account.name}}</td>
+                <td>{{account.kind | accountKind}}</td>
+                <td>{{account.person.first_name}}</td>
+                <td>{{account.balance | dollars}}</td>
+                <td class="action-col">
+                  <div>
+                    <a ng-show="account.deleting" class="btn-delete"><span class="fa fa-circle-o-notch fa-spin"></span></a>
+                    <a ng-hide="account.deleting" class="btn-delete" ng-click="remove(account)"><span class="fa fa-trash"></span></a>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br/>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-lg-12">
+            <label>Manual Accounts</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 table-static clearfix">
+            <table>
+              <thead>
+                <tr>
+                <th>Account Name</th>
+                <th>Type</th>
+                <th>Owner</th>
+                <th>Balance</th>
+                <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="account in manualAccounts" ng-click="goToAccountEdit(account.guid)">
+                <td>{{account.name}}</td>
+                <td>{{account.kind | accountKind}}</td>
+                <td>{{account.person.first_name}}</td>
+                <td>{{account.balance | dollars}}</td>
+                <td class="text-right"><i class="fa fa-chevron-right"></i></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <a class="child-btn iq-submit-btn btn-success btn btn-add" href="/#/onboard/accounts/link-or-manual">
+          <span class="icon-add"></span>
+          <span class="text-add">Add Account</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="form-footer">
+    <a href="{{backPath}}" ng-show="!pending" class="iq-submit-btn btn">Back To Previous Step</a>
+    <button ng-show="!pending" class="iq-submit-btn btn-success btn" ng-click="next()">Continue To Next Step</button>
+    <button ng-show="pending" class="iq-submit-btn btn-success btn" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+  </div>
+</div>
+</div>
+</div>

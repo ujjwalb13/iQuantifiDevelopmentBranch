@@ -1,0 +1,41 @@
+<div class="mobile-dashboard">
+  <div class="light-yellow">
+    <ul class="protections-list">
+      <li><a ng-href="/#/summaries/reserves/{{currentCR.guid}}"><img src="/images/svg/protection-3cr.svg" class="img-responsive"></a></li>
+      <li><a href="/#/summaries/policies/disability"><img src="/images/svg/protection-dp.svg" class="img-responsive"></a></li>
+      <li><a href="/#/summaries/policies/life"><img src="/images/svg/protection-lp.svg" class="img-responsive"></a></li>
+    </ul>
+  </div>
+
+  <div class="col-xs-12 light-yellow">
+    <ul class="goals-list">
+      <li class="col-xs-6" ng-repeat-start="goal in goals">
+        <dash-donut complete="goal.balance/goal.amount * 100" goal="goal"></dash-donut>
+        <span class="action">{{goal.name}}</span>
+        <span class="amt">{{goal.balance | dollars}} of {{goal.amount | dollars}}</span>
+      </li>
+      <li class="clearfix visible-xs-block" ng-if="$index%2==1" ng-repeat-end></li>
+
+      <li class="col-xs-6" ng-if="goals.length%2==1"></li>
+      <li class="clearfix visible-xs-block" ng-if="goals.length%2==1"></li>
+
+      <li class="col-xs-6">
+        <a ng-href="/#/add-goal" class="add-button">
+          <img class="inner-image" ng-src="/images/svg/add-goalOn.svg">
+        </a>
+        <span class="action">Add a Goal</span>
+      </li>
+      <li class="col-xs-6">
+        <a href ng-click="openModal('debt', 'New', 'debt')" class="add-button debt">
+          <img class="inner-image" ng-src="/images/svg/add-debtOn.svg">
+        </a>
+        <span class="action">Add a Debt</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="clearfix action-btns green footer mm-fixed-bottom" ng-show="incompleteActionsCount > 0">
+    <a href="/#/actions"><h4 class="text-center"><i class="fa fa-list-ul pull-left"></i><ng-pluralize count="incompleteActionsCount" when="{'0': 'You have no pending actions.', '1': 'You have 1 pending action.', 'other': 'You have {} pending actions.'}"></ng-pluralize><i class="fa fa-chevron-right pull-right"></i></h4>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+  <div class="sc-goal-details">
+    <div class="sc-container container">
+      <div class="arrow-down"></div>
+      <h1>Goal Details</h1>
+      <div class="col-sm-6 goal-details-left">
+        <ul>
+          <li class="clearfix">
+            <span class="key col-sm-8">State Attending College</span>
+            <span class="value col-sm-4">{{goal.college_state}}</span>
+          </li>
+          <li class="clearfix">
+            <span class="key col-sm-8">College</span>
+            <span class="value col-sm-4">{{collegeType}}</span>
+          </li>
+          <li class="clearfix">
+            <span class="key col-sm-8">Years Attending</span>
+            <span class="value col-sm-4">{{goal.years_attending}}</span>
+          </li>
+          <li class="clearfix">
+            <span class="key col-sm-8">Parents' Contribution</span>
+            <span class="value col-sm-4">{{goal.percentage}}%</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-6 goal-details-right">
+        <div class="col-sm-4 graph">
+          <div ng-repeat="account in accounts" style="background:{{color($index)}}; height:{{account.percent/100 * 350}}px;"></div>
+        </div>
+        <div class="col-sm-8">
+          <div class="goal-fund" ng-repeat="account in accounts" style="color:{{color($index)}};">
+            <div class="percent"><span>{{account.percent}}%</span> {{account.name}}</div>
+            <div class="sc-separator"><span style="background:{{color($index)}};"></span></div>
+            <div class="amt">{{account.balance | dollars}}</div>
+            <div class="goal-fund-details">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,21 @@
+<div ng-include src="'/views/progress/_nav.html'"></div>
+
+<div class="edit mp iq-container col-sm-9">
+  <div class="heading protection">
+    <div class="icon"><div class="icon-mm-accounts"></div></div>
+    <h3>{{heading}}</h3>
+  </div>
+
+  <form class="policies-modal-form" name="policyForm" ng-controller="PoliciesCtrl">
+
+    <div ng-include="modalUrl()"></div>
+
+    <div class="text-center">
+      <button ng-show="!pending" type="button" class="iq-submit-btn btn-success btn" ng-click="save(policyForm.$valid)" ng-hide="processing">Save</button>
+      <button ng-show="pending" type="button" class="iq-submit-btn btn-success btn" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+      <button ng-show="!deleting && action == 'edit'" type="button" class="iq-submit-btn btn-danger btn" ng-click="delete(obj)">Delete</button>
+      <button ng-show="deleting && action == 'edit'" type="button" class="iq-submit-btn btn-danger btn" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,45 @@
+<div class="onboarding experience">
+  <div class="content container">
+    <div ng-include src="'/views/onboard/welcome-box.html'"></div>
+    <onboard-nav current-step='currentStep'></onboard-nav>
+    <form name="frmExperience" role="form" ng-submit="processForm(frmExperience)" novalidate>
+      <div class="app-wizard-step1">
+        <div class="app-wizard-form fix-container">
+          <div class="row">
+            <div class="col-sm-12 sub-headers">
+              <h4>Let us know what investment experience you have.</h4>
+            </div>
+          </div>
+          <div class="row investment investment-header">
+            <div class="col-xs-2 col-sm-4"></div>
+            <div class="col-xs-2 col-sm-2 text-center">None</div>
+            <div class="col-xs-3 col-sm-2 text-center">1-5 Years</div>
+            <div class="col-xs-3 col-sm-2 text-center">6-10 Years</div>
+            <div class="col-xs-2 col-sm-2 text-center">10+ Years</div>
+          </div>
+          <div class="row investment investment-item" >
+            <experience-picker exp-name="Stocks" exp-name-sm="Stocks" ng-model="experience.stocks"></experience-picker>
+          </div>
+          <div class="row investment investment-item" >
+            <experience-picker exp-name="Bonds" exp-name-sm="Bonds" ng-model="experience.bonds"></experience-picker>
+          </div>
+          <div class="row investment investment-item" >
+            <experience-picker exp-name="Mutual Funds" exp-name-sm="Mutual" ng-model="experience.mutual_funds"></experience-picker>
+          </div>
+          <div class="row investment investment-item" >
+            <experience-picker exp-name="Index Funds" exp-name-sm="Index" ng-model="experience.index_funds"></experience-picker>
+          </div>
+          <div class="row investment investment-item" >
+            <experience-picker exp-name="ETFs" exp-name-sm="ETFs" ng-model="experience.etfs"></experience-picker>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <a href="{{backPath}}" ng-show="!pending" class="iq-submit-btn btn">Back to Previous Step</a>
+          <button type="submit" ng-show="!pending" class="iq-submit-btn btn-success btn">Continue to Next Step</button>
+          <button type="submit" ng-show="pending" class="iq-submit-btn btn-success btn" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

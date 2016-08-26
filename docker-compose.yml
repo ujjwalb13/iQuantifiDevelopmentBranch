@@ -1,0 +1,41 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:9.4
+    volumes:
+      - "./.data/iq/postgres:/var/lib/postgresql/data"
+      - "./:/postgreshare"
+    container_name: iq.postgres
+    environment:
+      POSTGRES_PASSWORD: quan
+      POSTGRES_USER: quan
+      POSTGRES_DB: quan
+  redis:
+    image: redis:2.8
+    container_name: iq.redis
+  backend:
+    image: iquandev/goals
+    volumes:
+      - "../goals:/goals"
+    depends_on:
+      - postgres
+      - redis
+    command: sh -c "bundle install; rm -r tmp;bundle exec rails s -b 0.0.0.0"
+    environment:
+      DB_HOST: postgres
+    container_name: iq.backend
+    ports:
+      - "0.0.0.0:3000:3000"
+  frontend:
+    image: iquandev/agera
+    command: sh -c "bower install; grunt serve"
+    volumes:
+      - "./app:/home/dev/agera/app"
+      - "./Gruntfile.js:/home/dev/agera/Gruntfile.js"
+      - "./bower.json:/home/dev/agera/bower.json"
+    depends_on:
+      - backend
+    container_name: iq.frontend
+    ports:
+      - "0.0.0.0:9000:9000"
+

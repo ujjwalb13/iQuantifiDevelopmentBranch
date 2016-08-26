@@ -1,0 +1,41 @@
+<div class="container">
+  <h3 ng-show="organization.guid">Edit Organization</h3>
+  <h3 ng-hide="organization.guid">Add New Organization</h3>
+
+  <form name="organizationForm" role="form" ng-submit="submit(organizationForm.$valid)" novalidate>
+    <div class="form-group" ng-class="{'has-error': submitted && organizationForm.name.$invalid}">
+      <label class="control-label" for="name">Name</label>
+      <input type="text" class="form-control" name="name" required ng-model="organization.name">
+      <span ng-show="submitted && organizationForm.name.$error.required" class="help-block">Name is required.</span>
+    </div>
+
+    <button type="submit" class="iq-submit-btn btn-primary btn" ng-disabled="submitted && accountForm.$invalid" ng-hide="processing">Save</button>
+    <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+    <a class="iq-submit-btn btn" href="/#/admin/organizations">Back</a>
+  </form>
+</div>
+
+<div class="container" ng-show="organization.guid">
+  <h3>Products</h3>
+  <table class="iq-table table-striped table selectable">
+    <thead class="dark">
+      <th>Class</th>
+      <th>Kind</th>
+      <th>Vendor</th>
+      <th>Name</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="product in products" ng-click="goToProductEdit(product.id)">
+        <td>{{product.product_class}}</td>
+        <td>{{product.kind}}</td>
+        <td>{{product.vendor}}</td>
+        <td>{{product.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <a href="/#/admin/organizations/{{organization.guid}}/products/new" class="iq-submit-btn btn-primary btn" role="button">New Product</a>
+  <a href="/#/admin/organizations/{{organization.guid}}/investments" class="iq-submit-btn btn-primary btn" role="button">Investments</a>
+</div>

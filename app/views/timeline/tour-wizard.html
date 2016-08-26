@@ -1,0 +1,14 @@
+<div class="modal-guide-content">
+  <div class="guided-header">
+    <h1 class="title">Welcome!</h1>
+    <button class="btn-link skip-link" wz-finish ng-hide="selectedStep == steps[steps.length -1]">Skip</button>
+  </div>
+  <div class="guided-content">
+    <div class="steps" ng-transclude></div>
+    <div class="nav-guided">
+      <span ng-class="{active: step.selected, completed: step.completed}" ng-repeat="step in getEnabledSteps()" ng-click="goTo(step)"></span>
+    </div>
+    <button class="btn btn-primary" wz-next ng-hide="selectedStep == steps[steps.length -1]">Continue</button>
+    <button class="btn btn-primary" wz-finish ng-show="selectedStep == steps[steps.length -1]">Got it! Get Started!</button>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<style>
+body { background: #f1f1e8; }
+</style>
+
+<div class="can-i-buy-container">
+  <h1 class="text-center hidden-xs">Can I Buy&hellip;</h1>
+
+  <div class="col-xs-10 align-center text-center">
+    <p class="lead">So, you want to buy something. Awesome. Let's see if you can afford it.</p>
+  </div>
+
+  <form name="impulseForm" role="form" ng-submit="submit(impulseForm.$valid)" novalidate>
+    <div class="form-group col-xs-8 align-center" ng-class="{'has-error': submitted && impulseForm.name.$invalid}">
+      <label class="control-label">What is it?</label>
+      <input name="name" type="text" class="form-control" ng-model="name" required>
+      <span ng-show="submitted && impulseForm.name.$error.required" class="help-block">Name is required.</span>
+    </div>
+
+    <div class="cost form-group col-xs-8 align-center" ng-class="{'has-error': submitted && (impulseForm.amount.$invalid || errors.amount)}">
+      <label class="control-label">How much does it cost?</label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input name="amount" type="text" class="form-control" ng-model="amount" required currency-input>
+      </div>
+      <span ng-show="submitted && impulseForm.amount.$error.required" class="help-block">Amount is required.</span>
+      <span ng-show="errors.amount" class="help-block" ng-repeat="err in errors.amount">{{err}}</span>
+      <span class="help-block">You currently have {{limit | dollars}} available.</span>
+    </div>
+
+    <div class="col-xs-12 fixed-btm mm-fixed-bottom">
+      <button type="submit" class="iq-submit-btn btn btn-primary btn-lg btn-block">Tell Me!</button>
+    </div>
+  </form>
+</div>
+
+<script type="text/ng-template" id="successModal">
+  <div class="modal-header text-center">
+    <h3 class="modal-title text-success">Woohoo!</h3>
+  </div>
+  <div class="modal-body text-heavy text-center">
+    <p>You, my friend, are going to be happy! You can buy it!</p>
+    <p class="less-bottom-margin"><small>To purchase it, you'll be taking money from your cash reserves. We'll automatically set up a goal for you to replenish that money.</small></p>
+
+    <div class="col-xs-12 align-center text-center">
+      <strong>Reserves</strong>
+      <reserves-progress-bar balance="reservesBalance" amount="reservesAmount" impulse="impulseAmount" one-cr="oneCRAmount" three-cr="threeCRAmount" six-cr="sixCRAmount"></reserves-progress-bar>
+    </div>
+
+  </div>
+  <div class="modal-footer text-center">
+    <div class="col-xs-12">
+      <p>Do you want to make this purchase?</p>
+      <button class="btn btn-default btn-lg btn-block" ng-click="accept()">Yes, I want to buy it!</button>
+      <button class="btn btn-default btn-lg btn-block" ng-click="decline()">No, I changed my mind.</button>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="failureModal">
+  <div class="modal-header text-center">
+    <h3 class="modal-title">Sorry.</h3>
+  </div>
+  <div class="modal-body text-center">
+    <span class="fa-stack fa-4x text-danger">
+      <i class="fa fa-circle-thin fa-stack-2x"></i>
+      <i class="fa fa-thumbs-down fa-stack-1x"></i>
+    </span>
+    <p>Looks like you don't have quite the cash on hand to buy it. We know this is a bummer.</p>
+  </div>
+  <div class="modal-footer">
+    <div class="col-xs-12">
+      <button class="btn btn-default btn-lg btn-block" ng-click="close()">Okay</button>
+    </div>
+  </div>
+</script>

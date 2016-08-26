@@ -1,0 +1,49 @@
+  <div class="sc-finance-reco" ng-if="goal.projected_finance_amount">
+    <div class="sc-container container">
+      <div class="arrow-down"></div>
+      <h1>Finance Recommendation</h1>
+      <div class="row">
+        <div class="col-sm-5 col-sm-push-1 text-right finance-track">
+          <div class="outer-circle">
+            <div class="inner-circle">
+              <div class="icon text-center"><img ng-src="/images/ignore/track-{{goalKind}}-icon.gif" class="img-responsive"></div>
+                <div class="financial-year">{{goal.transition_on | monthYear}}</div>
+                <div class="financial-title">Start Finance Track</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 date-block pull-right col-sm-pull-1 orange">
+          <div class="skew-neg clearfix">
+            <div class="skew-pos text-left">
+              <span>Start Date</span>
+              <span>{{goal.transition_on | monthYear}}</span>
+            </div>
+          </div>
+          <div class="tabular-data clearfix">
+            <div class="clearfix">
+              <div class="col-sm-8 text-left">Loan Amount</div>
+              <div class="col-sm-4 text-right">{{goal.projected_finance_amount | dollars}}</div>
+            </div>
+            <div class="clearfix">
+              <div class="col-sm-8 text-left">Interest Rate</div>
+              <div class="col-sm-4 text-right">{{goal.rate}}%</div>
+            </div>
+            <div class="clearfix">
+              <div class="col-sm-8 text-left">
+                Term in Years&nbsp;
+                <i ng-if="goalKind=='house'" popover="House terms are generally at fixed time lengths of 15, 20, and 30 year mortgages. To avoid years of interest payments, iQuantifi will always recommend the shortest timeframe that still allows for you to achieve all of your goals." popover-append-to-body="true" class="fa fa-info-circle"></i>
+                <i ng-if="goalKind=='car'" popover="iQuantifi does not recommend that a car loan exceed 5 years. Using financial planning principles, it is wise to consider the timeframe and to pay off a loan as soon as possible while still achieving other goals." popover-append-to-body="true" class="fa fa-info-circle"></i>
+              </div>
+              <div class="col-sm-4 text-right">{{goal.terms / 12}} Years</div>
+            </div>
+          </div>
+          <div class="skew-neg clearfix  pull-right">
+            <div class="skew-pos text-right">
+              <span>Monthly Payment</span>
+              <span>{{goal.projected_payment | dollars}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

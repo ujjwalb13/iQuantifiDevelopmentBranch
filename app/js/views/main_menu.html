@@ -1,0 +1,24 @@
+<div class="nav-main-dashboard" ng-controller="MainMenuCtrl" ng-show="showMainMenu">
+  <a href="javascript:void(0)" class="close-btn" ng-click="toggleMainMenu()">
+    <i class="fa fa-close"></i>
+  </a>
+  <ul>
+    <li
+      ng-repeat="menu in menuItems"
+      ng-show="menu.enabled"
+      ng-click="menuOnClick(menu)"
+      ng-class="{active: menu.active, havesub: menu.subMenuItems, 'sub-slide-down': menu.open}">
+      <a href="javascript:void(0)">
+        {{menu.title}}
+        <span class="badge" ng-show="menu.badge">{{menu.badge}}</span>
+      </a>
+      <ul ng-show="menu.subMenuItems">
+        <li ng-repeat="subItem in menu.subMenuItems" ng-click="gotoPath(subItem.path)">
+          <a href="javascript:void(0)">
+            {{subItem.title}}
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

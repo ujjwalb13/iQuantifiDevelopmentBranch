@@ -1,0 +1,4 @@
+<div class="alerts-container container-fluid" ng-controller="AlertsCtrl">
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" ng-hide="alert.id == 'shortage'">{{alert.msg}}</alert>
+</div>
+

@@ -1,0 +1,108 @@
+<style>
+
+  .primary-container {
+    padding-top: 130px;
+  }
+
+  .navbar-inverse {
+    background-color: #fff;
+    border-color: transparent;
+  }
+
+  .navbar-inverse .navbar-nav > li > a {
+    color: #000;
+    padding: 0;
+    cursor: pointer;
+  }
+  .navbar-inverse .navbar-nav > li > a:hover {
+    color: #000;
+    background-color: #fff;
+    cursor: pointer;
+  }
+
+  .navbar-right {
+    margin-right: 0;
+  }
+  .nav-links{
+    color: #8bb5b7;
+  }
+  .nav-links li {
+    margin-right: 10px;
+  }
+  .nav-search {
+    max-width: 300px;
+    margin-top: 10px;
+  }
+
+  .main-nav {
+    background-color: #448f91;
+    height: 40px;
+    margin-left: 0;
+  }
+
+  .main-nav a {
+    color: #fff;
+    line-height: 40px;
+  }
+
+  .active {
+    background: #aaa;
+  }
+
+  .sub-nav li {
+    list-style: none;
+    float: left;
+    margin-right: 40px;
+  }
+  .sub-nav li a {
+    color: #8bb5b7;
+  }
+  .sub-nav li.active {
+    background-color: #fff;
+    font-weight: bold;
+  }
+
+
+
+</style>
+<img src="/images/demo/Zbank-logo.png" alt="zBank">
+
+<div class="navbar-right">
+  <ul class="nav navbar-nav nav-links">
+    <li>Welcome John Smith</li>
+    <li>Profile & Settings</li>
+    <li>Privacy & Security</li>
+    <li>FAQs</li>
+    <li>Contact Us</li>
+    <li><a ng-click="logout()"><strong>Log Out</strong></a></li>
+  </ul>
+  <br>
+  <div class="nav-search pull-right">
+    <div class="input-group input-group-sm">
+      <span class="input-group-addon"><i class="fa fa-search"></i></span>
+      <input type="search" class="form-control" placeholder="How can we help you?">
+    </div>
+  </div>
+</div>
+
+<div class="row main-nav hidden-xs">
+  <div class="col-xs-2 active"><a href="#">Accounts</a> </div>
+  <div class="col-xs-2"><a href="#">Make Payments</a></div>
+  <div class="col-xs-2"><a href="#">Transfers</a></div>
+  <div class="col-xs-2"><a href="#">Special Offers</a></div>
+  <div class="col-xs-2"><a href="#">Financial Tools</a></div>
+  <div class="col-xs-2"><a href="#">Help & Support</a></div>
+</div>
+<div class="row sub-nav hidden-xs">
+  <ul>
+    <li class="active"><a href="#">Account Summary</a> </li>
+    <li><a href="#">Card Activity</a></li>
+    <li><a href="#">Message Center <span class="badge">1</span></a></li>
+    <li><a href="#">Manage Accounts</a></li>
+    <li><a href="#">Statements</a></li>
+    <li><a href="#">Alerts <span class="badge">3</span></a></li>
+    <li><a href="#">Update Profile</a></li>
+    <li><a href="#">Service Center</a></li>
+    <li><a href="#">Open Account</a></li>
+    </ul>
+</div>

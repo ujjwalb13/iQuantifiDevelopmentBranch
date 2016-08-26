@@ -1,0 +1,33 @@
+<div class="action-detail-container clearfix arrow-box">
+  <div class="col-xs-3 align-center text-center">
+    <img class="goal" ng-src="/images/ignore/{{actionable.goal_type | hyphenate}}On.svg" ng-if="actionable.category == 'goal' || actionable.category == 'retirement'">
+    <img class="debt" ng-src="/images/svg/debtOn.svg" ng-if="actionable.category == 'debt'">
+    <img src="/images/svg/protection-1cr.svg" ng-if="goal.type == 'Reserve' && goal.kind == '1CR'">
+    <img src="/images/svg/protection-3cr.svg" ng-if="goal.type == 'Reserve' && goal.kind == '3CR'">
+    <img src="/images/svg/protection-6cr.svg" ng-if="goal.type == 'Reserve' && goal.kind == '6CR'">
+    <img src="/images/svg/protection-dp.svg" ng-if="actionable.policy_type == 'DisabilityPolicy'">
+    <img src="/images/svg/protection-lp.svg" ng-if="actionable.policy_type == 'LifePolicy'">
+  </div>
+
+  <div class="col-xs-10 align-center text-center">
+    <h4>{{actionable.name}}</h4>
+  </div>
+</div>
+
+<div class="action-detail-description col-xs-12 align-center" ng-class="{'arrow-box': action.positions.length}">
+  <h4>{{action.description}}</h4>
+</div>
+
+<ul class="recommend-list">
+  <li ng-repeat="position in action.positions[0]">
+    <span>{{position.percent}}%</span><span>{{position.name}}</span>
+  </li>
+</ul>
+
+<div class="clearfix action-btns footer mm-fixed-bottom">
+  <div class="col-xs-11 align-center">
+    <a ng-href="/#/actions/{{action.guid}}/open" class="iq-submit-btn btn btn-block btn-lg btn-primary" ng-if="action.name === 'open_account' && !action.is_complete" ng-disabled="!action.is_completable">Open Account</a>
+    <button class="iq-submit-btn btn btn-block btn-lg btn-primary" ng-if="action.name !== 'open_account' && !action.is_complete" ng-click="completeAction()" ng-disabled="!action.is_completable">I Did It</button>
+    <button class="iq-submit-btn btn btn-block btn-lg btn-success" ng-if="action.is_complete" disabled><i class="fa fa-check"></i></button>
+  </div>
+</div>

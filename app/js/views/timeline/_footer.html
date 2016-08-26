@@ -1,0 +1,6 @@
+<div class="actions-container mm-fixed-bottom hidden-xs closed" ng-class="{open: actionsOpen, closed: !actionsOpen}" ng-controller="ActionListCtrl">
+  <h1 class="action-footer-title" ng-click="actionsOpen = !actionsOpen">
+    <span><i class="fa" ng-class="{'fa-angle-down': actionsOpen, 'fa-angle-up': !actionsOpen}"></i> Actions Due by {{lastDayOfMonth}}</span>
+  </h1>
+  <div class="actions-wrapper" ng-include src="'/views/actions/action-list.html'"></div>
+</div>

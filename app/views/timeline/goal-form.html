@@ -1,0 +1,48 @@
+<div class="main-title">
+  <div class="container">
+    <h3 class="pull-left">
+      <span ng-show="action == 'New'">
+        Add New Goal
+      </span>
+      <span ng-show="action == 'Edit'">
+        Edit Goal
+      </span>
+    </h3>
+    <h3 class="pull-right">
+      <a href="/#/progress">&times;</a>
+    </h3>
+  </div>
+</div>
+<div class="main-content-style">
+  <div class="container main-wrapper add-new-section">
+    <div class="section-header goals" id="{{type}}">
+        <i class="icon {{ type | goalIconClass }}"></i>
+        <span>{{title(type) | titleize}}</span>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">
+      <div class="form-body">
+        <div ng-show="deleting" class="row text-center">
+          <i class="fa fa-exclamation-triangle"></i> Deleting {{obj.name}}...
+        </div>
+        <form class="goal-modal-form" name="objForm">
+          <section ng-include="modalUrl()"></section>
+        </form>
+      </div>
+      <div class="action-form">
+        <button ng-show="!deleting && action == 'Edit' && obj.type != 'Retirement' && obj.type != 'retirement'" type="button" class="btn-delete" ng-click="delete(obj)">
+          <span class="fa fa-trash" aria-hidden="true"></span>
+        </button>
+        <button ng-show="deleting && action == 'Edit'" type="button" class="iq-submit-btn btn-success btn" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+        <button type="button" class="iq-submit-btn btn" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+        <button ng-show="!pending && type != 'downsizing'" type="button" class="iq-submit-btn btn-success btn" ng-click="save(objForm.$valid)">
+          {{ action == 'Edit' ? "Save Changes" : "Add Goal"}}
+        </button>
+        <button ng-show="!pending  && type == 'downsizing'" type="button" class="iq-submit-btn btn-success btn" ng-click="next(objForm.$valid)">
+          Next
+        </button>
+        <button ng-show="pending" type="button" class="iq-submit-btn btn-success btn" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

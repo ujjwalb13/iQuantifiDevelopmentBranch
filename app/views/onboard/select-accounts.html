@@ -1,0 +1,34 @@
+<div class="onboarding">
+  <div class="content">
+    <div ng-include src="'/views/onboard/welcome-box.html'"></div>
+    <onboard-nav current-step='currentStep'></onboard-nav>
+
+    <div class="app-wizard-step1">
+      <div class="fix-container">
+        <div class="app-wizard-form">
+          <div class="row">
+            <div class="col-sm-12 sub-headers">
+              <h4>Link Account</h4>
+            </div>
+          </div>
+          <div class="row" ng-repeat="account in institution.accounts">
+            <div class="col-xs-12">
+              <div class="checkbox-st">
+                <input type="checkbox" ng-model="account.is_active" id="{{account.guid}}"/>
+                <label for="{{account.guid}}" class="checkbox-btn green">{{account.name}} ({{account.balance | dollars}})</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="form-footer">
+      <div class="row text-left">
+        <div class="col-sm-12">
+          <button class="iq-submit-btn btn-primary btn" ng-disabled="submitted && accountForm.$invalid" ng-hide="processing" ng-click="submit()">Save</button>
+          <button class="iq-submit-btn btn-primary btn" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

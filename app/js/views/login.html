@@ -1,0 +1,50 @@
+<div ng-if="!demo">
+
+  <style>
+    body, footer { background-color: #3b5152; }
+    footer.footer-app {
+      background-color: transparent;
+      padding: 0px;
+      border-top:none;
+    }
+    footer p { color: #cfcfcf; }
+    h1 {color: #fff}
+  </style>
+
+  <div class="container auth-container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h1>Get Ready to Take Control of Your Finances...</h1>
+        <h3>Log in with your email address</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+        <form class="auth-form" name="loginForm" role="form" ng-submit="submit(loginForm.$valid)" novalidate>
+          <p class="text-danger" ng-show="error.error">{{error.error}}</p>
+          <div class="form-group">
+            <label class="control-label" for="email">Email</label>
+            <input type="email" class="form-control" name="email" id="email" required ng-model="$parent.user.email">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password" required ng-model="$parent.user.password">
+          </div>
+          <div class="text-center">
+            <button ng-show="processing" type="button" class="iq-submit-btn btn btn-success" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+            <button ng-show="!processing" type="submit" class="iq-submit-btn btn btn-success">Log in</button>
+          </div>
+          <ul class="auth-links">
+            <li><a href="/#/forgot-password">Forgot password?</a></li>
+            <li><a href="/#/confirmation">Didn't receive confirmation instructions?</a></li>
+            <li><a href="/#/unlock">Didn't receive unlock instructions?</a></li>
+          </ul>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-if="demo" ng-include src="'/views/demo/login.html'"></div>

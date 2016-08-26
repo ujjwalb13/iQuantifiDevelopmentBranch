@@ -1,0 +1,111 @@
+<div>
+  <div class="row form-group" ng-class="{'has-error': submitted && (errors.name || objForm.name.$invalid)}">
+    <div class="col-sm-4 text-right">
+      <label class="control-label">Name of Goal</label>
+    </div>
+    <div class="col-sm-6">
+      <input type="text" name="name" id="name" class="form-control" ng-model="obj.name" required ng-minlength="2" ng-class="{error: objForm.name.$error.minlength}">
+      <span ng-repeat="error in errors.name" class="help-block">{{ error }}</span>
+      <span ng-messages="submitted && objForm.name.$error" ng-messages-include="error-messages"></span>
+    </div>
+  </div>
+
+  <div class="row form-group" ng-class="{'has-error': submitted && (errors.transition_on || objForm.transitionMonth.$invalid || objForm.transitionYear.$invalid)}">
+    <div class="col-sm-4 text-right">
+      <label class="control-label">Purchase Date</label>
+    </div>
+    <div class="col-sm-3">
+      <select ng-model="obj.transition_month" name="transitionMonth" id="months-transitionOn" class="form-control" name="months-transitionOn" data-placeholder="{{ thisMonth }}" tabindex="2" required ng-change="filterRelated()">
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <span ng-repeat="error in errors.transition_on" class="help-block">{{ error }}</span>
+    </div>
+    <div class="col-sm-3">
+      <select ng-model="obj.transition_year" name="transitionYear" id="years-transitionOn" class="form-control" name="years-transitionOn" data-placeholder="{{ thisYear }}" tabindex="2" required ng-options="year for year in years" ng-change="filterRelated()">
+      </select>
+    </div>
+  </div>
+
+  <div class="row form-group" ng-class="{'has-error': submitted && (errors.amount || objForm.amount.$invalid)}">
+    <div class="col-sm-4 text-right">
+      <label class="control-label">Purchase Price</label>
+    </div>
+    <div class="col-sm-6">
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" name="amount" id="amount" class="form-control" ng-model="obj.amount" min="1" required placeholder="0.00" ng-change="updateLoanAmt()" maxlength="10" currency-input>
+      </div>
+      <span ng-repeat="error in errors.amount" class="help-block">{{ error }}</span>
+      <span ng-messages="submitted && objForm.amount.$error" ng-messages-include="error-messages"></span>
+    </div>
+  </div>
+
+  <div class="row form-group" ng-class="{'has-error': submitted && (errors.name || objForm.tradeIn.$invalid)}">
+    <div class="col-sm-4 text-right">
+      <label class="control-label">Net Proceeds from Sale of Home</label>
+    </div>
+    <div class="col-sm-6">
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" name="tradeIn" id="tradeIn" class="form-control" ng-model="obj.trade_in" min="0" placeholder="0.00" ng-change="updateLoanAmt()" maxlength="10" currency-input>
+      </div>
+      <span ng-repeat="error in errors.trade_in" class="help-block">{{ error }}</span>
+      <span ng-messages="submitted && objForm.tradeIn.$error" ng-messages-include="error-messages"></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4 text-right" ng-class="{'has-error': submitted && (errors.downpayment || objForm.downpayment.$invalid)}">
+      <label class="control-label">Down Payment</label>
+    </div>
+    <div class="col-sm-6">
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" name="downpayment" id="downpayment" class="form-control" ng-model="obj.downpayment" min="0" placeholder="0.00" ng-change="updateLoanAmt()" maxlength="10" currency-input>
+      </div>
+      <span ng-repeat="error in errors.downpayment" class="help-block">{{ error }}</span>
+      <span ng-messages="submitted && objForm.downpayment.$error" ng-messages-include="error-messages"></span>
+    </div>
+  </div>
+
+  <div class="row amt-row">
+    <div class="col-sm-4 text-right">
+      <label class="control-label">Mortgage Amount</label>
+    </div>
+    <div class="col-sm-6">
+      <span class="amt-total">{{obj.loanamt | currency}}</span>
+    </div>
+  </div>
+
+  <div class="row form-group" ng-repeat="debt in related.debts" ng-if="debt.filtered">
+    <div class="col-sm-11 col-sm-offset-1">
+      <label class="control-label">Will {{debt.name}} be paid off and closed once you purchase this house?</label>
+      <input type="radio" id="related-{{debt.guid}}-true" ng-value="true" ng-model="debt.value" required>
+      <label class="radio-btn green" for="related-{{debt.guid}}-true">Yes</label>
+      <input type="radio" id="related-{{debt.guid}}-false" ng-value="false" ng-model="debt.value">
+      <label class="radio-btn grey" for="related-{{debt.guid}}-false">No</label>
+    </div>
+  </div>
+
+  <div class="row form-group" ng-repeat="goal in related.goals" ng-if="goal.filtered">
+    <div class="col-sm-11 col-sm-offset-1">
+      <label class="control-label" ng-hide="goal.goal_type === 'Rent'">Will {{goal.name}} be sold once you purchase this house?</label>
+      <label class="control-label" ng-show="goal.goal_type === 'Rent'">Will {{goal.name}} no longer be paid once you purchase this house?</label>
+      <input type="radio" id="related-{{goal.guid}}-true" ng-value="true" ng-model="goal.value" required>
+      <label class="radio-btn green" for="related-{{goal.guid}}-true">Yes</label>
+      <input type="radio" id="related-{{goal.guid}}-false" ng-value="false" ng-model="goal.value">
+      <label class="radio-btn grey" for="related-{{goal.guid}}-false">No</label>
+    </div>
+  </div>
+</div>

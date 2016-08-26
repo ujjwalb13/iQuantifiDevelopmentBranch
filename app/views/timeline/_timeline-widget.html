@@ -1,0 +1,104 @@
+<div class="dashboard-ct">
+  <div class="timeline-ct">
+    <div class="timeline-btm">
+      <div class="timeline-point timeline-focus">
+
+        <div ng-repeat="goal in goals | orderBy: 'date':true"
+          slide-goal
+          class="point-main transition {{goal.category}} {{stackIcon(goal)}}"
+          ng-style="positionX(goal.focus.x)" ng-hide="(goal.focus.x) < startX || (goal.focus.x) > endX || goal.deleted">
+
+          <div class="point-ct">
+            <i
+              class="icon {{goal | timelineGoalIcon}}"
+              ng-class="{'icon-80': goal.category != 'debt'}"
+              ng-dblclick="goToSummary(goal)"
+              ng-mousedown="bringGoalForward(goal)"></i>
+            <div class="text-ct">
+              <p>
+                <strong>{{goal.date | monthYear}}</strong>
+                <span>{{goal.amount | currency}}</span>
+              </p>
+              <div class="point-control" ng-show="showConfirm">
+                <a href="javascript:void(0)" ng-click="cancel()" class="close-control">
+                  <i class="fa fa-close"></i>
+                </a>
+                <a href="javascript:void(0)" ng-click="save()" class="check-control">
+                  <i class="fa fa-check"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <span class="point-inline"></span>
+        </div><!-- END GOALS -->
+
+        <div ng-repeat="group in groups | orderBy: 'date':true"
+          class="point-tooltip-wrapper {{group.category}}"
+          ng-style="positionX(group.focus.x)"
+          ng-class="{'on-top': group.onTop}">
+          <span class="point-inline"></span>
+          <!-- Add pointwp + number to set the top of tooltip control -->
+          <div class="point-tooltip pointwp{{group.size}}" >
+            <div class="tooltip-btn" ng-click="toggleTooltip(group)">
+              <span>{{group.size}}</span>
+              <i class="fa fa-list-ul"></i>
+            </div>
+            <div class="point-tooltip-content" ng-show="group.tooltipShow">
+              <div class="popover bottom fade in">
+                <div class="arrow"></div>
+                <div class="popover-inner">
+                  <ul>
+                    <li ng-class="{active: goal.stackIndex == 1}" ng-repeat="goal in group.goals | orderBy: date | limitTo: group.limit" ng-click="bringGoalForward(goal)">
+                      <i class="icon {{goal | timelineGoalIcon}}"></i>
+                      <p>
+                        <strong>
+                          {{goal.name | titleize}}
+                        </strong>
+                        {{goal.date | monthYear}} | {{goal.amount | currency}}
+                      </p>
+                      <span class="status-icon"></span>
+                    </li>
+                  </ul>
+                  <div class="tooltip-control">
+                    <a href="javascript:void(0)" class="close-btn" ng-click="toggleTooltip(group)">Close</a>
+                    <a href="javascript:void(0)" class="show-ctrl less" ng-click="showLess(group)" ng-show="group.hasMore && !group.showMore">
+                      <i class="fa fa-angle-up"></i>
+                      Show Less
+                    </a>
+                    <a href="javascript:void(0)" class="show-ctrl more" ng-click="showMore(group)" ng-show="group.hasMore && group.showMore">
+                      <i class="fa fa-angle-down"></i>
+                      Show More
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- END STACK INDICATOR -->
+        <div class="focus-ticks" style="clear:both">
+          <svg height="30" style="width:100%"></svg>
+        </div>
+      </div>
+
+      <div class="timeline-nav timeline-context">
+        <a href="javascript:void(0)" class="nav-ctrl brush-start"
+          slide-brush
+          ng-style="positionX(context.brush.startX - 40)"
+          analytics-on="click" analytics-event="Resize" analytics-category="Timeline"
+          grab-slide-brush>
+          <i class="fa fa-angle-right"></i>
+        </a>
+        <a href="javascript:void(0)" class="nav-ctrl brush-end"
+          slide-brush
+          ng-style="positionX(context.brush.endX)"
+          analytics-on="click" analytics-event="Resize" analytics-category="Timeline"
+          grab-slide-brush>
+          <i class="fa fa-angle-left"></i>
+        </a>
+      </div>
+      <div class="context-ticks" style="clear:both">
+       <svg height="30" style="width:100%"></svg>
+      </div>
+    </div>
+  </div>
+</div>

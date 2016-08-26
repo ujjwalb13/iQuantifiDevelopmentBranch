@@ -1,0 +1,18 @@
+<div class="reserves-progress-bar">
+  <div class="progress reserves-progress">
+    <div class="progress-bar progress-bar-success" style="width: {{reservesPostPercentage}}%"></div>
+    <div class="progress-bar progress-bar-warning" style="width: {{impulsePercentage}}%"></div>
+    <div class="col-xs-2"></div>
+  </div>
+  <div class="month-amounts">
+    <div class="col-xs-2 one-mo">
+      {{oneCr | dollars}}
+    </div>
+    <div class="col-xs-4 three-mo">
+      {{threeCr | dollars}}
+    </div>
+    <div class="col-xs-6 six-mo">
+      {{sixCr | dollars}}
+    </div>
+  </div>
+</div>

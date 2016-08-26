@@ -1,0 +1,38 @@
+<style>
+body, footer { background-color: #ecf4f4; }
+</style>
+
+<div class="container dropdown-container">
+  <div class="row header hidden-xs">
+    <div class="col-sm-12">
+      <h3 class="text-center">Incomes</h3>
+     </div>
+  </div>
+
+  <div class="row">
+    <table class="iq-table table-striped table selectable">
+      <thead class="dark">
+        <th>Person</th>
+        <th class="hidden-xs">Name</th>
+        <th class="text-right hidden-xs">Amount</th>
+        <th class="text-right">Annual</th>
+        <th class="visible-xs"></th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="income in incomes" ng-click="goToIncomeEdit(income.guid)">
+          <td>{{income.person.first_name}} {{income.person.last_name}}</td>
+          <td class="hidden-xs">{{income.period | titleize}}</td>
+          <td class="text-right hidden-xs">{{income.amount | dollars}}</td>
+          <td class="text-right">{{income.annual_amount | dollars}}</td>
+          <td class="visible-xs"><i class="fa fa-chevron-right"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <a href="/#/incomes/new" class="iq-submit-btn btn-primary btn" role="button">Add New Income</a>
+    </div>
+  </div>
+</div>

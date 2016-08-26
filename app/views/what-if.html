@@ -1,0 +1,118 @@
+<section class="what-if-slider">
+  <div class="content">
+    <slick class="slider center" data="goals" init-onload="true" center-mode="true" center-padding="60px" slides-to-show="{{slidesToShow}}" focus-on-select="true"
+           responsive="[{breakpoint: 768, settings: {arrows: false, centerMode: true, centerPadding: '100px', slidesToShow: 5}},
+                        {breakpoint: 480, settings: {arrows: false, centerMode: true, centerPadding: '40px', slidesToShow: 3}}]"
+           ng-swipe-left="setSelectedGoal()"
+           ng-swipe-right="setSelectedGoal()"
+           ng-hide="results">
+
+      <div ng-repeat="goal in goals track by $index">
+        <h3 data-guid="{{goal.guid}}" ng-if="goal.guid != 'new'" ng-click="setSelectedGoal('{{ goal.guid }}')">
+          <img ng-src="/images/ignore/{{icon(goal.type)}}Off.svg" class="inactive">
+          <img ng-src="/images/ignore/{{icon(goal.type)}}On.svg" class="active">
+          {{goal.name}}
+        </h3>
+
+        <h3 data-guid="new" ng-if="goal.guid == 'new'" ng-click="setSelectedGoal('new')">
+          <img src="/images/svg/add-goalOff.svg" class="inactive">
+          <img src="/images/svg/add-goalOn.svg" class="active">
+          Add Goal
+        </h3>
+      </div>
+
+    </slick>
+    <span class="selected-goal" ng-show="results">{{selectedGoal.name}}</span>
+  </div>
+</section>
+
+<div class="scenario-box row" ng-hide="selectedGoal == 'new'">
+  <form name="whatIfForm" class="clearfix" ng-submit="runScenario(whatIfForm.$valid)" novalidate>
+    <div class="col-xs-6">
+      <div class="btn-group btn-group-justified">
+        <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
+          <!--{{'Adjust Goal ' + selectedAttribute | titleize}} <span class="caret"></span>-->
+        <!--</button>-->
+        <!--<ul class="dropdown-menu" role="menu">-->
+          <!--<li><a href ng-click="selectedAttribute='amount'">Adjust Goal Amount</a></li>-->
+          <!--<li><a href ng-click="selectedAttribute='date'">Adjust Goal Date</a></li>-->
+        <!--</ul>-->
+
+        <select ng-model="selectedAttribute" class="btn btn-default dropdown-toggle">
+          <option value="amount">Adjust Goal Amount</option>
+          <option value="date">Adjust Goal Date</option>
+        </select>
+
+      </div>
+    </div>
+    <div class="form-group col-xs-6" ng-class="{'has-error': submitted && (errors[selectedAttribute] || whatIfForm.goalAttribute.$invalid)}">
+      <div class="input-group" ng-if="selectedAttribute != 'date'">
+        <span class="input-group-addon">$</span>
+        <input type="tel" name="goalAttribute" class="form-control" ng-model="selectedGoal[selectedAttribute]" required currency-input>
+      </div>
+      <input type="date" name="goalAttribute" class="form-control" ng-model="selectedGoal.transition_on" required ng-if="selectedAttribute == 'date'">
+      <p class="help-block" ng-show="errors[selectedAttribute]" ng-repeat="err in errors[selectedAttribute]">{{err}}</p>
+      <p ng-show="submitted && whatIfForm.goalAttribute.$error.required" class="help-block">Name is required</p>
+      <p ng-show="submitted && whatIfForm.goalAttribute.$error.pattern" class="help-block">Name is invalid</p>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3">
+      <button type="submit" class="iq-submit-btn btn btn-primary btn-block" ng-hide="running">Run Scenario</button>
+      <button type="submit" class="iq-submit-btn btn btn-primary btn-block" disabled ng-show="running"><i class="fa fa-circle-o-notch fa-spin"></i> Running</button>
+    </div>
+  </form>
+</div>
+
+<div class="goal-type-grid" ng-show="selectedGoal=='new' && !results">
+  <p>Select a goal type.</p>
+  <div class="row" ng-repeat="row in goalTypes | partition:addPartition">
+    <div class="col-xs-4 col-sm-2" ng-repeat="type in row" ng-click="openGoalModal(type, 'New', 'goal')">
+      <img ng-src="/images/ignore/{{icon(type)}}On.svg">
+      <span>{{title(type) | titleize}}</span>
+    </div>
+  </div>
+</div>
+
+<div class="tip col-xs-6 col-xs-offset-3" ng-hide="results || selectedGoal=='new'">
+  <span>Tip</span>
+  <p class="text-center">Modify the date or amount of your goal to see the results.</p>
+</div>
+
+<div class="what-if-results col-xs-12" ng-if="results">
+  <div class="tabular-data clearfix">
+    <div class="head clearfix" scroll-to-fixed margin-top="56">
+      <div class="col-xs-4">Goal Amount</div>
+      <div class="col-xs-4">Completion Date</div>
+      <div class="col-xs-4">Payment</div>
+    </div>
+    <div class="content">
+      <div class="row" ng-repeat="goal in results">
+        <div class="col-xs-11 col-xs-offset-1">
+          <h3>
+            <img class="goal" ng-src="/images/ignore/{{goal.type | hyphenate}}On.svg" ng-if="goal.category != 'debt'">
+            <img class="debt" src="/images/svg/debtOn.svg" ng-if="goal.category == 'debt'">
+            {{goal.name}}
+          </h3>
+        </div>
+        <div class="clearfix">
+          <div class="col-xs-4" ng-repeat="attr in ['amount', 'date', 'payment']">
+            <span ng-class="{green: goal[attr].status=='up' && attr=='date', red: goal[attr].status=='down' && attr=='date', green: goal[attr].status=='down', red: goal[attr].status=='up'}">
+              {{goal[attr].post | dollars | date}}
+              <div class="arrow-{{goal[attr].status}}" ng-hide="goal[attr].status=='equal'"></div>
+            </span>
+            <span>{{goal[attr].pre | dollars | date}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix action-btns footer mm-fixed-bottom" ng-show="results">
+  <div class="col-xs-5">
+    <button class="iq-submit-btn btn btn-default btn-block" ng-click="reset()">Reset</button>
+  </div>
+  <div class="col-xs-7">
+    <button class="iq-submit-btn btn btn-success btn-block" ng-click="save()" ng-hide="saving">Save Changes</button>
+    <button class="iq-submit-btn btn btn-success btn-block" disabled ng-show="saving"><i class="fa fa-circle-o-notch fa-spin"></i> Saving</button>
+  </div>
+</div>

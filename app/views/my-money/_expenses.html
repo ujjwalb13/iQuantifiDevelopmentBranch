@@ -1,0 +1,10 @@
+<div class="section-header mymoney">
+    <i class="icon icon-mm-expenses"></i>Expenses Summary
+</div>
+<div class="wrapper-detail">
+  <div ng-include="'/views/my-money/expenses/_header.html'"></div>
+  <div ng-include="'/views/my-money/expenses/_monthly_debt_payments_and_policy_premiums.html'"
+      ng-show="isCurrentView('monthly_debt_and_policy_premiums')" class="tab-pane" id="monthlydebt" role="tabpanel"></div>
+  <div ng-include="'/views/my-money/expenses/_monthly_expenses.html'"
+      ng-show="isCurrentView('monthly_expenses')" class="tab-pane" id="monthlyexpense" role="tabpanel"></div>
+</div>

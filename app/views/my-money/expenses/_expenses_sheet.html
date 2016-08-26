@@ -1,0 +1,103 @@
+<div class="section-header mymoney">
+    <i class="icon icon-mm-expenses"></i>Monthly Expense Sheet
+</div>
+<div class="wrapper-detail">
+  <div class="sheet-header">
+    <div class="col-md-3 col-xs-12 total-content">
+      <strong>Total Monthly Expenses</strong>
+      <span>{{monthlyExpenses | dollars}}</span>
+    </div>
+    <div class="col-md-9 col-xs-12 note-content">
+      <strong>NOTE:</strong>
+      <span>
+        <strong>Do not include debts like mortgages, credit cards, and car loan payments.</strong> These should be added in the debts section of Complete My Profile.</span>
+        <p class="hint">
+        <span class="star">*</span>
+        If you have linked accounts, we have filled in an estimate for each category.  Please review and make any changes necessary.
+        </p>
+    </div>
+  </div>
+  <div class="has-info-icon update-sheet">
+    <div class="col-md-6 col-xs-12 form-group" ng-repeat-start="expense in expenses" attr="{{$index}}">
+      <div class="row">
+        <div class="col-md-5 col-xs-3">
+          <label>{{expense.human_name}}</label>
+        </div>
+        <div class="col-md-6 col-xs-4">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="text" name="amt" placeholder="Amount" class="form-control" ng-model="expense.amount" ng-change="showTotal()" maxlength="10" currency-input>
+          </div>
+        </div>
+        <div class="col-md-1 col-xs-1 info-icon-container chart-content">
+          <span class="info-icon fa fa-info" aria-hidden="true" ng-click="dislaySubcategories(expense.kind)"></span>
+          <div class="popover top fade in {{expense.kind}} {{expenseSubcategories[expense.kind]['showed']}}" ng-show="expenseSubcategories[expense.kind]['showed']">
+            <div class="arrow"></div>
+            <div class="popover-inner">
+              <div class="popover-content">
+                <i class="fa fa-times" aria-hidden="true" ng-click="expenseSubcategories[expense.kind]['showed'] = false"></i>
+                <label class="title">{{expense.human_name}}</label>
+                <ul class="process-content">
+                  <li class="chart-dark-yellow">
+                    <label for="">Current Expenses:</label>
+                    <div class="process-bar current pc{{expense.amount_percent}}" ng-class="{'process-empty': expense.amount_percent == 0}">
+                      <p><span>${{expense.amount}}</span></p>
+                    </div>
+                  </li>
+                  <li class="chart-green">
+                    <label for="">3 Month Average:</label>
+                    <div class="process-bar month pc{{expense.three_month_average_amount_percent}}" ng-class="{'process-empty': expense.three_month_average_amount_percent == 0}">
+                      <p><span>${{expense.three_month_average_amount}}</span></p>
+                    </div>
+                  </li>
+                </ul>
+                <label for="">Category includes:</label>
+                <p class="subcategories-loading" ng-show="!expenseSubcategories[expense.kind]['loadDone']">
+                  <i class="fa fa-circle-o-notch fa-spin"></i>
+                </p>
+                <ul ng-show="expenseSubcategories[expense.kind]['loadDone']">
+                  <li ng-repeat="subcategory in expenseSubcategories[expense.kind]['categories']">
+                    <strong>{{ subcategory }}</strong>
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="popover-content">
+                  <i class="fa fa-times" aria-hidden="true" ng-click="expenseSubcategories[expense.kind]['showed'] = false"></i>
+                  <p class="title-popover">{{expense.human_name}}</p>
+                  <p class="sub-title-popover">Current Amount: {{expense.amount}}</p>
+                  <p class="sub-title-popover">3 Month Average: {{expense.three_month_average_amount}}</p>
+                  <p class="sub-title-popover">Category includes:</p>
+                  <p class="subcategories-loading" ng-show="!expenseSubcategories[expense.kind]['loadDone']">
+                    <i class="fa fa-circle-o-notch fa-spin"></i>
+                  </p>
+                  <ul ng-show="expenseSubcategories[expense.kind]['loadDone']">
+                    <li ng-repeat="subcategory in expenseSubcategories[expense.kind]['categories']">
+                      {{ subcategory }}
+                    </li>
+                  </ul>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix hidden-xs-block" ng-if="$index%2==1" ng-repeat-end></div>
+  </div>
+  <div class="main-wrapper add-new-sheet-section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="action-form">
+          <button class="pull-right iq-submit-btn btn-success btn" ng-click="saveMonthlyExpenses()" ng-hide="processing"> Update Expenses Sheet </button>
+          <button type="submit" class="pull-right iq-submit-btn btn-success btn" ng-show="processing" disabled>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            Processing
+          </button>
+          <button class="pull-right iq-submit-btn btn"
+                  ng-click="cancelSavingExpenses()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
