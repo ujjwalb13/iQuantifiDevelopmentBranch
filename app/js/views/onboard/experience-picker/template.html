@@ -1,8 +1,0 @@
-<div class="col-sm-4 col-xs-2">
-  <div class="hidden-xs investment-type">{{expName}}</div>
-  <div class="visible-xs" title="{{expName}}">{{expNameSm}}</div>
-</div>
-<div class="experience-checkbox text-center {{exp.classes}}" ng-repeat="exp in experiences" >
-  <input type='checkbox' id="exp-{{$id}}" ng-model="exp.selected" ng-change="getExperience(exp)"/>
-  <label class="checkbox-ex-btn grey" for="exp-{{$id}}"></label>
-</div>
