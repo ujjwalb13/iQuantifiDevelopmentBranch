@@ -6,6 +6,11 @@
         update: {
           method: 'PUT',
           isArray: false
+        },
+        reset: {
+            method: 'POST',
+            isArray: false,
+            url: ENV.apiHost + "/users/reset"
         }
       });
     }

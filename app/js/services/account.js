@@ -4,7 +4,14 @@
     'Resource', 'ENV', function($resource, ENV) {
       return $resource(ENV.apiHost + "/finance/accounts/:guid", {
         guid: '@guid'
-      });
+      },
+      {
+          updateList: {
+              method: 'POST',
+              isArray: true
+          }
+      }
+      );
     }
   ]);
 

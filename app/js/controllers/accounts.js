@@ -50,7 +50,9 @@
       if (isValid) {
         $scope.processing = true;
         $scope.account.person_guid = $scope.account.person.guid;
-        return $scope.account.$save().then(function(result) {
+        var accounts = [];
+        accounts.push($scope.account);
+        return Account.updateList(accounts).$promise.then(function (result) {
           $scope.processing = false;
           $rootScope.$broadcast('alert', {
             type: 'success',

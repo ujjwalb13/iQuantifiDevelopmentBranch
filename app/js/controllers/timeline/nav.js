@@ -24,6 +24,7 @@
         if ($rootScope.demo) {
           $rootScope.showDashboard = true;
         }
+        $rootScope.currentUser = null
         $rootScope.$broadcast('clearAlerts');
         return $location.path('/login');
       });

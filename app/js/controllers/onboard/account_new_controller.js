@@ -27,14 +27,21 @@
     $scope.submit = function(isValid) {
       $scope.submitted = true;
       if (isValid) {
-        $scope.processing = true;
+          $scope.processing = true;
+
         $scope.account.person_guid = $scope.account.person.guid;
-        return $scope.account.$save().then(function(result) {
-          $rootScope.$broadcast('alert', {
-            type: 'success',
-            msg: 'The account was created successfully.'
-          });
+
+        var accounts = [];
+        accounts.push($scope.account);
+        return Account.updateList(accounts).$promise.then(
+            function (result) {
+              $rootScope.$broadcast('alert', {
+                type: 'success',
+                msg: 'The account was created successfully.'
+              });
+
           $rootScope.$broadcast('refresh');
+
           return $location.path('/onboard/accounts');
         }, function(err) {
           return $rootScope.$broadcast('alert', {
