@@ -61,6 +61,26 @@
             }
           ].concat($http.defaults.transformResponse)
         },
+        updateList: {
+            isArray: true,
+            method: 'POST',
+            transformResponse: [
+            function(data) {
+                var i, len, person;
+                if (angular.isString(data)) {
+                    data = data.replace(PROTECTION_PREFIX, '');
+                    if (JSON_START.test(data) && JSON_END.test(data)) {
+                        data = angular.fromJson(data);
+                        for (i = 0, len = data.length; i < len; i++) {
+                            person = data[i];
+                            transformPerson(person);
+                        }
+                    }
+                }
+                return data;
+            }
+            ].concat($http.defaults.transformResponse)
+        },
         update: {
           method: 'PUT',
           transformResponse: [

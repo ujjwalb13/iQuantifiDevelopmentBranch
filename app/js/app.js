@@ -369,8 +369,8 @@
   });
 
   app.run(function($http, $rootScope, $location, $window, Auth) {
-    $http.defaults.headers.common['Accept'] = 'application/json';
-    $http.defaults.headers.common['Content-Type'] = 'application/json';
+    //$http.defaults.headers.common['Accept'] = 'application/json';
+    //$http.defaults.headers.common['Content-Type'] = 'application/json';
     $http.defaults.withCredentials = true;
     $rootScope.demo = false;
     $rootScope.showDashboard = false;
@@ -389,7 +389,11 @@
     $rootScope.location = $location;
     $rootScope.footerDate = new Date();
     $rootScope.$on('devise:unauthorized', function(event, xhr, deferred) {
-      return Auth.logout().then(function() {
+
+        if (_($window.location.href).endsWith('/two-factor-auth'))
+            return null;
+        else
+            return Auth.logout().then(function () {
         $rootScope.currentUser = null;
         if (!_($window.location.href).endsWith('/login')) {
           return $location.path('/login');

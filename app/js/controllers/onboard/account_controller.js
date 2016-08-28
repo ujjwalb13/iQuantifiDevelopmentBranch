@@ -42,16 +42,18 @@
       return onboardService.process_transactions().then(function() {
         return onboardService.is_complete().then(function(data) {
           return completeSetup();
-        }, function(data) {
-          if (!data.accounts) {
-            return;
-          }
-          if (!data.income) {
+        }, function (data) {
+
             return $location.path('/onboard/manual-income');
-          }
-          if (!data.expenses) {
-            return $location.path('/onboard/manual-expenses');
-          }
+          //if (!data.accounts) {
+          //  return;
+          //}
+          //if (!data.income) {
+          //  return $location.path('/onboard/manual-income');
+          //}
+          //if (!data.expenses) {
+          //  return $location.path('/onboard/manual-expenses');
+          //}
         });
       })["finally"](function() {
         return $scope.pending = false;

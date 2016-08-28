@@ -60,7 +60,9 @@
       $scope.submitted = true;
       if (isValid) {
         $scope.processing = true;
-        return $scope.person.$save().then(function(result) {
+        var people = [];
+        people.push($scope.person);
+        return Person.updateList(people).$promise.then(function (result) {
           $rootScope.$broadcast('alert', {
             type: 'success',
             msg: 'The person was saved successfully.'

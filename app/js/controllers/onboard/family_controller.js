@@ -73,42 +73,50 @@
       }).apply(this);
     };
     $scope.processForm = function(form) {
-      var calls, child, j, len, ref;
+      var calls, child, j, len, ref, people;
       $scope.submitted = true;
       if (form.$valid) {
         $scope.pending = true;
         calls = [];
+        people = [];
+        
+        //Primary
         preparePerson($scope.primary, 'primary');
-        $scope.primary.state = "TN";
-        calls.push($scope.primary.$save().then(function() {}, function(response) {
-          $scope.spouse.errors = response.data.errors;
-          return $q.reject('');
-        }));
-        if ($scope.hasSpouse) {
-          preparePerson($scope.spouse, 'spouse');
-          calls.push($scope.spouse.$save().then(function() {}, function(response) {
-            $scope.spouse.errors = response.data.errors;
-            return $q.reject('');
-          }));
+        $scope.primary.state = "TN"; //TODO: Calc at server
+        people.push($scope.primary);
+
+        //Spouse
+        if ($scope.hasSpouse)
+        {
+            preparePerson($scope.spouse, 'spouse');
+            people.push($scope.spouse);
         }
-        if ($scope.hasChild) {
-          ref = $scope.children;
-          for (j = 0, len = ref.length; j < len; j++) {
-            child = ref[j];
-            preparePerson(child, 'child');
-          }
-          angular.forEach($scope.children, function(child) {
-            return calls.push(child.$save().then(function() {}, function(response) {
+
+        //Child
+        if ($scope.hasChild)
+        {
+            ref = $scope.children;
+            for (j = 0, len = ref.length; j < len; j++) {
+                child = ref[j];
+                preparePerson(child, 'child');
+            }
+            people = people.concat($scope.children);
+        }
+
+        //Update List   
+          Person.updateList(people).$promise.then(
+          function () {
+              return $location.path('/onboard/experience');
+          },
+          function (response) {
               child.errors = response.data.errors;
               return $q.reject('');
-            }));
-          });
-        }
-        return $q.all(calls).then(function() {
-          return $location.path('/onboard/experience');
-        }, function(response) {})["finally"](function() {
-          return $scope.pending = false;
+          }
+          )["finally"](
+        function () {
+            return $scope.pending = false;
         });
+
       }
     };
     preparePerson = function(person, relationship) {

@@ -174,7 +174,7 @@
         } else {
           $rootScope.$broadcast('clean-timeline');
         }
-        if (timeline.shortage !== 0 && timeline.shortage !== null) {
+        if (timeline.shortage !== "" && timeline.shortage !== null) {
           broadcastShortage(timeline.shortage);
         }
         ref = timeline.goals;
