@@ -1,0 +1,64 @@
+﻿<!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
+
+<div>
+    <div>
+        <div>
+            <form id="" action="{{actionUrl}}" method="post">
+                <button type="submit">Download</button>
+            </form>
+        </div>
+        <div id="grid1" class="ag-fresh" style="height: 100%;"></div>
+        <br />
+    </div>
+
+
+
+    <!--<div id="myPopover" class="hide" ng-controller="ActionCtrl">
+         <input type="text" id="txtMonthsToAdd" ng-model="monthsToAdd" style="visibility:collapse" />
+        <div id="grdActions" class="ag-fresh" style="height: 100%;"></div>
+    </div>-->
+
+    <div id="actionDialog" class="modal fade" role="dialog" ng-controller="ActionCtrl" style="height: 600px;">
+        <div class="modal-dialog">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Actions {{ caption }}</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="txtCaption" ng-model="caption" style="visibility:collapse" />
+                    <input type="text" id="txtMonthsToAdd" ng-model="monthsToAdd" style="visibility:collapse" />
+                    <!--<div id="grdActions" class="ag-fresh" style="height: 100%; width:400px"></div>-->
+                    <table style="width:100%">
+                        <tr ng-repeat="goal in actionsByGoal" style="padding-bottom:20px;border-bottom:5px solid black">
+                            <td class="small" valign="top">{{goal.Name}}</td>
+                            <td>
+                                <table style="width:100%">
+                                    <tr ng-repeat="action in goal.Actions" style="padding-bottom:20px">
+                                        <td valign="top" class="spacer">&nbsp;</td>
+                                        <td class="small">- {{action.Description}}</td>
+                                    </tr>
+                                </table>
+
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+

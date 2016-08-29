@@ -1,100 +1,100 @@
 <div class="container">
-  <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-12">
-      <div class="col-detail">
-        <div class="title">
-          <h3>My Progress</h3>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="col-detail">
+                <div class="title">
+                    <h3>My Progress</h3>
+                </div>
+                <div class="content">
+                    <ul>
+                        <li ng-click="gotoProgressPage('goal')">
+                            <a href="javascript:void(0)">
+                                <i class="icon icon-gl-custom-goal"></i>
+                                <p>My Goals</p>
+                                <span class="lbl-ontrack">On Track</span>
+                            </a>
+                        </li>
+                        <li ng-click="gotoProgressPage('debt')">
+                            <a href="javascript:void(0)">
+                                <i class="icon icon-db-debt"></i>
+                                <p>My Debts</p>
+                                <span class="action-due">! Action Due</span>
+                            </a>
+                        </li>
+                        <li ng-click="gotoProgressPage('protection')">
+                            <a href="javascript:void(0)">
+                                <i class="icon icon-pt-protection"></i>
+                                <p>My Protections</p>
+                                <span class="action-due-mp">Action Due</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="content">
-          <ul>
-            <li ng-click="gotoProgressPage('goal')">
-              <a href="javascript:void(0)">
-                <i class="icon icon-gl-custom-goal"></i>
-                <p>My Goals</p>
-                <span class="lbl-ontrack">On Track</span>
-              </a>
-            </li>
-            <li ng-click="gotoProgressPage('debt')">
-              <a href="javascript:void(0)">
-                <i class="icon icon-db-debt"></i>
-                <p>My Debts</p>
-                <span class="action-due">! Action Due</span>
-              </a>
-            </li>
-            <li ng-click="gotoProgressPage('protection')">
-              <a href="javascript:void(0)">
-                <i class="icon icon-pt-protection"></i>
-                <p>My Protections</p>
-                <span class="action-due-mp">Action Due</span>
-              </a>
-            </li>
-          </ul>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="col-detail">
+                <div class="title">
+                    <h3>My Money</h3>
+                </div>
+                <div class="content">
+                    <ul>
+                        <li>
+                            <a href="">
+                                <i class="icon icon-mm-overview"></i>
+                                <p>Money Profile</p>
+                                <span class="lbl-ontrack"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon icon-mm-accounts"></i>
+                                <p>Accounts</p>
+                                <span class="lbl-ontrack"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon icon-mm-net-worth"></i>
+                                <p>Net Worth</p>
+                                <span class="lbl-ontrack"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="col-detail">
+                <div class="title">
+                    <h3>My Features</h3>
+                </div>
+                <div class="content">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="icon icon-ft-scenario-planer"></i>
+                                <p>Scenario Planner</p>
+                                <span class="lbl-ontrack"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" ng-click="gotoCashFinder()">
+                                <i class="icon icon-ft-cash-finder"></i>
+                                <p>Cashfinder</p>
+                                <span class="lbl-ontrack"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon icon-ft-can-i-buy"></i>
+                                <p>Can I Buy?</p>
+                                <span class="lbl-ontrack"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-12">
-      <div class="col-detail">
-        <div class="title">
-          <h3>My Money</h3>
-        </div>
-        <div class="content">
-          <ul>
-            <li>
-              <a href="">
-                <i class="icon icon-mm-overview"></i>
-                <p>Money Profile</p>
-                <span class="lbl-ontrack"></span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="icon icon-mm-accounts"></i>
-                <p>Accounts</p>
-                <span class="lbl-ontrack"></span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="icon icon-mm-net-worth"></i>
-                <p>Net Worth</p>
-                <span class="lbl-ontrack"></span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-12">
-      <div class="col-detail">
-        <div class="title">
-          <h3>My Features</h3>
-        </div>
-        <div class="content">
-          <ul>
-            <li>
-              <a href="#">
-                <i class="icon icon-ft-scenario-planer"></i>
-                <p>Scenario Planner</p>
-                <span class="lbl-ontrack"></span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" ng-click="gotoCashFinder()">
-                <i class="icon icon-ft-cash-finder"></i>
-                <p>Cashfinder</p>
-                <span class="lbl-ontrack"></span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="icon icon-ft-can-i-buy"></i>
-                <p>Can I Buy?</p>
-                <span class="lbl-ontrack"></span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
