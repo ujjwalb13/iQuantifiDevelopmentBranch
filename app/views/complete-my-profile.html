@@ -4,7 +4,7 @@
       <i class="icon icon-al-profile"></i>
       Complete My Profile
     </h3>
-    <a href="#" class="btn btn-secondery pull-right">
+    <a href="javascript:void(0)" ng-click="doItLater()" class="btn btn-secondery pull-right">
       I’ll do it later
     </a>
   </div>
@@ -25,8 +25,8 @@
         <div class="col-md-3 col-xs-12">
           <div class="title-progress-content">
             <div class="progress">
-              <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                <span>45% Complete</span>
+              <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="{{completionPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{completionPercentage}}%">
+                <span>{{completionPercentage}}% Complete</span>
               </div>
             </div>
           </div>
@@ -34,91 +34,44 @@
       </div>
 
       <div class="profile-complete">
-        <div class="col-md-3 col-xs-6">
-          <div class="wrapper-detail">
+        <div class="col-md-3 col-xs-6" ng-repeat="item in profileItems">
+          <div class="wrapper-detail" ng-class="{completed: item.isCompleted}" ng-if="item.itemName != 'College' && item.itemName != 'Retirement'">
             <i class="icon icon-gl-retirement icon-80"></i>
             <div class="profile-st-content">
-              <h4>Protections</h4>
-              <strong>Review your Protections </strong>
+              <h4>{{item.itemName | titleize}}</h4>
+              <strong>Review your {{item.itemName | titleize}} </strong>
               <p>for accuracy and add anything that may be missing.</p>
-              <a href="#" class="btn btn-primary">
-                View My Protections
+              <a href="javascript:void(0)" class="btn btn-primary" ng-click="reviewAction(item)">
+                View My {{item.itemName | titleize}}
               </a>
             </div>
           </div>
-        </div>
 
-        <div class="col-md-3 col-xs-6">
-          <div class="wrapper-detail">
-            <i class="icon icon-gl-retirement icon-80"></i>
-            <div class="profile-st-content">
-              <h4>Debts</h4>
-              <strong>Review your Debts </strong>
-              <p>for accuracy and add anything that may be missing.</p>
-              <a href="#" class="btn btn-primary">
-                View My Debts
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3 col-xs-6">
-          <div class="wrapper-detail">
-            <i class="icon icon-gl-retirement icon-80"></i>
-            <div class="profile-st-content">
-              <h4>Accounts</h4>
-              <strong>Review your Accounts </strong>
-              <p>for accuracy and add anything that may be missing.</p>
-              <a href="#" class="btn btn-primary">
-                View My Accounts
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3 col-xs-6">
-          <div class="wrapper-detail">
-            <i class="icon icon-gl-retirement icon-80"></i>
-            <div class="profile-st-content">
-              <h4>Expenses</h4>
-              <strong>Review your Expenses </strong>
-              <p>for accuracy and add anything that may be missing.</p>
-              <a href="#" class="btn btn-primary">
-                View My Expenses
-              </a>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-3 col-xs-6">
-          <div class="wrapper-detail">
+          <div class="wrapper-detail" ng-class="{completed: item.isCompleted}" ng-if="item.itemName == 'College'">
             <i class="icon icon-gl-retirement icon-80"></i>
             <div class="profile-st-content">
               <h4>College</h4>
-              <p>A College goal has been created for “Child’s Name” with the information you’ve already provided.</p>
+              <p>A College goal has been created for “{{item.childName || 'the child'}}” with the information you’ve already provided.</p>
               <strong>Please complete it for accuracy.</strong>
-              <a href="#" class="btn btn-primary">
+              <a href="javascript:void(0)" class="btn btn-primary" ng-click="reviewAction(item)">
                 View College Goal
               </a>
             </div>
           </div>
-        </div>
 
-        <div class="col-md-3 col-xs-6">
-          <div class="wrapper-detail">
+          <div class="wrapper-detail" ng-class="{completed: item.isCompleted}" ng-if="item.itemName == 'Retirement'">
             <i class="icon icon-gl-retirement icon-80"></i>
             <div class="profile-st-content">
               <h4>Retirement</h4>
               <p>A Retirement goal has been created with the information you’ve already provided.</p>
               <strong>Please complete it for accuracy.</strong>
-              <a href="#" class="btn btn-primary">
+              <a href="javascript:void(0)" class="btn btn-primary" ng-click="reviewAction(item)">
                 View Retirement Goal
               </a>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </div>
