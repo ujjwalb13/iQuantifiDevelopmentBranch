@@ -10524,23 +10524,23 @@ form label {
   margin: 0 0.1em 0.1em 0;
   background-color: #ccc;
   /*	&:hover{
-  
+
   		cursor: default;
-  
+
   		> span {
   			width: 3.33em;
   			line-height: 3.33em;
   			font-size: 0.3em;
   			color: $primary-color;
   		}
-  
+
   		&:after{
   			top: $circle-width-hover;
   			left: $circle-width-hover;
   			width: 1 - (2 * $circle-width-hover);
   			height: 1 - (2 * $circle-width-hover);
   		}
-  
+
   	}
   */
 }
@@ -18531,6 +18531,16 @@ body.body-onboarding .worksheet .info-icon-container {
 /* line 2153, ../../app/css/modules/_mainstyle.scss */
 .monthly-expenses.total-debt .chart-des {
   padding: 50px 0px;
+}
+
+.monthly-expenses .monthly-expenses-chart .chart-area {fill: none;}
+.monthly-expenses .monthly-expenses-chart .expense-group .tooltip-icon {display: none;}
+.monthly-expenses .monthly-expenses-chart .expense-group:hover .tooltip-icon {display: block;}
+.monthly-expenses .monthly-expenses-chart .expense-group .group-highlight {fill: none; pointer-events: all;}
+.monthly-expenses .monthly-expenses-chart .expense-group:hover .group-highlight {display: block; fill: #d3d3d3;}
+.monthly-expenses .monthly-expenses-chart .tick path,
+.monthly-expenses .monthly-expenses-chart .tick line {
+  fill: none; stroke: #d3d3d3;
 }
 
 /* line 2158, ../../app/css/modules/_mainstyle.scss */
