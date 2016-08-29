@@ -66,6 +66,9 @@
     }).when('/admin', {
       templateUrl: '/views/admin/main.html',
       controller: 'AdminCtrl'
+    }).when('/admin/grid', {
+      templateUrl: '/views/admin/grid.html',
+      controller: 'GridCtrl'
     }).when('/admin/organizations', {
       templateUrl: '/views/admin/organizations.html',
       controller: 'OrganizationsCtrl'
@@ -146,9 +149,6 @@
       controller: 'ForgotPasswordCtrl',
       setupRequired: false,
       loginRequired: false
-    }).when('/grid', {
-      templateUrl: '/views/timeline/grid.html',
-      controller: 'GridCtrl'
     }).when('/incomes', {
       templateUrl: '/views/dropdown/incomes.html',
       controller: 'IncomesCtrl'
@@ -369,12 +369,34 @@
   });
 
   app.run(function ($http, $rootScope, $location, $window, Auth, $mdToast) {
+    $rootScope.alerts = [];
+    $rootScope.shortageAlert = { Id: '' };
+
     $rootScope.$on('alert', function (event, data) {
-      console.log(data);
-      if (data.Id != 'shortage' && data.msg !="")
+      //
+      $rootScope.alerts.push(data);
+      if (data.Id != 'shortage' && data.msg != "")
         $mdToast.show($mdToast.simple().textContent(data.msg).position('bottom right').hideDelay(5000));
+
+      
+      var found = false;
+      for (i = 0; i < $rootScope.alerts.length; i++) {
+        if ($rootScope.alerts[i].Id == 'shortage')
+        {
+          found = true;
+          $rootScope.shortageAlert = $rootScope.alerts[i];
+        }
+      }
+
+      if (found==false) 
+        $rootScope.shortageAlert = { Id: '' };
+
     });
 
+    $rootScope.$on('clearAlerts', function (scope, alerts) {
+      return $rootScope.alerts = [];
+      $rootScope.shortageAlert = { Id: '' };
+    });
     //$http.defaults.headers.common['Accept'] = 'application/json';
     //$http.defaults.headers.common['Content-Type'] = 'application/json';
     $http.defaults.withCredentials = true;

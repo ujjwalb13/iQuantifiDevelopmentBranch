@@ -1,14 +1,7 @@
 (function() {
   'use strict';
   angular.module('timeline').controller('NavCtrl', function ($scope, $rootScope, $location, $http, $q, $modal, Auth, Action, Scenario, goalService, ENV) {
-
-  
-
-
-
-
-
-
+    
     var fetchIncompleteActionsCount;
     fetchIncompleteActionsCount = function() {
       return Action.count().$promise.then(function(data) {

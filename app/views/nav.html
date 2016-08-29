@@ -4,13 +4,13 @@
     <!-- Desktop and tablet nav -->
     <div class="container container-fluid hidden-xs">
       <div class="row">
-        <div class="nav-content">
+        <div class="nav-content" ng-controller="AlertsCtrl">
           <div class="navbar-header col-sm-4">
             <a class="navbar-brand" href="/#/"><img class="logo" ng-src="/images/organization-logos/{{organizationSlug()}}.png"></a>
           </div>
-          <div class="navbar-header-center col-sm-4" ng-controller="AlertsCtrl">
+          <div class="navbar-header-center col-sm-4">
             
-            <span ng-repeat="alert in alerts" class="alert-shortage" ng-show="alert.id == 'shortage'">
+            <span class="alert-shortage" ng-show="shortageAlert.Id == 'shortage'">
               <i class="icon icon-ft-fix-shotage"></i>
               <span ng-click="goToCashfinder()" class="visible-lg">
                 You have a shortage. Fix It
@@ -22,12 +22,12 @@
             </span>
             
           </div>
-          <div class="navbar-right col-sm-4">
+          <div class="navbar-right col-sm-4" >
             <ul class="nav navbar-nav">
               <li>
                 <a href="#">
                   <i class="fa fa-bell"></i>
-                  <span class="badge">5</span>
+                  <span class="badge" ng->{{ alerts.length }}</span>
                 </a>
               </li>
               <li>
