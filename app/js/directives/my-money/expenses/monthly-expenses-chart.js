@@ -3,27 +3,29 @@
   angular.module('agera').directive('monthlyExpensesChart', function(Expense) {
     var getChartData, link;
     link = function(scope, element, attrs) {
-      var chart, chartBars, chartGroups, chart_height, child_margin, color, data, detail_icon_height, expense_types, group_margin, height, legends, margin, svg, width, x, x1, xAxis, y, yAxis;
+      var chart, chartBars, chartGroups, chart_height, child_margin, color, data, detail_icon_height, expense_types, group_margin, height, legends, margin, svg, width, ratio, x, x1, xAxis, y, yAxis;
       data = getChartData();
-      svg = d3.select(element[0]).append('svg');
+      svg = d3.select(element.find("svg")[0]);
       margin = {
-        top: 50,
+        top: 0,
         right: 20,
-        bottom: 70,
-        left: 45
+        bottom: 80,
+        left: 60
       };
       group_margin = 10;
       child_margin = 4;
       detail_icon_height = 30;
       width = Number.parseInt(svg.style("width"));
-      height = Number.parseInt(svg.style("height"));
+      ratio = Number.parseFloat(svg.attr("ratio"));
+      height = Math.round(width / ratio)
+      console.log("chart ", width, height, ratio);
       chart_height = height + detail_icon_height;
       expense_types = ["amount", "three_month_average_amount"];
       color = d3.scale.ordinal().range([scope.currentExpensesColor, scope.threeMonthsAverageColor]);
-      svg = svg.style('width', width + margin.left + margin.right).style('height', chart_height + margin.top + margin.bottom).append("g");
+      svg = svg.style('width', width).style('height', chart_height + margin.top + margin.bottom).append("g");
       x = d3.scale.ordinal().domain(data.map(function(d) {
         return Expense.getExpenseName(d.kind);
-      })).rangeRoundBands([0, width - margin.left]);
+      })).rangeRoundBands([0, width - margin.left - margin.right]);
       y = d3.scale.linear().domain([
         0, d3.max(data, function(d) {
           return Math.max(d.amount, d.three_month_average_amount);
@@ -32,7 +34,6 @@
       x1 = d3.scale.ordinal().domain(expense_types).rangeRoundBands([0, x.rangeBand() - group_margin]);
       xAxis = d3.svg.axis().scale(x).orient('bottom');
       yAxis = d3.svg.axis().scale(y).orient('left').innerTickSize(-width);
-      legends = svg.append('g').attr('class', 'legends');
       chart = svg.append('g').attr('class', 'chart').attr('transform', "translate(" + margin.left + ", " + margin.top + ")").attr("height", chart_height);
       svg.append('g').attr('transform', "translate(" + margin.left + ", " + (margin.top + chart_height) + ")").attr('class', 'x axis').call(xAxis).selectAll("text").style("text-anchor", "end").attr("dx", "-.8em").attr("dy", ".15em").attr("transform", "rotate(-30)");
       chart.append('g').attr('class', 'y axis').attr('transform', "translate(0, " + detail_icon_height + ")").call(yAxis).append('text').attr('transform', "rotate(-90)").attr('dy', '.71em');
