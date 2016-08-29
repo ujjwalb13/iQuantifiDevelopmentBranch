@@ -37,6 +37,10 @@
     <div ng-include src="'/views/_error-messages.html'"></div>
     </div>
     <!-- bower:js -->
+      <!-- Added for grid to work -->
+    <script src="bower_components/jquery/jquery-3.1.0.js" ></script>
+    <script src="bower_components/bootstrap/js/bootstrap.js"></script>
+
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -52,6 +56,9 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+      <!-- Added for grid to work -->
+    <script src="bower_components/ag-grid/ag-grid.min.js"></script>
+
     <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
     <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
     <script src="bower_components/waypoints/waypoints.js"></script>
@@ -107,6 +114,7 @@
     <script src="js/controllers/admin/investments.js"></script>
     <script src="js/controllers/admin/main.js"></script>
     <script src="js/controllers/admin/organizations.js"></script>
+      <script src="js/controllers/admin/grid.js"></script>
 
     <script src="js/controllers/aggregation/link-account.js"></script>
     <script src="js/controllers/aggregation/select-accounts.js"></script>
@@ -129,7 +137,6 @@
     <script src="js/controllers/timeline/alerts.js"></script>
     <script src="js/controllers/timeline/goal-modal.js"></script>
     <script src="js/controllers/timeline/goal-form.js"></script>
-    <script src="js/controllers/timeline/grid.js"></script>
     <script src="js/controllers/timeline/nav.js"></script>
     <script src="js/controllers/timeline/protections.js"></script>
     <script src="js/controllers/timeline/extras.js"></script>

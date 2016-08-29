@@ -71,6 +71,9 @@
           }, {
             title: "Feedback",
             path: '/feedback'
+          }, {
+            title: "Grid",
+            path: '/admin/grid'
           }
         ],
         open: false
