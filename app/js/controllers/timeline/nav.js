@@ -58,10 +58,127 @@
         return $scope.saveMenu = false;
       });
     };
-    $scope.$on('dirty-timeline', function() {
-      return $scope.saveMenu = true;
+
+
+    $scope.PlanGoalWidth = function (goalDate) {
+      var dNow = new Date();
+      var dGoalDate = new Date(goalDate);
+      var nMonthYear = (dGoalDate.getMonth() / 12) + (dGoalDate.getYear() - dNow.getYear());
+
+      var nShowYears = 5;
+      var nMaxGoalWidth = 115 * nShowYears;
+
+      var nGoalRatio = nMonthYear / nShowYears;
+
+      if (nGoalRatio > 1) nGoalRatio = 1.0;
+
+      return nMaxGoalWidth * nGoalRatio;
+    };
+
+    $scope.PlanGoalBackgroundColor = function (goalChange, goalChangePlan) {
+      if (goalChange.GoalCategoryType != 'debt') {
+        // goal - green
+        if (goalChangePlan.isCurrent) {
+          return "#dcedc5";
+        }
+        else {
+          return "#8ec249";
+        }
+      }
+      else {
+        // debt - red
+        if (goalChangePlan.isCurrent) {
+          return "#f9ccca";
+        }
+        else {
+          return "#ed564d";
+        }
+      }
+    };
+
+    $scope.PlanGoalImageColor = function (goalChange) {
+      if (goalChange.GoalCategoryType != 'debt') {
+        // goal - green
+        return "green";
+      }
+      else {
+        // debt - red
+        return "red";
+      }
+    };
+
+
+    $scope.PlanGoalYear = function (yearOffset) {
+      var dNow = new Date();
+      return (1900 + dNow.getYear() + yearOffset);
+    };
+
+    $scope.PlanGoalIcon = function (itemDataType) {
+
+      if (itemDataType == "baby")
+        return "goal-sm-baby.png";
+      else if (itemDataType == "car")
+        return "goal-sm-car.png";
+      else if (itemDataType == "college")
+        return "goal-sm-college.png";
+      else if (itemDataType == "custom")
+        return "goal-sm-college.png";
+      else if (itemDataType == "downsize")
+        return "goal-sm-downsize.png";
+      else if (itemDataType == "education")
+        return "goal-sm-education.png";
+      else if (itemDataType == "house")
+        return "goal-sm-house.png";
+      else if (itemDataType == "purchase")
+        return "goal-sm-purchase.png";
+      else if (itemDataType == "relocation")
+        return "goal-sm-relocation.png";
+      else if (itemDataType == "rent")
+        return "goal-sm-rent.png";
+      else if (itemDataType == "retirement")
+        return "goal-sm-retirement.png";
+      else if (itemDataType == "ring")
+        return "goal-sm-ring.png";
+      else if (itemDataType == "travel")
+        return "goal-sm-travel.png";
+      else if (itemDataType == "wedding")
+        return "goal-sm-wedding.png";
+      else if (itemDataType == "CreditCard")
+        return "debt-sm.png"
+      else
+        return "goal-sm-house.png";
+
+    };
+
+
+    $scope.$on('dirty-timeline', function () {
+
+      Scenario.planChanges().$promise.then(function (planChangeResult) {
+
+        $scope.planChanges = planChangeResult;
+
+        if (planChangeResult != null && planChangeResult.DataChanges.length > 0 && planChangeResult.DataChanges[0].DataType != "nochanges") {
+          $scope.saveMenu = true;
+        }
+      });
+
+      return true;
+
     });
-    $scope.$on('clean-timeline', function() {
+
+    $scope.PlanGoalHasShortage = function (planChangeResult) {
+      if (planChangeResult != null && planChangeResult.DataChanges.length > 0 && planChangeResult.DataChanges[0].DataType == "shortage") {
+        return true;
+      }
+      else {
+        return false;
+      }
+    };
+
+
+
+
+    $scope.$on('clean-timeline', function () {
       return $scope.saveMenu = false;
     });
     $scope.openEditModal = function(type, action, category, obj) {
