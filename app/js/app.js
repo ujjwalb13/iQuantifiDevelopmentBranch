@@ -380,6 +380,7 @@
 
       
       var found = false;
+      var i = 0;
       for (i = 0; i < $rootScope.alerts.length; i++) {
         if ($rootScope.alerts[i].Id == 'shortage')
         {
