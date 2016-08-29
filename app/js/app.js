@@ -20,7 +20,7 @@
 
   angular.module('myMoney', []);
 
-  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
+  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
 
   app = angular.module('agera', dependencies);
 
@@ -368,7 +368,13 @@
     });
   });
 
-  app.run(function($http, $rootScope, $location, $window, Auth) {
+  app.run(function ($http, $rootScope, $location, $window, Auth, $mdToast) {
+    $rootScope.$on('alert', function (event, data) {
+      console.log(data);
+      if (data.Id != 'shortage' && data.msg !="")
+        $mdToast.show($mdToast.simple().textContent(data.msg).position('bottom right').hideDelay(5000));
+    });
+
     //$http.defaults.headers.common['Accept'] = 'application/json';
     //$http.defaults.headers.common['Content-Type'] = 'application/json';
     $http.defaults.withCredentials = true;
@@ -464,7 +470,11 @@
     return $rootScope.$on('screen:undim', function() {
       return angular.element('.screen-dim').remove();
     });
+
+
   });
+
+
 
 }).call(this);
 
