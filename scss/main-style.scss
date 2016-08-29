@@ -1,0 +1,37 @@
+.nav-content{
+  .navbar-nav{
+    li{
+      position: relative;
+      a{
+        i{
+          color: #fff;
+          font-size: 20px;
+          vertical-align: middle;
+        }
+        span{
+          margin-left: 5px;
+          &.badge{
+            background: #386d6f;
+            font-size: 14px;
+            font-weight: normal;
+          }
+        }
+      }
+      &:after{
+        width: 1px;
+        display: block;
+        content: "";
+        position: absolute;
+        height: 20px;
+        top: 16px;
+        right: 0px;
+        background: #8c8b8b;
+      }
+      &:last-of-type{
+        &:after{
+          display: none;
+        }
+      }
+    }
+  }
+}
