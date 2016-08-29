@@ -30,7 +30,7 @@
       x1 = d3.scale.ordinal().domain(expense_types).rangeRoundBands([0, x.rangeBand() - group_margin]);
 
       xAxis = d3.svg.axis().scale(x).orient('bottom').outerTickSize(1);
-      yAxis = d3.svg.axis().scale(y).orient('left').innerTickSize(-width).outerTickSize(1).tickPadding(10);
+      yAxis = d3.svg.axis().scale(y).orient('left').innerTickSize(-(width - margin.left - margin.right)).outerTickSize(1).tickPadding(10);
 
       chart = svg.append('g')
       .attr('class', 'chart')
@@ -109,11 +109,14 @@
       .append("xhtml:span")
         .attr("class", "info-icon fa fa-info")
         .on("click", function(d){
-          console.log("info clicked", d, this);
           $("#group-details-popup .info-icon-container").css("top", Math.min(y(d.amount), y(d.three_month_average_amount)) + "px")
           $("#group-details-popup .info-icon-container").css("left", (x(Expense.getExpenseName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px")
           $("#group-details-popup .popover").show()
         });
+
+      $(".btn-close-popover").on("click", function(){
+        $("#group-details-popup .popover").hide()
+      });
     };
     getChartData = function() {
       return [

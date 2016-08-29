@@ -16,13 +16,15 @@
     </div>
     <div class="col-md-12 col-xs-12 chart-content">
       <monthly-expenses-chart current-expenses-color="#e5944e"
-                              three-months-average-color="#4cb47c">
+                              three-months-average-color="#4cb47c"
+                              class="monthly-expenses-chart has-info-icon">
         <div id="group-details-popup">
           <div class="info-icon-container">
             <div class="popover top fade in" style="display: none;">
               <div class="arrow"></div>
               <div class="popover-inner">
                 <div class="popover-content debt">
+                  <i class="fa fa-times btn-close-popover" aria-hidden="true"></i>
                   <label class="title">Groceries</label>
                   <ul>
                     <li class="chart-dark-yellow">
@@ -49,7 +51,7 @@
             </div>
           </div>
         </div>
-        <svg class="monthly-expenses-chart" width="100%" ratio="2"></svg>
+        <svg width="100%" ratio="2"></svg>
       </monthly-expenses-chart>
     </div>
   </div>
