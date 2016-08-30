@@ -2,6 +2,26 @@
   'use strict';
   angular.module('summaries').controller('summariesSummaryCtrl', function($scope, $rootScope, $routeParams, $http, $location, ENV, configService, Car, College, Credit, Baby, House, Loan, Relocation, Rent, Reserve, Retirement, Ring, Travel, Wedding, Purchase) {
     var Obj, fetchCollegeData, fetchData, fetchGoalData, fetchRentData, fetchReservesData, fetchRetirementData, getCurrentPeriod, getNeed, getPercent, getPercentIncomplete, getSafePercent, lookup;
+
+    $scope.sectionsAttributes = {
+      "overview": {
+        "text": "Overview",
+        "icon": "icon-al-my-progress"
+      },
+      "goal": {
+        "text": "My Goals",
+        "icon": "icon-gl-custom-goal"
+      },
+      "debt": {
+        "text": "My Debts",
+        "icon": "icon-db-debt"
+      },
+      "protection": {
+        "text": "My Protections",
+        "icon": "icon-pt-protection"
+      }
+    };
+
     $scope.goal = {};
     $scope.goalType = '';
     $scope.nextAction = {};
@@ -47,6 +67,9 @@
         }
       });
     }
+    $scope.gotoProgressPage = function(type) {
+      return $location.path("/progress/" + type);
+    };
     $scope.icon = function(type) {
       type = type.toLowerCase();
       if (type === 'wedding') {
