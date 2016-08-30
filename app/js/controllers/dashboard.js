@@ -1,15 +1,6 @@
 (function() {
   'use strict';
-  angular.module('agera').controller('TimelineDashboardCtrl', function ($scope, $modal, $filter, $rootScope, $location, $timeout, $cacheFactory, goalService, Action, Scenario, CashfinderService, ENV, $mdToast) {
-
-
-
-
-
-
-
-
-
+  angular.module('agera').controller('TimelineDashboardCtrl', function(Person,$scope, $modal, $filter, $rootScope, $location, $timeout, $cacheFactory, goalService, Action, Scenario, CashfinderService, ENV, ProfileItem, $mdToast) {
     var assignGoalOntop, broadcastShortage, buildGroups, calculateGoalPositionBasedOnGroup, calculateGoalStackedIndex, calculateGroupPosition, contextAxis, contextXScale, fetchIncompleteActionsCount, focusAxis, focusXScale, groupDefaultSize, gutter, modalInstance, partitionGoalsByMonth, refreshTimeline, renderTimeline, updateStackIndexWithinGroup;
     $rootScope.onTimeline = true;
     $scope.demo = $rootScope.demo;
@@ -27,11 +18,21 @@
     $scope.clickActionButton = function() {
       return $location.path("/complete-my-profile");
     };
-    fetchIncompleteActionsCount = function() {
-      return Action.count().$promise.then(function (response) {
+
+    var getActionCount = function() {
+      return Action.count().$promise.then(function(response) {
         return $scope.incompleteActionsCount = response.count;
       });
-    };
+    }
+    fetchIncompleteActionsCount = function() {
+      ProfileItem.count().$promise.then(function(response){
+        if(response.incomplete > 0) {
+          $scope.profileIncompleteCount = response.incomplete
+        } else {
+          getActionCount();
+        }
+      });
+    }
     $scope.positionX = function(left, width) {
       var data;
       data = {

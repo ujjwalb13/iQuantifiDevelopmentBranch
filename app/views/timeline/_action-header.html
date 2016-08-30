@@ -21,13 +21,16 @@
           <li class="archievement">
             <a href="javascript:void(0)">
               <i class="icon icon-al-my-archivement"></i>
-              My Archievements
+              My Achievements
             </a>
           </li>
         </ul>
       </div>
-      <a href="javascript:void(0)" class="btn btn-primary pull-right" ng-click="clickActionButton()">
-        Completed My Profile <span class="badge">{{incompleteActionsCount}}</span>
+      <a href="javascript:void(0)" ng-if="incompleteActionsCount" class="btn btn-primary pull-right" ng-click="clickActionButton()">
+        My Actions <span class="badge">{{incompleteActionsCount}}</span>
+      </a>
+      <a href="javascript:void(0)" ng-if="profileIncompleteCount" class="btn btn-primary pull-right" ng-click="clickActionButton()">
+        Complete My Profile <span class="badge">{{profileIncompleteCount}}</span>
       </a>
     </div>
   </div>
