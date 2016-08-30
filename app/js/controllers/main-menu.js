@@ -9,7 +9,7 @@
       }, {
         title: "My Actions",
         badge: $scope.incompleteActionsCount,
-        path: '/my-actions'
+        path: '/actions'
       }, {
         title: "My Progress",
         subMenuItems: [
