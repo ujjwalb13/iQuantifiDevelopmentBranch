@@ -19,7 +19,7 @@
                               three-months-average-color="#4cb47c"
                               class="monthly-expenses-chart has-info-icon">
         <div id="group-details-popup">
-          <div class="info-icon-container">
+          <div class="info-icon-container  {{current_category}}">
             <div class="popover top fade in" style="display: none;">
               <div class="arrow"></div>
               <div class="popover-inner">
@@ -28,14 +28,17 @@
                   <label class="title">Groceries</label>
                   <ul>
                     <li class="chart-dark-yellow">
-                      <span class="chart-color"></span> Current Expenses:  <strong>$480</strong>
+                      <span class="chart-color"></span> Current Expenses:  <strong class="current-expense-value">$480</strong>
                     </li>
                     <li class="chart-green">
-                      <span class="chart-color"></span> 3 Month Average:  $410
+                      <span class="chart-color"></span> 3 Month Average:  <div class="three-months-average-value">$410</div>
                     </li>
                   </ul>
                   <label for="">Debts include:</label>
-                  <ul>
+                  <p class="subcategories-loading">
+                    <i class="fa fa-circle-o-notch fa-spin"></i>
+                  </p>
+                  <ul class="sub-categories">
                     <li>
                       <strong>Auto Loan</strong> - $350
                     </li>

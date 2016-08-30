@@ -3,8 +3,9 @@
   angular.module('agera').directive('monthlyExpensesChart', function(Expense) {
     var getChartData, link;
     link = function(scope, element, attrs) {
-      var chart, chartArea, chartGroups, chart_height, child_margin, color, data, detail_icon_height, expense_types, group_margin, height, legends, margin, svg, width, ratio, x, x1, xAxis, y, yAxis;
-      data = getChartData();
+      scope.current_category = "xxx"
+      var chart, chartArea, chartGroups, chart_height, child_margin, color, expenses, detail_icon_height, expense_types, group_margin, height, legends, margin, svg, width, ratio, x, x1, xAxis, y, yAxis;
+      expenses = getChartData();
       svg = d3.select(element.find("svg")[0]);
       margin = {
         top: 0,
@@ -22,10 +23,10 @@
       expense_types = ["amount", "three_month_average_amount"];
       color = d3.scale.ordinal().range([scope.currentExpensesColor, scope.threeMonthsAverageColor]);
       svg = svg.style('width', width).style('height', chart_height + margin.top + margin.bottom).append("g");
-      x = d3.scale.ordinal().domain(data.map(function(d) { return Expense.getExpenseName(d.kind);}))
+      x = d3.scale.ordinal().domain(expenses.map(function(d) { return Expense.getExpenseName(d.kind);}))
       .rangeRoundBands([0, width - margin.left - margin.right]);
       y = d3.scale.linear().domain([
-        0, d3.max(data, function(d) { return Math.max(d.amount, d.three_month_average_amount);})
+        0, d3.max(expenses, function(d) { return Math.max(d.amount, d.three_month_average_amount);})
       ]).range([height, 0]);
       x1 = d3.scale.ordinal().domain(expense_types).rangeRoundBands([0, x.rangeBand() - group_margin]);
 
@@ -62,7 +63,7 @@
       .attr("height", chart_height);
 
       chartGroups = chartArea.selectAll("expense-group")
-      .data(data)
+      .data(expenses)
       .enter()
       .append("g")
         .attr("class", "expense-group")
@@ -109,8 +110,15 @@
       .append("xhtml:span")
         .attr("class", "info-icon fa fa-info")
         .on("click", function(d){
+          scope.current_category = d.kind
           $("#group-details-popup .info-icon-container").css("top", Math.min(y(d.amount), y(d.three_month_average_amount)) + "px")
           $("#group-details-popup .info-icon-container").css("left", (x(Expense.getExpenseName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px")
+          $("#group-details-popup .popover .popover-content .title").text(Expense.getExpenseName(d.kind));
+          $("#group-details-popup .popover .popover-content .current-expense-value").text("$"+d.amount);
+          $("#group-details-popup .popover .popover-content .three-months-average-value").text("$"+d.three_month_average_amount);
+          $("#group-details-popup .popover .popover-content .title").text(Expense.getExpenseName(d.kind));
+          $("#group-details-popup .popover .popover-content .subcategories-loading").show()
+          $("#group-details-popup .popover .popover-content .sub-categories").empty()
           $("#group-details-popup .popover").show()
         });
 
