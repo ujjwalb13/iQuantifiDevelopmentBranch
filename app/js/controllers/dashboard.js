@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('agera').controller('TimelineDashboardCtrl', function(Person,$scope, $modal, $filter, $rootScope, $location, $timeout, $cacheFactory, goalService, Action, Scenario, CashfinderService, ENV, ProfileItem) {
+  angular.module('agera').controller('TimelineDashboardCtrl', function(Person,$scope, $modal, $filter, $rootScope, $location, $timeout, $cacheFactory, goalService, Action, Scenario, CashfinderService, ENV, ProfileItem, $mdToast) {
     var assignGoalOntop, broadcastShortage, buildGroups, calculateGoalPositionBasedOnGroup, calculateGoalStackedIndex, calculateGroupPosition, contextAxis, contextXScale, fetchIncompleteActionsCount, focusAxis, focusXScale, groupDefaultSize, gutter, modalInstance, partitionGoalsByMonth, refreshTimeline, renderTimeline, updateStackIndexWithinGroup;
     $rootScope.onTimeline = true;
     $scope.demo = $rootScope.demo;
@@ -196,7 +196,7 @@
     };
     renderTimeline = function(timeline) {
       var dates, goals, retirementGoal, setEndX;
-      if (timeline.shortage !== 0 && timeline.shortage !== null) {
+      if (timeline.shortage !== "" && timeline.shortage !== 0 && timeline.shortage !== null) {
         broadcastShortage(timeline.shortage);
       }
       dates = _.pluck(timeline.goals, "startOn");
@@ -278,7 +278,7 @@
         } else {
           $rootScope.$broadcast('clean-timeline');
         }
-        if (timeline.shortage !== 0 && timeline.shortage !== null) {
+        if (timeline.shortage !== "" && timeline.shortage !== 0 && timeline.shortage !== null) {
           broadcastShortage(timeline.shortage);
         }
         return refreshTimeline(timeline);

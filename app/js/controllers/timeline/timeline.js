@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('timeline').controller('TimelineCtrl', function($scope, $modal, $filter, $rootScope, $location, $timeout, $cacheFactory, goalService, Action, Scenario, CashfinderService, ENV) {
-    var broadcastShortage, fetchIncompleteActionsCount, modalInstance, renderTimeline;
+        var broadcastShortage, fetchIncompleteActionsCount, modalInstance, renderTimeline;
     $rootScope.onTimeline = true;
     $scope.demo = $rootScope.demo;
     fetchIncompleteActionsCount = function() {
@@ -92,7 +92,7 @@
     };
     renderTimeline = function(timeline) {
       var dates, goal, goals, i, len, setEndX;
-      if (timeline.shortage !== 0 && timeline.shortage !== null) {
+      if (timeline.shortage !== "" && timeline.shortage !== 0 && timeline.shortage !== null) {
         broadcastShortage(timeline.shortage);
       }
       dates = _.pluck(timeline.goals, "startOn");
@@ -174,7 +174,7 @@
         } else {
           $rootScope.$broadcast('clean-timeline');
         }
-        if (timeline.shortage !== "" && timeline.shortage !== null) {
+        if (timeline.shortage !== "" && timeline.shortage !== 0 && timeline.shortage !== null) {
           broadcastShortage(timeline.shortage);
         }
         ref = timeline.goals;
