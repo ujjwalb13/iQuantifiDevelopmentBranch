@@ -370,19 +370,19 @@
 
   app.run(function ($http, $rootScope, $location, $window, Auth, $mdToast) {
     $rootScope.alerts = [];
-    $rootScope.shortageAlert = { Id: '' };
+    $rootScope.shortageAlert = { id: '' };
 
     $rootScope.$on('alert', function (event, data) {
       //
       $rootScope.alerts.push(data);
-      if (data.Id != 'shortage' && data.msg != "")
+      if (data.msg != "")
         $mdToast.show($mdToast.simple().textContent(data.msg).position('bottom right').hideDelay(5000));
 
       
       var found = false;
       var i = 0;
       for (i = 0; i < $rootScope.alerts.length; i++) {
-        if ($rootScope.alerts[i].Id == 'shortage')
+        if ($rootScope.alerts[i].id == 'shortage')
         {
           found = true;
           $rootScope.shortageAlert = $rootScope.alerts[i];
@@ -390,13 +390,15 @@
       }
 
       if (found==false) 
-        $rootScope.shortageAlert = { Id: '' };
+        $rootScope.shortageAlert = {id: '' };
 
     });
 
     $rootScope.$on('clearAlerts', function (scope, alerts) {
-      return $rootScope.alerts = [];
-      $rootScope.shortageAlert = { Id: '' };
+      $rootScope.shortageAlert = { id: '' };
+      $rootScope.alerts = [];
+      return;
+
     });
     //$http.defaults.headers.common['Accept'] = 'application/json';
     //$http.defaults.headers.common['Content-Type'] = 'application/json';

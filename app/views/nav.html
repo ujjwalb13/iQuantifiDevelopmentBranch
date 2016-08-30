@@ -10,7 +10,7 @@
           </div>
           <div class="navbar-header-center col-sm-4">
             
-            <span class="alert-shortage" ng-show="shortageAlert.Id == 'shortage'">
+            <span class="alert-shortage" ng-show="shortageAlert.id == 'shortage'">
               <i class="icon icon-ft-fix-shotage"></i>
               <span ng-click="goToCashfinder()" class="visible-lg">
                 You have a shortage. Fix It
@@ -30,6 +30,7 @@
                   <span class="badge">{{ alerts.length }}</span>
                 </a>
               </li>
+
               <li>
                 <a ng-click="toggleMainMenu()">
                   <i class="fa fa-bars"></i>

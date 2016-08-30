@@ -82,7 +82,7 @@
         path: '/faq',
         setupRequired: false
       }, {
-        title: "Log Out",
+        title: "Log Out ",
         setupRequired: false,
         path: '/logout'
       }
