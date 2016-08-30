@@ -32,15 +32,20 @@
         title: "My Money",
         subMenuItems: [
           {
-            title: "Overview"
+            title: "Overview",
+            path: "/my-money/overview"
           }, {
-            title: "Incomes"
+            title: "Incomes",
+            path: "/my-money/income"
           }, {
-            title: "Expenses"
+            title: "Expenses",
+            path: "/my-money/expenses"
           }, {
-            title: "Accounts"
+            title: "Accounts",
+            path: "/my-money/accounts"
           }, {
-            title: "Net Worth"
+            title: "Net Worth",
+            path: "/my-money/networth"
           }
         ],
         open: false

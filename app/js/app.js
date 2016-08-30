@@ -20,7 +20,7 @@
 
   angular.module('myMoney', []);
 
-  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
+  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'money-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
 
   app = angular.module('agera', dependencies);
 
@@ -339,10 +339,25 @@
       templateUrl: '/views/progress/debt/summary.html',
       controller: 'DebtFormCtrl'
     }).when('/my-money', {
-      templateUrl: '/views/my-money/index.html',
+      templateUrl: '/views/my-money/overview.html',
       controller: 'MyMoneyOverviewCtrl'
-    }).when('/my-money/:type', {
-      templateUrl: '/views/my-money/index.html',
+    }).when('/my-money/overview', {
+      templateUrl: '/views/my-money/overview.html',
+      controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/income', {
+      templateUrl: '/views/my-money/income.html',
+      controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/accounts', {
+      templateUrl: '/views/my-money/accounts.html',
+      controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/expenses', {
+      templateUrl: '/views/my-money/expenses.html',
+      controller: 'MyMoneyExpenseCtrl'
+    }).when('/my-money/expensesheet', {
+      templateUrl: '/views/my-money/expenses/_expenses_sheet.html',
+      controller: 'MyMoneyUpdateExpensesSheetCtrl'
+    }).when('/my-money/networth', {
+      templateUrl: '/views/my-money/networth.html',
       controller: 'MyMoneyOverviewCtrl'
     }).when('/complete-my-profile', {
       templateUrl: '/views/complete-my-profile.html',
