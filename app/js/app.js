@@ -20,7 +20,7 @@
 
   angular.module('myMoney', []);
 
-  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
+  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'money-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
 
   app = angular.module('agera', dependencies);
 
@@ -339,10 +339,25 @@
       templateUrl: '/views/progress/debt/summary.html',
       controller: 'DebtFormCtrl'
     }).when('/my-money', {
-      templateUrl: '/views/my-money/index.html',
+      templateUrl: '/views/my-money/overview.html',
       controller: 'MyMoneyOverviewCtrl'
-    }).when('/my-money/:type', {
-      templateUrl: '/views/my-money/index.html',
+    }).when('/my-money/overview', {
+      templateUrl: '/views/my-money/overview.html',
+      controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/income', {
+      templateUrl: '/views/my-money/income.html',
+      controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/accounts', {
+      templateUrl: '/views/my-money/accounts.html',
+      controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/expenses', {
+      templateUrl: '/views/my-money/expenses.html',
+      controller: 'MyMoneyExpenseCtrl'
+    }).when('/my-money/expensesheet', {
+      templateUrl: '/views/my-money/expenses/_expenses_sheet.html',
+      controller: 'MyMoneyUpdateExpensesSheetCtrl'
+    }).when('/my-money/networth', {
+      templateUrl: '/views/my-money/networth.html',
       controller: 'MyMoneyOverviewCtrl'
     }).when('/complete-my-profile', {
       templateUrl: '/views/complete-my-profile.html',
@@ -370,19 +385,19 @@
 
   app.run(function ($http, $rootScope, $location, $window, Auth, $mdToast) {
     $rootScope.alerts = [];
-    $rootScope.shortageAlert = { Id: '' };
+    $rootScope.shortageAlert = { id: '' };
 
     $rootScope.$on('alert', function (event, data) {
       //
       $rootScope.alerts.push(data);
-      if (data.Id != 'shortage' && data.msg != "")
+      if (data.msg != "")
         $mdToast.show($mdToast.simple().textContent(data.msg).position('bottom right').hideDelay(5000));
 
       
       var found = false;
       var i = 0;
       for (i = 0; i < $rootScope.alerts.length; i++) {
-        if ($rootScope.alerts[i].Id == 'shortage')
+        if ($rootScope.alerts[i].id == 'shortage')
         {
           found = true;
           $rootScope.shortageAlert = $rootScope.alerts[i];
@@ -390,13 +405,15 @@
       }
 
       if (found==false) 
-        $rootScope.shortageAlert = { Id: '' };
+        $rootScope.shortageAlert = {id: '' };
 
     });
 
     $rootScope.$on('clearAlerts', function (scope, alerts) {
-      return $rootScope.alerts = [];
-      $rootScope.shortageAlert = { Id: '' };
+      $rootScope.shortageAlert = { id: '' };
+      $rootScope.alerts = [];
+      return;
+
     });
     //$http.defaults.headers.common['Accept'] = 'application/json';
     //$http.defaults.headers.common['Content-Type'] = 'application/json';

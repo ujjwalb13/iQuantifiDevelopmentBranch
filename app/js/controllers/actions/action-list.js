@@ -95,6 +95,23 @@
         return $rootScope.$broadcast('refreshActionsCount');
       });
     };
+
+    $scope.showRationale = function (action) {
+
+      Action.getRationale({guid: action.guid}).$promise.then(function (rationaleResult) {
+
+        $rootScope.rationaleResults = null;
+        $rootScope.rationaleResults = rationaleResult;
+
+        if (rationaleResult != null) {
+          $("#rationaleModal").modal({ backdrop: false });
+        }
+      });
+
+      return true;
+
+    };
+
     $scope.toggleCategoryFilter = function(category) {
       if (($scope.categoryFilter.category != null) && $scope.categoryFilter.category === category) {
         return $scope.categoryFilter = {};
