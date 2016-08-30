@@ -18,15 +18,15 @@ angular.module('agera').controller('CompleteMyProfileCtrl', ['$scope', 'ProfileI
       case 'Policies':
         return '/progress/protection';
       case 'Debts':
-              return '/progress/debt';
+        return '/progress/debt';
       case 'Accounts':
-              return '/my-money';
+        return '/my-money';
       case 'Expenses':
-              return '/expenses';
+        return '/expenses';
       case 'College':
-              return '/goals/colleges/' + item.goalId  + '/edit';
+        return '/goals/colleges/' + item.goalId  + '/edit';
       case 'Retirement':
-              return '/goals/retirements/' + item.goalId + '/edit';
+        return '/goals/retirements/' + item.goalId + '/edit';
     }
   }
 
@@ -44,6 +44,24 @@ angular.module('agera').controller('CompleteMyProfileCtrl', ['$scope', 'ProfileI
 
   $scope.doItLater = function() {
     $location.path('/');
+  }
+
+  $scope.actionIcon = function(name) {
+    switch(name) {
+      case 'Policies':
+        return 'icon-pt-protection';
+      case 'Debts':
+        return 'icon icon-db-debt';
+      case 'Accounts':
+        return 'icon-mm-accounts';
+      case 'Expenses':
+        return 'icon-mm-expenses';
+      case 'College':
+        return 'icon-gl-college';
+      case 'Retirement':
+        return 'icon-gl-retirement';
+    }
+    return ''
   }
 
   fetchProfileComplete();
