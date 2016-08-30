@@ -53,11 +53,15 @@
         title: "My Features",
         subMenuItems: [
           {
-            title: "Scenario Planner"
+            title: "Scenario Planner",
+            path: "/my-features/scenario"
+
           }, {
-            title: "Cashfinder"
+            title: "Cashfinder",
+            path: "/my-features/cashfinder"
           }, {
-            title: "Can I Buy?"
+            title: "Can I Buy?",
+            path: "/my-features/canibuy"
           }
         ],
         open: false
