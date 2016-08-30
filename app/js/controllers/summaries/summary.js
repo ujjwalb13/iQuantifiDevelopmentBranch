@@ -19,6 +19,10 @@
       "protection": {
         "text": "My Protections",
         "icon": "icon-pt-protection"
+      },
+      "myAchievement": {
+        "text": "My Achievements",
+        "icon": "icon-al-my-archivement"
       }
     };
 
