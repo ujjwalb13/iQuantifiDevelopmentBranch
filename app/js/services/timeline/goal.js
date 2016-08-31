@@ -13,17 +13,27 @@
           return $q.reject(response);
         });
       },
-      put: function(goal) {
+      put: function (goal) {
         var url;
         url = ENV.apiHost + goal.href;
-        return $http.put(url, goal).then(function(response) {
+        return $http.put(url, goal).then(function (response) {
           return response.data;
-        }, function(response) {
+        }, function (response) {
           response.data;
           return $q.reject(response);
         });
       },
-      "delete": function(goal) {
+      updateDate: function (goal) {
+        var url;
+        url = ENV.apiHost + goal.href + '/UpdateDate';
+        return $http.put(url, goal).then(function (response) {
+          return response.data;
+        }, function (response) {
+          response.data;
+          return $q.reject(response);
+        });
+      },
+      "delete": function (goal) {
         var url;
         url = ENV.apiHost + goal.href;
         return $http["delete"](url).then(function(response) {

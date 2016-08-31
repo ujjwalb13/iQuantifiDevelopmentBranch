@@ -73,7 +73,7 @@
           hideDimScreen();
           scope.goal.onTop = false;
           scope.buildGoalsStack();
-          return scope.saveGoal(scope.goal);
+          return scope.saveGoalDate(scope.goal);
         };
         return scope.cancel = function() {
           scope.goal.date = originalDate;

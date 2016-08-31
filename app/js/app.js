@@ -20,7 +20,7 @@
 
   angular.module('myMoney', []);
 
-  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'money-sidebar', 'feature-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
+  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'money-sidebar', 'feature-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney', 'toaster'];
 
   app = angular.module('agera', dependencies);
 
@@ -389,7 +389,10 @@
     });
   });
 
-  app.run(function ($http, $rootScope, $location, $window, Auth, $mdToast) {
+
+  app.run(function ($http, $rootScope, $location, $window, Auth, toaster) {
+
+
     $rootScope.alerts = [];
     $rootScope.shortageAlert = { id: '' };
 
@@ -397,9 +400,8 @@
       //
       $rootScope.alerts.push(data);
       if (data.msg != "")
-        $mdToast.show($mdToast.simple().textContent(data.msg).position('bottom right').hideDelay(5000));
-
-      
+        toaster.pop('success', "", data.msg);
+        
       var found = false;
       var i = 0;
       for (i = 0; i < $rootScope.alerts.length; i++) {
@@ -551,6 +553,7 @@
 
     };
   });
+
 
 
 }).call(this);
