@@ -11711,6 +11711,8 @@ body .main-title .title-icon-close .icon-close:hover {
 body .main-title .btn {
   margin-top: -4px;
   margin-bottom: -5px;
+  font-weight: normal;
+  font-size: 14px;
 }
 /* line 524, ../../app/css/modules/_mainstyle.scss */
 body .right-content {
@@ -12551,8 +12553,7 @@ ul.overview-content li .icon-process.icon-protect .c100 .icon.icon-80 {
 }
 /* line 1274, ../../app/css/modules/_mainstyle.scss */
 .dashboard-nav ul li.debt a:after {
-  color: #e16250;
-  border: 1px solid #e16250;
+  background: url("/images/svg/icon-al-add-red.svg") no-repeat 0px 0px;
 }
 /* line 1281, ../../app/css/modules/_mainstyle.scss */
 .dashboard-nav ul li.policy a {
@@ -12560,20 +12561,19 @@ ul.overview-content li .icon-process.icon-protect .c100 .icon.icon-80 {
 }
 /* line 1283, ../../app/css/modules/_mainstyle.scss */
 .dashboard-nav ul li.policy a:after {
-  color: #4a8f92;
-  border: 1px solid #4a8f92;
+  background: url("/images/svg/icon-al-add-blue.svg") no-repeat 0px 0px;
 }
 /* line 1290, ../../app/css/modules/_mainstyle.scss */
 .dashboard-nav ul li.archievement a {
   color: #d8a029;
-  padding-left: 42px;
+  padding-left: 58px;
   position: relative;
 }
 /* line 1294, ../../app/css/modules/_mainstyle.scss */
 .dashboard-nav ul li.archievement a i {
   position: absolute;
-  top: 3px;
-  left: 0px;
+  top: 11px;
+  left: 10px;
 }
 /* line 1299, ../../app/css/modules/_mainstyle.scss */
 .dashboard-nav ul li.archievement a:after {
@@ -12582,25 +12582,28 @@ ul.overview-content li .icon-process.icon-protect .c100 .icon.icon-80 {
 /* line 1304, ../../app/css/modules/_mainstyle.scss */
 .dashboard-nav ul li a {
   display: block;
-  padding-left: 25px;
   position: relative;
   line-height: 32px;
   font-weight: bold;
+  padding: 8px 15px 9px 33px;
+  margin-top: -8px;
+  margin-bottom: -10px;
+}
+
+.dashboard-nav ul li a:hover{
+  background: #f8f6ef;
 }
 /* line 1310, ../../app/css/modules/_mainstyle.scss */
 .dashboard-nav ul li a:after {
-  border-radius: 100%;
-  top: 7px;
-  color: #8ec54a;
-  content: "+";
-  font-size: 16px;
-  height: 18px;
-  line-height: 12px;
-  position: absolute;
-  left: 3px;
-  text-align: center;
   width: 18px;
-  border: 1px solid #8ec54a;
+  height: 18px;
+  background: url("/images/svg/icon-al-add-green.svg") no-repeat 0px 0px;
+  background-size: 100%;
+  display: block;
+  content: " ";
+  top: 15px;
+  left: 8px;
+  position: absolute;
 }
 
 /* line 1328, ../../app/css/modules/_mainstyle.scss */

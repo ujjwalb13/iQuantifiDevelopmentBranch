@@ -9,7 +9,7 @@
       }, {
         title: "My Actions",
         badge: $scope.incompleteActionsCount,
-        path: '/my-actions'
+        path: '/actions'
       }, {
         title: "My Progress",
         subMenuItems: [
@@ -32,15 +32,20 @@
         title: "My Money",
         subMenuItems: [
           {
-            title: "Overview"
+            title: "Overview",
+            path: "/my-money/overview"
           }, {
-            title: "Incomes"
+            title: "Incomes",
+            path: "/my-money/income"
           }, {
-            title: "Expenses"
+            title: "Expenses",
+            path: "/my-money/expenses"
           }, {
-            title: "Accounts"
+            title: "Accounts",
+            path: "/my-money/accounts"
           }, {
-            title: "Net Worth"
+            title: "Net Worth",
+            path: "/my-money/networth"
           }
         ],
         open: false
@@ -48,11 +53,15 @@
         title: "My Features",
         subMenuItems: [
           {
-            title: "Scenario Planner"
+            title: "Scenario Planner",
+            path: "/my-features/scenario"
+
           }, {
-            title: "Cashfinder"
+            title: "Cashfinder",
+            path: "/my-features/cashfinder"
           }, {
-            title: "Can I Buy?"
+            title: "Can I Buy?",
+            path: "/my-features/canibuy"
           }
         ],
         open: false
@@ -71,6 +80,9 @@
           }, {
             title: "Feedback",
             path: '/feedback'
+          }, {
+            title: "Grid",
+            path: '/admin/grid'
           }
         ],
         open: false
@@ -79,7 +91,7 @@
         path: '/faq',
         setupRequired: false
       }, {
-        title: "Log Out",
+        title: "Log Out ",
         setupRequired: false,
         path: '/logout'
       }

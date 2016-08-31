@@ -73,6 +73,8 @@
           </slick>
         </div>
 
+        <a class="btn btn-default" ng-click="showRationale(action)">Rationale</a>
+
         <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="i-did btn btn-default hidden-xs" ng-if="action.name === 'open_account' && !action.is_complete" ng-click="completeAction(action)" ng-disabled="!action.is_completable">Open</a>
         <button class="i-did btn btn-default hidden-xs" ng-if="action.name !== 'apply' && action.name !== 'open_account' && !action.is_complete" ng-click="completeAction(action)" ng-disabled="!action.is_completable">I Did It</button>
         <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="i-did btn btn-default hidden-xs" ng-if="action.name === 'apply' && !action.is_complete" ng-disabled="!action.is_completable">Apply!</a>

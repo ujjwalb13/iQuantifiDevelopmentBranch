@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('myMoney').controller('MyMoneyOverviewCtrl', function($scope, $routeParams, $location, Expense, $http, ENV, $rootScope) {
+  angular.module('myMoney').controller('MyMoneyExpenseCtrl', function($scope, $routeParams, $location, Expense, $http, ENV, $rootScope) {
     var setDefaultData, updateCategoryFilter;
     setDefaultData = function() {
       $scope.noFilter = true;

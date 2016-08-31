@@ -20,7 +20,7 @@
 
   angular.module('myMoney', []);
 
-  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
+  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'money-sidebar', 'feature-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
 
   app = angular.module('agera', dependencies);
 
@@ -66,6 +66,9 @@
     }).when('/admin', {
       templateUrl: '/views/admin/main.html',
       controller: 'AdminCtrl'
+    }).when('/admin/grid', {
+      templateUrl: '/views/admin/grid.html',
+      controller: 'GridCtrl'
     }).when('/admin/organizations', {
       templateUrl: '/views/admin/organizations.html',
       controller: 'OrganizationsCtrl'
@@ -146,9 +149,6 @@
       controller: 'ForgotPasswordCtrl',
       setupRequired: false,
       loginRequired: false
-    }).when('/grid', {
-      templateUrl: '/views/timeline/grid.html',
-      controller: 'GridCtrl'
     }).when('/incomes', {
       templateUrl: '/views/dropdown/incomes.html',
       controller: 'IncomesCtrl'
@@ -339,11 +339,35 @@
       templateUrl: '/views/progress/debt/summary.html',
       controller: 'DebtFormCtrl'
     }).when('/my-money', {
-      templateUrl: '/views/my-money/index.html',
+      templateUrl: '/views/my-money/overview.html',
       controller: 'MyMoneyOverviewCtrl'
-    }).when('/my-money/:type', {
-      templateUrl: '/views/my-money/index.html',
+    }).when('/my-money/overview', {
+      templateUrl: '/views/my-money/overview.html',
       controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/income', {
+      templateUrl: '/views/my-money/income.html',
+      controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/accounts', {
+      templateUrl: '/views/my-money/accounts.html',
+      controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/expenses', {
+      templateUrl: '/views/my-money/expenses.html',
+      controller: 'MyMoneyExpenseCtrl'
+    }).when('/my-money/expensesheet', {
+      templateUrl: '/views/my-money/expenses/_expenses_sheet.html',
+      controller: 'MyMoneyUpdateExpensesSheetCtrl'
+    }).when('/my-money/networth', {
+      templateUrl: '/views/my-money/networth.html',
+      controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-features/scenario', {
+      templateUrl: '/views/my-features/scenario.html',
+      controller: 'MyFeaturesScenarioCtrl'
+    }).when('/my-features/cashfinder', {
+      templateUrl: '/views/my-features/cashfinder.html',
+      controller: 'MyFeaturesCashFinderCtrl'
+    }).when('/my-features/canibuy', {
+      templateUrl: '/views/my-features/canibuy.html',
+      controller: 'MyFeaturesCanIBuyCtrl'
     }).when('/complete-my-profile', {
       templateUrl: '/views/complete-my-profile.html',
       controller: 'CompleteMyProfileCtrl'
@@ -368,7 +392,38 @@
     });
   });
 
-  app.run(function($http, $rootScope, $location, $window, Auth) {
+  app.run(function ($http, $rootScope, $location, $window, Auth, $mdToast) {
+    $rootScope.alerts = [];
+    $rootScope.shortageAlert = { id: '' };
+
+    $rootScope.$on('alert', function (event, data) {
+      //
+      $rootScope.alerts.push(data);
+      if (data.msg != "")
+        $mdToast.show($mdToast.simple().textContent(data.msg).position('bottom right').hideDelay(5000));
+
+      
+      var found = false;
+      var i = 0;
+      for (i = 0; i < $rootScope.alerts.length; i++) {
+        if ($rootScope.alerts[i].id == 'shortage')
+        {
+          found = true;
+          $rootScope.shortageAlert = $rootScope.alerts[i];
+        }
+      }
+
+      if (found==false) 
+        $rootScope.shortageAlert = {id: '' };
+
+    });
+
+    $rootScope.$on('clearAlerts', function (scope, alerts) {
+      $rootScope.shortageAlert = { id: '' };
+      $rootScope.alerts = [];
+      return;
+
+    });
     //$http.defaults.headers.common['Accept'] = 'application/json';
     //$http.defaults.headers.common['Content-Type'] = 'application/json';
     $http.defaults.withCredentials = true;
@@ -464,7 +519,42 @@
     return $rootScope.$on('screen:undim', function() {
       return angular.element('.screen-dim').remove();
     });
+
+
   });
+
+  app.directive("modalShow", function ($parse) {
+    return {
+      restrict: "A",
+      link: function (scope, element, attrs) {
+
+        //Hide or show the modal
+        scope.showModal = function (visible, elem) {
+          if (!elem)
+            elem = element;
+
+          if (visible)
+            $(elem).appendTo('body').modal("show"); //$(elem).modal("show"); //
+          else
+            $(elem).modal("hide");
+        }
+
+        //Watch for changes to the modal-visible attribute
+        scope.$watch(attrs.modalShow, function (newValue, oldValue) {
+          scope.showModal(newValue, attrs.$$element);
+        });
+
+        //Update the visible value when the dialog is closed through UI actions (Ok, cancel, etc.)
+        $(element).bind("hide.bs.modal", function () {
+          $parse(attrs.modalShow).assign(scope, false);
+          if (!scope.$$phase && !scope.$root.$$phase)
+            scope.$apply();
+        });
+      }
+
+    };
+  });
+
 
 }).call(this);
 

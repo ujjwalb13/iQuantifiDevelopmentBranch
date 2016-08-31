@@ -16,7 +16,16 @@
     <!-- End New Relic -->
     <link rel="stylesheet" href="css/vendor.css">
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="css/main-style.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <style>
+      body {
+        height: auto;
+        background-attachment: fixed;
+      }
+    </style>
   </head>
   <body ng-app="agera" ng-class="{ 'body-onboarding': isOnboarding }">
     <div class="iq-app-wrapper">
@@ -25,17 +34,22 @@
     <nav ng-include src="'/views/nav.html'" class="navbar navbar-inverse navbar-fixed-top mm-fixed-top" role="navigation"></nav>
 
     <div class="primary-container container-fluid">
-      <section ng-include src="'/views/timeline/_alerts.html'"></section>
       <ng-view autoscroll></ng-view>
     </div>
 
-    <footer ng-include src="'/views/footer.html'" class="text-center" ng-hide="onTimeline" ng-class="{'no-border': isOnboarding, 'footer-app': !isOnboarding}">
-      © 2016 iQuantifi Inc. All rights reserved.
-    </footer>
+        <footer ng-include src="'/views/footer.html'" class="text-center" ng-hide="onTimeline" ng-class="{'no-border': isOnboarding, 'footer-app': !isOnboarding}">
+            © 2016 iQuantifi Inc. All rights reserved. <br />
+
+        </footer>
     <div ng-include src="'/views/_error-messages.html'"></div>
     </div>
     <!-- bower:js -->
+      <!-- Added for grid to work -->
+    <script src="bower_components/jquery/jquery-3.1.0.js" ></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
+
+    <script src="bower_components/bootstrap/js/bootstrap.js"></script>
+
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-devise/lib/devise.js"></script>
@@ -50,6 +64,9 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+      <!-- Added for grid to work -->
+    <script src="bower_components/ag-grid/ag-grid.min.js"></script>
+
     <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
     <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
     <script src="bower_components/waypoints/waypoints.js"></script>
@@ -67,6 +84,10 @@
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/underscore.inflection/lib/underscore.inflection.js"></script>
     <script src="bower_components/underscore.string/dist/underscore.string.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+   
+      
     <!-- endbower -->
     <script src="bower_components/jquery-simulate/jquery.simulate.js"></script>
     <script src="bower_components/jQuery.mmenu/src/js/jquery.mmenu.min.js"></script>
@@ -101,6 +122,7 @@
     <script src="js/controllers/admin/investments.js"></script>
     <script src="js/controllers/admin/main.js"></script>
     <script src="js/controllers/admin/organizations.js"></script>
+    <script src="js/controllers/admin/grid.js"></script>
 
     <script src="js/controllers/aggregation/link-account.js"></script>
     <script src="js/controllers/aggregation/select-accounts.js"></script>
@@ -123,7 +145,6 @@
     <script src="js/controllers/timeline/alerts.js"></script>
     <script src="js/controllers/timeline/goal-modal.js"></script>
     <script src="js/controllers/timeline/goal-form.js"></script>
-    <script src="js/controllers/timeline/grid.js"></script>
     <script src="js/controllers/timeline/nav.js"></script>
     <script src="js/controllers/timeline/protections.js"></script>
     <script src="js/controllers/timeline/extras.js"></script>
@@ -137,8 +158,13 @@
     <script src="js/controllers/progress/protection/add-protection.js"></script>
     <script src="js/controllers/dashboard.js"></script>
 
+    <script src="js/controllers/my-money/myMoneyOverview.js"></script>
     <script src="js/controllers/my-money/main.js"></script>
     <script src="js/controllers/my-money/update-expenses.js"></script>
+
+    <script src="js/controllers/my-features/MyFeaturesCanIBuyCtrl.js"></script>
+    <script src="js/controllers/my-features/MyFeaturesCashFinderCtrl.js"></script>
+    <script src="js/controllers/my-features/MyFeaturesScenarioCtrl.js"></script>
 
     <script src="js/controllers/complete-my-profile.js"></script>
 
@@ -155,6 +181,10 @@
     <script src="js/directives/onboard-nav/directive.js"></script>
     <script src="js/directives/profile-sidebar/module.js"></script>
     <script src="js/directives/profile-sidebar/directive.js"></script>
+    <script src="js/directives/money-sidebar/module.js"></script>
+    <script src="js/directives/money-sidebar/directive.js"></script>
+    <script src="js/directives/feature-sidebar/module.js"></script>
+    <script src="js/directives/feature-sidebar/directive.js"></script>
     <script src="js/directives/experience-picker/module.js"></script>
     <script src="js/directives/experience-picker/directive.js"></script>
     <script src="js/directives/account-name-uniq.js"></script>
@@ -235,6 +265,7 @@
     <script src="js/services/onboard/onboard.js"></script>
     <script src="js/services/onboard/welcome_text.js"></script>
     <script src="js/services/timeline/goal.js"></script>
+    <script src="js/services/profile-item.js"></script>
 
     <!-- Begin Inspectlet Embed Code -->
     <script type="text/javascript" id="inspectletjs">

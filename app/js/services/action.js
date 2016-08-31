@@ -9,6 +9,11 @@
           method: 'GET',
           isArray: false,
           url: ENV.apiHost + "/actions/count"
+        },
+        getRationale: {
+          method: 'GET',
+          isArray: false,
+          url: ENV.apiHost + "/actions/rationale/:guid"
         }
       });
     }

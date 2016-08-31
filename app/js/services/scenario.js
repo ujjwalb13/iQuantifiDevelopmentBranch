@@ -42,6 +42,11 @@
           method: 'GET',
           isArray: false,
           url: ENV.apiHost + "/scenario/shortage"
+        },
+        planChanges: {
+          method: 'GET',
+          isArray: false,
+          url: ENV.apiHost + "/plan/planchanges"
         }
       });
     }
