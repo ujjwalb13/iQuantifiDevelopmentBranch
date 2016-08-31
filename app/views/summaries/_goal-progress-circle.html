@@ -1,0 +1,26 @@
+<div class="track-donut" ng-class="{policy: isPolicy || isRetirement}">
+  <div class="outside-ring"></div>
+  <div class="center-ring">
+    <div class="percent-complete">
+      <span class="complete-text">{{complete}}%</span>
+      <span>Downpayment saved!</span>
+    </div>
+    <div class="" ng-if="isPolicy || isRetirement">
+      <!-- line -->
+    </div>
+    <div class="track-status" ng-if="!isPolicy" ng-class="{'track-status-retirement': isRetirement}" ng-switch on="status">
+      <div class="middle-line"></div>
+      <span class="green" ng-switch-when="safe">On <i class="fa fa-check"></i> Track</span>
+      <span class="yellow" ng-switch-when="warning">Off <i class="fa fa-exclamation"></i> Track</span>
+      <span class="red" ng-switch-default>Off <i class="fa fa-exclamation"></i> Track</span>
+    </div>
+    <div class="percent-risk" ng-if="isPolicy">
+      <span>{{100 - complete}}%</span>
+      <span>Risk!</span>
+    </div>
+    <div class="save-per-month" ng-class="{'save-per-month-retirement': isRetirement}" ng-if="!isPolicy">
+      <span>{{permonth | dollars}}</span>
+      <span>{{(goalType == 'debt' && 'Pay') || 'Save'}} Per Month</span>
+    </div>
+  </div>
+</div>
