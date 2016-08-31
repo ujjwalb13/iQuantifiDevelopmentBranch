@@ -389,19 +389,6 @@
     });
   });
 
-  //app.config(function ($mdToastProvider) {
-  //  $mdToastProvider.addPreset('successAlert', {
-  //    options: function () {
-  //      return {
-  //        template: '<md-toast><div class="alert-success" ><span class="bg-icon"><i class="fa fa-check"></i></span><label for="">blahblah</label></div></md-toast>',
-  //        controllerAs: 'toast',
-  //        bindToController: true
-  //      };
-
-  //    }
-  //  });
-
-  //});
 
   app.run(function ($http, $rootScope, $location, $window, Auth, toaster) {
 
@@ -413,9 +400,8 @@
       //
       $rootScope.alerts.push(data);
       if (data.msg != "")
-        toaster.pop('success', "title", data.msg);
+        toaster.pop('success', "", data.msg);
         
-      // $mdToast.show($mdToast.successAlert());
       var found = false;
       var i = 0;
       for (i = 0; i < $rootScope.alerts.length; i++) {
