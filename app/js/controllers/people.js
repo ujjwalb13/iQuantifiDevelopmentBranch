@@ -7,7 +7,14 @@
     };
   });
 
-  angular.module('agera').controller('PersonFormCtrl', function($q, $modal, $scope, $routeParams, $rootScope, $location, matchmedia, Person) {
+  angular.module('agera').controller('PersonFormCtrl', function ($q, $modal, $scope, $routeParams, $rootScope, $location, matchmedia, Person) {
+
+    $rootScope.$broadcast('alert', {
+      type: 'success',
+      msg: 'The person was added successfully.'
+    });
+
+
     var ModalInstanceCtrl, filterSpouseRelationship, i, j, ref, results, results1, unregister;
     $scope.relationshipOptions = ['primary', 'spouse', 'child'];
     unregister = matchmedia.onPhone(function(mediaQueryList) {
