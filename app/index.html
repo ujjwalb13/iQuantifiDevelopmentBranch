@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="css/main-style.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <style>
+      body {
+        height: auto;
+        background-attachment: fixed;
+      }
+    </style>
   </head>
   <body ng-app="agera" ng-class="{ 'body-onboarding': isOnboarding }">
     <div class="iq-app-wrapper">
@@ -113,7 +120,7 @@
     <script src="js/controllers/admin/investments.js"></script>
     <script src="js/controllers/admin/main.js"></script>
     <script src="js/controllers/admin/organizations.js"></script>
-      <script src="js/controllers/admin/grid.js"></script>
+    <script src="js/controllers/admin/grid.js"></script>
 
     <script src="js/controllers/aggregation/link-account.js"></script>
     <script src="js/controllers/aggregation/select-accounts.js"></script>
@@ -149,8 +156,13 @@
     <script src="js/controllers/progress/protection/add-protection.js"></script>
     <script src="js/controllers/dashboard.js"></script>
 
+    <script src="js/controllers/my-money/myMoneyOverview.js"></script>
     <script src="js/controllers/my-money/main.js"></script>
     <script src="js/controllers/my-money/update-expenses.js"></script>
+
+    <script src="js/controllers/my-features/MyFeaturesCanIBuyCtrl.js"></script>
+    <script src="js/controllers/my-features/MyFeaturesCashFinderCtrl.js"></script>
+    <script src="js/controllers/my-features/MyFeaturesScenarioCtrl.js"></script>
 
     <script src="js/controllers/complete-my-profile.js"></script>
 
@@ -167,7 +179,11 @@
     <script src="js/directives/onboard-nav/directive.js"></script>
     <script src="js/directives/profile-sidebar/module.js"></script>
     <script src="js/directives/profile-sidebar/directive.js"></script>
-    <script src="js/directives/progress-sidebar/module.js"></script>
+    <script src="js/directives/money-sidebar/module.js"></script>
+    <script src="js/directives/money-sidebar/directive.js"></script>
+    <script src="js/directives/feature-sidebar/module.js"></script>
+    <script src="js/directives/feature-sidebar/directive.js"></script>
+	<script src="js/directives/progress-sidebar/module.js"></script>
     <script src="js/directives/progress-sidebar/directive.js"></script>
     <script src="js/directives/experience-picker/module.js"></script>
     <script src="js/directives/experience-picker/directive.js"></script>

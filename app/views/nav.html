@@ -10,7 +10,7 @@
           </div>
           <div class="navbar-header-center col-sm-4">
             
-            <span class="alert-shortage" ng-show="shortageAlert.Id == 'shortage'">
+            <span class="alert-shortage" ng-show="shortageAlert.id == 'shortage'">
               <i class="icon icon-ft-fix-shotage"></i>
               <span ng-click="goToCashfinder()" class="visible-lg">
                 You have a shortage. Fix It
@@ -30,6 +30,7 @@
                   <span class="badge">{{ alerts.length }}</span>
                 </a>
               </li>
+
               <li>
                 <a ng-click="toggleMainMenu()">
                   <i class="fa fa-bars"></i>
@@ -186,6 +187,118 @@
       font-weight: bold;
       color: #5b9295;
     }
+
+
+    /*tabs styles */
+
+    /* custom inclusion of right, left and below tabs */
+
+.tabs-below > .nav-tabs,
+.tabs-right > .nav-tabs,
+.tabs-left > .nav-tabs {
+  border-bottom: 0;
+}
+
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+  display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+  display: block;
+}
+
+.tabs-below > .nav-tabs {
+  border-top: 1px solid #ddd;
+}
+
+.tabs-below > .nav-tabs > li {
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+
+.tabs-below > .nav-tabs > li > a {
+  -webkit-border-radius: 0 0 4px 4px;
+     -moz-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px;
+}
+
+.tabs-below > .nav-tabs > li > a:hover,
+.tabs-below > .nav-tabs > li > a:focus {
+  border-top-color: #ddd;
+  border-bottom-color: transparent;
+}
+
+.tabs-below > .nav-tabs > .active > a,
+.tabs-below > .nav-tabs > .active > a:hover,
+.tabs-below > .nav-tabs > .active > a:focus {
+  border-color: transparent #ddd #ddd #ddd;
+}
+
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+  float: none;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+  min-width: 74px;
+  margin-right: 0;
+  margin-bottom: 3px;
+}
+
+.tabs-left > .nav-tabs {
+  float: left;
+  margin-right: 19px;
+  border-right: 1px solid #ddd;
+}
+
+.tabs-left > .nav-tabs > li > a {
+  margin-right: -1px;
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus {
+  border-color: #ddd transparent #ddd #ddd;
+  *border-right-color: #ffffff;
+}
+
+.tabs-right > .nav-tabs {
+  float: right;
+  margin-left: 19px;
+  border-left: 1px solid #ddd;
+}
+
+.tabs-right > .nav-tabs > li > a {
+  margin-left: -1px;
+  -webkit-border-radius: 0 4px 4px 0;
+     -moz-border-radius: 0 4px 4px 0;
+          border-radius: 0 4px 4px 0;
+}
+
+.tabs-right > .nav-tabs > li > a:hover,
+.tabs-right > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+}
+
+.tabs-right > .nav-tabs .active > a,
+.tabs-right > .nav-tabs .active > a:hover,
+.tabs-right > .nav-tabs .active > a:focus {
+  border-color: #ddd #ddd #ddd transparent;
+  *border-left-color: #ffffff;
+}
+
+
   </style>
 
   <!-- save timeline drop down - NEW DESIGN -->
@@ -751,15 +864,85 @@
         </div>
 
         <div class="modal-footer">
-          <div style="margin-left: auto; margin-right: auto; width: 300px;">
-            <button type="button" class="save btn btn-success" ng-click="save()">Save New Plan</button>
-            <button type="button" class="cancel btn btn-default" ng-click="cancel()">Keep Current Plan</button>
+          <div style="position: relative; height: 50px;">
+            <div style="margin-left: auto; margin-right: auto; width: 590px; position: absolute;">
+              <button type="button" class="cancel btn btn-default" ng-click="cancel()">Keep Current Plan</button>
+              <button type="button" class="save btn btn-success" ng-click="save()">Save New Plan</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+
+
+  <!-- Rationale Modal -->
+  <div class="modal fade" id="rationaleModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="{{type}}"><span class="goal-icon {{ icon(type) }}"></span><span>{{'Explain' | titleize}}</span></h4>
+        </div>
+        <div class="modal-body">
+
+          <!-- tabs left -->
+          <div class="tabbable tabs-left">
+            <ul class="nav nav-tabs">
+              <li ng-repeat="ratSection in $root.rationaleResults.RationaleSections track by $index">
+                <a data-toggle="tab" data-target="#{{ ratSection.SectionKey }}">{{ ratSection.SectionName }}</a>
+              </li>
+              <!--<li class="active"><a data-toggle="tab" data-target="#tabAccountType">Account Type</a></li>
+              <li><a data-toggle="tab" data-target="#tabWhyThisAmount">Why This Amount</a></li>
+              <li><a data-toggle="tab" data-target="#tabProfileType">Profile Type</a></li>
+              <li><a data-toggle="tab" data-target="#tabInvestmentType">Investment Type</a></li>
+              <li><a data-toggle="tab" data-target="#tabAssetClass">Asset Class</a></li>
+              <li><a data-toggle="tab" data-target="#tabInvestmentPosition">Investment Position</a></li>
+              <li><a data-toggle="tab" data-target="#tabAllocationPercentage">Allocation Percentage</a></li>-->
+            </ul>
+            <div class="tab-content">
+              <div ng-repeat="ratSection in $root.rationaleResults.RationaleSections track by $index" class="tab-pane" id="{{ ratSection.SectionKey }}">
+                <div ng-bind-html="ratSection.SectionHTML"></div>
+                <div ng-if="ratSection.GraphDataInfo != null">
+                   (This section has a graph)
+                </div>
+              </div>
+
+              <!--<div class="tab-pane active" id="tabAccountType">
+                Account type rationale here.
+              </div>
+              <div class="tab-pane" id="tabWhyThisAmount">
+                Why this amount rationale here.
+              </div>
+              <div class="tab-pane" id="tabProfileType">
+                Profile type rationale here
+              </div>
+              <div class="tab-pane" id="tabInvestmentType">
+                Investment type rationale here
+              </div>
+              <div class="tab-pane" id="tabAssetClass">
+                Asset class rationale here
+              </div>
+              <div class="tab-pane" id="tabInvestmentPosition">
+                Investment position rationale here
+              </div>
+              <div class="tab-pane" id="tabAllocationPercentage">
+                Allocation percentage rationale here
+              </div>-->
+            </div>
+          </div>
+          <!-- /tabs -->
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="iq-submit-btn btn-success btn" data-dismiss="modal" ng-click="cancel()">Got it</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 

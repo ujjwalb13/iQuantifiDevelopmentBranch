@@ -1,0 +1,8 @@
+﻿<ul>
+    <li></li> <!-- This first item will be used for responsive design -->
+    <li ng-repeat="page in pages" ng-click="gotoPage(page)">
+        <a href="/#{{page.link}}" ng-class="{'active': page.active}">
+            <i class="{{page.icon}}"></i><span>{{page.title}}</span>
+        </a>
+    </li>
+</ul>

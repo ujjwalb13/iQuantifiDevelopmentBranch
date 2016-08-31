@@ -148,6 +148,7 @@
 
       Scenario.planChanges().$promise.then(function (planChangeResult) {
 
+        $scope.planChanges = null;
         $scope.planChanges = planChangeResult;
 
         if (planChangeResult != null && planChangeResult.DataChanges.length > 0 && planChangeResult.DataChanges[0].DataType != "nochanges") {
