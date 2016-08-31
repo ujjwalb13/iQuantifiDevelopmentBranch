@@ -15,6 +15,7 @@
         index: '=?'
       },
       link: function(scope, element, attrs) {
+        console.log("1");
         return scope.$watch('complete', function(newValue, oldValue) {
           var arc, arcOuter, arcTween, background, complete, completeEndAngle, donutContainer, donutTableEl, donutTop, height, incomplete, incompleteColor, radius, svg, width;
           if ((newValue == null) || (typeof isNaN === "function" ? isNaN(newValue) : void 0)) {
@@ -28,15 +29,10 @@
           } else {
             incompleteColor = '#e16250';
           }
-          scope.isPolicy = scope.goalKind === 'life_policy' || scope.goalKind === 'disability_policy' || scope.goalKind === 'care_policy';
           scope.isRetirement = scope.goalKind === 'retirement';
-          if (scope.isPolicy || scope.isRetirement) {
-            width = 280;
-            height = 280;
-          } else {
-            width = 350;
-            height = 350;
-          }
+          width = 350;
+          height = 350;
+
           radius = Math.min(width, height) / 2;
           arcOuter = scope.isPolicy ? radius - 35 : radius - 40;
           arc = d3.svg.arc().innerRadius(radius - 10).outerRadius(arcOuter).startAngle(function(d) {
