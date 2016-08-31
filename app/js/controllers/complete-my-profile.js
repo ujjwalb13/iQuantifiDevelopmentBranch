@@ -6,8 +6,10 @@ angular.module('agera').controller('CompleteMyProfileCtrl', ['$scope', 'ProfileI
   fetchProfileComplete = function() {
     ProfileItem.query().$promise.then(function(response){
       $scope.completionPercentage = response.completionPercentage;
-      $scope.profileItems = _.map(response.profileItems, function(item){
-        return new ProfileItem(item)
+      $scope.profileItems = []
+      _.each(response.profileItems, function(item){
+        if(!item.notRequired)
+          $scope.profileItems.push(new ProfileItem(item))
       });
     });
   }
