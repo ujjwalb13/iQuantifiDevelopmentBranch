@@ -11,24 +11,29 @@
         self = this;
         $scope.pages = [
           {
-            link: "/settings",
-            title: "Account Settings",
+            link: "/progress",
+            title: "Overview",
+            icon: "icon-al-my-progress",
             active: false
           }, {
-            link: "/people",
-            title: "Household",
+            link: "/progress/goal",
+            title: "My Goals",
+            icon: "icon-gl-custom-goal",
             active: false
           }, {
-            link: "/experience",
-            title: "Experience",
+            link: "/progress/debt",
+            title: "My Debts",
+            icon: "icon-db-debt",
             active: false
           }, {
-            link: "/permissions",
-            title: "Permissions",
+            link: "/progress/protection",
+            title: "My Protections",
+            icon: "icon-pt-protection",
             active: false
           }, {
-            link: "/feedback",
-            title: "Feedback",
+            link: "/achievements",
+            title: "My Achievements",
+            icon: "icon-al-my-archivement",
             active: false
           }
         ];
