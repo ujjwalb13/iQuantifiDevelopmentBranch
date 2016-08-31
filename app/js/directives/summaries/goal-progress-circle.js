@@ -45,7 +45,7 @@
           background = svg.append('path').datum({
             startAngle: 0,
             endAngle: 2 * Math.PI
-          }).style('fill', '#667070').attr('d', arc);
+          }).style('fill', '#e5e0c7').attr('d', arc);
           complete = svg.append('path').datum({
             startAngle: 0,
             endAngle: 0
