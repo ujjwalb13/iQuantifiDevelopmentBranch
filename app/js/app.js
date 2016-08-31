@@ -20,7 +20,7 @@
 
   angular.module('myMoney', []);
 
-  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'money-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
+  dependencies = ['ngAnimate', 'ngMessages', 'ngRoute', 'ngResource', 'ngSanitize', 'ngTouch', 'ngMaterial', 'ui.bootstrap', 'ui.utils', 'ui.slider', 'Devise', 'angulartics.google.tagmanager', 'emguo.poller', 'slick', 'matchmedia-ng', 'newrelic-timing', 'actions', 'admin', 'aggregation', 'goals', 'onboard', 'summaries', 'timeline', 'config', 'onboard-nav', 'experience-picker', 'profile-sidebar', 'money-sidebar', 'feature-sidebar', 'mgo-angular-wizard', 'progress', 'myMoney'];
 
   app = angular.module('agera', dependencies);
 
@@ -149,15 +149,6 @@
       controller: 'ForgotPasswordCtrl',
       setupRequired: false,
       loginRequired: false
-    }).when('/incomes', {
-      templateUrl: '/views/dropdown/incomes.html',
-      controller: 'IncomesCtrl'
-    }).when('/incomes/new', {
-      templateUrl: '/views/dropdown/income-form.html',
-      controller: 'IncomeFormCtrl'
-    }).when('/incomes/:incomeId', {
-      templateUrl: '/views/dropdown/income-form.html',
-      controller: 'IncomeFormCtrl'
     }).when('/institutions/:institutionId', {
       templateUrl: '/views/aggregation/select-accounts.html',
       controller: 'SelectAccountsCtrl',
@@ -346,7 +337,13 @@
       controller: 'MyMoneyOverviewCtrl'
     }).when('/my-money/income', {
       templateUrl: '/views/my-money/income.html',
-      controller: 'MyMoneyOverviewCtrl'
+      controller: 'IncomesCtrl'
+    }).when('/my-money/incomes/new', {
+      templateUrl: '/views//my-money/income-form.html',
+      controller: 'IncomeFormCtrl'
+    }).when('/my-money/incomes/:incomeId', {
+      templateUrl: '/views/my-money/income-form.html',
+      controller: 'IncomeFormCtrl'
     }).when('/my-money/accounts', {
       templateUrl: '/views/my-money/accounts.html',
       controller: 'MyMoneyOverviewCtrl'
@@ -359,6 +356,15 @@
     }).when('/my-money/networth', {
       templateUrl: '/views/my-money/networth.html',
       controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-features/scenario', {
+      templateUrl: '/views/my-features/scenario.html',
+      controller: 'MyFeaturesScenarioCtrl'
+    }).when('/my-features/cashfinder', {
+      templateUrl: '/views/my-features/cashfinder.html',
+      controller: 'MyFeaturesCashFinderCtrl'
+    }).when('/my-features/canibuy', {
+      templateUrl: '/views/my-features/canibuy.html',
+      controller: 'MyFeaturesCanIBuyCtrl'
     }).when('/complete-my-profile', {
       templateUrl: '/views/complete-my-profile.html',
       controller: 'CompleteMyProfileCtrl'
