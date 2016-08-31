@@ -11,7 +11,7 @@
       <span class="red" ng-switch-when="behindTwoMonth">ACTION DUE</span>
     </div>
     <div class="save-per-month save-status" ng-class="{'save-per-month-retirement': isRetirement}" ng-if="!isPolicy">
-      <span>{{permonth | dollars}}</span>
+      <strong>{{permonth | dollars}}</strong>
       <span>{{ status === "ontrack" ? 'Save Per Month' : "Behind" }}</span>
     </div>
   </div>
