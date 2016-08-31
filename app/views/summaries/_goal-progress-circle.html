@@ -1,16 +1,16 @@
-<div class="track-donut">
-  <div class="center-ring">
-    <div class="percent-complete">
-      <span class="complete-text">{{complete}}%</span>
+<div class="">
+  <div class="chart-main-content">
+    <p class="percent-completep downpay-status">
+      <strong class="complete-text">{{complete}}%</strong>
       <span>Downpayment saved!</span>
-    </div>
-    <div class="track-status" ng-switch on="status">
+    <p/>
+    <div class="track-status chart-status" ng-switch on="status">
       <div class="middle-line"></div>
       <span class="green" ng-switch-when="ontrack">ON TRACK</span>
       <span class="yellow" ng-switch-when="behindOneMonth">ACTION DUE</span>
       <span class="red" ng-switch-when="behindTwoMonth">ACTION DUE</span>
     </div>
-    <div class="save-per-month" ng-class="{'save-per-month-retirement': isRetirement}" ng-if="!isPolicy">
+    <div class="save-per-month save-status" ng-class="{'save-per-month-retirement': isRetirement}" ng-if="!isPolicy">
       <span>{{permonth | dollars}}</span>
       <span>{{ status === "ontrack" ? 'Save Per Month' : "Behind" }}</span>
     </div>
