@@ -30,8 +30,8 @@
           } else {
             incompleteColor = '#e16250';
           }
-          width = 350;
-          height = 350;
+          width = 220;
+          height = 220;
 
           radius = Math.min(width, height) / 2;
           arcOuter = scope.isPolicy ? radius - 35 : radius - 40;
