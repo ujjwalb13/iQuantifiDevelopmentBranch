@@ -69,7 +69,7 @@
     };
 
     $scope.PlanGoalBackgroundColor = function (goalChange, goalChangePlan) {
-      if (goalChange.GoalCategoryType != 'debt') {
+      if (goalChange.GoalCategoryType !== 'debt') {
         // goal - green
         if (goalChangePlan.isCurrent) {
           return "#dcedc5";
@@ -90,7 +90,7 @@
     };
 
     $scope.PlanGoalImageColor = function (goalChange) {
-      if (goalChange.GoalCategoryType != 'debt') {
+      if (goalChange.GoalCategoryType !== 'debt') {
         // goal - green
         return "green";
       }
@@ -108,35 +108,35 @@
 
     $scope.PlanGoalIcon = function (itemDataType) {
 
-      if (itemDataType == "baby")
+      if (itemDataType === "baby")
         return "goal-sm-baby.png";
-      else if (itemDataType == "car")
+      else if (itemDataType === "car")
         return "goal-sm-car.png";
-      else if (itemDataType == "college")
+      else if (itemDataType === "college")
         return "goal-sm-college.png";
-      else if (itemDataType == "custom")
+      else if (itemDataType === "custom")
         return "goal-sm-college.png";
-      else if (itemDataType == "downsize")
+      else if (itemDataType === "downsize")
         return "goal-sm-downsize.png";
-      else if (itemDataType == "education")
+      else if (itemDataType === "education")
         return "goal-sm-education.png";
-      else if (itemDataType == "house")
+      else if (itemDataType === "house")
         return "goal-sm-house.png";
-      else if (itemDataType == "purchase")
+      else if (itemDataType === "purchase")
         return "goal-sm-purchase.png";
-      else if (itemDataType == "relocation")
+      else if (itemDataType === "relocation")
         return "goal-sm-relocation.png";
-      else if (itemDataType == "rent")
+      else if (itemDataType === "rent")
         return "goal-sm-rent.png";
-      else if (itemDataType == "retirement")
+      else if (itemDataType === "retirement")
         return "goal-sm-retirement.png";
-      else if (itemDataType == "ring")
+      else if (itemDataType === "ring")
         return "goal-sm-ring.png";
-      else if (itemDataType == "travel")
+      else if (itemDataType === "travel")
         return "goal-sm-travel.png";
-      else if (itemDataType == "wedding")
+      else if (itemDataType === "wedding")
         return "goal-sm-wedding.png";
-      else if (itemDataType == "CreditCard")
+      else if (itemDataType === "CreditCard")
         return "debt-sm.png"
       else
         return "goal-sm-house.png";
@@ -151,7 +151,7 @@
         $scope.planChanges = null;
         $scope.planChanges = planChangeResult;
 
-        if (planChangeResult != null && planChangeResult.DataChanges.length > 0 && planChangeResult.DataChanges[0].DataType != "nochanges") {
+        if (planChangeResult !== null && planChangeResult.DataChanges.length > 0 && planChangeResult.DataChanges[0].DataType !== "nochanges") {
           $scope.saveMenu = true;
         }
       });
@@ -161,7 +161,7 @@
     });
 
     $scope.PlanGoalHasShortage = function (planChangeResult) {
-      if (planChangeResult != null && planChangeResult.DataChanges.length > 0 && planChangeResult.DataChanges[0].DataType == "shortage") {
+      if (planChangeResult !== null && planChangeResult.DataChanges.length > 0 && planChangeResult.DataChanges[0].DataType === "shortage") {
         return true;
       }
       else {
