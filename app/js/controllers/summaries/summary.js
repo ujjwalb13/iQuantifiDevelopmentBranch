@@ -9,7 +9,8 @@
     $scope.schedule = [];
     $scope.status = 'safe';
     $scope.ontrackStatus = "ontrack";
-    $scope.behindStatus = "behind";
+    $scope.behindOneMonthStatus = "behindOneMonth";
+    $scope.behindTwoMonthStatus = "behindTwoMonth";
     lookup = {
       cars: Car,
       colleges: College,
