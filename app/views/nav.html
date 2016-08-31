@@ -302,18 +302,18 @@
   </style>
 
   <!-- save timeline drop down - NEW DESIGN -->
-  <div class="modal fade" role="dialog" modal-show="saveMenu">
+  <div class="modal fade" role="dialog" modal-show="saveMenu" ng-cloak>
     <!--<div class="save-dropdown-menu" ng-class="{'ui-show': saveMenu}" style="width: 800px; margin-left: -400px;">-->
 
     <div class="modal-dialog" style="width: 800px;">
       <div class="modal-content">
 
-        <div class="modal-header">
+        <div class="modal-header delete-modal-header text-center">
           <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
           <h4 class="modal-title">Save New Plan</h4>
         </div>
 
-        <div class="modal-body" style="margin: 20px;">
+        <div class="modal-body delete-modal-body">
           <div style="margin-bottom: 20px;">
             <b>A new plan has been generated.</b>
           </div>
@@ -338,11 +338,11 @@
               Here's how the changes would affect your goals:
             </div>
             <!--<div class="pull-right" style="margin-right: 10px;">
-                <ul class="nav nav-pills">
-                    <li><a data-toggle="tab" href="#tabTimeline">Timeline</a></li>
-                    <li class="active"><a data-toggle="tab" href="#tabList">List</a></li>
-                </ul>
-            </div>-->
+          <ul class="nav nav-pills">
+              <li><a data-toggle="tab" href="#tabTimeline">Timeline</a></li>
+              <li class="active"><a data-toggle="tab" href="#tabList">List</a></li>
+          </ul>
+      </div>-->
           </div>
 
 
@@ -835,9 +835,9 @@
                         </div>
                         <div class="col-xs-2" style="width: 20%" ng-class="{'savePlanValueChange': goalChange.GoalChangeItems[1].hasPaymentChange}">
                           <!--{{ goalChange.GoalChangeItems[1].Payment }}
-                          <img src="../images/plan-AmountIncrease.png" width="9" height="6" style="vertical-align: middle; margin-top: -4px;" ng-if="goalChange.GoalChangeItems[1].Change == 'increase'" />
-                          <img src="../images/plan-AmountDecrease.png" width="9" height="6" style="vertical-align: middle; margin-top: -4px;" ng-if="goalChange.GoalChangeItems[1].Change == 'decrease'" />
-                          -->
+                    <img src="../images/plan-AmountIncrease.png" width="9" height="6" style="vertical-align: middle; margin-top: -4px;" ng-if="goalChange.GoalChangeItems[1].Change == 'increase'" />
+                    <img src="../images/plan-AmountDecrease.png" width="9" height="6" style="vertical-align: middle; margin-top: -4px;" ng-if="goalChange.GoalChangeItems[1].Change == 'decrease'" />
+                    -->
                         </div>
                       </div>
 
@@ -863,14 +863,11 @@
 
         </div>
 
-        <div class="modal-footer">
-          <div style="position: relative; height: 50px;">
-            <div style="margin-left: auto; margin-right: auto; width: 590px; position: absolute;">
-              <button type="button" class="cancel btn btn-default" ng-click="cancel()">Keep Current Plan</button>
-              <button type="button" class="save btn btn-success" ng-click="save()">Save New Plan</button>
-            </div>
-          </div>
+        <div class="modal-footer text-center delete-modal-footer">
+            <button class="iq-submit-btn btn btn-lg" ng-click="cancel()">Keep Current Plan</button>
+            <button class="iq-submit-btn btn btn-primary" ng-hide="pending" ng-click="save()">Save New Plan</button>
         </div>
+
       </div>
     </div>
   </div>

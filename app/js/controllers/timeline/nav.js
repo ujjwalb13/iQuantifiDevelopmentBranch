@@ -143,7 +143,7 @@
 
     };
 
-
+    $scope.planChanges = null;
     $scope.$on('dirty-timeline', function () {
 
       Scenario.planChanges().$promise.then(function (planChangeResult) {
