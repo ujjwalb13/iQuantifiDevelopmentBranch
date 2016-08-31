@@ -6,6 +6,7 @@
     <p/>
     <div class="track-status chart-status" ng-switch on="status">
       <div class="middle-line"></div>
+      <i class="fa fa-check" ng-switch-when="ontrack"></i>
       <span class="green" ng-switch-when="ontrack">ON TRACK</span>
       <span class="yellow" ng-switch-when="behindOneMonth">ACTION DUE</span>
       <span class="red" ng-switch-when="behindTwoMonth">ACTION DUE</span>
