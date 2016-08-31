@@ -324,7 +324,7 @@
           <div ng-repeat="dataChange in planChanges.DataChanges track by $index">
             <div class="row" style="border-top: 1px solid #f0efeb; padding-top: 10px; padding-bottom: 10px; margin-bottom: 0px;">
               <div class="col-xs-3">
-                <img src="../images/icon/{{ PlanGoalIcon(dataChange.DataType) }}" class="savePlanGoalIcon" />
+                <img ng-src="../images/icon/{{ PlanGoalIcon(dataChange.DataType) }}" class="savePlanGoalIcon" />
                 <div class="savePlanGoalName">{{ dataChange.DataName }}</div>
               </div>
               <div class="col-xs-9">
@@ -395,7 +395,7 @@
 
                   <!-- Goal Header with Icon -->
                   <div class="savePlanTimelineGoalHeader">
-                    <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                    <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                     <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                   </div>
 
@@ -421,7 +421,7 @@
                       </div>
 
                       <div style="position: absolute; left: 147px; top: 10px;">
-                        <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
+                        <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img ng-src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
                         <div style="display: inline-block; margin-left: 15px;" ng-class="{'savePlanValueChange': goalChangePlan.hasCompletionDateChange}">
                           {{ goalChangePlan.CompletionDateString }}
                         </div>
@@ -439,7 +439,7 @@
 
                 <!-- Goal Header with Icon -->
                 <div class="savePlanTimelineGoalHeader">
-                  <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                  <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                   <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                 </div>
 
@@ -465,7 +465,7 @@
                     </div>
 
                     <div style="position: absolute; left: 147px; top: 10px;">
-                      <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
+                      <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img ng-src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
                       <div style="display: inline-block; margin-left: 15px;" ng-class="{'savePlanValueChange': goalChangePlan.hasCompletionDateChange}">
                         {{ goalChangePlan.CompletionDateString }}
                       </div>
@@ -482,7 +482,7 @@
 
                 <!-- Goal Header with Icon -->
                 <div class="savePlanTimelineGoalHeader">
-                  <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                  <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                   <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                 </div>
 
@@ -508,7 +508,7 @@
                     </div>
 
                     <div style="position: absolute; left: 147px; top: 10px;">
-                      <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
+                      <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img ng-src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
                       <div style="display: inline-block; margin-left: 15px;" ng-class="{'savePlanValueChange': goalChangePlan.hasCompletionDateChange}">
                         {{ goalChangePlan.CompletionDateString }}
                       </div>
@@ -602,7 +602,7 @@
                   <div class="row savePlanTableGoalRow savePlanTableBorder">
                     <div class="col-xs-3">
                       <div style="margin-top: 15px;">
-                        <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                        <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                         <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                       </div>
                     </div>
@@ -699,7 +699,7 @@
                   <div class="row savePlanTableGoalRow savePlanTableBorder">
                     <div class="col-xs-3">
                       <div style="margin-top: 15px;">
-                        <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                        <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                         <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                       </div>
                     </div>
@@ -796,7 +796,7 @@
                   <div class="row savePlanTableGoalRow savePlanTableBorder">
                     <div class="col-xs-3">
                       <div style="margin-top: 15px;">
-                        <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                        <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                         <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                       </div>
                     </div>
