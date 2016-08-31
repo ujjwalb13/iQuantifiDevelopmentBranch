@@ -20,7 +20,7 @@
     </div>
     <div class="save-per-month" ng-class="{'save-per-month-retirement': isRetirement}" ng-if="!isPolicy">
       <span>{{permonth | dollars}}</span>
-      <span>{{(goalType == 'debt' && 'Pay') || 'Save'}} Per Month</span>
+      <span>{{ status === "ontrack" ? 'Save Per Month' : "Behind" }}</span>
     </div>
   </div>
 </div>

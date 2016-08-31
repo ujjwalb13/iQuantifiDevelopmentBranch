@@ -8,6 +8,8 @@
     $scope.completedActions = [];
     $scope.schedule = [];
     $scope.status = 'safe';
+    $scope.ontrackStatus = "ontrack";
+    $scope.behindStatus = "behind";
     lookup = {
       cars: Car,
       colleges: College,

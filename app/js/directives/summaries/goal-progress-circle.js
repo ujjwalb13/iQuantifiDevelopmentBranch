@@ -16,6 +16,7 @@
       },
       link: function(scope, element, attrs) {
         console.log("1");
+        console.log(scope);
         return scope.$watch('complete', function(newValue, oldValue) {
           var arc, arcOuter, arcTween, background, complete, completeEndAngle, donutContainer, donutTableEl, donutTop, height, incomplete, incompleteColor, radius, svg, width;
           if ((newValue == null) || (typeof isNaN === "function" ? isNaN(newValue) : void 0)) {
