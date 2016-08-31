@@ -149,15 +149,6 @@
       controller: 'ForgotPasswordCtrl',
       setupRequired: false,
       loginRequired: false
-    }).when('/incomes', {
-      templateUrl: '/views/dropdown/incomes.html',
-      controller: 'IncomesCtrl'
-    }).when('/incomes/new', {
-      templateUrl: '/views/dropdown/income-form.html',
-      controller: 'IncomeFormCtrl'
-    }).when('/incomes/:incomeId', {
-      templateUrl: '/views/dropdown/income-form.html',
-      controller: 'IncomeFormCtrl'
     }).when('/institutions/:institutionId', {
       templateUrl: '/views/aggregation/select-accounts.html',
       controller: 'SelectAccountsCtrl',
@@ -346,7 +337,13 @@
       controller: 'MyMoneyOverviewCtrl'
     }).when('/my-money/income', {
       templateUrl: '/views/my-money/income.html',
-      controller: 'MyMoneyOverviewCtrl'
+      controller: 'IncomesCtrl'
+    }).when('/my-money/incomes/new', {
+      templateUrl: '/views//my-money/income-form.html',
+      controller: 'IncomeFormCtrl'
+    }).when('/my-money/incomes/:incomeId', {
+      templateUrl: '/views/my-money/income-form.html',
+      controller: 'IncomeFormCtrl'
     }).when('/my-money/accounts', {
       templateUrl: '/views/my-money/accounts.html',
       controller: 'MyMoneyOverviewCtrl'
