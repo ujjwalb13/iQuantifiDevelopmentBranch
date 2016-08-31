@@ -351,14 +351,14 @@
       return Math.max(percent, 0);
     };
     getCurrentPeriod = function(schedule) {
-      var i, len, month, ref;
-      ref = schedule.data;
-      for (i = 0, len = ref.length; i < len; i++) {
-        month = ref[i];
-        if (moment().startOf('month').isSame(month.date)) {
-          return month;
-        }
-      }
+      // var i, len, month, ref;
+      // ref = schedule.data;
+      // for (i = 0, len = ref.length; i < len; i++) {
+      //   month = ref[i];
+      //   if (moment().startOf('month').isSame(month.date)) {
+      //     return month;
+      //   }
+      // }
       return {};
     };
     getNeed = function(current, target) {
