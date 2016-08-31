@@ -34,7 +34,7 @@
           height = 220;
 
           radius = Math.min(width, height) / 2;
-          arcOuter = scope.isPolicy ? radius - 35 : radius - 40;
+          arcOuter = radius - 40;
           arc = d3.svg.arc().innerRadius(radius - 10).outerRadius(arcOuter).startAngle(function(d) {
             return d.startAngle + 3 * Math.PI / 2;
           }).endAngle(function(d) {
