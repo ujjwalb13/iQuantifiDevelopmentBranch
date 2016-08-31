@@ -29,7 +29,6 @@
           } else {
             incompleteColor = '#e16250';
           }
-          scope.isRetirement = scope.goalKind === 'retirement';
           width = 350;
           height = 350;
 
