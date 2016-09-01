@@ -26,6 +26,11 @@
             icon: "icon-mm-expenses",
             active: false
           }, {
+            link: "/my-money/capitalandcashflow",
+            title: "Capital & Cashflow",
+            icon: "icon-mm-expenses",
+            active: false
+          }, {
             link: "/my-money/accounts",
             title: "Accounts",
             icon: "icon-mm-accounts",

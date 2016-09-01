@@ -348,6 +348,9 @@
     }).when('/my-money/accounts', {
       templateUrl: '/views/my-money/accounts.html',
       controller: 'MyMoneyOverviewCtrl'
+    }).when('/my-money/capitalandcashflow', {
+      templateUrl: '/views/my-money/capitalandcashflow.html',
+      controller: 'MyMoneyCapitalandCashflowCtrl'
     }).when('/my-money/expenses', {
       templateUrl: '/views/my-money/expenses.html',
       controller: 'MyMoneyExpenseCtrl'
@@ -401,7 +404,12 @@
       //
       $rootScope.alerts.push(data);
       if (data.msg != "")
-        toaster.pop('success', "", data.msg);
+      {
+        if (data.type == 'danger')
+          toaster.pop('error', "", data.msg);
+        else
+          toaster.pop(data.type, "", data.msg);
+      }
 
       var found = false;
       var i = 0;
