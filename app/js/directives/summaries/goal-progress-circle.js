@@ -16,7 +16,7 @@
       },
       link: function(scope, element, attrs) {
         return scope.$watch('complete', function(newValue, oldValue) {
-          var arc, arcOuter, arcTween, background, complete, completeEndAngle, donutContainer, donutTableEl, donutTop, height, incomplete, incompleteColor, radius, svg, width, strokeColor, strokeWidth;
+          var arc, arcOuter, arcTween, background, complete, completeEndAngle, height, incomplete, incompleteColor, radius, svg, width, strokeColor, strokeWidth;
           if ((newValue == null) || (typeof isNaN === "function" ? isNaN(newValue) : void 0)) {
             return;
           }
@@ -82,15 +82,6 @@
           };
           complete.transition().duration(1000).call(arcTween, completeEndAngle);
           incomplete.transition().duration(1000).delay(1000).call(arcTween, completeEndAngle + (scope.incomplete / 100) * 2 * Math.PI);
-          donutTableEl = angular.element('.donut-part');
-          if ((donutTableEl != null) && !scope.isPolicy) {
-            donutTop = 0;
-            angular.element(donutTableEl).prevAll().each(function(index) {
-              return donutTop += angular.element(this).outerHeight();
-            });
-            donutContainer = angular.element('.donut-chart-container');
-            return donutContainer.css('top', (-10 + donutTop) + "px");
-          }
         });
       }
     };
