@@ -17,6 +17,7 @@
           if (newValue == null) {
             return;
           }
+          console.log("1232321");
           getBars = function(data) {
             var bars, d, graph, i, j, len, ref, step;
             graph = [];
@@ -58,20 +59,6 @@
             } else {
               break;
             }
-          }
-          if (scope.goalKind === 'retirement' || scope.goalKind === 'college') {
-            list = [];
-            amt = scope.baseline;
-            ref1 = scope.schedule;
-            for (m = 0, len3 = ref1.length; m < len3; m++) {
-              month = ref1[m];
-              amt = (amt + month.payment) * (1 + (configService.growthRate / 12));
-              list.push({
-                date: month.date,
-                value: amt
-              });
-            }
-            mtnData = getBars(list);
           }
           margin = {
             top: 20,
