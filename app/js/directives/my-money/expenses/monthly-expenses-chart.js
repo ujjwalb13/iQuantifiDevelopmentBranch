@@ -3,6 +3,10 @@
   angular.module('agera').directive('monthlyExpensesChart', function(Expense) {
     var getChartData, link;
     link = function(scope, element, attrs) {
+      scope.selectedExpense = null;
+      scope.getExpenseName = function(kind) {
+          return "XXX|"+kind;
+        }
       var chart, chartArea, chartGroups, chart_height, child_margin, color, expenses, subCategories, detail_icon_height, expense_types, group_margin, height, legends, margin, svg, width, ratio, x, x1, xAxis, y, yAxis;
       expenses = getChartData();
       subCategories = genereateSubCategories(expenses);
@@ -112,7 +116,10 @@
         .on("click", function(d){
           $("#group-details-popup .info-icon-container").css("top", Math.min(y(d.amount), y(d.three_month_average_amount)) + "px")
           $("#group-details-popup .info-icon-container").css("left", (x(Expense.getExpenseName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px")
-          showPopover(d);
+          scope.selectedExpense = d;
+          scope.$digest();
+          // showPopover(d);
+          console.log("scope change", scope.selectedExpense);
         });
 
       $(".btn-close-popover").on("click", function(){
@@ -215,14 +222,14 @@
       ];
     };
     function showPopover(expense) {
-      $("#group-details-popup .popover .popover-content .current-expense-value").text("$"+expense.amount);
-      $("#group-details-popup .popover .popover-content .three-months-average-value").text("$"+expense.three_month_average_amount);
-      $("#group-details-popup .popover .popover-content .title").text(Expense.getExpenseName(expense.kind));
-      $("#group-details-popup .popover .popover-content .subcategories-loading").show();
-      $("#group-details-popup .popover .popover-content .sub-categories").empty();
+      // $("#group-details-popup .popover .popover-content .current-expense-value").text("$"+expense.amount);
+      // $("#group-details-popup .popover .popover-content .three-months-average-value").text("$"+expense.three_month_average_amount);
+      // $("#group-details-popup .popover .popover-content .title").text(Expense.getExpenseName(expense.kind));
+      // $("#group-details-popup .popover .popover-content .subcategories-loading").show();
+      // $("#group-details-popup .popover .popover-content .sub-categories").empty();
       // ifsubCategories[d.kind]["loadDone"]
       // "<li><strong>Auto Loan</strong></li>"
-      $("#group-details-popup .popover").show();
+      // $("#group-details-popup .popover").show();
     }
     function genereateSubCategories(expenses) {
       var subCategories = {}
@@ -235,6 +242,8 @@
     }
     return {
       restrict: 'E',
+      transclude: true,
+      templateUrl: "/views/directives/my-money/expenses/monthly-chart.tpl.html",
       scope: {
         currentExpensesColor: '@',
         threeMonthsAverageColor: '@'

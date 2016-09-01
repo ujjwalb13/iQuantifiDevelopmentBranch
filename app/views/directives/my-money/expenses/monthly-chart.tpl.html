@@ -1,0 +1,38 @@
+<strong>selectedExpense: {{getExpenseName(selectedExpense.kind)}} | {{currentExpensesColor}}</strong>
+<div id="group-details-popup" ng-show="selectedExpense != null">
+  <div class="info-icon-container">
+    <div class="popover top fade in">
+      <div class="arrow"></div>
+      <div class="popover-inner">
+        <div class="popover-content debt">
+          <i class="fa fa-times btn-close-popover" aria-hidden="true"></i>
+          <label class="title">Groceries</label>
+          <ul>
+            <li class="chart-dark-yellow">
+              <span class="chart-color"></span> Current Expenses:  <strong class="current-expense-value">$480</strong>
+            </li>
+            <li class="chart-green">
+              <span class="chart-color"></span> 3 Month Average:  <span class="three-months-average-value">$410</span>
+            </li>
+          </ul>
+          <label for="">Debts include:</label>
+          <p class="subcategories-loading">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+          </p>
+          <ul class="sub-categories">
+            <li>
+              <strong>Auto Loan</strong> - $350
+            </li>
+            <li>
+              <strong>Student Loan</strong> - $220
+            </li>
+            <li>
+              <strong>Credit Card</strong> - $135
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<svg width="100%" ratio="2"></svg>
