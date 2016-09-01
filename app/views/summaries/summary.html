@@ -10,6 +10,18 @@
   </div>
 </div>
 
+
+<div class="sum-main-content" style="position:absolute;top:350px;left:30px">
+  <div class="chart-content">
+    <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="behindOneMonthStatus"></goal-progress-circle>
+  </div>
+</div>
+<div class="sum-main-content" style="position:absolute;top:600px;left:30px">
+  <div class="chart-content">
+    <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="behindTwoMonthStatus"></goal-progress-circle>
+  </div>
+</div>
+
 <div class="main-content-style">
     <div class="container main-wrapper">
       <div class="row">
@@ -126,12 +138,8 @@
 
         </div>
       </div>
-    <goal-progress-circle complete="24" incomplete="0" permonth="2143" status="ontrackStatus"></goal-progress-circle>
-    <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="behindOneMonthStatus"></goal-progress-circle>
-    <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="behindTwoMonthStatus"></goal-progress-circle>
     </div>
 </div>
-
 
 <div ng-include="'/views/summaries/_overview.html'"></div>
 <div ng-include="'/views/summaries/_next_action.html'"></div>

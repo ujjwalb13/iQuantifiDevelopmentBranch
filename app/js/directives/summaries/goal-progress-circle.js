@@ -9,10 +9,7 @@
         complete: '=',
         incomplete: '=?',
         status: '=',
-        permonth: '=',
-        goalType: '=',
-        goalKind: '=',
-        index: '=?'
+        permonth: '='
       },
       link: function(scope, element, attrs) {
         return scope.$watch('complete', function(newValue, oldValue) {
@@ -23,10 +20,10 @@
           if (scope.incomplete == null) {
             scope.incomplete = 0;
           }
-          if (scope.status === 'warning') {
-            incompleteColor = '#ffc730';
-          } else {
+          if (scope.status === 'behindTwoMonth') {
             incompleteColor = '#e16250';
+          } else {
+            incompleteColor = '#e79546';
           }
           strokeColor = "#fff";
           strokeWidth = 2;
