@@ -17,7 +17,6 @@
           if (newValue == null) {
             return;
           }
-          console.log("1232321");
           getBars = function(data) {
             var bars, d, graph, i, j, len, ref, step;
             graph = [];
@@ -198,6 +197,28 @@
           });
           svg.append('path').datum(data.slice(0, +nowIndex + 1 || 9e9)).attr('class', 'white line').attr('d', line).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
           svg.append('path').datum(data.slice(nowIndex)).attr('class', 'blue line').attr('d', line).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
+          svg.selectAll('.v-line').data(data).enter().append('line')
+          .attr('x1', function(d) {
+            return x(d.date);
+          })
+          .attr('x2', function(d) {
+            return x(d.date);
+          })
+          .attr('y2', function(d) {
+            return 0;
+          })
+          .attr('class', 'v-line')
+          .attr('stroke', 'rgb(255,0,0)')
+          .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
+          svg.selectAll('.v-line').attr('y1', function(d) {
+            return height - y(d3.max(data, function(d) {
+              return d.projected_balance;
+            }));
+          });
+
+
           svg.selectAll('.circle').data(data).enter().append('circle').attr('class', function(d) {
             if (moment(d.date) > moment()) {
               return 'blue circle';
