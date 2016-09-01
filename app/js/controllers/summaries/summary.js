@@ -40,6 +40,10 @@
       return $scope.currentRightSummary === "financeRecommendations";
     }
 
+    $scope.changeRightSummayContent = function(contentType) {
+      $scope.currentRightSummary = contentType;
+    }
+
     if (Obj) {
       Obj.get({
         guid: $routeParams.guid
