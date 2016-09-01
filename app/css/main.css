@@ -23687,33 +23687,12 @@ footer p {
   color: #313131;
 }
 
-/* line 100, ../../app/css/section/timeline/_actions.scss */
-.actions-content {
-  margin: 71px 63px 50px 96px;
-  border-left: 1px #cacaca solid;
-}
-/* line 104, ../../app/css/section/timeline/_actions.scss */
-.actions-content .action {
-  margin-left: 64px;
-  padding: 20px 0;
-}
 /* line 108, ../../app/css/section/timeline/_actions.scss */
 .actions-content .action .goal-icon, .actions-content .action .debt-icon, .actions-content .action .protection-icon {
   display: inline-block;
   margin-right: 20px;
 }
-/* line 113, ../../app/css/section/timeline/_actions.scss */
-.actions-content .action .icon-action-default {
-  position: absolute;
-  left: -71px;
-  top: 20px;
-}
-/* line 119, ../../app/css/section/timeline/_actions.scss */
-.actions-content .action .icon-action-alert, .actions-content .action .icon-action-success, .actions-content .action .icon-action-yellow-alert {
-  position: absolute;
-  left: -80px;
-  top: 12px;
-}
+
 /* line 125, ../../app/css/section/timeline/_actions.scss */
 .actions-content .action .protection-icon + h2 {
   vertical-align: middle;
@@ -23785,11 +23764,17 @@ footer p {
 }
 /* line 189, ../../app/css/section/timeline/_actions.scss */
 .actions-content .action ul li {
-  padding: 14px 0;
+  padding: 15px 30px;
   border-bottom: 1px #cacaca solid;
   position: relative;
   color: #313131;
   font-size: 18px;
+}
+.actions-content .action ul li:last-child {
+  border: none;
+}
+.actions-content .action .section-header {
+  margin: 0;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   /* line 197, ../../app/css/section/timeline/_actions.scss */
