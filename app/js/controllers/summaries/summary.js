@@ -30,6 +30,16 @@
     Obj = lookup[$routeParams.type];
     $scope.goalType = Obj.type;
     $scope.goalKind = Obj.kind;
+
+    $scope.currentRightSummary = "downpayment";
+    $scope.downpaymentActive = function() {
+      return $scope.currentRightSummary === "downpayment";
+    }
+
+    $scope.financeRecommendationsActive = function() {
+      return $scope.currentRightSummary === "financeRecommendations";
+    }
+
     if (Obj) {
       Obj.get({
         guid: $routeParams.guid
