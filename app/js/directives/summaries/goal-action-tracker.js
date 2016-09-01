@@ -13,7 +13,8 @@
       },
       link: function(scope, element, attrs) {
         return scope.$watch('schedule', function(newValue, oldValue) {
-          var amt, area, bgBarWidth, commasFormatter, d, data, dotValue, downColor, firstDate, getBars, height, i, j, k, l, lastDate, len, len1, len2, len3, line, list, m, margin, maxBars, month, mtnData, now, nowColor, nowDatum, nowIndex, nowRectEl, ref, ref1, svg, tip, upColor, width, x, xAxis, xDateFormat, y, yAxis;
+          var amt, area, bgBarWidth, commasFormatter, d, data, dotValue, downColor, firstDate, getBars, height, i, j, k, l, lastDate, len, len1, len2, len3, line, list, m, margin, maxBars, month, mtnData, now, nowColor, nowDatum, nowIndex, nowRectEl, ref, ref1, svg, tip, upColor, width, x, xAxis, xDateFormat, y, yAxis,
+            yAxisTicks;
           if (newValue == null) {
             return;
           }
@@ -84,6 +85,7 @@
           yAxis = d3.svg.axis().scale(y).orient('left').tickFormat(function(d) {
             return "$" + (commasFormatter(d));
           });
+
           line = d3.svg.line().x(function(d) {
             return x(d.date);
           }).y(function(d) {
@@ -218,6 +220,7 @@
             }));
           });
 
+          yAxisTicks = yAxis.scale().ticks(yAxis.ticks()[0]);
 
           svg.selectAll('.circle').data(data).enter().append('circle').attr('class', function(d) {
             if (moment(d.date) > moment()) {
