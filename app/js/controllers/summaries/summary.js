@@ -8,6 +8,9 @@
     $scope.completedActions = [];
     $scope.schedule = [];
     $scope.status = 'safe';
+    $scope.ontrackStatus = "ontrack";
+    $scope.behindOneMonthStatus = "behindOneMonth";
+    $scope.behindTwoMonthStatus = "behindTwoMonth";
     lookup = {
       cars: Car,
       colleges: College,
@@ -27,6 +30,20 @@
     Obj = lookup[$routeParams.type];
     $scope.goalType = Obj.type;
     $scope.goalKind = Obj.kind;
+
+    $scope.currentRightSummary = "downpayment";
+    $scope.downpaymentActive = function() {
+      return $scope.currentRightSummary === "downpayment";
+    }
+
+    $scope.financeRecommendationsActive = function() {
+      return $scope.currentRightSummary === "financeRecommendations";
+    }
+
+    $scope.changeRightSummayContent = function(contentType) {
+      $scope.currentRightSummary = contentType;
+    }
+
     if (Obj) {
       Obj.get({
         guid: $routeParams.guid
@@ -47,6 +64,9 @@
         }
       });
     }
+    $scope.gotoProgressPage = function(type) {
+      return $location.path("/progress/" + type);
+    };
     $scope.icon = function(type) {
       type = type.toLowerCase();
       if (type === 'wedding') {
@@ -324,14 +344,14 @@
       return Math.max(percent, 0);
     };
     getCurrentPeriod = function(schedule) {
-      var i, len, month, ref;
-      ref = schedule.data;
-      for (i = 0, len = ref.length; i < len; i++) {
-        month = ref[i];
-        if (moment().startOf('month').isSame(month.date)) {
-          return month;
-        }
-      }
+      // var i, len, month, ref;
+      // ref = schedule.data;
+      // for (i = 0, len = ref.length; i < len; i++) {
+      //   month = ref[i];
+      //   if (moment().startOf('month').isSame(month.date)) {
+      //     return month;
+      //   }
+      // }
       return {};
     };
     getNeed = function(current, target) {
