@@ -41,6 +41,9 @@
             title: "Expenses",
             path: "/my-money/expenses"
           }, {
+            title: "Capital & Cash Flow ",
+            path: "/my-money/capitalandcashflow"
+          }, {
             title: "Accounts",
             path: "/my-money/accounts"
           }, {
