@@ -23,7 +23,7 @@
           if (scope.status === 'behindTwoMonth') {
             incompleteColor = '#e16250';
           } else {
-            incompleteColor = '#e79546';
+            incompleteColor = '#ffc744';
           }
           strokeColor = "#fff";
           strokeWidth = 2;
@@ -47,7 +47,7 @@
           complete = svg.append('path').datum({
             startAngle: 0,
             endAngle: 0
-          }).style('fill', '#8ec54b')
+          }).style('fill', '#8ec54a')
             .style('stroke', strokeColor)
             .style("stroke-width", strokeWidth)
             .attr('d', arc);
