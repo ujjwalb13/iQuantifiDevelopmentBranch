@@ -12,6 +12,12 @@
         permonth: '='
       },
       link: function(scope, element, attrs) {
+        scope.behindStatusClass = function() {
+          if (scope.status === 'behindTwoMonth') return "behind-two-month";
+          if (scope.status === 'behindOneMonth') return "behind-one-month";
+          return ""
+        }
+
         return scope.$watch('complete', function(newValue, oldValue) {
           var arc, arcOuter, arcTween, background, complete, completeEndAngle, height, incomplete, incompleteColor, radius, svg, width, strokeColor, strokeWidth;
           if ((newValue == null) || (typeof isNaN === "function" ? isNaN(newValue) : void 0)) {
