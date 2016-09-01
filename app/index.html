@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="css/main-style.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/toaster.css" />
 
     <style>
       body {
@@ -67,6 +68,8 @@
       <!-- Added for grid to work -->
     <script src="bower_components/ag-grid/ag-grid.min.js"></script>
 
+
+
     <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
     <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
     <script src="bower_components/waypoints/waypoints.js"></script>
@@ -86,6 +89,9 @@
     <script src="bower_components/underscore.string/dist/underscore.string.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/toaster/toaster.min.js"></script>
+ 
+      
     <!-- endbower -->
     <script src="bower_components/jquery-simulate/jquery.simulate.js"></script>
     <script src="bower_components/jQuery.mmenu/src/js/jquery.mmenu.min.js"></script>
@@ -105,7 +111,6 @@
     <script src="js/controllers/permissions.js"></script>
     <script src="js/controllers/faq.js"></script>
     <script src="js/controllers/feedback.js"></script>
-    <script src="js/controllers/incomes.js"></script>
     <script src="js/controllers/people.js"></script>
     <script src="js/controllers/policies.js"></script>
     <script src="js/controllers/settings.js"></script>
@@ -159,6 +164,7 @@
     <script src="js/controllers/my-money/myMoneyOverview.js"></script>
     <script src="js/controllers/my-money/main.js"></script>
     <script src="js/controllers/my-money/update-expenses.js"></script>
+    <script src="js/controllers/my-money/incomes.js"></script>
 
     <script src="js/controllers/my-features/MyFeaturesCanIBuyCtrl.js"></script>
     <script src="js/controllers/my-features/MyFeaturesCashFinderCtrl.js"></script>
@@ -292,5 +298,6 @@
     '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-T35W88');</script>
     <!-- End Google Tag Manager -->
+      <toaster-container toaster-options="{'position-class': 'toast-bottom-right'}"></toaster-container>
   </body>
 </html>

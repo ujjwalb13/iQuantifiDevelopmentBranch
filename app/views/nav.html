@@ -302,18 +302,18 @@
   </style>
 
   <!-- save timeline drop down - NEW DESIGN -->
-  <div class="modal fade" role="dialog" modal-show="saveMenu">
+  <div class="modal fade" role="dialog" modal-show="saveMenu" ng-cloak>
     <!--<div class="save-dropdown-menu" ng-class="{'ui-show': saveMenu}" style="width: 800px; margin-left: -400px;">-->
 
     <div class="modal-dialog" style="width: 800px;">
       <div class="modal-content">
 
-        <div class="modal-header">
+        <div class="modal-header delete-modal-header text-center">
           <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
           <h4 class="modal-title">Save New Plan</h4>
         </div>
 
-        <div class="modal-body" style="margin: 20px;">
+        <div class="modal-body delete-modal-body">
           <div style="margin-bottom: 20px;">
             <b>A new plan has been generated.</b>
           </div>
@@ -324,7 +324,7 @@
           <div ng-repeat="dataChange in planChanges.DataChanges track by $index">
             <div class="row" style="border-top: 1px solid #f0efeb; padding-top: 10px; padding-bottom: 10px; margin-bottom: 0px;">
               <div class="col-xs-3">
-                <img src="../images/icon/{{ PlanGoalIcon(dataChange.DataType) }}" class="savePlanGoalIcon" />
+                <img ng-src="../images/icon/{{ PlanGoalIcon(dataChange.DataType) }}" class="savePlanGoalIcon" />
                 <div class="savePlanGoalName">{{ dataChange.DataName }}</div>
               </div>
               <div class="col-xs-9">
@@ -335,14 +335,14 @@
 
           <div class="row" style="margin-top: 20px;" ng-if="!PlanGoalHasShortage(planChanges)">
             <div style="margin-top: 10px; margin-bottom: 0px;" class="col-xs-8">
-              Here's how the changes would affect your goals.
+              Here's how the changes would affect your goals:
             </div>
             <!--<div class="pull-right" style="margin-right: 10px;">
-                <ul class="nav nav-pills">
-                    <li><a data-toggle="tab" href="#tabTimeline">Timeline</a></li>
-                    <li class="active"><a data-toggle="tab" href="#tabList">List</a></li>
-                </ul>
-            </div>-->
+          <ul class="nav nav-pills">
+              <li><a data-toggle="tab" href="#tabTimeline">Timeline</a></li>
+              <li class="active"><a data-toggle="tab" href="#tabList">List</a></li>
+          </ul>
+      </div>-->
           </div>
 
 
@@ -395,7 +395,7 @@
 
                   <!-- Goal Header with Icon -->
                   <div class="savePlanTimelineGoalHeader">
-                    <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                    <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                     <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                   </div>
 
@@ -421,7 +421,7 @@
                       </div>
 
                       <div style="position: absolute; left: 147px; top: 10px;">
-                        <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
+                        <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img ng-src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
                         <div style="display: inline-block; margin-left: 15px;" ng-class="{'savePlanValueChange': goalChangePlan.hasCompletionDateChange}">
                           {{ goalChangePlan.CompletionDateString }}
                         </div>
@@ -439,7 +439,7 @@
 
                 <!-- Goal Header with Icon -->
                 <div class="savePlanTimelineGoalHeader">
-                  <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                  <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                   <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                 </div>
 
@@ -465,7 +465,7 @@
                     </div>
 
                     <div style="position: absolute; left: 147px; top: 10px;">
-                      <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
+                      <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img ng-src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
                       <div style="display: inline-block; margin-left: 15px;" ng-class="{'savePlanValueChange': goalChangePlan.hasCompletionDateChange}">
                         {{ goalChangePlan.CompletionDateString }}
                       </div>
@@ -482,7 +482,7 @@
 
                 <!-- Goal Header with Icon -->
                 <div class="savePlanTimelineGoalHeader">
-                  <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                  <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                   <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                 </div>
 
@@ -508,7 +508,7 @@
                     </div>
 
                     <div style="position: absolute; left: 147px; top: 10px;">
-                      <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
+                      <div class="savePlanTimelineGoalBar" ng-style="{ 'width': PlanGoalWidth(goalChangePlan.CompletionDate) + 'px', 'background-color': PlanGoalBackgroundColor(goalChange, goalChangePlan) }"><img ng-src="../images/plan-Timeline-endPoint-{{ PlanGoalImageColor(goalChange) }}.png" width="22" height="22" style="margin-right: -11px;" /></div>
                       <div style="display: inline-block; margin-left: 15px;" ng-class="{'savePlanValueChange': goalChangePlan.hasCompletionDateChange}">
                         {{ goalChangePlan.CompletionDateString }}
                       </div>
@@ -602,7 +602,7 @@
                   <div class="row savePlanTableGoalRow savePlanTableBorder">
                     <div class="col-xs-3">
                       <div style="margin-top: 15px;">
-                        <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                        <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                         <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                       </div>
                     </div>
@@ -699,7 +699,7 @@
                   <div class="row savePlanTableGoalRow savePlanTableBorder">
                     <div class="col-xs-3">
                       <div style="margin-top: 15px;">
-                        <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                        <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                         <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                       </div>
                     </div>
@@ -796,7 +796,7 @@
                   <div class="row savePlanTableGoalRow savePlanTableBorder">
                     <div class="col-xs-3">
                       <div style="margin-top: 15px;">
-                        <img src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
+                        <img ng-src="../images/icon/{{ PlanGoalIcon(goalChange.GoalType) }}" class="savePlanGoalIcon" />
                         <div class="savePlanGoalName">{{ goalChange.GoalName }}</div>
                       </div>
                     </div>
@@ -835,9 +835,9 @@
                         </div>
                         <div class="col-xs-2" style="width: 20%" ng-class="{'savePlanValueChange': goalChange.GoalChangeItems[1].hasPaymentChange}">
                           <!--{{ goalChange.GoalChangeItems[1].Payment }}
-                          <img src="../images/plan-AmountIncrease.png" width="9" height="6" style="vertical-align: middle; margin-top: -4px;" ng-if="goalChange.GoalChangeItems[1].Change == 'increase'" />
-                          <img src="../images/plan-AmountDecrease.png" width="9" height="6" style="vertical-align: middle; margin-top: -4px;" ng-if="goalChange.GoalChangeItems[1].Change == 'decrease'" />
-                          -->
+                    <img src="../images/plan-AmountIncrease.png" width="9" height="6" style="vertical-align: middle; margin-top: -4px;" ng-if="goalChange.GoalChangeItems[1].Change == 'increase'" />
+                    <img src="../images/plan-AmountDecrease.png" width="9" height="6" style="vertical-align: middle; margin-top: -4px;" ng-if="goalChange.GoalChangeItems[1].Change == 'decrease'" />
+                    -->
                         </div>
                       </div>
 
@@ -863,14 +863,11 @@
 
         </div>
 
-        <div class="modal-footer">
-          <div style="position: relative; height: 50px;">
-            <div style="margin-left: auto; margin-right: auto; width: 590px; position: absolute;">
-              <button type="button" class="cancel btn btn-default" ng-click="cancel()">Keep Current Plan</button>
-              <button type="button" class="save btn btn-success" ng-click="save()">Save New Plan</button>
-            </div>
-          </div>
+        <div class="modal-footer text-center delete-modal-footer">
+            <button class="iq-submit-btn btn btn-lg" ng-click="cancel()">Keep Current Plan</button>
+            <button class="iq-submit-btn btn btn-primary" ng-hide="pending" ng-click="save()">Save New Plan</button>
         </div>
+
       </div>
     </div>
   </div>
