@@ -15,10 +15,8 @@
         index: '=?'
       },
       link: function(scope, element, attrs) {
-        console.log("1");
-        console.log(scope);
         return scope.$watch('complete', function(newValue, oldValue) {
-          var arc, arcOuter, arcTween, background, complete, completeEndAngle, donutContainer, donutTableEl, donutTop, height, incomplete, incompleteColor, radius, svg, width;
+          var arc, arcOuter, arcTween, background, complete, completeEndAngle, donutContainer, donutTableEl, donutTop, height, incomplete, incompleteColor, radius, svg, width, strokeColor, strokeWidth;
           if ((newValue == null) || (typeof isNaN === "function" ? isNaN(newValue) : void 0)) {
             return;
           }
@@ -30,30 +28,39 @@
           } else {
             incompleteColor = '#e16250';
           }
+          strokeColor = "#fff";
+          strokeWidth = 2;
           width = 220;
           height = 220;
 
           radius = Math.min(width, height) / 2;
           arcOuter = radius - 40;
-          arc = d3.svg.arc().innerRadius(radius - 10).outerRadius(arcOuter).startAngle(function(d) {
-            return d.startAngle + 3 * Math.PI / 2;
+          arc = d3.svg.arc().innerRadius(radius - 5).outerRadius(arcOuter).startAngle(function(d) {
+            return d.startAngle + 0;
           }).endAngle(function(d) {
-            return d.endAngle + 3 * Math.PI / 2;
+            return d.endAngle + 0;
           });
           svg = d3.select(element[0]).append('svg').attr('width', width).attr('height', height).append('g').attr('transform', "translate(" + (width / 2) + ", " + (height / 2) + ")");
           completeEndAngle = (scope.complete / 100) * 2 * Math.PI;
           background = svg.append('path').datum({
             startAngle: 0,
             endAngle: 2 * Math.PI
-          }).style('fill', '#e5e0c7').attr('d', arc);
+          }).style('fill', '#e5e0c7')
+            .attr('d', arc);
           complete = svg.append('path').datum({
             startAngle: 0,
             endAngle: 0
-          }).style('fill', '#8ec54b').attr('d', arc);
+          }).style('fill', '#8ec54b')
+            .style('stroke', strokeColor)
+            .style("stroke-width", strokeWidth)
+            .attr('d', arc);
           incomplete = svg.append('path').datum({
             startAngle: completeEndAngle,
             endAngle: completeEndAngle
-          }).style('fill', incompleteColor).attr('d', arc);
+          }).style('fill', incompleteColor)
+            .style('stroke', strokeColor)
+            .style("stroke-width", strokeWidth)
+            .attr('d', arc);
           if (scope.complete !== 0) {
             d3.select(angular.element(element).find('.complete-text')[0]).text(0).transition().duration(1000).tween('text', function() {
               var i;
