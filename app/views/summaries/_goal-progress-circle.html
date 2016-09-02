@@ -1,0 +1,19 @@
+<div class="">
+  <div class="chart-main-content">
+    <p class="percent-completep downpay-status">
+      <strong class="complete-text">{{complete}}%</strong>
+      <span>Downpayment saved!</span>
+    <p/>
+    <div class="track-status chart-status {{ behindStatusClass() }}" ng-switch on="status">
+      <div class="middle-line"></div>
+      <i class="fa fa-check" ng-switch-when="ontrack"></i>
+      <span ng-switch-when="ontrack">ON TRACK</span>
+      <span ng-switch-when="behindOneMonth">ACTION DUE</span>
+      <span ng-switch-when="behindTwoMonth">ACTION DUE</span>
+    </div>
+    <div class="save-per-month save-status {{ behindStatusClass() }} ">
+      <strong>{{permonth | dollars}}</strong>
+      <span>{{ status === "ontrack" ? 'Save Per Month' : "Behind" }}</span>
+    </div>
+  </div>
+</div>

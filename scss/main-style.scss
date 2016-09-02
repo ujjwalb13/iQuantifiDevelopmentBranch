@@ -455,3 +455,182 @@ ul{
     color: #e06253;
   }
 }
+
+.tab-header{
+  float: right;
+  ul{
+    margin-bottom: 0px;
+    padding-top: 6px;
+    li{
+      display: inline-block;
+      a{
+        color: #3b5152;
+        padding: 9px 20px 10px;
+        font-weight: bold;
+        font-size: 16px;
+        border-radius: 3px;
+        border: 1px solid #efebd9;
+      }
+      &:hover{
+        a{
+          background: transparent;
+          border: 1px solid #3b5152;
+        }
+      }
+      &.active{
+        a{
+          background: #3b5152;
+          color: white;
+          border: 1px solid #3b5152;
+        }
+      }
+    }
+  }
+}
+
+.action-list{
+  .wrapper-detail{
+    margin-bottom: 0px;
+  }
+}
+.action-list-content{
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 15px;
+  &:last-of-type{
+    border-bottom: 0px;
+    margin-bottom: 0px;
+  }
+  .action-list-head{
+    position: relative;
+    padding: 10px 240px 10px 54px;
+    .icon-profile-status{
+      background: transparent;
+      &:before{
+        display: block;
+        font-size: 20px;
+        color: black;
+        font-style: normal;
+        font-family: FontAwesome;
+        line-height: 18px;
+      }
+    }
+    &.warning-status{
+      .icon-profile-status{
+        &:before{
+          content: "\f06a";
+          color: $red-color;
+        }
+      }
+    }
+    &.warning-status-yellow{
+      .icon-profile-status{
+        &:before{
+          content: "\f06a";
+          color: #ffc744;
+        }
+      }
+    }
+    &.pending-status{
+      .icon-profile-status{
+        background: url("/images/icon/icon-profile-status.png") no-repeat;
+        background-position: 0px -24px;
+        &:before{
+          content: "";
+        }
+      }
+    }
+    &.complete-status{
+      .icon-profile-status{
+        &:before{
+          content: "\f058";
+          color: $green-color;
+        }
+      }
+      .btn{
+        background: transparent;
+        color: $green-color;
+      }
+    }
+    i{
+      font-size: 20px;
+      &.red{
+        color: $red-color;
+      }
+      &.yellow{
+        color: #ffc744;
+      }
+    }
+    i,p{
+      display: inline-block;
+      vertical-align: middle;
+    }
+    p{
+      padding-left: 30px;
+      margin-bottom: 0px;
+      span{
+        border-bottom: 1px dashed #4a8f92;
+        display: inline-block;
+        padding-bottom: 0px;
+      }
+    }
+    .btn{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+    .explain{
+      position: absolute;
+      right: 160px;
+      font-weight: bold;
+      color: #4a8f92;
+      font-size: 16px;
+      margin-top: -2px;
+      i{
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+    }
+  }
+  .action-list-table{
+    margin-top: 20px;
+    padding-left: 105px;
+    padding-right: 150px;
+    table{
+      thead{
+        tr{
+          th{
+            color: black;
+          }
+        }
+      }
+      tbody{
+        tr{
+          td{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            strong{
+              font-size: 18px;
+            }
+            span{
+              font-size: 16px;
+              color: #4a8f92;
+            }
+            label.radio-btn{
+              margin-top: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.icon-explain{
+  display: inline-block;
+  width: 18px;
+  height: 24px;
+  &:before{
+    background: url($url-images-icon + "question_mark.png") no-repeat 0 0;
+  }
+}
