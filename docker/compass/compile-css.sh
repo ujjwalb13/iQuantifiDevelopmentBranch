@@ -1,2 +1,2 @@
 #!/bin/bash
-compass compile -s expanded --sass-dir scss/ --force
+compass compile -s compressed --sass-dir scss/ --force
