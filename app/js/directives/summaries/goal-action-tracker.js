@@ -281,14 +281,6 @@
             return y(d.dotValue);
           }).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
-          svg.append("foreignObject")
-              .attr("width", 115)
-              .attr("height", 200)
-              .attr("x", 310)
-              .attr("y", 200)
-              .html("<div class='needed'>Need $3,245</div>");
-
-
           nowDatum = data[nowIndex];
           if ((nowDatum != null) && scope.bubbleText && nowDatum.dotValue >= nowDatum.projected_balance) {
             svg.selectAll('.circle').select(function(d, i) {
@@ -299,24 +291,6 @@
               }
             }).on('mouseover', tip.show);
             nowRectEl = angular.element(".circle:eq(" + nowIndex + ")");
-          } else if ((nowDatum != null) && scope.bubbleText && nowDatum.projected_balance >= nowDatum.balance) {
-            svg.selectAll('.projected-bar').select(function(d, i) {
-              if (i === nowIndex) {
-                return this;
-              } else {
-                return null;
-              }
-            }).on('mouseover', tip.show);
-            nowRectEl = angular.element(".projected-bar:eq(" + nowIndex + ")");
-          } else if ((nowDatum != null) && scope.bubbleText) {
-            svg.selectAll('.bar').select(function(d, i) {
-              if (i === nowIndex) {
-                return this;
-              } else {
-                return null;
-              }
-            }).on('mouseover', tip.show);
-            nowRectEl = angular.element(".bar:eq(" + nowIndex + ")");
           }
           angular.element(document).ready(function() {
             if (nowRectEl != null) {
