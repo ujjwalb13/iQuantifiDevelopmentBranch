@@ -330,12 +330,12 @@
     $scope.dummyStatus = "warning";
 
     // two month behind
-    $scope.dummyScheduleData[0]["balance"] = 100;
-    $scope.dummyScheduleData[3]["balance"] = 200;
-    $scope.dummyScheduleData[6]["balance"] = 200;
-    $scope.dummyScheduleData[9]["balance"] = 200;
-    $scope.dummyScheduleData[12]["balance"] = 200;
-    $scope.dummyStatus = "danger";
+    // $scope.dummyScheduleData[0]["balance"] = 100;
+    // $scope.dummyScheduleData[3]["balance"] = 200;
+    // $scope.dummyScheduleData[6]["balance"] = 200;
+    // $scope.dummyScheduleData[9]["balance"] = 200;
+    // $scope.dummyScheduleData[12]["balance"] = 200;
+    // $scope.dummyStatus = "danger";
 
     $scope.dummyScheduleData = _.map($scope.dummyScheduleData, function(d){
       var result = d;

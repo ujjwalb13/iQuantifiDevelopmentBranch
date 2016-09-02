@@ -178,14 +178,27 @@
             }
           })();
 
+          var nowPathData = _.filter(data, function(d, index) {
+            return index <= nowIndex;
+          });
+
+          var nowAreaClosePoints = [{date: _.last(nowPathData).date, dotValue: 0}, {date: _.first(nowPathData).date, dotValue: 0}];
+          svg.append('path').datum(nowPathData.concat(nowAreaClosePoints))
+            .attr('d', line)
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
+            .attr('class', function(d) {
+              if (scope.status == "danger") {
+                return 'danger area';
+              } else {
+                return 'warning area';
+              }
+            });
+
           svg.append('path').datum(data)
             .attr('d', line)
             .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
             .attr('class', 'line');
 
-          var nowPathData = _.filter(data, function(d, index) {
-            return index <= nowIndex;
-          });
           svg.append('path').datum(nowPathData)
             .attr('d', line)
             .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")

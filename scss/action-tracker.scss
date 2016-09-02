@@ -33,4 +33,12 @@
     stroke: #eceeef;
     stroke-width: 1px;
   }
+  .area {
+    &.warning {
+      fill: #fff4da;
+    }
+    &.danger {
+      fill: #ff8f83;
+    }
+  }
 }
