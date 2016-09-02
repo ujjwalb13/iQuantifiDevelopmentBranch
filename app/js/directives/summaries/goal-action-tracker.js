@@ -3,6 +3,8 @@
   angular.module('summaries').directive('goalActionTracker', function(configService, $window) {
     return {
       restrict: 'E',
+      replace: true,
+      templateUrl: '/views/summaries/_goal-action-tracker.html',
       scope: {
         schedule: '=',
         goalKind: '=',
