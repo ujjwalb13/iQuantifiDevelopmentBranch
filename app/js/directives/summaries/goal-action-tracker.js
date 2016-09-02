@@ -280,6 +280,15 @@
           }).attr('cy', function(d) {
             return y(d.dotValue);
           }).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
+          svg.append("foreignObject")
+              .attr("width", 115)
+              .attr("height", 200)
+              .attr("x", 310)
+              .attr("y", 200)
+              .html("<div class='needed'>Need $3,245</div>");
+
+
           nowDatum = data[nowIndex];
           if ((nowDatum != null) && scope.bubbleText && nowDatum.dotValue >= nowDatum.projected_balance) {
             svg.selectAll('.circle').select(function(d, i) {
