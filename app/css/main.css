@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -10278,7 +10278,9 @@ form label {
 .icon-mm-overview:before {
   background: url("/images/svg/icon-mm-overview.svg") no-repeat;
 }
-
+.icon-mm-capital-and-cashflow:before {
+  background: url("/images/svg//images/svg/icon-mm-capital-and-cashflow.svg") no-repeat;
+}
 /* line 358, ../../app/css/modules/_icons.scss */
 .icon-pt-3-moth-case-reserve:before {
   background: url("/images/svg/icon-pt-3-moth-case-reserve.svg") no-repeat;
