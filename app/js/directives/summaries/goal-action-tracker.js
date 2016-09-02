@@ -110,6 +110,7 @@
           }
           svg.append('g').attr('class', 'x axis').attr('transform', "translate(0, " + height + ")").call(xAxis);
           svg.append('g').attr('class', 'y axis').call(yAxis);
+
           svg.selectAll('.bg-bar').data(data).enter().append('rect').attr('class', 'bg-bar').attr('x', function(d) {
             return x(d.date);
           }).attr('width', bgBarWidth).attr('y', 0).attr('transform', "translate(-" + (bgBarWidth / 4) + ", 0)");
@@ -220,7 +221,30 @@
             }));
           });
 
-          yAxisTicks = yAxis.scale().ticks(yAxis.ticks()[0]);
+          var yAxisTickTransforms = [];
+          svg.selectAll(".y .tick").each(function(data) {
+            var tick = d3.select(this);
+            yAxisTickTransforms.push(tick.attr("transform"));
+          });
+          svg.selectAll('.h-line').data(yAxisTickTransforms).enter().append('line')
+          .attr('x1', function(d) {
+            return width;
+          })
+          .attr('x2', function(d) {
+            return 5;
+          })
+          .attr('y1', function(d) {
+            return 0;
+          })
+          .attr('y2', function(d) {
+            return 0;
+          })
+          .attr('transform', function(d) {
+            return d;
+          })
+          .attr('class', 'h-line')
+          .attr('stroke', 'rgb(255,0,0)');
+
 
           svg.selectAll('.circle').data(data).enter().append('circle').attr('class', function(d) {
             if (moment(d.date) > moment()) {
