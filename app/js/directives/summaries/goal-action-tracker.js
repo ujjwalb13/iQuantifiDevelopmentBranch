@@ -207,6 +207,34 @@
             .attr('d', line)
             .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
+          svg.selectAll('.xline-balance').data(nowPathData).enter().append('line')
+          .attr('x1', function(d) {
+            return x(d.date);
+          })
+          .attr('x2', function(d) {
+            return x(d.date);
+          })
+          .attr('y1', function(d) {
+            return y(d.dotValue);
+          })
+          .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
+          .attr('class', function(d) {
+            if (d.balance < d.projected_balance) {
+              if (scope.status == "danger") {
+                return 'danger xline-balance';
+              } else {
+                return 'warning xline-balance';
+              }
+            } else {
+              return 'ontrack xline-balance';
+            }
+          });
+
+          svg.selectAll('.xline-balance').attr('y2', function(d) {
+            return height - y(d3.max(data, function(d) {
+              return d.projected_balance;
+            }));
+          });
 
           svg.append('path').datum(data)
             .attr('d', line)

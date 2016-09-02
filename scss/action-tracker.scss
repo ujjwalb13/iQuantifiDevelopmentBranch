@@ -29,9 +29,21 @@
       stroke: #e16250;
     }
   }
-  .xline, .yline {
+  .xline, .yline, .xline-balance {
     stroke: #eceeef;
     stroke-width: 1px;
+  }
+
+  .xline-balance {
+    &.ontrack {
+      stroke: #8ec54a;
+    }
+    &.warning {
+      stroke: #ffc744;
+    }
+    &.danger {
+      stroke: #e16250;
+    }
   }
   .area {
     &.warning {
