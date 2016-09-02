@@ -273,26 +273,12 @@
                 return null;
               }
             }).on('mouseover', tip.show);
-            nowRectEl = angular.element(".circle:eq(" + nowIndex + ")");
           }
           angular.element(document).ready(function() {
-            if (nowRectEl != null) {
-              return nowRectEl.simulate('mouseover');
-            }
-          });
-          return angular.element(document).ready(function() {
-            var aspect, container;
-            aspect = element.find('svg').width() / element.find('svg').height();
-            container = element.parent();
-            return angular.element($window).on('resize', function() {
-              var targetWidth;
-              targetWidth = container.width();
-              element.find('svg').attr('width', targetWidth);
-              element.find('svg').attr('height', Math.round(targetWidth / aspect));
-              if (nowRectEl != null) {
-                return nowRectEl.simulate('mouseover');
-              }
-            }).trigger('resize');
+            _.defer(function(){
+              nowRectEl = angular.element(".circle:eq(" + nowIndex + ")");
+              nowRectEl.simulate('mouseover');
+            });
           });
         });
       }
