@@ -151,8 +151,17 @@
         $scope.planChanges = null;
         $scope.planChanges = planChangeResult;
 
-        if (planChangeResult !== null && planChangeResult.DataChanges.length > 0 && planChangeResult.DataChanges[0].DataType !== "nochanges") {
-          $scope.saveMenu = true;
+        if (planChangeResult !== null) {
+          if (planChangeResult.DataChanges.length > 0
+            || planChangeResult.FinanceGoalChanges.length > 0
+            || planChangeResult.RentGoalChanges.length > 0
+            || planChangeResult.GeneralGoalChanges.length > 0) {
+
+            if (planChangeResult.DataChanges.length == 0 || planChangeResult.DataChanges[0].DataType !== "nochanges") {
+              $scope.saveMenu = true;
+            }
+
+          }
         }
       });
 
