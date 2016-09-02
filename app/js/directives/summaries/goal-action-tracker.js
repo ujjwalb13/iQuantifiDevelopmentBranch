@@ -160,23 +160,6 @@
             return scope.bubbleText;
           });
           svg.call(tip);
-          if (scope.goalType === 'debt') {
-            upColor = scope.status === 'warning' ? 'yellow' : 'red';
-            downColor = 'green';
-          } else {
-            upColor = 'green';
-            downColor = scope.status === 'warning' ? 'yellow' : 'red';
-          }
-          nowColor = (function() {
-            switch (false) {
-              case scope.status !== 'danger':
-                return 'red';
-              case scope.status !== 'warning':
-                return 'yellow';
-              default:
-                return 'green';
-            }
-          })();
 
           var nowPathData = _.filter(data, function(d, index) {
             return index <= nowIndex;
