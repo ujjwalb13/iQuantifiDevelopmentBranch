@@ -312,11 +312,44 @@
         "payment": 27
     }];
 
+
+    // on track
+    $scope.dummyScheduleData[0]["balance"] = 100;
+    $scope.dummyScheduleData[3]["balance"] = 200;
+    $scope.dummyScheduleData[6]["balance"] = 200;
+    $scope.dummyScheduleData[9]["balance"] = 300;
+    $scope.dummyScheduleData[12]["balance"] = 400;
+    $scope.dummyStatus = "safe";
+
+    // on month behind
+    $scope.dummyScheduleData[0]["balance"] = 100;
+    $scope.dummyScheduleData[3]["balance"] = 200;
+    $scope.dummyScheduleData[6]["balance"] = 200;
+    $scope.dummyScheduleData[9]["balance"] = 300;
+    $scope.dummyScheduleData[12]["balance"] = 300;
+    $scope.dummyStatus = "warning";
+
+    // two month behind
+    // $scope.dummyScheduleData[0]["balance"] = 100;
+    // $scope.dummyScheduleData[3]["balance"] = 200;
+    // $scope.dummyScheduleData[6]["balance"] = 200;
+    // $scope.dummyScheduleData[9]["balance"] = 200;
+    // $scope.dummyScheduleData[12]["balance"] = 200;
+    // $scope.dummyStatus = "danger";
+
+    $scope.dummyScheduleData = _.map($scope.dummyScheduleData, function(d){
+      var result = d;
+      result.date = moment(d.date).subtract(12, "months").format("YYYY-MM-DD");
+      return result;
+    });
+
+    console.log($scope.dummyScheduleData);
+
     $scope.dummyBaseline = 0;
     $scope.dummyBubbleText = "Saved $27";
     $scope.dummyGoalKind = "house";
     $scope.dummyGoalType = "goal";
-    $scope.dummyStatus = "safe";
+
 
     if (Obj) {
       Obj.get({

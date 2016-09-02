@@ -68,6 +68,10 @@
           };
           width = 960 - margin.left - margin.right;
           height = 400 - margin.top - margin.bottom;
+
+          console.log("111");
+          console.log(data);
+
           bgBarWidth = width / data.length;
           x = d3.scale.ordinal().rangeRoundBands([0, width], .5);
           y = d3.scale.linear().range([height, 0]);
@@ -248,9 +252,17 @@
 
           svg.selectAll('.circle').data(data).enter().append('circle').attr('class', function(d) {
             if (moment(d.date) > moment()) {
-              return 'blue circle';
+              return 'circle';
             } else {
-              return 'white circle';
+              if (d.balance < d.projected_balance) {
+                if (scope.status == "danger") {
+                  return 'danger circle';
+                } else {
+                  return 'warning circle';
+                }
+              } else {
+                return 'ontrack circle';
+              }
             }
           }).attr('r', 5).attr('cx', function(d) {
             return x(d.date);
