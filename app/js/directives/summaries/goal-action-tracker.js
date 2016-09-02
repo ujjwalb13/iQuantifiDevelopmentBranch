@@ -207,10 +207,14 @@
             .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
             .attr('class', 'line');
 
-          // var ontrackPathData = _.filter(data, function(d, index) {
-          //   return index <= nowIndex && d.balance >= d.projected_balance;
-          // });
-          // svg.append('path').datum(ontrackPathData).attr('class', 'ontrack line').attr('d', line).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+          var ontrackPathData = _.filter(data, function(d, index) {
+            return index <= nowIndex && d.balance >= d.projected_balance;
+          });
+          svg.append('path')
+            .datum(ontrackPathData)
+            .attr('class', 'ontrack line')
+            .attr('d', line)
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
           // var behindPathData = _.filter(data, function(d, index) {
           //   return index <= nowIndex && d.balance < d.projected_balance;
