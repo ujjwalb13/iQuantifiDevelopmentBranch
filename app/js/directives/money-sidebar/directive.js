@@ -28,7 +28,7 @@
           }, {
             link: "/my-money/capitalandcashflow",
             title: "Capital & Cashflow",
-            icon: "icon-mm-expenses",
+            icon: "icon-mm-capital-and-cashflow",
             active: false
           }, {
             link: "/my-money/accounts",

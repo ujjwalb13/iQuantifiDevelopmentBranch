@@ -1,7 +1,7 @@
 ﻿<div class="main-title">
     <div class="container">
         <h3 class="pull-left" ng-show="editMode">
-            <span> Edit income</span>
+            <span> Edit Income</span>
         </h3>
         <h3 class="pull-left" ng-hide="editMode">
             <span>
@@ -66,10 +66,6 @@
         </form>
         <div class="row row-gutter-20">
 
-            <!--<button type="button" class="iq-submit-btn btn-danger btn" ng-click="openDeleteModal(income)" ng-show="editMode">Delete</button>
-            <a class="iq-submit-btn btn" href="/#/incomes">Cancel</a>
-            <button type="submit" class="iq-submit-btn btn-primary btn" ng-disabled="submitted && incomeForm.$invalid" ng-hide="processing">Save</button>
-            <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>-->
 
             <button ng-show="editMode && deleting" class="btn-delete col-margin-20 pull-left"><span class="fa fa-circle-o-notch fa-spin"></span></button>
             <button ng-show="editMode && !deleting" class="btn-delete col-margin-20 pull-left" ng-click="openDeleteModal(income)"><span class="fa fa-trash"></span></button>
