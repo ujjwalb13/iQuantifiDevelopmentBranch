@@ -207,6 +207,20 @@
             .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
             .attr('class', 'line');
 
+          var nowPathData = _.filter(data, function(d, index) {
+            return index <= nowIndex;
+          });
+          svg.append('path').datum(nowPathData)
+            .attr('d', line)
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
+            .attr('class', function(d) {
+              if (scope.status == "danger") {
+                return 'danger line';
+              } else {
+                return 'warning line';
+              }
+            });
+
           var ontrackPathData = _.filter(data, function(d, index) {
             return index <= nowIndex && d.balance >= d.projected_balance;
           });
@@ -216,19 +230,6 @@
             .attr('d', line)
             .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
-          // var behindPathData = _.filter(data, function(d, index) {
-          //   return index <= nowIndex && d.balance < d.projected_balance;
-          // });
-          // svg.append('path').datum(behindPathData)
-          //   .attr('d', line)
-          //   .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
-          //   .attr('class', function(d) {
-          //     if (scope.status == "danger") {
-          //       return 'danger line';
-          //     } else {
-          //       return 'warning line';
-          //     }
-          //   });
 
           svg.selectAll('.v-line').data(data).enter().append('line')
           .attr('x1', function(d) {
