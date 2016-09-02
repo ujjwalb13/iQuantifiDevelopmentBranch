@@ -1,4 +1,5 @@
 .action-tracker {
+  background-color: #fff;
   .circle {
     fill: white;
     stroke-width: 3px;
@@ -27,5 +28,9 @@
     &.danger {
       stroke: #e16250;
     }
+  }
+  .xline, .yline {
+    stroke: #eceeef;
+    stroke-width: 1px;
   }
 }
