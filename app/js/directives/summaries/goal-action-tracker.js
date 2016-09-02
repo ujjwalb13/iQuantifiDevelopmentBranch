@@ -183,6 +183,7 @@
           });
 
           var nowAreaClosePoints = [{date: _.last(nowPathData).date, dotValue: 0}, {date: _.first(nowPathData).date, dotValue: 0}];
+
           svg.append('path').datum(nowPathData.concat(nowAreaClosePoints))
             .attr('d', line)
             .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
@@ -193,6 +194,19 @@
                 return 'warning area';
               }
             });
+
+          var ontrackPathData = _.filter(data, function(d, index) {
+            return index <= nowIndex && d.balance >= d.projected_balance;
+          });
+
+          var ontrackAreaClosePoints = [{date: _.last(ontrackPathData).date, dotValue: 0}, {date: _.first(ontrackPathData).date, dotValue: 0}];
+
+          svg.append('path')
+            .datum(ontrackPathData.concat(ontrackAreaClosePoints))
+            .attr('class', 'ontrack area')
+            .attr('d', line)
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
 
           svg.append('path').datum(data)
             .attr('d', line)
