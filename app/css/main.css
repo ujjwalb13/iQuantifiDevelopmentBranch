@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -10273,10 +10273,7 @@ form label {
 .icon-mm-net-worth:before {
   background: url("/images/svg/icon-mm-net-worth.svg") no-repeat;
 }
-/* line 355, ../../app/css/modules/_icons.scss */
-.icon-mm-capital-and-cashflow:before {
-  background: url("/images/svg/icon-mm-capital-and-cashflow.svg") no-repeat;
-}
+
 /* line 355, ../../app/css/modules/_icons.scss */
 .icon-mm-overview:before {
   background: url("/images/svg/icon-mm-overview.svg") no-repeat;
