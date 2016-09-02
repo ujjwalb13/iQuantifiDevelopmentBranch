@@ -873,17 +873,114 @@
   </div>
 
 
+  <style>
+    .rationale-graph-column-section {
+      background-color: #c7e2a1;
+      position: relative;
+      opacity: 0.50;
+    }
+
+    .hilight-box {
+      background-color: #8ec54a;
+      top: -5px;
+      left: -5px;
+      position: relative;
+      height: 100%;
+    }
+
+    .hilight-box-bottom, .hilight-box-bottom-shadow {
+      width: 100%;
+      height: 5px;
+      -webkit-transform: skew(45deg);
+      -moz-transform: skew(45deg);
+      -o-transform: skew(45deg);
+      transform: skew(45deg);
+      background-color: white;
+      top: -5px;
+      left: -2px;
+      bottom: 0px;
+      position: relative;
+      background-color: #8ec54a;
+    }
+
+    .hilight-box-right, .hilight-box-right-shadow {
+      width: 5px;
+      height: 100%;
+      -webkit-transform: skewY(45deg);
+      -moz-transform: skewY(45deg);
+      -o-transform: skewY(45deg);
+      transform: skewY(45deg);
+      top: -2px;
+      right: 0px;
+      bottom: 0px;
+      position: absolute;
+      background-color: #8ec54a;
+    }
+
+    .hilight-box-bottom-shadow {
+      background-color: black;
+      top: -10px;
+      opacity: 0.25;
+    }
+
+    .hilight-box-right-shadow {
+      background-color: black;
+      opacity: 0.10;
+    }
+
+    .rationale-area {
+      width: 600px;
+      height: 500px;
+      position: absolute;
+    }
+
+    .rationale-area-side {
+      width: 50%;
+      position: absolute;
+      height: 100%;
+    }
+
+    .rationale-graph-line-area {
+      width: 85%;
+      height: 85%;
+      position: absolute;
+      margin-top: 10%;
+    }
+
+    .rationale-graph-column {
+      width: 70px;
+      height: 85%;
+      position: relative;
+      margin: 0 auto;
+      margin-top: 10%;
+      margin-left: 45%;
+      box-sizing: border-box;
+    }
+
+    .rationale-graph-line {
+      border-top: 1px solid lightgray;
+      height: 100%;
+      margin-left: 80px;
+    }
+
+    .rationale-graph-line-label {
+      position: absolute;
+      width: 70px;
+      margin-top: -7px;
+      text-align: right;
+    }
+  </style>
 
   <!-- Rationale Modal -->
   <div class="modal fade" id="rationaleModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 850px;">
 
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="{{type}}"><span class="goal-icon {{ icon(type) }}"></span><span>{{'Explain' | titleize}}</span></h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="height: 550px;">
 
           <!-- tabs left -->
           <div class="tabbable tabs-left">
@@ -891,43 +988,100 @@
               <li ng-repeat="ratSection in $root.rationaleResults.RationaleSections track by $index">
                 <a data-toggle="tab" data-target="#{{ ratSection.SectionKey }}">{{ ratSection.SectionName }}</a>
               </li>
-              <!--<li class="active"><a data-toggle="tab" data-target="#tabAccountType">Account Type</a></li>
-              <li><a data-toggle="tab" data-target="#tabWhyThisAmount">Why This Amount</a></li>
-              <li><a data-toggle="tab" data-target="#tabProfileType">Profile Type</a></li>
-              <li><a data-toggle="tab" data-target="#tabInvestmentType">Investment Type</a></li>
-              <li><a data-toggle="tab" data-target="#tabAssetClass">Asset Class</a></li>
-              <li><a data-toggle="tab" data-target="#tabInvestmentPosition">Investment Position</a></li>
-              <li><a data-toggle="tab" data-target="#tabAllocationPercentage">Allocation Percentage</a></li>-->
             </ul>
             <div class="tab-content">
               <div ng-repeat="ratSection in $root.rationaleResults.RationaleSections track by $index" class="tab-pane" id="{{ ratSection.SectionKey }}">
                 <div ng-bind-html="ratSection.SectionHTML"></div>
-                <div ng-if="ratSection.GraphDataInfo != null">
-                   (This section has a graph)
+                <div ng-if="ratSection.GraphDataInfo != null" style="margin-left: 170px;">
+                  
+
+                  <div class="rationale-area">
+                    <div class="rationale-area-side">
+
+                      <div class="rationale-graph-line-area">
+
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$5,500</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+                        <div style="height: 10%;">
+                          <div class="rationale-graph-line-label">$0</div>
+                          <div class="rationale-graph-line"></div>
+                        </div>
+                      </div>
+
+                      <div class="rationale-graph-column">
+                        <!--<div ng-repeat="graphData in ratSection.GraphDataInfo track by $index">
+                          <div class="rationale-graph-column-section" style="background-color: #e47b5a; height: 10%;"></div>
+                        </div>-->
+                        <!--column values-->
+                        <div class="rationale-graph-column-section" style="height: 10%;"></div>
+                        <div style="height: 20%; position: relative;">
+                          <div class="hilight-box"></div>
+                          <div class="hilight-box-bottom"></div>
+                          <div class="hilight-box-bottom-shadow"></div>
+                          <div class="hilight-box-right"></div>
+                          <div class="hilight-box-right-shadow"></div>
+                        </div>
+                        <div class="rationale-graph-column-section" style="background-color: #e47b5a; height: 10%;"></div>
+                        <div class="rationale-graph-column-section" style="background-color: #71aba9; height: 10%;"></div>
+                        <div class="rationale-graph-column-section" style="background-color: #e79546; height: 50%;"></div>
+                      </div>
+
+                      <!--bottom label-->
+                      <div style="text-align: center; margin-top: 15px;">
+                        Total Monthly Cashflow
+                      </div>
+
+                    </div>
+                    <div class="rationale-area-side" style="margin-left: 50%; background-color: yellow">
+                      data
+                    </div>
+                  </div>
+
+
+
                 </div>
               </div>
 
-              <!--<div class="tab-pane active" id="tabAccountType">
-                Account type rationale here.
-              </div>
-              <div class="tab-pane" id="tabWhyThisAmount">
-                Why this amount rationale here.
-              </div>
-              <div class="tab-pane" id="tabProfileType">
-                Profile type rationale here
-              </div>
-              <div class="tab-pane" id="tabInvestmentType">
-                Investment type rationale here
-              </div>
-              <div class="tab-pane" id="tabAssetClass">
-                Asset class rationale here
-              </div>
-              <div class="tab-pane" id="tabInvestmentPosition">
-                Investment position rationale here
-              </div>
-              <div class="tab-pane" id="tabAllocationPercentage">
-                Allocation percentage rationale here
-              </div>-->
             </div>
           </div>
           <!-- /tabs -->
