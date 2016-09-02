@@ -32,23 +32,7 @@
     }).when('/', {
       templateUrl: '/views/timeline/dashboard.html',
       controller: 'TimelineDashboardCtrl'
-    }).when('/accounts', {
-      templateUrl: '/views/dropdown/accounts.html',
-      controller: 'AccountsCtrl'
-    }).when('/accounts/new', {
-      templateUrl: '/views/dropdown/account-form.html',
-      controller: 'AccountFormCtrl'
-    }).when('/accounts/link/:sender?', {
-      templateUrl: '/views/aggregation/link-account.html',
-      controller: 'LinkAccountCtrl',
-      resolve: {
-        onboarding: function() {
-          return false;
-        }
-      }
-    }).when('/accounts/:accountId', {
-      templateUrl: '/views/dropdown/account-form.html',
-      controller: 'AccountFormCtrl'
+
     }).when('/actions', {
       templateUrl: '/views/actions/action-list.html',
       controller: 'ActionListCtrl'
@@ -347,7 +331,21 @@
       controller: 'IncomeFormCtrl'
     }).when('/my-money/accounts', {
       templateUrl: '/views/my-money/accounts.html',
-      controller: 'MyMoneyOverviewCtrl'
+      controller: 'AccountsCtrl'
+    }).when('/my-money/accounts/new', {
+      templateUrl: '/views/my-money/account-form.html',
+      controller: 'AccountFormCtrl'
+    }).when('/my-money/accounts/link/:sender?', {
+      templateUrl: '/views/aggregation/link-account.html',
+      controller: 'LinkAccountCtrl',
+      resolve: {
+        onboarding: function () {
+          return false;
+        }
+      }
+    }).when('/my-money/accounts/:accountId', {
+      templateUrl: '/views/my-money/account-form.html',
+      controller: 'AccountFormCtrl'
     }).when('/my-money/capitalandcashflow', {
       templateUrl: '/views/my-money/capitalandcashflow.html',
       controller: 'MyMoneyCapitalandCashflowCtrl'
