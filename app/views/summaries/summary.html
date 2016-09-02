@@ -125,17 +125,9 @@
       </div>
     </div>
 </div>
-<div class="sc-action-tracker">
-  <div class="sc-container container">
-    <div class="arrow-down"></div>
-    <h1>Action Tracker</h1>
+<div class="">
     <goal-action-tracker schedule="dummyScheduleData" goal-kind="dummyGoalKind" goal-type="dummyGoalType" bubble-text="dummyBubbleText" baseline="dummyBaseline" status="dummyStatus">
     </goal-action-tracker>
-    <div class="legend" ng-if="goalKind == 'college' || goalKind == 'retirement'">
-      <div class="box gray"></div><span>{{goalKind == 'college' && 'College Contribution' || goalKind == 'retirement' && 'Retirement Contributions'}}</span>
-      <div class="box blue"></div><span>Estimated Future Value</span>
-    </div>
-  </div>
 </div>
 <div ng-include="'/views/summaries/_overview.html'"></div>
 <div ng-include="'/views/summaries/_next_action.html'"></div>

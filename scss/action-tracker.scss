@@ -56,12 +56,15 @@
       fill: #e9f3dc;
     }
   }
+  .axis path {
+    display: none;
+  }
 }
 .d3-tip {
   color: #386d6f;
   font-size: 16px;
   border: 3px #8c8b8b solid;
   &:after{
-    color: #386d6f;
+    color: #8c8b8b;
   }
 }
