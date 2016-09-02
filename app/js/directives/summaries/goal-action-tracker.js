@@ -174,33 +174,6 @@
                 return 'green';
             }
           })();
-          now = moment();
-          svg.selectAll('.bar').data(data).enter().append('rect').attr('class', function(d) {
-            if (moment(d.date).isSame(now, 'month')) {
-              return nowColor + " bar";
-            } else {
-              return upColor + " bar";
-            }
-          }).attr('x', function(d) {
-            return x(d.date);
-          }).attr('width', x.rangeBand()).attr('y', function(d) {
-            return y(moment(d.date) <= now ? d.projected_balance : 0);
-          }).attr('height', function(d) {
-            return height - y(moment(d.date) <= now ? d.projected_balance : 0);
-          });
-          svg.selectAll('.bar').select(function(d, i) {
-            if (moment(d.date) < now && d.balance < d.projected_balance) {
-              return this;
-            } else {
-              return null;
-            }
-          }).attr('class', function(d) {
-            if (moment(d.date).isSame(now, 'month')) {
-              return nowColor + " bar";
-            } else {
-              return downColor + " bar";
-            }
-          });
 
           svg.append('path').datum(data)
             .attr('d', line)
