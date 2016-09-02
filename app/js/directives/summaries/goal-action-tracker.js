@@ -64,11 +64,11 @@
           }
           margin = {
             top: 20,
-            right: 20,
+            right: 0,
             bottom: 30,
-            left: 100
+            left: 60
           };
-          width = 960 - margin.left - margin.right;
+          width = 930 - margin.left - margin.right;
           height = 400 - margin.top - margin.bottom;
 
           bgBarWidth = width / data.length;
