@@ -114,45 +114,6 @@
           svg.append('g').attr('class', 'x axis').attr('transform', "translate(0, " + height + ")").call(xAxis);
           svg.append('g').attr('class', 'y axis').call(yAxis);
 
-          svg.selectAll('.bg-bar').data(data).enter().append('rect').attr('class', 'bg-bar').attr('x', function(d) {
-            return x(d.date);
-          }).attr('width', bgBarWidth).attr('y', 0).attr('transform', "translate(-" + (bgBarWidth / 4) + ", 0)");
-          if (mtnData != null) {
-            svg.selectAll('.bg-bar').attr('height', function(d) {
-              return height - y(d3.max(mtnData, function(d) {
-                return d.value;
-              }));
-            });
-          } else {
-            if (scope.goalType === 'debt') {
-              svg.selectAll('.bg-bar').attr('height', function(d) {
-                return height - y(d3.max(data, function(d) {
-                  return d.balance;
-                }));
-              });
-            } else {
-              svg.selectAll('.bg-bar').attr('height', function(d) {
-                return height - y(d3.max(data, function(d) {
-                  return d.projected_balance;
-                }));
-              });
-            }
-          }
-          if (mtnData != null) {
-            area = d3.svg.area().x(function(d) {
-              return x(d.date);
-            }).y0(height).y1(function(d) {
-              return y(d.value);
-            });
-            svg.append('path').datum(mtnData).attr('class', 'area').attr('d', area).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
-          }
-          svg.selectAll('.projected-bar').data(data).enter().append('rect').attr('class', 'projected-bar').attr('x', function(d) {
-            return x(d.date);
-          }).attr('width', x.rangeBand()).attr('y', function(d) {
-            return y(d.projected_balance);
-          }).attr('height', function(d) {
-            return height - y(d.projected_balance);
-          });
           tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
             return scope.bubbleText;
           });
