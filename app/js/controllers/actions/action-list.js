@@ -125,16 +125,15 @@
 
     };
 
-
     $scope.getActionStatus = function(action) {
       if (action.is_complete) {
-        return 'success';
+        return 'complete-status';
       } else if (moment(action.assigned_on).isSame(moment(), 'month') || moment(action.assigned_on).isAfter(moment())) {
-        return 'default';
+        return 'pending-status';
       } else if (moment(action.assigned_on).isSame(moment().subtract(1, 'months'), 'month')) {
-        return 'yellow-alert';
+        return 'warning-status-yellow';
       } else {
-        return 'alert';
+        return 'warning-status';
       }
     };
   });
