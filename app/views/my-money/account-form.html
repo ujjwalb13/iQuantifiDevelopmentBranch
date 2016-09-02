@@ -1,0 +1,106 @@
+<div class="main-title">
+    <div class="container">
+        <h3 class="pull-left" ng-show="editMode">
+            <span> Edit Account</span>
+        </h3>
+        <h3 class="pull-left" ng-hide="editMode">
+            <span>
+                Add New Account
+            </span>
+        </h3>
+        <h3 class="pull-right">
+            <a ng-click="gotoAccounts()">&times;</a>
+        </h3>
+    </div>
+</div>
+
+<div class="container main-wrapper">
+    <div class="content-wrapper">
+        <form name="accountForm" role="form" ng-submit="submit(accountForm.$valid)" novalidate>
+            <div class="row">
+                <div class="col-md-4 col-sm-8">
+
+                    <div class="form-group" ng-class="{'has-error': submitted && accountForm.name.$invalid}">
+                        <label class="control-label" for="name">Name</label>
+                        <input type="text" class="form-control" name="name" id="name" required ng-model="account.name">
+                        <span ng-show="submitted && accountForm.name.$error.required" class="help-block">Name is required.</span>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': submitted && accountForm.balance.$invalid}">
+                        <label class="control-label" for="balance">Balance</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control" name="balance" id="balance" required ng-model="account.balance" maxlength="10" currency-input>
+                        </div>
+                        <span ng-show="submitted && accountForm.balance.$error.required" class="help-block">Balance is required.</span>
+                        <span ng-show="submitted && accountForm.balance.$error.pattern" class="help-block">Balance is invalid.</span>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': submitted && accountForm.type.$invalid}">
+                        <label class="control-label" for="type">Type</label>
+                        <select name="type" class="form-control" name="type" id="type" required ng-model="account.kind">
+                            <option value=""></option>
+                            <option value="checking">Checking</option>
+                            <option value="savings">Savings</option>
+                            <option value="market">Money Market</option>
+                            <option value="brokerage">Brokerage</option>
+                            <option value="other">Other</option>
+                            <option value="education">529 Plan</option>
+                            <option value="ira401k">401k/403b</option>
+                            <option value="ira_roth">Roth IRA</option>
+                            <option value="ira">IRA</option>
+                            <option value="ira_sep">Sep IRA</option>
+                            <option value="ira_simple">Simple IRA</option>
+                        </select>
+                        <span ng-show="submitted && accountForm.type.$error.required" class="help-block">Type is required.</span>
+                    </div>
+                    <div class="form-group" ng-if="account.kind=='ira401k'" ng-class="{'has-error': submitted && accountForm.match.$invalid}">
+                        <label class="control-label">Match %</label>
+                        <div class="input-group">
+                            <input name="match" type="number" placeholder="Match" class="form-control" ng-model="account.match" ng-required="submitted" ng-pattern="/^(\d{1,2})(\.(\d{1,3}))?$/">
+                            <span class="input-group-addon">%</span>
+                        </div>
+                        <span ng-show="submitted && acct.match.$error.required" class="help-block">Match is required.</span>
+                        <span ng-show="submitted && acct.match.$error.pattern" class="help-block">Match is invalid.</span>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': submitted && accountForm.owner.$invalid}">
+                        <label class="control-label" for="owner">Owner</label>
+                        <select class="form-control" id="owner" name="owner" required ng-model="account.person.guid" ng-options="person.guid as (person.first_name + ' ' + person.last_name) for person in owners"></select>
+                        <span ng-show="submitted && accountForm.owner.$error.required" class="help-block">Person is required.</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row row-gutter-20">
+
+            <!--<button type="submit" class="iq-submit-btn btn-primary btn" ng-disabled="submitted && accountForm.$invalid" ng-hide="processing">Save</button>
+            <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+            <a class="iq-submit-btn btn" href="/#/my-money/accounts">Back</a>
+            <button type="button" class="iq-submit-btn btn-danger btn" ng-click="openDeleteModal(account)" ng-show="account.guid">Delete</button>-->
+
+            <button ng-show="editMode && deleting" class="btn-delete col-margin-20 pull-left"><span class="fa fa-circle-o-notch fa-spin"></span></button>
+            <button ng-show="editMode && !deleting" class="btn-delete col-margin-20 pull-left" ng-click="openDeleteModal(account)"><span class="fa fa-trash"></span></button>
+            <button class="iq-submit-btn btn hidden-xs col-margin-20 pull-left" ng-click="gotoAccounts()">Cancel</button>
+            <button type="submit" class="iq-submit-btn btn-primary btn col-margin-20 pull-left" ng-disabled="submitted && accountForm.$invalid" ng-hide="processing" ng-click="submit(accountForm.$valid)">{{editMode ? 'Save Changes' : 'Add Account'}}</button>
+            <button type="submit" class="iq-submit-btn btn-primary btn col-margin-20 pull-left" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<script type="text/ng-template" id="deleteAccountModal">
+    <div class="modal-header delete-modal-header text-center">
+        <button type="button" class="close" ng-click="close()" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">Delete Account</h3>
+    </div>
+    <div class="modal-body delete-modal-body">
+        <p class="text-center">Are you <em>sure</em> you want to remove this account?</p>
+    </div>
+    <div class="modal-footer text-center delete-modal-footer">
+        <button class="iq-submit-btn btn btn-lg" ng-click="close()">Close</button>
+        <button class="iq-submit-btn btn btn-primary" ng-hide="deleting" ng-click="deleteAccount()">Yes, Delete</button>
+        <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="deleting" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+
+    </div>
+</script>

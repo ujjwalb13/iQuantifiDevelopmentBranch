@@ -3,13 +3,13 @@
   angular.module('agera').controller('AccountsCtrl', function($location, $scope, $rootScope, Account) {
     $scope.accounts = Account.query();
     $scope.goToAccountEdit = function(guid) {
-      return $location.path("/accounts/" + guid);
+      return $location.path("/my-money/accounts/" + guid);
     };
     return $scope.disabled = function() {
       if ($location.host() === 'pilot.iquantifi.com') {
-        return "/#/accounts/new";
+        return "my-money/accounts/new";
       } else {
-        return "/#/accounts/link";
+        return "#my-money/accounts/link";
       }
     };
   });
@@ -23,11 +23,13 @@
         }).$promise, Person.query().$promise
       ]).then(function(data) {
         $scope.account = data[0];
+        $scope.editMode = true;
         return $scope.people = data[1];
       });
     } else {
       $scope.account = new Account();
       $scope.people = Person.query();
+      $scope.editMode = false;
     }
     $scope.owners = $scope.people;
     $scope.$watch('account.kind', function(newValue) {
@@ -45,6 +47,11 @@
         return $scope.owners = $scope.people;
       }
     });
+
+    $scope.gotoAccounts = function () {
+      return $location.path('/my-money/accounts');
+    };
+
     $scope.submit = function(isValid) {
       $scope.submitted = true;
       if (isValid) {
@@ -59,7 +66,7 @@
             msg: 'The account was saved successfully.'
           });
           $rootScope.$broadcast('refresh');
-          return $location.path('/accounts');
+          return $location.path('my-money/accounts');
         }, function(err) {
           $scope.processing = false;
           return $rootScope.$broadcast('alert', {
@@ -69,6 +76,7 @@
         });
       }
     };
+
     $scope.openDeleteModal = function(account) {
       var modalInstance;
       $rootScope.savable = false;
@@ -82,12 +90,14 @@
         }
       });
     };
+
     return ModalInstanceCtrl = [
       '$location', '$scope', '$modalInstance', 'account', function($location, $scope, $modalInstance, account) {
         $scope.close = function() {
           return $modalInstance.dismiss('cancel');
         };
-        return $scope.deleteAccount = function() {
+        return $scope.deleteAccount = function () {
+          $scope.deleting = true;
           var errorVerb, successVerb;
           if ('guid' in account) {
             successVerb = 'unlinked';
@@ -102,13 +112,15 @@
               type: 'success',
               msg: "The account was " + successVerb + " successfully."
             });
-            return $location.path('/accounts');
+            return $location.path('my-money/accounts');
           }, function(err) {
             $modalInstance.dismiss('cancel');
             return $rootScope.$broadcast('alert', {
               type: 'danger',
               msg: "There was an error " + errorVerb + " the account."
             });
+          })["finally"](function () {
+            return $scope.deleting = false;
           });
         };
       }
