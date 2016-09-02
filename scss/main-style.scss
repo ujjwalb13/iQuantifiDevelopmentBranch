@@ -634,3 +634,138 @@ ul{
     background: url($url-images-icon + "question_mark.png") no-repeat 0 0;
   }
 }
+
+.popup-main{
+  width: 600px;
+}
+
+.modal{
+  overflow: hidden;
+  .modal-header{
+    background: #ece8de;
+    text-align: center;
+    border-radius: 5px 5px 0px 0px;
+    i{
+      vertical-align: middle;
+      margin-right: 10px;
+      margin-top: -5px;
+    }
+    h4{
+      font-size: 20px;
+      &.explain-tt{
+        color: #4a8f92;
+      }
+    }
+  }
+}
+.action-list-popup{
+  p{
+    margin-bottom: 0px;
+    font-size: 16px;
+    i,strong{
+      display: inline-block;
+    }
+    i{
+      margin-right: 7px;
+    }
+  }
+  ul{
+    li{
+      float: none;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $border-color;
+      &:last-of-type{
+        border-bottom: 0px;
+        padding-bottom: 0px;
+      }
+    }
+  }
+  .ratio-st{
+    margin-right: 30px;
+    margin-left: 6px;
+    strong{
+      margin-left: 15px;
+    }
+  }
+  label.radio-btn{
+    margin-top: 0px;
+  }
+  em{
+    color: #8c8b8b;
+  }
+  .form-popup{
+    padding-left: 48px;
+    .form-popup-ct{
+      position: relative;
+      margin-top: 10px;
+      .form-group{
+        padding-left: 30px;
+        width: 90%;
+        margin-bottom: 0px;
+      }
+      .ratio-st{
+        position: absolute;
+        top: -2px;
+        left: -14px;
+      }
+      label{
+        margin-top: 0px;
+      }
+    }
+  }
+  .modal-body{
+    padding: 15px 20px 15px 20px;
+  }
+  .modal-footer{
+    text-align: center;
+    padding-bottom: 30px;
+    padding
+    button{
+      display: inline-block;
+    }
+  }
+}
+.blue-bg-content{
+  background: #eef4f4;
+  display: block;
+  padding: 10px 20px;
+  font-weight: bold;
+  float: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.tab-explain{
+  .tab-content{
+    ul{
+      border-right: 1px solid $border-color;
+      li{
+        float: none;
+        display: block;
+        border-bottom: 1px solid $border-color;
+        padding: 0px;
+        a{
+          font-size: 14px;
+          padding: 10px 20px;
+          display: block;
+          color: #444444;
+        }
+        &.active{
+          a{
+            font-weight: bold;
+            background: #dbe9e9;
+          }
+        }
+      }
+    }
+  }
+  .tab-detail{
+    font-size: 14px;
+    p{
+      font-size: 14px;
+    }
+  }
+}
+.modal-lg{
+  width: 900px;
+}
