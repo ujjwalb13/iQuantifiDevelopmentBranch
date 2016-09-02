@@ -13,4 +13,19 @@
       stroke: #e16250;
     }
   }
+
+  .line {
+    fill: none;
+    stroke: #c5c6c8;
+    stroke-width: 2px;
+    &.ontrack {
+      stroke: #8ec54a;
+    }
+    &.warning {
+      stroke: #ffc744;
+    }
+    &.danger {
+      stroke: #e16250;
+    }
+  }
 }
