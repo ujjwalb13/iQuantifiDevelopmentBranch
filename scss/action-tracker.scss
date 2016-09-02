@@ -3,5 +3,8 @@
     fill: white;
     stroke-width: 3px;
     stroke: #c5c6c8;
+    &.ontrack {
+      stroke: #8ec54a;
+    }
   }
 }
