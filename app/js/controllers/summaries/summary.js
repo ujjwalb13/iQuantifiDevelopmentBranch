@@ -1,6 +1,31 @@
 (function() {
   'use strict';
   angular.module('summaries').controller('summariesSummaryCtrl', function($scope, $rootScope, $routeParams, $http, $location, ENV, configService, Car, College, Credit, Baby, House, Loan, Relocation, Rent, Reserve, Retirement, Ring, Travel, Wedding, Purchase) {
+    var lookup = {
+      cars: Car,
+      colleges: College,
+      babies: Baby,
+      houses: House,
+      loans: Loan,
+      relocations: Relocation,
+      rents: Rent,
+      reserves: Reserve,
+      retirements: Retirement,
+      creditcards: Credit,
+      rings: Ring,
+      travels: Travel,
+      weddings: Wedding,
+      purchases: Purchase
+    };
+    var Obj = lookup[$routeParams.type];
+    if (Obj) {
+      Obj.get({
+        guid: $routeParams.guid
+      }).$promise.then(function(object) {
+        $scope.goal = object;
+      });
+    }
+
     $scope.ontrackStatus = "ontrack";
     $scope.behindOneMonthStatus = "behindOneMonth";
     $scope.behindTwoMonthStatus = "behindTwoMonth";
