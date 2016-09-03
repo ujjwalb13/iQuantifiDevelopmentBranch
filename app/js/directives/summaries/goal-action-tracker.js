@@ -7,8 +7,6 @@
       templateUrl: '/views/summaries/_goal-action-tracker.html',
       scope: {
         schedule: '=',
-        goalKind: '=',
-        goalType: '=',
         bubbleText: '=',
         baseline: '=',
         status: '='
