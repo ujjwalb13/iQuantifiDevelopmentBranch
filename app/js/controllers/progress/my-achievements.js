@@ -34,7 +34,8 @@
         $scope.debtsSection = {
           name: debtsSection.SectionName,
           items:  _.map(debtsSection.Goals, function(item) {
-            return { name: item.name, amount: item.amount, date: item.completed_date, type: protectionType(item) };
+            console.log(item);
+            return { name: item.name, amount: item.amount, date: item.completed_date, type: item.kind };
           })
         };
       }

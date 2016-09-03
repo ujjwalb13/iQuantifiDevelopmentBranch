@@ -39,36 +39,20 @@
           </div>
           <div class="content-wrapper" ng-if="debtsSection">
             <div class="section-header debts">
-                <i class="icon icon-db-debt"></i>My Debts
+                <i class="icon icon-db-debt"></i> {{ debtsSection.name }}
             </div>
             <div class="wrapper-detail">
               <ul class="overview-content">
-                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="debt in debts"  ng-click="gotoSummary(debt)">
+                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="debt in debtsSection.items">
                   <div class="icon-process icon-debt">
-                    <div class="c100 p{{debt.progress}} small">
-                      <span>
-                        <i class="icon {{ debt.kind | debtIconClass }}  icon-80"></i>
-                      </span>
-                      <div class="slice">
-                          <div class="bar"></div>
-                          <div class="fill"></div>
-                      </div>
-                    </div>
+                    <span>
+                      <i class="icon {{ debt.type | debtIconClass }}  icon-80"></i>
+                    </span>
                   </div>
                   <p>
                     <strong>{{ debt.name }}</strong><br>
-                    <span>{{ debt.amount | dollars }} of {{ debt.total | dollars }}</span>
+                    <span>{{ debt.amount | dollars }} | {{ debt.date | monthYear }}</span>
                   </p>
-                </li>
-                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-click="addDebt()">
-                  <a href="javascript:void(0)">
-                    <div class="icon-process">
-                      <i class="icon icon-db-add-debt icon-80"></i>
-                    </div>
-                    <p class="add-debt">
-                      <strong>Add a Debt</strong>
-                    </p>
-                  </a>
                 </li>
               </ul>
             </div>
