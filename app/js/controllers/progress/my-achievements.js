@@ -8,8 +8,8 @@
       });
 
       if (_.isObject(goalsSection)) {
-        $scope.goal = {
-          sectionName: goalsSection.SectionName,
+        $scope.goalsSection = {
+          name: goalsSection.SectionName,
           items:  _.map(goalsSection.Goals, function(item) {
             return { name: item.name, amount: item.amount, date: item.completed_date, type: item.type };
           })
