@@ -26,6 +26,11 @@
       });
     }
 
+    $scope.goToEdit = function(goal) {
+      var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
+      $location.path(editUrl);
+    }
+
     $scope.ontrackStatus = "ontrack";
     $scope.behindOneMonthStatus = "behindOneMonth";
     $scope.behindTwoMonthStatus = "behindTwoMonth";
