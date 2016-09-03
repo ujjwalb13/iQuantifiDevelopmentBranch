@@ -104,7 +104,12 @@
                 <div class="next-action-content">
                     <p ng-if="dummyStatus == 'warning' || dummyStatus == 'danger'">
                       <i class="fa fa-exclamation-circle" ng-class="{'danger': dummyStatus == 'danger'}"></i>
-                      <strong>You are currently one month behind.</strong> <br>
+                      <strong>
+                        You are currently
+                          {{dummyStatus == 'warning' ? "one month" : "two months"}}
+                        behind.
+                      </strong>
+                      <br>
                       Deposit $2,143 this month towards New Home's downpayment.
                       <a href="" class="btn btn-primary">Take Action</a>
                     </p>
