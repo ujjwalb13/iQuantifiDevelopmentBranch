@@ -503,7 +503,7 @@ ul{
   }
   .action-list-head{
     position: relative;
-    padding: 10px 54px;
+    padding: 10px 320px 10px 54px;
     .icon-profile-status{
       background: transparent;
       &:before{
@@ -575,6 +575,8 @@ ul{
       }
     }
     .action-buttons {
+      position: absolute;
+      right: 54px;
       margin-top: -12px;
       .btn {width: 140px;}
       .explain{
