@@ -522,10 +522,18 @@
       angular.element('.screen-dim').remove();
       return angular.element('body').append('<div class="screen-dim">me here</div>');
     });
-    return $rootScope.$on('screen:undim', function() {
+
+    $rootScope.$on('screen:undim', function() {
       return angular.element('.screen-dim').remove();
     });
 
+    $rootScope.goBack = function() {
+      if ($rootScope.backPath != null) {
+        $location.path($rootScope.backPath)
+      } else {
+        $window.history.back();
+      }
+    };
 
   });
 
