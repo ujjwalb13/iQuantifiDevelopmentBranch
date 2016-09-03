@@ -73,27 +73,21 @@
               </ul>
             </div>
           </div>
-          <div class="content-wrapper">
+          <div class="content-wrapper" ng-if="protectionsSection">
             <div class="section-header protections">
-                <i class="icon icon-pt-protection"></i>My Protections
+                <i class="icon icon-pt-protection"></i>{{ protectionsSection.name }}
             </div>
             <div class="wrapper-detail">
               <ul class="overview-content">
-                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="protection in protections" ng-click="gotoProtectionSummary(protection)">
+                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="protection in protectionsSection.items" ng-click="gotoProtectionSummary(protection)">
                   <div class="icon-process icon-protect">
-                    <div class="c100 p{{protection.progress}} small">
-                      <span>
-                        <i class="icon {{ protection.type | protectionIconClass }} icon-80"></i>
-                      </span>
-                      <div class="slice">
-                          <div class="bar"></div>
-                          <div class="fill"></div>
-                      </div>
-                    </div>
+                    <span>
+                      <i class="icon {{ protection.type | protectionIconClass }} icon-80"></i>
+                    </span>
                   </div>
                   <p>
                     <strong> {{ protection.name }}</strong><br>
-                    <span>{{ protection.amount | dollars }} of {{ protection.total | dollars }}</span>
+                    <span>{{ protection.amount | dollars }} | {{ protection.date | monthYear }}</span>
                   </p>
                 </li>
                 <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-click=addProtection()>
