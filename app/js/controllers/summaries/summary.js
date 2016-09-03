@@ -375,26 +375,7 @@
     $scope.gotoProgressPage = function(type) {
       return $location.path("/progress/" + type);
     };
-    $scope.icon = function(type) {
-      type = type.toLowerCase();
-      if (type === 'wedding') {
-        return "purchase";
-      } else {
-        return type;
-      }
-    };
-    $scope.addMortgage = function() {
-      if ($rootScope.demo && $routeParams.type === 'houses') {
-        return $location.path('/zlife-mortgage');
-      }
-    };
-    $scope.cursor = function() {
-      if ($rootScope.demo && $routeParams.type === 'houses') {
-        return true;
-      } else {
-        return false;
-      }
-    };
+
     fetchData = function(goal) {
       $scope.thisYear = moment().year();
       $scope.dateTitle = Obj.dateTitle;
