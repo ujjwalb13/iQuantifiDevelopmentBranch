@@ -2,49 +2,62 @@
   'use strict';
   angular.module('actions').controller('ActionListCtrl', function($scope, $rootScope, $modal, $filter, $location, $window, $q, matchmedia, Scenario, goalService, Action) {
     var filterActionables, unregister;
+
     $scope.categoryFilter = {};
-    $scope.lastDayOfMonth = moment().endOf('month').format('MMMM D');
+    $scope.noFilter = true
+    $scope.changeCategoryFilter = function(category) {
+      if (category == '') {
+        $scope.categoryFilter = {}
+        $scope.noFilter = true
+        return
+      } else if (category == 'completed') {
+        $scope.categoryFilter = {is_completed: true}
+      } else {
+        $scope.categoryFilter = {category: category}
+      }
+      $scope.noFilter = false
+    }
+
     if ($location.path() === '/actions') {
       $rootScope.$broadcast('clearAlerts');
     }
+
     unregister = matchmedia.onPhone(function(mediaQueryList) {
       $scope.iconSize = mediaQueryList.matches ? 'sm' : 'med';
     });
+
     $scope.summaryPath = function(goal) {
       return "/#/summaries/" + (_.pluralize(goal.type.toLowerCase())) + "/" + goal.guid;
     };
-    $scope.getWindowHeight = function() {
-      return $window.innerHeight;
-    };
-    $scope.icon = function(size, type) {
-      type = type.toLowerCase();
-      if (type === 'wedding') {
-        return "icon-goal-" + size + "-purchase";
-      } else {
-        return "icon-goal-" + size + "-" + type;
-      }
-    };
+
     filterActionables = function(actionables) {
       return _.filter(actionables, function(a) {
         return a.actions.length;
       });
     };
+
     $scope.fetchData = function() {
       $scope.loading = true;
       return Scenario.get().$promise.then(function(scenario) {
+        console.log(scenario)
         var goals, impulseItems, taxRefunds;
         impulseItems = filterActionables(scenario.impulse_items);
         taxRefunds = filterActionables(scenario.tax_refunds);
         goals = filterActionables(scenario.goals);
-        return $scope.actionables = impulseItems.concat(taxRefunds.concat(goals));
+        $scope.actionables = impulseItems.concat(taxRefunds.concat(goals));
+        $scope.completedCount = _.filter($scope.actionables, function(item) {
+          item.is_completed == true;
+        }).length
       })["finally"](function() {
         return $scope.loading = false;
       });
     };
+
     $scope.fetchData();
     $scope.$on('refresh', function() {
       return $scope.fetchData();
     });
+
     $scope.target = function(action) {
       if (action.match(/^http/)) {
         return '_blank';
@@ -112,42 +125,16 @@
 
     };
 
-    $scope.toggleCategoryFilter = function(category) {
-      if (($scope.categoryFilter.category != null) && $scope.categoryFilter.category === category) {
-        return $scope.categoryFilter = {};
-      } else {
-        return $scope.categoryFilter = {
-          category: category
-        };
-      }
-    };
-    $scope.toggleAlertFilter = function() {
-      return $scope.alertFilterOn = !$scope.alertFilterOn;
-    };
     $scope.getActionStatus = function(action) {
       if (action.is_complete) {
-        return 'success';
+        return 'complete-status';
       } else if (moment(action.assigned_on).isSame(moment(), 'month') || moment(action.assigned_on).isAfter(moment())) {
-        return 'default';
+        return 'pending-status';
       } else if (moment(action.assigned_on).isSame(moment().subtract(1, 'months'), 'month')) {
-        return 'yellow-alert';
+        return 'warning-status-yellow';
       } else {
-        return 'alert';
+        return 'warning-status';
       }
-    };
-    return $scope.alertFilter = function(goal) {
-      var action, i, len, ref;
-      if (!$scope.alertFilterOn) {
-        return true;
-      }
-      ref = goal.actions;
-      for (i = 0, len = ref.length; i < len; i++) {
-        action = ref[i];
-        if ($scope.getActionStatus(action) === 'alert') {
-          return true;
-        }
-      }
-      return false;
     };
   });
 
