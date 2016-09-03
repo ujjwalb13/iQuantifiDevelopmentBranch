@@ -1,7 +1,7 @@
 version: '2'
 services:
   compass:
-    image: iquandev/compass
+    build: ./docker/compass
     volumes:
       - "./:/uidev"
     container_name: iq.compass
