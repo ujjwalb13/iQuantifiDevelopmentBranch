@@ -1,0 +1,70 @@
+.action-tracker {
+  background-color: #fff;
+  .circle {
+    fill: white;
+    stroke-width: 3px;
+    stroke: #c5c6c8;
+    &.ontrack {
+      stroke: #8ec54a;
+    }
+    &.warning {
+      stroke: #ffc744;
+    }
+    &.danger {
+      stroke: #e16250;
+    }
+  }
+
+  .line {
+    fill: none;
+    stroke: #c5c6c8;
+    stroke-width: 2px;
+    &.ontrack {
+      stroke: #8ec54a;
+    }
+    &.warning {
+      stroke: #ffc744;
+    }
+    &.danger {
+      stroke: #e16250;
+    }
+  }
+  .xline, .yline, .xline-balance {
+    stroke: #eceeef;
+    stroke-width: 1px;
+  }
+
+  .xline-balance {
+    &.ontrack {
+      stroke: #8ec54a;
+    }
+    &.warning {
+      stroke: #ffc744;
+    }
+    &.danger {
+      stroke: #e16250;
+    }
+  }
+  .area {
+    &.warning {
+      fill: #fff4da;
+    }
+    &.danger {
+      fill: #f9e0dc;
+    }
+    &.ontrack {
+      fill: #e9f3dc;
+    }
+  }
+  .axis path {
+    display: none;
+  }
+}
+.d3-tip {
+  color: #386d6f;
+  font-size: 16px;
+  border: 3px #8c8b8b solid;
+  &:after{
+    color: #8c8b8b;
+  }
+}

@@ -103,12 +103,15 @@
             <div class="section-header">Goal Summary
             </div>
             <div class="row">
-              <div class="col-md-6 col-xs-12">
+              <div class="col-md-12 col-xs-12">
                 <div class="chart-content">
-                  <img src="images/action-chart.png" alt="">
+                  <goal-action-tracker schedule="dummyScheduleData" goal-kind="dummyGoalKind" goal-type="dummyGoalType" bubble-text="dummyBubbleText" baseline="dummyBaseline" status="dummyStatus">
+                  </goal-action-tracker>
                 </div>
               </div>
-              <div class="col-md-6 col-xs-12">
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
                 <h3 class="title-next">Next Action</h3>
                 <div class="next-action-content">
                     <p>
@@ -120,17 +123,7 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
 </div>
-
-<div ng-include="'/views/summaries/_overview.html'"></div>
-<div ng-include="'/views/summaries/_next_action.html'"></div>
-<!-- <div ng-include="'/views/summaries/_retirement_accounts.html'" ng-if="isRetirement && goal.total > 0"></div> -->
- <div ng-include="'/views/summaries/_action_tracker.html'" ng-if="schedule.data.length > 0"></div>
-<div ng-include="'/views/summaries/_finance.html'" ng-if="hasFinance"></div>
-<div ng-include="'/views/summaries/_reserves.html'" ng-if="isReserves"></div>
-<div ng-include="'/views/summaries/_college_details.html'" ng-if="isCollege"></div>
-<div ng-include="'/views/summaries/_completed_actions.html'"></div>
