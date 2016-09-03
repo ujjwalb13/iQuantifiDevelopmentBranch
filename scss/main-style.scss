@@ -503,7 +503,7 @@ ul{
   }
   .action-list-head{
     position: relative;
-    padding: 10px 240px 10px 54px;
+    padding: 10px 320px 10px 54px;
     .icon-profile-status{
       background: transparent;
       &:before{
@@ -568,34 +568,28 @@ ul{
     p{
       padding-left: 30px;
       margin-bottom: 0px;
-      span{
-        border-bottom: 1px dashed #4a8f92;
-        display: inline-block;
-        padding-bottom: 0px;
-      }
     }
-    .btn{
+    .action-buttons {
       position: absolute;
-      top: 0px;
-      right: 0px;
-    }
-    .explain{
-      position: absolute;
-      right: 160px;
-      font-weight: bold;
-      color: #4a8f92;
-      font-size: 16px;
-      margin-top: -2px;
-      i{
-        margin-right: 5px;
-        vertical-align: middle;
+      right: 54px;
+      margin-top: -10px;
+      .btn {width: 140px;}
+      .explain{
+        font-weight: bold;
+        color: #4a8f92;
+        font-size: 16px;
+        margin-top: -2px;
+        i{
+          margin-right: 5px;
+          vertical-align: middle;
+        }
       }
     }
   }
   .action-list-table{
     margin-top: 20px;
     padding-left: 105px;
-    padding-right: 150px;
+    padding-right: 290px;
     table{
       thead{
         tr{

@@ -44,20 +44,21 @@
             ng-click="goToSingleAction(action)">
             <div class="action-list-head {{getActionStatus(action)}}">
               <i class="icon-profile-status"></i>
-              <span class="visible-md-inline-block visible-lg-inline-block description" termify>{{action.description}}</span>
-              <span class="hidden-md hidden-lg description" termify>{{action.short_desc}}</span>
+              <p class="visible-md-inline-block visible-lg-inline-block description" termify>{{action.description}}</p>
+              <p class="hidden-md hidden-lg description" termify>{{action.short_desc}}</p>
 
-              <a href="javascript:void(0)" class="explain" ng-click="showRationale(action)">
-                <i class="icon-explain"></i>
-                Explain
-              </a>
+              <span class="pull-right row-gutter-20 action-buttons">
+                <a href="javascript:void(0)" class="explain col-margin-20" ng-click="showRationale(action)">
+                  <i class="icon-explain"></i>
+                  Explain
+                </a>
+                <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="btn btn-primary col-margin-20 hidden-xs"
+                  ng-if="!action.is_complete"
+                  ng-click="completeAction(action)"
+                  ng-disabled="!action.is_completable">Take Action</a>
 
-              <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="btn btn-primary hidden-xs"
-                ng-if="!action.is_complete"
-                ng-click="completeAction(action)"
-                ng-disabled="!action.is_completable">Take Action</a>
-
-              <a href="#" ng-if="action.is_complete" class="btn btn-primary btn-complete">Completed</a>
+                <a href="#" ng-if="action.is_complete" class="btn btn-primary btn-complete col-margin-20">Completed</a>
+              </span>
             </div>
             <div class="action-list-table" ng-if="action.positions.length && !action.is_complete">
               <div class="table-static" style="width: 100%;" ng-repeat="option in action.positions">
