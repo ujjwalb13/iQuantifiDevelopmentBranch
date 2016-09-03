@@ -57,7 +57,7 @@
                   ng-click="completeAction(action)"
                   ng-disabled="!action.is_completable">Take Action</a>
 
-                <a href="#" ng-if="action.is_complete" class="btn btn-primary btn-complete col-margin-20">Completed</a>
+                <a href="javascript:void(0)" ng-if="action.is_complete" class="btn btn-primary btn-complete col-margin-20">Completed</a>
               </span>
             </div>
             <div class="action-list-table" ng-if="action.positions.length && !action.is_complete">
