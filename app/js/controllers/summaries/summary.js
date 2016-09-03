@@ -1,36 +1,9 @@
 (function() {
   'use strict';
   angular.module('summaries').controller('summariesSummaryCtrl', function($scope, $rootScope, $routeParams, $http, $location, ENV, configService, Car, College, Credit, Baby, House, Loan, Relocation, Rent, Reserve, Retirement, Ring, Travel, Wedding, Purchase) {
-    var Obj, fetchCollegeData, fetchData, fetchGoalData, fetchRentData, fetchReservesData, fetchRetirementData, getCurrentPeriod, getNeed, getPercent, getPercentIncomplete, getSafePercent, lookup;
-    $scope.goal = {};
-    $scope.goalType = '';
-    $scope.nextAction = {};
-    $scope.completedActions = [];
-    $scope.schedule = [];
-    $scope.status = 'safe';
     $scope.ontrackStatus = "ontrack";
     $scope.behindOneMonthStatus = "behindOneMonth";
     $scope.behindTwoMonthStatus = "behindTwoMonth";
-    lookup = {
-      cars: Car,
-      colleges: College,
-      babies: Baby,
-      houses: House,
-      loans: Loan,
-      relocations: Relocation,
-      rents: Rent,
-      reserves: Reserve,
-      retirements: Retirement,
-      creditcards: Credit,
-      rings: Ring,
-      travels: Travel,
-      weddings: Wedding,
-      purchases: Purchase
-    };
-    Obj = lookup[$routeParams.type];
-    $scope.goalType = Obj.type;
-    $scope.goalKind = Obj.kind;
-
     $scope.currentRightSummary = "downpayment";
     $scope.downpaymentActive = function() {
       return $scope.currentRightSummary === "downpayment";
@@ -345,8 +318,6 @@
     });
 
     $scope.dummyBaseline = 0;
-    $scope.dummyGoalKind = "house";
-    $scope.dummyGoalType = "goal";
   });
 }).call(this);
 
