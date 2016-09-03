@@ -39,7 +39,6 @@
     $scope.fetchData = function() {
       $scope.loading = true;
       return Scenario.get().$promise.then(function(scenario) {
-        console.log(scenario)
         var goals, impulseItems, taxRefunds;
         impulseItems = filterActionables(scenario.impulse_items);
         taxRefunds = filterActionables(scenario.tax_refunds);
