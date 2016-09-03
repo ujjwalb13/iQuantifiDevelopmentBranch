@@ -1,8 +1,7 @@
 version: '2'
 services:
   compass:
-    image: iquandev/compass
-    command: sh -c "sleep 365d"
+    build: ./docker/compass
     volumes:
       - "./:/uidev"
     container_name: iq.compass

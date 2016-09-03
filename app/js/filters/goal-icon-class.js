@@ -2,6 +2,8 @@
   'use strict';
   angular.module('agera').filter('goalIconClass', function() {
     return function(input) {
+      input = input.toLowerCase();
+
       if (input === 'baby') {
         return 'icon-gl-baby';
       }
@@ -40,18 +42,6 @@
       }
       if (input === "downsizing") {
         return 'icon-gl-downsizing';
-      }
-      if (input === "CR1") {
-        return 'icon-protection-achieved-1-lb';
-      }
-      if (input === "CR3") {
-        return 'icon-protection-achieved-3-lb';
-      }
-      if (input === "CR6") {
-        return 'icon-protection-achieved-6-lb';
-      }
-      if (input === "Monthly") {
-        return 'icon-protection-dp-lb';
       }
     };
   });
