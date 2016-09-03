@@ -15,8 +15,11 @@
     $scope.gotoCashFinder = function() {
       return $location.path("/cashfinder");
     };
-    $scope.clickActionButton = function() {
+    $scope.gotoCompleteMyProfile = function() {
       return $location.path("/complete-my-profile");
+    };
+    $scope.gotoMyActions = function() {
+      return $location.path("/actions");
     };
 
     var getActionCount = function() {
