@@ -249,6 +249,9 @@ angular.module('agera').config(function($routeProvider) {
   }).when('/progress', {
     templateUrl: '/views/progress/overview.html',
     controller: 'ProgressOverviewCtrl'
+  }).when('/achievements', {
+    templateUrl: '/views/progress/my-achievements.html',
+    controller: 'MyAchievementsCtrl'
   }).when('/progress/:type', {
     templateUrl: '/views/progress/overview.html',
     controller: 'ProgressOverviewCtrl'
