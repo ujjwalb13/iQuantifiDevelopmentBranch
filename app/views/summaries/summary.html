@@ -102,10 +102,14 @@
               <div class="col-md-12 col-xs-12">
                 <h3 class="title-next">Next Action</h3>
                 <div class="next-action-content">
-                    <p>
+                    <p ng-if="dummyStatus == 'warning' || dummyStatus == 'danger'">
                       <i class="fa fa-exclamation-circle"></i>
+                      <strong>You are currently one month behind.</strong> <br>
                       Deposit $2,143 this month towards New Home's downpayment.
                       <a href="" class="btn btn-primary">Take Action</a>
+                    </p>
+                    <p ng-if="dummyStatus == 'safe'">
+                      You’re currently on track! No action needed at this time.
                     </p>
                 </div>
               </div>
