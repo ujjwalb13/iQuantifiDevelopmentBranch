@@ -25,10 +25,27 @@
         };
       }
 
-      var protectionsSection = _.find(sections, function(item) {
-        return item.SectionType.toLowerCase() === "debt";
-      });
+      // var debtsSection = _.find(sections, function(item) {
+      //   return item.SectionType.toLowerCase() === "debt";
+      // });
 
+      var debtsSection = sections[1];
+      if (_.isObject(debtsSection)) {
+        $scope.debtsSection = {
+          name: debtsSection.SectionName,
+          items:  _.map(debtsSection.Goals, function(item) {
+            return { name: item.name, amount: item.amount, date: item.completed_date, type: protectionType(item) };
+          })
+        };
+      }
+
+      console.log($scope.debtsSection);
+
+      // var protectionsSection = _.find(sections, function(item) {
+      //   return item.SectionType.toLowerCase() === "protection";
+      // });
+
+      var protectionsSection = sections[2];
       if (_.isObject(protectionsSection)) {
         $scope.protectionsSection = {
           name: protectionsSection.SectionName,
