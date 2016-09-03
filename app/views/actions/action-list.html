@@ -38,8 +38,7 @@
         <div class="wrapper-detail" ng-repeat="goal in filteredActionables = (actionables | filter:categoryFilter | filter:alertFilter)">
           <div class="section-header">
             <i class="icon {{goal | timelineGoalIcon}}"></i>
-            <span class="truncate goal-text" ng-if="goal.category != 'protection'">{{goal.name}}</span>
-            <span class="truncate" ng-if="goal.category == 'protection'">{{goal.name}}</span>
+            {{goal.name}}
           </div>
           <div ng-repeat="action in goal.actions" class="action-list-content" id="action-{{action.guid}}"
             ng-click="goToSingleAction(action)">

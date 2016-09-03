@@ -5,7 +5,10 @@
       if (goal.category === 'debt') {
         return debtIconClassFilter(goal.kind);
       } else {
-        return goalIconClassFilter(goal.type);
+        if(goal.type === 'Reserve' || goal.type === 'DisabilityPolicy')
+          return goalIconClassFilter(goal.kind);
+        else
+          return goalIconClassFilter(goal.type);
       }
     };
   });
