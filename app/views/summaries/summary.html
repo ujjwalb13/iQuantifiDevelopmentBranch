@@ -10,18 +10,6 @@
   </div>
 </div>
 
-
-<div class="sum-main-content" style="position:absolute;top:350px;left:30px">
-  <div class="chart-content">
-    <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="behindOneMonthStatus"></goal-progress-circle>
-  </div>
-</div>
-<div class="sum-main-content" style="position:absolute;top:600px;left:30px">
-  <div class="chart-content">
-    <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="behindTwoMonthStatus"></goal-progress-circle>
-  </div>
-</div>
-
 <div class="main-content-style">
     <div class="container main-wrapper">
       <div class="row">
@@ -100,7 +88,7 @@
             </div>
           </div>
           <div class="content-wrapper">
-            <div class="section-header">Goal Summary
+            <div class="section-header">Action Tracker
             </div>
             <div class="row">
               <div class="col-md-12 col-xs-12">
@@ -114,11 +102,28 @@
               <div class="col-md-12 col-xs-12">
                 <h3 class="title-next">Next Action</h3>
                 <div class="next-action-content">
-                    <p>
-                      <i class="fa fa-exclamation-circle"></i>
+                    <p ng-if="dummyStatus == 'warning' || dummyStatus == 'danger'">
+                      <i class="fa fa-exclamation-circle" ng-class="{'danger': dummyStatus == 'danger'}"></i>
+                      <strong>You are currently one month behind.</strong> <br>
                       Deposit $2,143 this month towards New Home's downpayment.
                       <a href="" class="btn btn-primary">Take Action</a>
                     </p>
+                    <p ng-if="dummyStatus == 'safe'">
+                      You’re currently on track! No action needed at this time.
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-wrapper">
+            <div class="section-header">Completed Actions
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
+                <div class="completed-action-content">
+                  <p>Sep 2016 - Open or link a Brokerage account for House 8888</p>
+                  <p>Sep 2016 - Deposit $27 this month towards House 8888's downpayment.</p>
                 </div>
               </div>
             </div>

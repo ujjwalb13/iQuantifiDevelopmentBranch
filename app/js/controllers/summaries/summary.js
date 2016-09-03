@@ -312,30 +312,31 @@
         "payment": 27
     }];
 
-
-    // on track
     $scope.dummyScheduleData[0]["balance"] = 100;
     $scope.dummyScheduleData[3]["balance"] = 200;
     $scope.dummyScheduleData[6]["balance"] = 200;
     $scope.dummyScheduleData[9]["balance"] = 300;
     $scope.dummyScheduleData[12]["balance"] = 400;
     $scope.dummyStatus = "safe";
+    $scope.dummyBubbleText = "Saved $7,200";
 
-    // on month behind
-    $scope.dummyScheduleData[0]["balance"] = 100;
-    $scope.dummyScheduleData[3]["balance"] = 200;
-    $scope.dummyScheduleData[6]["balance"] = 200;
-    $scope.dummyScheduleData[9]["balance"] = 300;
-    $scope.dummyScheduleData[12]["balance"] = 300;
-    $scope.dummyStatus = "warning";
-
-    // two month behind
-    $scope.dummyScheduleData[0]["balance"] = 100;
-    $scope.dummyScheduleData[3]["balance"] = 200;
-    $scope.dummyScheduleData[6]["balance"] = 200;
-    $scope.dummyScheduleData[9]["balance"] = 200;
-    $scope.dummyScheduleData[12]["balance"] = 200;
-    $scope.dummyStatus = "danger";
+    if ($routeParams.behind == 1) {
+      $scope.dummyScheduleData[0]["balance"] = 100;
+      $scope.dummyScheduleData[3]["balance"] = 200;
+      $scope.dummyScheduleData[6]["balance"] = 200;
+      $scope.dummyScheduleData[9]["balance"] = 300;
+      $scope.dummyScheduleData[12]["balance"] = 300;
+      $scope.dummyStatus = "warning";
+      $scope.dummyBubbleText = "Need $2,143";
+    } else if ($routeParams.behind == 2) {
+      $scope.dummyScheduleData[0]["balance"] = 100;
+      $scope.dummyScheduleData[3]["balance"] = 200;
+      $scope.dummyScheduleData[6]["balance"] = 200;
+      $scope.dummyScheduleData[9]["balance"] = 200;
+      $scope.dummyScheduleData[12]["balance"] = 200;
+      $scope.dummyStatus = "danger";
+      $scope.dummyBubbleText = "Need $2,143";
+    }
 
     $scope.dummyScheduleData = _.map($scope.dummyScheduleData, function(d){
       var result = d;
@@ -346,7 +347,7 @@
     console.log($scope.dummyScheduleData);
 
     $scope.dummyBaseline = 0;
-    $scope.dummyBubbleText = "Saved $27";
+
     $scope.dummyGoalKind = "house";
     $scope.dummyGoalType = "goal";
 
