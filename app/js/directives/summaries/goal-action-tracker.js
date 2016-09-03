@@ -68,7 +68,7 @@
             bottom: 30,
             left: 60
           };
-          width = 930 - margin.left - margin.right;
+          width = 910 - margin.left - margin.right;
           height = 400 - margin.top - margin.bottom;
 
           bgBarWidth = width / data.length;
