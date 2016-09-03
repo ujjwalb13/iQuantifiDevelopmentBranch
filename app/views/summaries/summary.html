@@ -25,9 +25,9 @@
               <div class="pull-left">
                 <i class="icon icon-gl-house icon-80"></i>
                 <h3>
-                  New Home
+                  {{ goal.name }}
                 </h3>
-                <button class="btn btn-blue">
+                <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
                   Edit Goal
                 </button>
                 <a class="btn btn-delete ng-scope">
@@ -93,7 +93,7 @@
             <div class="row">
               <div class="col-md-12 col-xs-12">
                 <div class="chart-content">
-                  <goal-action-tracker schedule="dummyScheduleData" goal-kind="dummyGoalKind" goal-type="dummyGoalType" bubble-text="dummyBubbleText" baseline="dummyBaseline" status="dummyStatus">
+                  <goal-action-tracker schedule="dummyScheduleData" bubble-text="dummyBubbleText" baseline="dummyBaseline" status="dummyStatus">
                   </goal-action-tracker>
                 </div>
               </div>
