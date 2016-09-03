@@ -79,7 +79,7 @@
             </div>
             <div class="wrapper-detail">
               <ul class="overview-content">
-                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="protection in protectionsSection.items" ng-click="gotoProtectionSummary(protection)">
+                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="protection in protectionsSection.items">
                   <div class="icon-process icon-protect">
                     <span>
                       <i class="icon {{ protection.type | protectionIconClass }} icon-80"></i>
@@ -89,16 +89,6 @@
                     <strong> {{ protection.name }}</strong><br>
                     <span>{{ protection.amount | dollars }} | {{ protection.date | monthYear }}</span>
                   </p>
-                </li>
-                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-click=addProtection()>
-                  <a href="javascript:void(0)">
-                    <div class="icon-process">
-                      <i class="icon icon-pt-add-a-policy icon-80"></i>
-                    </div>
-                    <p class="add-policy">
-                      <strong>Add a Protection</strong>
-                    </p>
-                  </a>
                 </li>
               </ul>
             </div>
