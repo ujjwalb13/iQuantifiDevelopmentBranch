@@ -388,6 +388,10 @@ angular.module('agera').config(function($routeProvider) {
     controller: 'ProgressOverviewCtrl'
   })
 
+  }).when('/achievements', {
+    templateUrl: '/views/progress/my-achievements.html',
+    controller: 'MyAchievementsCtrl'
+
   .when('/goals/:type/new', {
     templateUrl: "/views/timeline/goal-form.html",
     controller: 'GoalFormCtrl',
