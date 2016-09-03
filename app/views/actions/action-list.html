@@ -48,7 +48,7 @@
               <p class="hidden-md hidden-lg description" termify>{{action.short_desc}}</p>
 
               <span class="pull-right row-gutter-20 action-buttons">
-                <a href="javascript:void(0)" class="explain col-margin-20" ng-click="showRationale(action)">
+                <a href="javascript:void(0)" class="explain col-margin-20" ng-click="showRationale(action)" ng-if="!action.is_complete">
                   <i class="icon-explain"></i>
                   Explain
                 </a>
