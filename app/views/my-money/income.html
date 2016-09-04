@@ -1,20 +1,49 @@
 ﻿<div ng-include src="'/views/my-money/_money-header.html'" class="main-title"></div>
 <div class="container main-wrapper">
     <div class="row">
-        <div class="left-side-bar col-lg-2 visible-lg">
+        <div class="left-side-bar col-lg-3 visible-lg">
             <money-sidebar current-page='/my-money/income'></money-sidebar>
         </div>
-        <div class="right-content col-lg-10">
+        <div class="right-content col-lg-9">
             <div class="section-header goals">
                 <i class="icon icon-mm-income"></i>Income
             </div>
             <div class="content-wrapper">
-
-
-
-
-
-
+                <div class="row">
+                    <div class="col-sm-12">
+                        <strong>Note:</strong> Please use your Net Income. (Income after taking out taxes, credits and deductions from your Gross Income.)
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-static">
+                            <table class="hovered">
+                                <thead class="dark">
+                                <th>Person</th>
+                                <th class="text-right">Amount</th>
+                                <th>Type</th>
+                                <th>Frequency</th>
+                                <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="income in incomes" ng-click="goToIncomeEdit(income.guid)">
+                                        <td>{{income.person.first_name}} {{income.person.last_name}}</td>
+                                        <td class="text-right">{{income.amount | dollars}}</td>
+                                        <td>{{income.income_source_type | titleize}}</td>
+                                        <td>{{income.period | titleize}}</td>
+                                        <td class="text-right"><i class="fa fa-chevron-right"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <a href="/#/my-money/incomes/new" class="iq-submit-btn btn-primary btn btn-add" role="button">Add New Income</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

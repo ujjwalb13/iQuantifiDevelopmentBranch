@@ -2,6 +2,8 @@
   'use strict';
   angular.module('agera').filter('goalIconClass', function() {
     return function(input) {
+      input = input.toLowerCase();
+
       if (input === 'baby') {
         return 'icon-gl-baby';
       }

@@ -1,8 +1,139 @@
-<div ng-include="'/views/summaries/_overview.html'"></div>
-<div ng-include="'/views/summaries/_next_action.html'"></div>
-<!-- <div ng-include="'/views/summaries/_retirement_accounts.html'" ng-if="isRetirement && goal.total > 0"></div> -->
- <div ng-include="'/views/summaries/_action_tracker.html'" ng-if="schedule.data.length > 0"></div>
-<div ng-include="'/views/summaries/_finance.html'" ng-if="hasFinance"></div>
-<div ng-include="'/views/summaries/_reserves.html'" ng-if="isReserves"></div>
-<div ng-include="'/views/summaries/_college_details.html'" ng-if="isCollege"></div>
-<div ng-include="'/views/summaries/_completed_actions.html'"></div>
+<div class="main-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>
+           My Progress
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content-style">
+    <div class="container main-wrapper">
+      <div class="row">
+        <div class="left-side-bar col-lg-2 col-md-3 col-sm-12 col-xs-12">
+          <progress-sidebar current-page=''></progress-sidebar>
+        </div>
+        <div class="right-content col-lg-10 col-md-9 col-sm-12 col-xs-12">
+          <div class="content-wrapper">
+            <div class="section-header goals">
+                <i class="icon icon-gl-custom-goal"></i>Goal Summary
+            </div>
+            <div class="goal-summary-head">
+              <div class="pull-left">
+                <i class="icon icon-gl-house icon-80"></i>
+                <h3>
+                  {{ goal.name }}
+                </h3>
+                <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
+                  Edit Goal
+                </button>
+                <a class="btn btn-delete ng-scope">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="pull-right">
+                <ul>
+                  <li>
+                    <label for="">Purchase Date</label>
+                    <p>Sep 2018</p>
+                  </li>
+                  <li>
+                    <label for="">Total Goal Amount</label>
+                    <p>$250,000</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="row sum-main-content">
+              <div class="col-md-6 col-xs-12">
+                <div class="table-static" style="width: 100%;">
+                    <table>
+                        <thead>
+                          <tr>
+                            <th>Start Saving Date</th>
+                            <th>Apr 2016</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><strong>Net Proceeds From Sale of Home</strong></td>
+                            <td>$0</td>
+                          </tr>
+                          <tr ng-click="changeRightSummayContent('downpayment')">
+                            <td><strong>Downpayment</strong></td>
+                            <td>$15,000</td>
+                          </tr>
+                          <tr ng-click="changeRightSummayContent('financeRecommendations')">
+                            <td><strong>Finance Amount</strong></td>
+                            <td>$235,000</td>
+                          </tr>
+                          <tr>
+                          </tr>
+                          <tr class="total-row">
+                            <td>Total Purchase Price</td>
+                            <td>$250,000</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div ng-include="'/views/summaries/_downpayment.html'"></div>
+                <div ng-include="'/views/summaries/_finance_recommendations.html'"></div>
+              </div>
+            </div>
+          </div>
+          <div class="content-wrapper">
+            <div class="section-header">Action Tracker
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
+                <div class="chart-content">
+                  <goal-action-tracker schedule="dummyScheduleData" bubble-text="dummyBubbleText" baseline="dummyBaseline" status="dummyStatus">
+                  </goal-action-tracker>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
+                <h3 class="title-next">Next Action</h3>
+                <div class="next-action-content">
+                    <p ng-if="dummyStatus == 'warning' || dummyStatus == 'danger'">
+                      <i class="fa fa-exclamation-circle" ng-class="{'danger': dummyStatus == 'danger'}"></i>
+                      <strong>
+                        You are currently
+                          {{dummyStatus == 'warning' ? "one month" : "two months"}}
+                        behind.
+                      </strong>
+                      <br>
+                      Deposit $2,143 this month towards New Home's downpayment.
+                      <a href="" class="btn btn-primary">Take Action</a>
+                    </p>
+                    <p ng-if="dummyStatus == 'safe'">
+                      You’re currently on track! No action needed at this time.
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-wrapper">
+            <div class="section-header">Completed Actions
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
+                <div class="completed-action-content">
+                  <p>Sep 2016 - Open or link a Brokerage account for House 8888</p>
+                  <p>Sep 2016 - Deposit $27 this month towards House 8888's downpayment.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -15,8 +15,11 @@
     $scope.gotoCashFinder = function() {
       return $location.path("/cashfinder");
     };
-    $scope.clickActionButton = function() {
+    $scope.gotoCompleteMyProfile = function() {
       return $location.path("/complete-my-profile");
+    };
+    $scope.gotoMyActions = function() {
+      return $location.path("/actions");
     };
 
     var getActionCount = function() {
@@ -294,6 +297,33 @@
         $rootScope.loading = false;
         return $scope.refreshTimeline();
       }, function(response) {
+        var msg;
+        $rootScope.loading = false;
+        $scope.refreshTimeline();
+        if (response.data.errors && response.data.errors.transition_on && response.data.errors.transition_on[0]) {
+          msg = 'Date ' + response.data.errors.transition_on[0];
+          return $rootScope.$broadcast('alert', {
+            type: 'danger',
+            msg: msg
+          });
+        } else {
+          return $rootScope.$broadcast('alert', {
+            type: 'danger',
+            msg: 'Invalid date for goal'
+          });
+        }
+      });
+    };
+    $scope.saveGoalDate = function (goal) {
+      $rootScope.$broadcast('clearAlerts');
+      $rootScope.loading = true;
+      if (goal.original_amount) {
+        goal.amount = goal.original_amount;
+      }
+      return goalService.updateDate(goal).then(function (response) {
+        $rootScope.loading = false;
+        return $scope.refreshTimeline();
+      }, function (response) {
         var msg;
         $rootScope.loading = false;
         $scope.refreshTimeline();

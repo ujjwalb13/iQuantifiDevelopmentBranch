@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="css/main-style.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="css/toaster.css" />
+    <link rel="stylesheet" href="css/action-tracker.css" />
     <style>
       body {
         height: auto;
@@ -67,6 +68,8 @@
       <!-- Added for grid to work -->
     <script src="bower_components/ag-grid/ag-grid.min.js"></script>
 
+
+
     <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
     <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
     <script src="bower_components/waypoints/waypoints.js"></script>
@@ -86,8 +89,7 @@
     <script src="bower_components/underscore.string/dist/underscore.string.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
-   
-      
+    <script src="bower_components/toaster/toaster.min.js"></script>
     <!-- endbower -->
     <script src="bower_components/jquery-simulate/jquery.simulate.js"></script>
     <script src="bower_components/jQuery.mmenu/src/js/jquery.mmenu.min.js"></script>
@@ -95,10 +97,13 @@
     <script src="bower_components/threedubmedia.jquery.event/event.drag/jquery.event.drag.js"></script>
     <script src="bower_components/threedubmedia.jquery.event/event.drop/jquery.event.drop.js"></script>
 
+    <script src="js/config/module.js"></script>
+    <script src="js/config/api.js"></script>
+    <script src="js/config/routers.js"></script>
+    <script src="js/config/auth.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/config.js"></script>
 
-    <script src="js/controllers/accounts.js"></script>
+
     <script src="js/controllers/auth.js"></script>
     <script src="js/controllers/can-i-buy.js"></script>
     <script src="js/controllers/cashfinder.js"></script>
@@ -107,7 +112,6 @@
     <script src="js/controllers/permissions.js"></script>
     <script src="js/controllers/faq.js"></script>
     <script src="js/controllers/feedback.js"></script>
-    <script src="js/controllers/incomes.js"></script>
     <script src="js/controllers/people.js"></script>
     <script src="js/controllers/policies.js"></script>
     <script src="js/controllers/settings.js"></script>
@@ -152,6 +156,7 @@
 
 
     <script src="js/controllers/progress/overview.js"></script>
+    <script src="js/controllers/progress/my-achievements.js"></script>
     <script src="js/controllers/progress/debt/category.js"></script>
     <script src="js/controllers/progress/debt/form.js"></script>
     <script src="js/controllers/add-goal.js"></script>
@@ -161,6 +166,9 @@
     <script src="js/controllers/my-money/myMoneyOverview.js"></script>
     <script src="js/controllers/my-money/main.js"></script>
     <script src="js/controllers/my-money/update-expenses.js"></script>
+    <script src="js/controllers/my-money/incomes.js"></script>
+    <script src="js/controllers/my-money/capitalandcashflow.js"></script>
+    <script src="js/controllers/my-money/accounts.js"></script>
 
     <script src="js/controllers/my-features/MyFeaturesCanIBuyCtrl.js"></script>
     <script src="js/controllers/my-features/MyFeaturesCashFinderCtrl.js"></script>
@@ -185,12 +193,16 @@
     <script src="js/directives/money-sidebar/directive.js"></script>
     <script src="js/directives/feature-sidebar/module.js"></script>
     <script src="js/directives/feature-sidebar/directive.js"></script>
+    <script src="js/directives/progress-sidebar/module.js"></script>
+    <script src="js/directives/progress-sidebar/directive.js"></script>
     <script src="js/directives/experience-picker/module.js"></script>
     <script src="js/directives/experience-picker/directive.js"></script>
     <script src="js/directives/account-name-uniq.js"></script>
 
     <script src="js/directives/summaries/action-chart.js"></script>
     <script src="js/directives/summaries/track-donut.js"></script>
+    <script src="js/directives/summaries/goal-progress-circle.js"></script>
+    <script src="js/directives/summaries/goal-action-tracker.js"></script>
     <script src="js/directives/summaries/retire-chart.js"></script>
 
     <script src="js/directives/timeline/slide-brush.js"></script>
@@ -235,6 +247,7 @@
     <script src="js/services/resource.js"></script>
     <script src="js/services/scenario.js"></script>
     <script src="js/services/myprogress.js"></script>
+    <script src="js/services/my-achievements.js"></script>
     <script src="js/services/user.js"></script>
     <script src="js/services/utils.js"></script>
 
@@ -291,5 +304,6 @@
     '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-T35W88');</script>
     <!-- End Google Tag Manager -->
+      <toaster-container toaster-options="{'position-class': 'toast-bottom-right'}"></toaster-container>
   </body>
 </html>
