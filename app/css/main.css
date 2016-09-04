@@ -18538,6 +18538,16 @@ body.body-onboarding .worksheet .info-icon-container {
   padding: 50px 0px;
 }
 
+.monthly-expenses .monthly-expenses-chart .chart-area {fill: none;}
+.monthly-expenses .monthly-expenses-chart .expense-group .tooltip-icon {display: none;}
+.monthly-expenses .monthly-expenses-chart .expense-group:hover .tooltip-icon {display: block;}
+.monthly-expenses .monthly-expenses-chart .expense-group .group-highlight {fill: none; pointer-events: all;}
+.monthly-expenses .monthly-expenses-chart .expense-group:hover .group-highlight {display: block; fill: #d3d3d3;}
+.monthly-expenses .monthly-expenses-chart .tick path,
+.monthly-expenses .monthly-expenses-chart .tick line {
+  fill: none; stroke: #d3d3d3;
+}
+
 /* line 2158, ../../app/css/modules/_mainstyle.scss */
 .info-icon-container {
   width: 20px;
