@@ -1,15 +1,15 @@
 (function() {
   'use strict';
-  angular.module('agera').directive('monthlyExpensesChart', function(Expense) {
+  angular.module('agera').directive('monthlyExpensesChart', function(ENV, $http, Expense) {
     var getChartData, link;
     link = function(scope, element, attrs) {
       scope.selectedExpense = null;
       scope.getExpenseName = function(kind) {
-          return "XXX|"+kind;
-        }
-      var chart, chartArea, chartGroups, chart_height, child_margin, color, expenses, subCategories, detail_icon_height, expense_types, group_margin, height, legends, margin, svg, width, ratio, x, x1, xAxis, y, yAxis;
+        return Expense.getName(kind);
+      }
+      var chart, chartArea, chartGroups, chart_height, child_margin, color, expenses, detail_icon_height, expense_types, group_margin, height, legends, margin, svg, width, ratio, x, x1, xAxis, y, yAxis;
       expenses = getChartData();
-      subCategories = genereateSubCategories(expenses);
+      scope.subCategories = genereateSubCategories(expenses);
       svg = d3.select(element.find("svg")[0]);
       margin = {
         top: 0,
@@ -27,7 +27,7 @@
       expense_types = ["amount", "three_month_average_amount"];
       color = d3.scale.ordinal().range([scope.currentExpensesColor, scope.threeMonthsAverageColor]);
       svg = svg.style('width', width).style('height', chart_height + margin.top + margin.bottom).append("g");
-      x = d3.scale.ordinal().domain(expenses.map(function(d) { return Expense.getExpenseName(d.kind);}))
+      x = d3.scale.ordinal().domain(expenses.map(function(d) { return Expense.getName(d.kind);}))
       .rangeRoundBands([0, width - margin.left - margin.right]);
       y = d3.scale.linear().domain([
         0, d3.max(expenses, function(d) { return Math.max(d.amount, d.three_month_average_amount);})
@@ -71,7 +71,7 @@
       .enter()
       .append("g")
         .attr("class", "expense-group")
-        .attr('x', function(d) { return x(Expense.getExpenseName(d.kind)) + margin.left + (group_margin / 2);})
+        .attr('x', function(d) { return x(Expense.getName(d.kind)) + margin.left + (group_margin / 2);})
         .attr('width', x.rangeBand()).attr('height', chart_height);
 
       chartGroups.selectAll("rect.group-highlight").data(function(d) { return [d];})
@@ -80,7 +80,7 @@
         .attr("class", "group-highlight")
         .attr("width", x.rangeBand())
         .attr("height", height)
-        .attr("x", function(d) { return x(Expense.getExpenseName(d.kind));})
+        .attr("x", function(d) { return x(Expense.getName(d.kind));})
         .attr("y", detail_icon_height);
 
       chartGroups.selectAll("rect.bar")
@@ -93,7 +93,7 @@
       .enter()
       .append("rect")
         .attr("class", "bar")
-        .attr("width", x1.rangeBand() - child_margin).attr("x", function(d) { return x(Expense.getExpenseName(d.kind)) + x1(d.key) + (group_margin / 2) + (child_margin / 2);})
+        .attr("width", x1.rangeBand() - child_margin).attr("x", function(d) { return x(Expense.getName(d.kind)) + x1(d.key) + (group_margin / 2) + (child_margin / 2);})
         .attr("y", function(d) { return y(d.value) + detail_icon_height;})
         .attr("height", function(d) {return height - y(d.value);})
         .style("fill", function(d) { return color(d.key);});
@@ -103,28 +103,23 @@
       .enter()
       .append("foreignObject")
         .attr("class", "tooltip-icon")
-        .attr("x", function(d) { return x(Expense.getExpenseName(d.kind)) })
+        .attr("x", function(d) { return x(Expense.getName(d.kind)) })
         .attr("y", function(d) { return Math.min(y(d.amount), y(d.three_month_average_amount));})
         .attr("width", x.rangeBand())
         .attr("height", detail_icon_height)
       .append("xhtml:div")
         .attr("class", "info-icon-container")
         .style("top", function(d) { return Math.min(y(d.amount), y(d.three_month_average_amount)) + "px"})
-        .style("left", function(d){return (x(Expense.getExpenseName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px"})
+        .style("left", function(d){return (x(Expense.getName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px"})
       .append("xhtml:span")
         .attr("class", "info-icon fa fa-info")
         .on("click", function(d){
           $("#group-details-popup .info-icon-container").css("top", Math.min(y(d.amount), y(d.three_month_average_amount)) + "px")
-          $("#group-details-popup .info-icon-container").css("left", (x(Expense.getExpenseName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px")
+          $("#group-details-popup .info-icon-container").css("left", (x(Expense.getName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px")
           scope.selectedExpense = d;
+          dislaySubcategories(d.kind, scope);
           scope.$digest();
-          // showPopover(d);
-          console.log("scope change", scope.selectedExpense);
         });
-
-      $(".btn-close-popover").on("click", function(){
-        $("#group-details-popup .popover").hide()
-      });
     };
     getChartData = function() {
       return [
@@ -221,16 +216,6 @@
         }
       ];
     };
-    function showPopover(expense) {
-      // $("#group-details-popup .popover .popover-content .current-expense-value").text("$"+expense.amount);
-      // $("#group-details-popup .popover .popover-content .three-months-average-value").text("$"+expense.three_month_average_amount);
-      // $("#group-details-popup .popover .popover-content .title").text(Expense.getExpenseName(expense.kind));
-      // $("#group-details-popup .popover .popover-content .subcategories-loading").show();
-      // $("#group-details-popup .popover .popover-content .sub-categories").empty();
-      // ifsubCategories[d.kind]["loadDone"]
-      // "<li><strong>Auto Loan</strong></li>"
-      // $("#group-details-popup .popover").show();
-    }
     function genereateSubCategories(expenses) {
       var subCategories = {}
       _.each(expenses, function(expense) {
@@ -240,6 +225,15 @@
       });
       return subCategories;
     }
+    function dislaySubcategories(expenseKind, scope) {
+      if (!scope.subCategories[expenseKind]['loadDone']) {
+        $http.get(ENV.apiHost + "/finance/expenses/subcategories/" + expenseKind).then(function(response) {
+          scope.subCategories[expenseKind]['categories'] = response.data;
+          return scope.subCategories[expenseKind]['loadDone'] = true;
+        });
+      }
+      return scope.subCategories[expenseKind]['showed'] = true;
+    };
     return {
       restrict: 'E',
       transclude: true,
