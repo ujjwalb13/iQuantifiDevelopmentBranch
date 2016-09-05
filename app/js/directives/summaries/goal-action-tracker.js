@@ -11,6 +11,12 @@
         baseline: '=',
         status: '='
       },
+      //  In schedule.data payment status are the following:
+      //  1) When a payment has been paid the status is "paid"
+      //  2) Where a payment has not been paid and the month is prior to the current month, the status is "pay"
+      //  3) Where a payment has not been paid and the month is current or a future month, the status is "pay_pend"
+      // This is how to tell if a payment was not made.
+
       link: function(scope, element, attrs) {
         return scope.$watch('schedule', function(newValue, oldValue) {
           var amt, area, bgBarWidth, commasFormatter, d, data, dotValue, downColor, firstDate, getBars, height, i, j, k, l, lastDate, len, len1, len2, len3, line, list, m, margin, maxBars, month, mtnData, now, nowColor, nowDatum, nowIndex, nowRectEl, ref, ref1, svg, tip, upColor, width, x, xAxis, xDateFormat, y, yAxis,
