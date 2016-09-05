@@ -48,17 +48,17 @@
     </div>
   </div>
 
-  <flexible-percentages model="obj.FlexibleAmountPercentage" amount="obj.amount"></flexible-percentages>
+  <flexible-percentages model="obj.FlexibleAmountPercentage" amount="obj.monthly_rent"></flexible-percentages>
 
-  <div class="row form-group" ng-class="{'has-error': submitted && (errors.amount || objForm.amount.$invalid)}">
+  <div class="row form-group" ng-class="{'has-error': submitted && (errors.security_deposit || objForm.security_deposit.$invalid)}">
     <div class="col-lg-6 col-md-8 col-sm-8">
       <label class="control-label">Security Deposit</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
-        <input type="text" name="amount" id="amount" class="form-control" ng-model="obj.amount" min="0" placeholder="0.00" maxlength="10" currency-input>
+        <input type="text" name="security_deposit" id="security_deposit" class="form-control" ng-model="obj.security_deposit" min="0" placeholder="0.00" maxlength="10" currency-input>
       </div>
-      <span ng-repeat="error in errors.amount" class="help-block">{{ error }}</span>
-      <span ng-messages="submitted && objForm.amount.$error" ng-messages-include="error-messages"></span>
+      <span ng-repeat="error in errors.security_deposit" class="help-block">{{ error }}</span>
+      <span ng-messages="submitted && objForm.security_deposit.$error" ng-messages-include="error-messages"></span>
     </div>
   </div>
 
