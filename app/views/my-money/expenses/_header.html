@@ -49,19 +49,23 @@
   <div class = "tab-content expenses-tab">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#monthlyexpense" aria-controls="home" role="tab" data-toggle="tab">Monthly Expenses</a></li>
-      <li role="presentation"><a href="#monthlydebt" aria-controls="profile" role="tab" data-toggle="tab">Total Debt Payments</a></li>
-      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Total Policy Premiums</a></li>
-    </ul>
-
-    <!-- <button type = "submit" class = "tabs-pills btn pull-left"
-            ng-class = '{"active": isCurrentView("monthly_expenses")}'
+      <li role="presentation" ng-class="{active: isCurrentView('monthly_expenses')}">
+        <a href="javascript:void(0)" aria-controls="home" role="tab" data-toggle="tab"
             ng-click = "updateExpensesView('monthly_expenses')">
-      Monthly Expenses
-    </button>
-    <button class = "tabs-pills btn pull-left"
-            ng-class = '{"active": isCurrentView("monthly_debt_and_policy_premiums")}'
-            ng-click="updateExpensesView('monthly_debt_and_policy_premiums')">
-      Monthly Debt Payments and Policy Premiums
-    </button> -->
+          Total Monthly Expenses
+        </a>
+      </li>
+      <li role="presentation" ng-class="{active: isCurrentView('monthly_debt_payments')}">
+        <a href="javascript:void(0)" aria-controls="profile" role="tab" data-toggle="tab"
+            ng-click = "updateExpensesView('monthly_debt_payments')">
+          Monthly Debt Payments
+        </a>
+      </li>
+      <li role="presentation" ng-class="{active: isCurrentView('monthly_policy_premiums')}">
+        <a href="javascript:void(0)" aria-controls="messages" role="tab" data-toggle="tab"
+            ng-click = "updateExpensesView('monthly_policy_premiums')">
+          Monthly Policy Premiums
+        </a>
+      </li>
+    </ul>
   </div>
