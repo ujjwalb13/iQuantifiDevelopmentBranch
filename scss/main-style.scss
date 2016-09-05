@@ -417,6 +417,9 @@ ul{
   i{
     color: $red-color;
     margin-right: 4px;
+    &.yellow-icon{
+      color: #ffc832;
+    }
   }
   span{
     display: block;
