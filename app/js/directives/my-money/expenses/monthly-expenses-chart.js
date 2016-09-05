@@ -19,24 +19,25 @@
       };
       group_margin = 10;
       child_margin = 4;
-      detail_icon_height = 30;
-      var title_height = 20;
+      detail_icon_height = 35;
+      var title_height = 25;
       width = Number.parseInt(svg.style("width"));
       ratio = Number.parseFloat(svg.attr("ratio"));
       height = Math.round(width / ratio)
-      chart_height = height + detail_icon_height;
+      chart_height = height + detail_icon_height + title_height;
       expense_types = ["amount", "three_month_average_amount"];
       color = d3.scale.ordinal().range([scope.currentExpensesColor, scope.threeMonthsAverageColor]);
       svg = svg.style('width', width).style('height', chart_height + margin.top + margin.bottom).append("g");
       x = d3.scale.ordinal().domain(expenses.map(function(d) { return Expense.getName(d.kind);}))
       .rangeRoundBands([0, width - margin.left - margin.right]);
+      var max_value = d3.max(expenses, function(d) { return Math.max(d.amount, d.three_month_average_amount);})
       y = d3.scale.linear().domain([
-        0, d3.max(expenses, function(d) { return Math.max(d.amount, d.three_month_average_amount);})
-      ]).range([height, 0]);
+        0, (max_value * (1 + (1.0 * detail_icon_height / height)))
+      ]).range([(height + detail_icon_height), 0]);
       x1 = d3.scale.ordinal().domain(expense_types).rangeRoundBands([0, x.rangeBand() - group_margin]);
 
       xAxis = d3.svg.axis().scale(x).orient('bottom').outerTickSize(1);
-      yAxis = d3.svg.axis().scale(y).orient('left').innerTickSize(-(width - margin.left - margin.right)).outerTickSize(1).tickPadding(10);
+      yAxis = d3.svg.axis().scale(y).orient('left').innerTickSize(-(width - margin.left - margin.right)).outerTickSize(0);
 
       chart = svg.append('g')
       .attr('class', 'chart')
@@ -44,9 +45,22 @@
       .attr("height", chart_height)
       .attr("width", width - margin.left - margin.right);
 
+      chart.append("rect")
+      .attr("class", "chart-background1")
+      .attr("width", (width - margin.left - margin.right)/2)
+      .attr("height", height)
+      .attr("fill", "#fafafa")
+
+      chart.append("rect")
+      .attr("class", "chart-background2")
+      .attr("width", (width - margin.left - margin.right)/2)
+      .attr("x", (width - margin.left - margin.right)/2)
+      .attr("height", height)
+      .attr("fill", "#ffffff")
+
       chart.append('g')
       .attr('class', 'y axis')
-      .attr('transform', "translate(0, " + detail_icon_height + ")")
+      .attr('transform', "translate(0," + title_height + ")")
       .call(yAxis)
       .append('text')
       .style("text-anchor", "end")
@@ -63,28 +77,44 @@
       .attr("dy", ".15em")
       .attr("transform", "rotate(-30)");
 
-      var bar = chart.append("g").attr("class", "title")
+      var bar = svg.append("g").attr("class", "title")
 
       bar.append("rect")
-      .attr("width", width - margin.left - margin.right)
+      .attr("width", (width - margin.left - margin.right)/2)
       .attr("height", title_height)
       .attr("top", 0)
-      .attr("x", 0)
+      .attr("x", margin.left)
       .attr("y", 0)
-      .attr("fill", "gray")
+      .attr("fill", "#f2f3f5")
+
+      bar.append("rect")
+      .attr("width", (width - margin.left - margin.right)/2)
+      .attr("height", title_height)
+      .attr("top", 0)
+      .attr("x", margin.left + (width - margin.left - margin.right)/2)
+      .attr("y", 0)
+      .attr("fill", "#f7f8fa")
 
       bar.append("text")
-     .attr("fill", "white")
+     .attr("fill", "#a7a7a7")
      .attr("font-size", "15px")
-     .attr("top", "0")
-     .attr("y", "0")
+     .attr("top", 5)
      .attr("text-anchor", "middle")
-     .attr("transform", "translate(" + (width - margin.left - margin.right)/2 + "," + title_height/2 + ")")
+     .attr("transform", "translate(" + (margin.left + (width - margin.right)/4) + "," + (title_height/2 + 5) + ")")
      .text("Committed Expenses");
+
+      bar.append("text")
+     .attr("fill", "#b4b4b4")
+     .attr("font-size", "15px")
+     .attr("top", 5)
+     .attr("text-anchor", "middle")
+     .attr("transform", "translate(" + (margin.left + 3*(width - margin.right)/4) + "," + (title_height/2 + 5) + ")")
+     .text("Discretonary Expenses");
 
       chartArea = chart.append('g')
       .attr("class", "chart-area")
-      .attr("height", chart_height);
+      .attr("height", chart_height)
+      .attr("transform", "translate(0, " + title_height + ")");
 
       chartGroups = chartArea.selectAll("expense-group")
       .data(expenses)
@@ -99,9 +129,9 @@
       .append("rect")
         .attr("class", "group-highlight")
         .attr("width", x.rangeBand())
-        .attr("height", height)
+        .attr("height", height + detail_icon_height)
         .attr("x", function(d) { return x(Expense.getName(d.kind));})
-        .attr("y", detail_icon_height);
+        .attr("y", 0);
 
       chartGroups.selectAll("rect.bar")
       .data(function(d) {
@@ -114,8 +144,8 @@
       .append("rect")
         .attr("class", "bar")
         .attr("width", x1.rangeBand() - child_margin).attr("x", function(d) { return x(Expense.getName(d.kind)) + x1(d.key) + (group_margin / 2) + (child_margin / 2);})
-        .attr("y", function(d) { return y(d.value) + detail_icon_height;})
-        .attr("height", function(d) {return height - y(d.value);})
+        .attr("y", function(d) { return y(d.value);})
+        .attr("height", function(d) {console.log("drawing bar", d, height, y(d.value), height - y(d.value));return height + detail_icon_height - y(d.value);})
         .style("fill", function(d) { return color(d.key);});
 
       chartGroups.selectAll("foreignObject.tooltip-icon")
@@ -124,17 +154,17 @@
       .append("foreignObject")
         .attr("class", "tooltip-icon")
         .attr("x", function(d) { return x(Expense.getName(d.kind)) })
-        .attr("y", 0)
+        .attr("y", title_height)
         .attr("width", x.rangeBand())
         .attr("height", detail_icon_height)
       .append("xhtml:div")
         .attr("class", "info-icon-container")
-        .style("top", "0px")
+        .style("top", title_height + "px")
         .style("left", function(d){return (x(Expense.getName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px"})
       .append("xhtml:span")
         .attr("class", "info-icon fa fa-info")
         .on("click", function(d){
-          $("#group-details-popup .info-icon-container").css("top", "0px")
+          $("#group-details-popup .info-icon-container").css("top", title_height + "px")
           $("#group-details-popup .info-icon-container").css("left", (x(Expense.getName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px")
           scope.selectedExpense = d;
           dislaySubcategories(d.kind, scope);
