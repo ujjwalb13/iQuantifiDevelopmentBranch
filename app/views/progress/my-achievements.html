@@ -17,6 +17,17 @@
           <progress-sidebar current-page='/achievements'></progress-sidebar>
         </div>
         <div class="right-content col-lg-10 col-md-9 col-sm-12 col-xs-12">
+          <div class="wrapper-detail">
+            <div class="congratulation-section">
+              <i class="icon icon-medal"></i>
+              <span class="rolling-ct">
+                Congratulations!
+              </span>
+              <p>
+                Here are your remarkable achievements!
+              </p>
+            </div>
+          </div>
           <div class="content-wrapper" ng-if="goalsSection">
             <div class="section-header goals">
                 <i class="icon icon-gl-custom-goal"></i>{{ goalsSection.name }}
@@ -24,7 +35,7 @@
             <div class="wrapper-detail">
               <ul class="overview-content">
                 <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="goal in goalsSection.items">
-                  <div class="icon-process icon-goals">
+                  <div class="icon-goals-cgr">
                     <span>
                       <i class="icon {{ goal.type | goalIconClass }} icon-80"></i>
                     </span>
@@ -44,7 +55,7 @@
             <div class="wrapper-detail">
               <ul class="overview-content">
                 <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="debt in debtsSection.items">
-                  <div class="icon-process icon-debt">
+                  <div class="icon-debt-cgr">
                     <span>
                       <i class="icon {{ debt.type | debtIconClass }}  icon-80"></i>
                     </span>
@@ -64,7 +75,7 @@
             <div class="wrapper-detail">
               <ul class="overview-content">
                 <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="protection in protectionsSection.items">
-                  <div class="icon-process icon-protect">
+                  <div class="icon-protect-cgr">
                     <span>
                       <i class="icon {{ protection.type | protectionIconClass }} icon-80"></i>
                     </span>
