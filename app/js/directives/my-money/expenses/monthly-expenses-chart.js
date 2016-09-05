@@ -13,13 +13,14 @@
       svg = d3.select(element.find("svg")[0]);
       margin = {
         top: 0,
-        right: 20,
+        right: 0,
         bottom: 80,
-        left: 60
+        left: 70
       };
       group_margin = 10;
       child_margin = 4;
       detail_icon_height = 30;
+      var title_height = 20;
       width = Number.parseInt(svg.style("width"));
       ratio = Number.parseFloat(svg.attr("ratio"));
       height = Math.round(width / ratio)
@@ -61,6 +62,25 @@
       .attr("dx", "-.8em")
       .attr("dy", ".15em")
       .attr("transform", "rotate(-30)");
+
+      var bar = chart.append("g").attr("class", "title")
+
+      bar.append("rect")
+      .attr("width", width - margin.left - margin.right)
+      .attr("height", title_height)
+      .attr("top", 0)
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("fill", "gray")
+
+      bar.append("text")
+     .attr("fill", "white")
+     .attr("font-size", "15px")
+     .attr("top", "0")
+     .attr("y", "0")
+     .attr("text-anchor", "middle")
+     .attr("transform", "translate(" + (width - margin.left - margin.right)/2 + "," + title_height/2 + ")")
+     .text("Committed Expenses");
 
       chartArea = chart.append('g')
       .attr("class", "chart-area")
@@ -104,17 +124,17 @@
       .append("foreignObject")
         .attr("class", "tooltip-icon")
         .attr("x", function(d) { return x(Expense.getName(d.kind)) })
-        .attr("y", function(d) { return Math.min(y(d.amount), y(d.three_month_average_amount));})
+        .attr("y", 0)
         .attr("width", x.rangeBand())
         .attr("height", detail_icon_height)
       .append("xhtml:div")
         .attr("class", "info-icon-container")
-        .style("top", function(d) { return Math.min(y(d.amount), y(d.three_month_average_amount)) + "px"})
+        .style("top", "0px")
         .style("left", function(d){return (x(Expense.getName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px"})
       .append("xhtml:span")
         .attr("class", "info-icon fa fa-info")
         .on("click", function(d){
-          $("#group-details-popup .info-icon-container").css("top", Math.min(y(d.amount), y(d.three_month_average_amount)) + "px")
+          $("#group-details-popup .info-icon-container").css("top", "0px")
           $("#group-details-popup .info-icon-container").css("left", (x(Expense.getName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px")
           scope.selectedExpense = d;
           dislaySubcategories(d.kind, scope);
