@@ -34,13 +34,11 @@
         $scope.debtsSection = {
           name: debtsSection.SectionName,
           items:  _.map(debtsSection.Goals, function(item) {
-            console.log(item);
             return { name: item.name, amount: item.amount, date: item.completed_date, type: item.kind };
           })
         };
       }
 
-      console.log($scope.debtsSection);
 
       // var protectionsSection = _.find(sections, function(item) {
       //   return item.SectionType.toLowerCase() === "protection";

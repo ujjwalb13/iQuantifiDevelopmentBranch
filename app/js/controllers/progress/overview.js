@@ -24,6 +24,10 @@
       "protection": {
         "text": "My Protections",
         "icon": "icon-pt-protection"
+      },
+      "achievements": {
+        "text": "My Achievements",
+        "icon": "icon-al-my-archivement"
       }
     };
     $scope.selectedSectionAttributes = $scope.sectionsAttributes["overview"];
@@ -120,6 +124,9 @@
     };
     $scope.isProtectionActive = function() {
       return !$scope.noFilter && $scope.categoryFilter['protection'];
+    };
+    $scope.gotoAchievementsPage = function() {
+      return $location.path("/achievements");
     };
     $scope.gotoProtectionSummary = function(protection) {
       var path;

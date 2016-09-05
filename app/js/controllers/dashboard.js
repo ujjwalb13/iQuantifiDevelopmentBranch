@@ -21,7 +21,9 @@
     $scope.gotoMyActions = function() {
       return $location.path("/actions");
     };
-
+    $scope.gotoAchievementsPage = function() {
+      return $location.path("/achievements");
+    };
     var getActionCount = function() {
       return Action.count().$promise.then(function(response) {
         return $scope.incompleteActionsCount = response.count;
