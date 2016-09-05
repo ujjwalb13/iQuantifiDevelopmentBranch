@@ -7,10 +7,14 @@
       scope.getExpenseName = function(kind) {
         return Expense.getName(kind);
       }
-      var chart, chartArea, chartGroups, chart_height, child_margin, color, expenses, detail_icon_height, expense_types, group_margin, height, legends, margin, svg, width, ratio, x, x1, xAxis, y, yAxis;
-      expenses = getChartData();
-      scope.subCategories = genereateSubCategories(expenses);
-      svg = d3.select(element.find("svg")[0]);
+      Expense.query().$promise.then(function(expenses){
+        scope.subCategories = genereateSubCategories(expenses);
+        var svg = d3.select(element.find("svg")[0]);
+        drawChart(scope, expenses, svg);
+      });
+    };
+    function drawChart(scope, expenses, svg) {
+      var chart, chartArea, chartGroups, chart_height, child_margin, color, expenses, detail_icon_height, expense_types, group_margin, height, margin, width, ratio, x, x1, xAxis, y, yAxis;
       margin = {
         top: 0,
         right: 0,
@@ -145,7 +149,7 @@
         .attr("class", "bar")
         .attr("width", x1.rangeBand() - child_margin).attr("x", function(d) { return x(Expense.getName(d.kind)) + x1(d.key) + (group_margin / 2) + (child_margin / 2);})
         .attr("y", function(d) { return y(d.value);})
-        .attr("height", function(d) {console.log("drawing bar", d, height, y(d.value), height - y(d.value));return height + detail_icon_height - y(d.value);})
+        .attr("height", function(d) {return height + detail_icon_height - y(d.value);})
         .style("fill", function(d) { return color(d.key);});
 
       chartGroups.selectAll("foreignObject.tooltip-icon")
@@ -170,102 +174,7 @@
           dislaySubcategories(d.kind, scope);
           scope.$digest();
         });
-    };
-    getChartData = function() {
-      return [
-        {
-          "kind": "car_insurance",
-          "amount": 10,
-          "three_month_average_amount": 11,
-          "id": 0
-        }, {
-          "kind": "cell_phone",
-          "amount": 30,
-          "three_month_average_amount": 10,
-          "id": 1
-        }, {
-          "kind": "education",
-          "amount": 10,
-          "three_month_average_amount": 11,
-          "id": 2
-        }, {
-          "kind": "health_insurance",
-          "amount": 15,
-          "three_month_average_amount": 20,
-          "id": 3
-        }, {
-          "kind": "rent",
-          "amount": 20,
-          "three_month_average_amount": 30,
-          "id": 4
-        }, {
-          "kind": "groceries",
-          "amount": 20,
-          "three_month_average_amount": 30,
-          "id": 5
-        }, {
-          "kind": "transportation",
-          "amount": 10,
-          "three_month_average_amount": 15,
-          "id": 6
-        }, {
-          "kind": "utilities",
-          "amount": 80,
-          "three_month_average_amount": 60,
-          "id": 7
-        }, {
-          "kind": "cable_internet",
-          "amount": 10,
-          "three_month_average_amount": 50,
-          "id": 8
-        }, {
-          "kind": "healthcare",
-          "amount": 20,
-          "three_month_average_amount": 25,
-          "id": 9
-        }, {
-          "kind": "charitable_giving",
-          "amount": 5,
-          "three_month_average_amount": 15,
-          "id": 10
-        }, {
-          "kind": "clothing",
-          "amount": 40,
-          "three_month_average_amount": 40,
-          "id": 11
-        }, {
-          "kind": "entertainment",
-          "amount": 55,
-          "three_month_average_amount": 10,
-          "id": 12
-        }, {
-          "kind": "hobbies_travel",
-          "amount": 20,
-          "three_month_average_amount": 20,
-          "id": 13
-        }, {
-          "kind": "personal_care",
-          "amount": 0,
-          "three_month_average_amount": 0,
-          "id": 14
-        }, {
-          "kind": "home_maintenance",
-          "amount": 10,
-          "three_month_average_amount": 0,
-          "id": 15
-        }, {
-          "kind": "dining",
-          "amount": 90,
-          "three_month_average_amount": 80,
-          "id": 16
-        }, {
-          "kind": "other",
-          "amount": 80,
-          "three_month_average_amount": 90,
-          "id": 17
-        }
-      ];
-    };
+    }
     function genereateSubCategories(expenses) {
       var subCategories = {}
       _.each(expenses, function(expense) {
