@@ -34,21 +34,19 @@
   </div>
 
   <div ng-if="has.rental">
-    <div ng-repeat="prop in obj.rentals" class="row even added" ng-form="propertyProfile">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label class="control-label col-sm-4">Name of rental property</label>
-          <div class="col-sm-8">
+    <div ng-repeat="prop in obj.rentals" class="even added" ng-form="propertyProfile">
+        <div class="form-group row">
+          <div class="col-lg-8 col-md-8 col-sm-8">
+            <label class="control-label">Name of rental property</label>
             <input type="text" name="propertyName" class="form-control" ng-model="prop.name" required>
             <span ng-show="prop.errors.name" class="help-block" ng-repeat="err in prop.errors.name">{{err}}</span>
             <span ng-show="submitted && propertyProfile.propertyName.$error.required" class="help-block">Property name is required.</span>
           </div>
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group" ng-class="{'has-error': submitted && (propertyProfile.amount.$invalid || prop.errors.amount)}">
-          <label class="control-label col-sm-4">Estimated Monthly Income from Property</label>
-          <div class="col-sm-8">
+
+        <div class="form-group row" ng-class="{'has-error': submitted && (propertyProfile.amount.$invalid || prop.errors.amount)}">
+          <div class="col-lg-8 col-md-8 col-sm-8">
+            <label class="control-label">Estimated Monthly Income from Property</label>
             <div class="input-group">
               <span class="input-group-addon">$</span>
               <input type="tel" class="form-control" ng-model="prop.amount" name="amount" required>
@@ -57,7 +55,6 @@
             <span ng-show="submitted && propertyProfile.amount.$error.required" class="help-block">Amount is required.</span>
           </div>
         </div>
-      </div>
       <a class="delete" ng-click="deleteRental($index)"><span>delete</span></a>
 
     </div>
