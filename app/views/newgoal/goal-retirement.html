@@ -38,14 +38,23 @@
         <div class="form-group row">
           <div class="col-lg-8 col-md-8 col-sm-8">
             <label class="control-label">Name of rental property</label>
-            <input type="text" name="propertyName" class="form-control" ng-model="prop.name" required>
-            <span ng-show="prop.errors.name" class="help-block" ng-repeat="err in prop.errors.name">{{err}}</span>
-            <span ng-show="submitted && propertyProfile.propertyName.$error.required" class="help-block">Property name is required.</span>
+            <div class="row">
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input type="text" name="propertyName" class="form-control" ng-model="prop.name" required>
+                <span ng-show="prop.errors.name" class="help-block" ng-repeat="err in prop.errors.name">{{err}}</span>
+                <span ng-show="submitted && propertyProfile.propertyName.$error.required" class="help-block">Property name is required.</span>
+              </div>
+              <div class="col-lg-2">
+                <a class="delete btn-delete" ng-click="deleteRental($index)">
+                   <span class="fa fa-trash" aria-hidden="true"></span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="form-group row" ng-class="{'has-error': submitted && (propertyProfile.amount.$invalid || prop.errors.amount)}">
-          <div class="col-lg-8 col-md-8 col-sm-8">
+          <div class="col-lg-7 col-md-8 col-sm-8">
             <label class="control-label">Estimated Monthly Income from Property</label>
             <div class="input-group">
               <span class="input-group-addon">$</span>
@@ -55,10 +64,6 @@
             <span ng-show="submitted && propertyProfile.amount.$error.required" class="help-block">Amount is required.</span>
           </div>
         </div>
-      <a class="delete btn-delete" ng-click="deleteRental($index)">
-         <span class="fa fa-trash" aria-hidden="true"></span>
-      </a>
-
     </div>
 
     <div class="row">
