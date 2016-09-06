@@ -8,7 +8,9 @@
       <div class="middle-line"></div>
       <i class="fa fa-check" ng-switch-when="ontrack"></i>
       <span ng-switch-when="ontrack">ON TRACK</span>
+      <i class="fa fa-exclamation-circle warning" ng-switch-when="behindOneMonth"></i>
       <span ng-switch-when="behindOneMonth">ACTION DUE</span>
+      <i class="fa fa-exclamation-circle danger" ng-switch-when="behindTwoMonth"></i>
       <span ng-switch-when="behindTwoMonth">ACTION DUE</span>
     </div>
     <div class="save-per-month save-status {{ behindStatusClass() }} ">
