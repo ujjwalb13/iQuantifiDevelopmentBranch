@@ -65,7 +65,6 @@ app.run(function ($http, $rootScope, $location, $window, Auth, toaster) {
       $rootScope.currentUser = null;
       if (!_($window.location.href).endsWith('/login')) {
         return $location.path('/login');
->>>>>>> refs/remotes/origin/master
       }
     });
   });
