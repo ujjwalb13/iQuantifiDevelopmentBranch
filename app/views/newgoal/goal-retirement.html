@@ -97,10 +97,8 @@
 
   <div ng-if="has.primaryPension">
     <div class="row added form-group" >
-      <div class="col-sm-4 text-right">
+      <div class="col-lg-7 col-md-8 col-sm-8">
         <label>At what age will you have access to your pension?</label>
-      </div>
-      <div class="col-sm-6">
         <select ng-model="obj.pensions.primary.eligibility_age" name="pension_primary_eligibility_age" class="form-control" required
                 ng-options="age for age in pensionAges">
         </select>
@@ -111,10 +109,8 @@
     </div>
 
     <div class="row added form-group">
-      <div class="col-sm-4 text-right">
+      <div class="col-lg-7 col-md-8 col-sm-8">
         <label>What will your monthly benefit be at that age?</label>
-      </div>
-      <div class="col-sm-6">
         <div class="input-group">
           <span class="input-group-addon">$</span>
           <input type="tel" name="pension_primary_amount" id="obj.pensions.primary.amount" class="form-control" ng-model="obj.pensions.primary.amount" required>
@@ -126,10 +122,8 @@
 
 
     <div class="row added form-group">
-      <div class="col-sm-4 text-right">
+      <div class="col-lg-7 col-md-8 col-sm-8">
         <label>At what age must you take your pension amount by?</label>
-      </div>
-      <div class="col-sm-6">
         <select ng-model="obj.pensions.primary.age_must_take" name="pension_primary_age_must_take" class="form-control" required
                 ng-options="age for age in pensionAges">
         </select>
@@ -140,10 +134,8 @@
     </div>
 
     <div class="row added form-group">
-      <div class="col-sm-4 text-right">
+      <div class="col-lg-7 col-md-8 col-sm-8">
         <label>What will your monthly benefit be at that age?</label>
-      </div>
-      <div class="col-sm-6">
         <div class="input-group">
           <span class="input-group-addon">$</span>
           <input type="tel" name="pension_primary_age_must_take_amount" id="obj.pensions.primary.age_must_take_amount" class="form-control" ng-model="obj.pensions.primary.age_must_take_amount" required>
