@@ -3,10 +3,10 @@
   angular.module('agera').directive('summaryDonutChart', function() {
     var link = function(scope, element, attrs) {
       var data = [
-        {label: "Monthly Policy Premiums", amount: 5, kind: "commited", color: "red"},
-        {label: "Monthly Debt Payments", amount: 10, kind: "commited", color: "green"},
-        {label: "Monthly Committed Expenses", amount: 80, kind: "commited", color: "blue"},
         {label: "Total Monthly Discretionary Expenses", amount: 20, kind: "commited", color: "gray"},
+        {label: "Monthly Committed Expenses", amount: 50, kind: "commited", color: "blue"},
+        {label: "Monthly Debt Payments", amount: 10, kind: "commited", color: "green"},
+        {label: "Monthly Policy Premiums", amount: 5, kind: "commited", color: "red"},
       ]
       // Expense.query().$promise.then(function(expenses){
       //   scope.subCategories = genereateSubCategories(expenses);
@@ -32,11 +32,11 @@
       svg.append("g").attr("class", "lines");
 
       var arc = d3.svg.arc()
-        .outerRadius(radius * 0.8)
+        .outerRadius(radius * 0.75)
         .innerRadius(radius * 0.4);
 
       var outerArc = d3.svg.arc()
-        .innerRadius(radius * 0.9)
+        .innerRadius(radius * 0.5)
         .outerRadius(radius * 0.9);
 
       var pie = d3.layout.pie()
@@ -52,8 +52,7 @@
         .style("fill", function(d) { return color(d.data.color); })
         .attr("class", "slice");
 
-      slices
-        .transition().duration(1000)
+      slices.transition()
         .attrTween("d", function(d) {
           this._current = this._current || d;
           var interpolate = d3.interpolate(this._current, d);
