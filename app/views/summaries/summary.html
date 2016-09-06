@@ -63,11 +63,11 @@
                             <td><strong>Net Proceeds From Sale of Home</strong></td>
                             <td>$0</td>
                           </tr>
-                          <tr ng-click="changeRightSummayContent('downpayment')">
+                          <tr ng-click="changeRightSummayContent('downpayment')" ng-class="{active: downpaymentActive()}">
                             <td><strong>Downpayment</strong></td>
                             <td>$15,000</td>
                           </tr>
-                          <tr ng-click="changeRightSummayContent('financeRecommendations')">
+                          <tr ng-click="changeRightSummayContent('financeRecommendations')" ng-class="{active: financeRecommendationsActive()}">
                             <td><strong>Finance Amount</strong></td>
                             <td>$235,000</td>
                           </tr>
