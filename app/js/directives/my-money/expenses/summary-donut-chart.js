@@ -18,31 +18,113 @@
     };
 
     function drawChart(scope, svg, data) {
-      var width, height;
+      var width, height, donut_size;
       width = Number.parseInt(svg.style("width"));
-      height = width/3;
+      donut_size = width/3;
       var radius = width/6;
-      var color = d3.scale.ordinal()
-                  .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+      var color = d3.scale.ordinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+      svg.style("width", width + "px").style("height", donut_size + "px");
+      svg = svg.append("g");
+      svg.attr("transform", "translate(" + width / 2 + "," + donut_size / 2 + ")")
+
+      svg.append("g").attr("class", "slices");
+      svg.append("g").attr("class", "labels");
+      svg.append("g").attr("class", "lines");
+
       var arc = d3.svg.arc()
-          .innerRadius(radius - 20)
-          .outerRadius(radius - 70);
+        .outerRadius(radius * 0.8)
+        .innerRadius(radius * 0.4);
+
+      var outerArc = d3.svg.arc()
+        .innerRadius(radius * 0.9)
+        .outerRadius(radius * 0.9);
 
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })
         .sort(null);
 
-      var path = svg
-      .style("width", width)
-      .style("height", height)
-      .append("g")
-      .attr("transform", "translate(" + width/2 + "," + height / 2 + ")")
-      .selectAll('path')
-      .data(pie(data))
-      .enter()
-      .append('path')
-      .attr('d', arc)
-      .attr('fill', function(d) {return d.data.color; });
+      var slices = svg.select(".slices")
+        .selectAll("path.slice")
+        .data(pie(data));
+
+      slices.enter()
+        .insert("path")
+        .style("fill", function(d) { return color(d.data.color); })
+        .attr("class", "slice");
+
+      slices
+        .transition().duration(1000)
+        .attrTween("d", function(d) {
+          this._current = this._current || d;
+          var interpolate = d3.interpolate(this._current, d);
+          this._current = interpolate(0);
+          return function(t) {
+            return arc(interpolate(t));
+          };
+        })
+
+      slices.exit().remove();
+
+
+      var key = function(d){ return d.data.label; };
+      var text = svg.select(".labels")
+        .selectAll("text")
+        .data(pie(data), key);
+
+      text.enter()
+        .append("text")
+        .attr("dy", ".35em")
+        .text(function(d) {
+          return d.data.label;
+        });
+
+      function midAngle(d){
+        return d.startAngle + (d.endAngle - d.startAngle)/2;
+      }
+
+      text.transition().duration(1000)
+        .attrTween("transform", function(d) {
+          this._current = this._current || d;
+          var interpolate = d3.interpolate(this._current, d);
+          this._current = interpolate(0);
+          return function(t) {
+            var d2 = interpolate(t);
+            var pos = outerArc.centroid(d2);
+            pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+            return "translate("+ pos +")";
+          };
+        })
+        .styleTween("text-anchor", function(d){
+          this._current = this._current || d;
+          var interpolate = d3.interpolate(this._current, d);
+          this._current = interpolate(0);
+          return function(t) {
+            var d2 = interpolate(t);
+            return midAngle(d2) < Math.PI ? "start":"end";
+          };
+        });
+
+      text.exit().remove();
+
+      var polyline = svg.select(".lines")
+        .selectAll("polyline")
+        .data(pie(data), key)
+        .enter().append("polyline")
+        .attr("fill", "none")
+        .attr("stroke", "#000");
+
+      polyline.transition().duration(1000)
+        .attrTween("points", function(d){
+          this._current = this._current || d;
+          var interpolate = d3.interpolate(this._current, d);
+          this._current = interpolate(0);
+          return function(t) {
+            var d2 = interpolate(t);
+            var pos = outerArc.centroid(d2);
+            pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+            return [arc.centroid(d2), outerArc.centroid(d2), pos];
+          };
+        });
     }
 
     return {
