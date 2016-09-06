@@ -1,9 +1,7 @@
 <div>
   <div class="row form-group" ng-class="{'has-error': submitted && (errors.name || objForm.name.$invalid)}">
-    <div class="col-sm-4 text-right">
+    <div class="col-lg-8 col-md-8 col-sm-8">
       <label class="control-label">Name of Goal</label>
-    </div>
-    <div class="col-sm-6">
       <input type="text" name="name" id="name" class="form-control" ng-model="obj.name" required ng-minlength="2">
       <span ng-repeat="error in errors.name" class="help-block">{{ error }}</span>
       <span ng-show="submitted && objForm.name.$error.required" class="help-block">Name is required.</span>
@@ -12,17 +10,13 @@
   </div>
 
   <div class="row form-group">
-    <div class="col-sm-4 text-right">
+    <div class="col-lg-8 col-md-8 col-sm-8">
       <label>{{ obj.owner.first_name + ' ' + obj.owner.last_name }}'s Retirement Age</label>
-    </div>
-    <div class="col-sm-6">
       <select ng-model="obj.selected_age" name="selectedAge" class="form-control" data-placeholder="Choose Age" tabindex="1" required ng-options="age for age in ages">
       </select>
+      <span class="hint"><span class="star">*</span> Retirement calculation is based on age of younger primary user or spouse.</span>
       <span ng-repeat="error in errors.person" class="help-block">{{ error }}</span>
       <span ng-show="submitted && objForm.selectedAge.$error.required" class="help-block">Age is required.</span>
-    </div>
-    <div class="col-sm-8 col-sm-offset-4">
-      <span class="hint"><span class="star">*</span> Retirement calculation is based on age of younger primary user or spouse.</span>
     </div>
   </div>
 
