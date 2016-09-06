@@ -1,86 +1,97 @@
-<div class="actions-header mm-fixed-top">
-    <span class="alert-filter-icon" ng-class="{'icon-action-exclamation': !alertFilterOn, 'icon-action-alert': alertFilterOn}" ng-click="toggleAlertFilter()"></span>
-    <ul class="action-filters nav nav-pills">
-      <li ng-class="{active: categoryFilter.category == 'goal'}">
-        <a ng-click="toggleCategoryFilter('goal')"><span>Goals</span></a>
-      </li>
-      <li ng-class="{active: categoryFilter.category == 'debt'}">
-        <a ng-click="toggleCategoryFilter('debt')"><span>Debts</span></a>
-      </li>
-      <li ng-class="{active: categoryFilter.category == 'protection'}">
-        <a ng-click="toggleCategoryFilter('protection')"><span>Protections</span></a>
-      </li>
-    </ul>
-  </div>
-
-<div class="actions-content">
-  <div class="action" ng-repeat="goal in filteredActionables = (actionables | filter:categoryFilter | filter:alertFilter)">
-    <div class="goal-icon {{icon(iconSize, goal.type)}}" ng-if="goal.category == 'goal'"></div>
-    <div class="debt-icon icon-debt-{{iconSize}}" ng-if="goal.category == 'debt'"></div>
-    <img src="/images/svg/protection-achieved-1-lb.svg" class="protection-icon badge-svg" ng-if="goal.type == 'Reserve' && goal.kind == '1CR'">
-    <img src="/images/svg/protection-achieved-3-lb.svg" class="protection-icon badge-svg" ng-if="goal.type == 'Reserve' && goal.kind == '3CR'">
-    <img src="/images/svg/protection-achieved-6-lb.svg" class="protection-icon badge-svg" ng-if="goal.type == 'Reserve' && goal.kind == '6CR'">
-    <img src="/images/svg/protection-lp-lb.svg" class="protection-icon badge-svg" ng-if="goal.type == 'LifePolicy'">
-    <img src="/images/svg/protection-dp-lb.svg" class="protection-icon badge-svg" ng-if="goal.type == 'DisabilityPolicy'">
-    <img src="/images/svg/protection-ltc-lb.svg" class="protection-icon badge-svg" ng-if="goal.type == 'CarePolicy'">
-
-    <h2 class="truncate goal-text" ng-if="goal.category != 'protection'">{{goal.name}}</h2>
-    <h2 class="truncate" ng-if="goal.category == 'protection'">{{goal.name}}</h2>
-
-    <div class="link-container hidden-xs" ng-if="goal.category == 'goal' || goal.category == 'debt' || goal.category == 'protection'">
-      <a ng-href="{{summaryPath(goal)}}" ng-if="goal.type != 'LifePolicy' && goal.type != 'DisabilityPolicy' && goal.type != 'CarePolicy'"><i class="fa fa-bar-chart-o"></i><span> Summary</span></a>
-      <a ng-href="/#/summaries/policies/disability" ng-if="goal.type == 'DisabilityPolicy'"><i class="fa fa-bar-chart-o"></i><span> Summary</span></a>
-      <a ng-href="/#/summaries/policies/life" ng-if="goal.type == 'LifePolicy'"><i class="fa fa-bar-chart-o"></i><span> Summary</span></a>
-      <a ng-href="/#/summaries/policies/care" ng-if="goal.type == 'CarePolicy'"><i class="fa fa-bar-chart-o"></i><span> Summary</span></a>
-      <a ng-click="open(goal.type, 'Edit', goal.category, goal)" ng-hide="goal.category == 'protection'"><i class="fa fa-pencil"></i><span> Edit</span></a>
-    </div>
-
-    <ul>
-      <li id="action-{{action.guid}}" ng-repeat="action in goal.actions" ng-click="goToSingleAction(action)">
-        <div class="icon-action-{{getActionStatus(action)}}"></div>
-        <span class="visible-md-inline-block visible-lg-inline-block description" termify>{{action.description}}</span>
-        <span class="hidden-md hidden-lg description" termify>{{action.short_desc}}</span>
-
-        <i class="fa fa-chevron-right visible-xs"></i>
-
-        <div class="carousel-container hidden-xs" ng-class="{retirement: goal.type == 'Retirement'}" ng-if="action.positions.length && !action.is_complete">
-          <slick init-onload="true" data="action.positions" class="carousel" responsive="[{breakpoint: 10000, settings: {centerMode: true, slidesToShow: 3}}, {breakpoint: 768, settings: {arrows: false, centerMode: true, slidesToShow: 3}}, {breakpoint: 480, settings: {arrows: false, centerMode: true, slidesToShow: 1}}]">
-            <div class="slide-container" ng-repeat="option in action.positions">
-              <div class="slide" data-option-id="{{option[0].option}}">
-                <h3 ng-show="$index == 0">Recommended</h3>
-                <h3 ng-hide="$index == 0">Option {{$index+1}}</h3>
-                <div class="icon-down-arrow"></div>
-                <div class="slide-content">
-                  <p class="clearfix" ng-repeat="fund in option" ng-if="option.length < 6">
-                    <span class="col-sm-6 percent">{{fund.percent}}%</span>
-                    <span class="col-sm-6 name" ng-if="!fund.url">{{fund.name}}</span>
-                    <span class="col-sm-6 name" ng-if="fund.url"><a ng-href="{{fund.url}}" target="_blank">{{fund.name}}</a></span>
-                  </p>
-                  <p class="clearfix" ng-repeat="row in option | partition:2" ng-if="option.length > 5">
-                    <span class="col-sm-2 percent">{{row[0].percent}}%</span>
-                    <span class="col-sm-4 name" ng-if="!row[0].url">{{row[0].name}}</span>
-                    <span class="col-sm-4 name" ng-if="row[0].url"><a ng-href="{{row[0].url}}" target="_blank">{{row[0].name}}</a></span>
-                    <span class="col-sm-2 percent">{{row[1].percent}}%</span>
-                    <span class="col-sm-4 name" ng-if="!row[1].url">{{row[1].name}}</span>
-                   <span class="col-sm-4 name" ng-if="row[1].url"><a ng-href="{{row[1].url}}" target="_blank">{{row[1].name}}</a></span>
-                  </p>
-                </div>
-                <div class="radio-container">
-                  <div class="icon-radio"></div>
-                </div>
-              </div>
-            </div>
-          </slick>
+<div class="main-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>
+          Action List
+        </h3>
+        <a href="javascript:void(0)" ng-click="goBack()" class="title-icon-close pull-right">
+          <i class="icon icon-close"></i>
+        </a>
+        <div class="tab-header">
+          <ul>
+            <li ng-class="{active: noFilter}">
+              <a ng-click="changeCategoryFilter('')"><span>All Actions</span></a>
+            </li>
+            <li ng-class="{active: categoryFilter.category == 'goal'}">
+              <a ng-click="changeCategoryFilter('goal')"><span>Goals</span></a>
+            </li>
+            <li ng-class="{active: categoryFilter.category == 'debt'}">
+              <a ng-click="changeCategoryFilter('debt')"><span>Debts</span></a>
+            </li>
+            <li ng-class="{active: categoryFilter.category == 'protection'}">
+              <a ng-click="changeCategoryFilter('protection')"><span>Protections</span></a>
+            </li>
+            <li ng-class="{active: categoryFilter.is_completed == true}">
+              <a ng-click="changeCategoryFilter('completed')"><span>Completed Actions ({{completedCount}})</span></a>
+            </li>
+          </ul>
         </div>
-
-        <a class="btn btn-default" ng-click="showRationale(action)">Rationale</a>
-
-        <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="i-did btn btn-default hidden-xs" ng-if="action.name === 'open_account' && !action.is_complete" ng-click="completeAction(action)" ng-disabled="!action.is_completable">Open</a>
-        <button class="i-did btn btn-default hidden-xs" ng-if="action.name !== 'apply' && action.name !== 'open_account' && !action.is_complete" ng-click="completeAction(action)" ng-disabled="!action.is_completable">I Did It</button>
-        <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="i-did btn btn-default hidden-xs" ng-if="action.name === 'apply' && !action.is_complete" ng-disabled="!action.is_completable">Apply!</a>
-        <button class="i-did ok btn btn-default hidden-xs" ng-if="action.is_complete"><i class="fa fa-check"></i></button>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </div>
-<div class="no-actions text-center" ng-show="!loading && !filteredActionables.length">No actions match these conditions.</div>
+<div class="main-content-style">
+  <div class="container main-wrapper actions-content">
+    <div class="row">
+      <div class="action-list col-lg-12">
+        <div class="wrapper-detail" ng-repeat="goal in filteredActionables = (actionables | filter:categoryFilter | filter:alertFilter)">
+          <div class="section-header">
+            <i class="icon {{goal | timelineGoalIcon}}"></i>
+            {{goal.name}}
+          </div>
+          <div ng-repeat="action in goal.actions" class="action-list-content" id="action-{{action.guid}}"
+            ng-click="goToSingleAction(action)">
+            <div class="action-list-head {{getActionStatus(action)}}">
+              <i class="icon-profile-status"></i>
+              <p class="visible-md-inline-block visible-lg-inline-block description" termify>{{action.description}}</p>
+              <p class="hidden-md hidden-lg description" termify>{{action.short_desc}}</p>
+
+              <span class="pull-right row-gutter-20 action-buttons">
+                <a href="javascript:void(0)" class="explain col-margin-20" ng-click="showRationale(action)" ng-if="!action.is_complete">
+                  <i class="icon-explain"></i>
+                  Explain
+                </a>
+                <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="btn btn-primary col-margin-20 hidden-xs"
+                  ng-if="!action.is_complete"
+                  ng-click="completeAction(action)"
+                  ng-disabled="!action.is_completable">Take Action</a>
+
+                <a href="javascript:void(0)" ng-if="action.is_complete" class="btn btn-primary btn-complete col-margin-20">Completed</a>
+              </span>
+            </div>
+            <div class="action-list-table" ng-if="action.positions.length && !action.is_complete">
+              <div class="table-static" style="width: 100%;" ng-repeat="option in action.positions">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Recommended</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="row in option | partition:2">
+                    <td>
+                      <strong>{{row[0].percent}}%</strong>
+                      <span>{{row[0].name}}</span>
+                    </td>
+                    <td>
+                      <strong>{{row[1].percent}}%</strong>
+                      <span>{{row[1].name}}</span>
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="no-actions text-center" ng-show="!loading && !filteredActionables.length">No actions match these conditions.</div>
+      </div>
+    </div>
+  </div>
+</div>

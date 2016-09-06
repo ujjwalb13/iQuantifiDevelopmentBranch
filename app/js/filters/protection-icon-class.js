@@ -2,6 +2,8 @@
   'use strict';
   angular.module('agera').filter('protectionIconClass', function() {
     return function(input) {
+      input = input.toLowerCase();
+
       if (input === "lifepolicy") {
         return "icon-pt-life";
       }

@@ -9,7 +9,8 @@
           isArray: true
         }
       });
-      obj.getExpenseName = function(kind) {
+      obj.getName = function(kind) {
+        if(kind == undefined) { return "";}
         var kind_formatted;
         kind_formatted = kind.replace('hobbies_travel', 'Hobbies / Travel').replace('cable_internet', 'Cable / Internet').replace('other', 'Other Expenses');
         return _.titleize(_.humanize(kind_formatted));

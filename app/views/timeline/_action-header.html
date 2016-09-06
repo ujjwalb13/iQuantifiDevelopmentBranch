@@ -18,7 +18,7 @@
               Protection
             </a>
           </li>
-          <li class="archievement">
+          <li class="archievement" ng-click="gotoAchievementsPage()">
             <a href="javascript:void(0)">
               <i class="icon icon-al-my-archivement"></i>
               My Achievements
@@ -26,10 +26,10 @@
           </li>
         </ul>
       </div>
-      <a href="javascript:void(0)" ng-if="incompleteActionsCount" class="btn btn-primary pull-right" ng-click="clickActionButton()">
+      <a href="javascript:void(0)" ng-if="incompleteActionsCount" class="btn btn-primary pull-right" ng-click="gotoMyActions()">
         My Actions <span class="badge">{{incompleteActionsCount}}</span>
       </a>
-      <a href="javascript:void(0)" ng-if="profileIncompleteCount" class="btn btn-primary pull-right" ng-click="clickActionButton()">
+      <a href="javascript:void(0)" ng-if="profileIncompleteCount" class="btn btn-primary pull-right" ng-click="gotoCompleteMyProfile()">
         Complete My Profile <span class="badge">{{profileIncompleteCount}}</span>
       </a>
     </div>

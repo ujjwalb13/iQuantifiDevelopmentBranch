@@ -17,6 +17,7 @@ $title-green-medium: #8dc34a;
 $title-dark-yellow: #d8a029;
 $section-header-color: #f8f6ef;
 $url-images-icon: "/images/icon/";
+$url-svg-icon: "/images/svg/";
 $table-row-hover: #e9f3db;
 $table-row-active: #efebda;
 $gray-color: #aaa99a;
@@ -93,7 +94,7 @@ ul{
     margin-right: 10px;
   }
   .btn{
-    margin-top: -5px;
+    margin-top: -10px;
   }
   .btn-blue{
     background: #4a8f92;
@@ -101,8 +102,8 @@ ul{
     font-size: 14px;
     padding: 5px 10px;
     &:hover{
-      color: #4a8f92;
-      background: white;
+      background: #386d6f;
+      border: 1px solid #386d6f;
     }
   }
   .btn-delete{
@@ -168,10 +169,22 @@ ul{
             padding-top: 0px;
             padding-bottom: 0px;
             height: 45px;
+            position: relative;
             &:last-of-type{
               text-align: right;
               padding-right: 40px;
               font-size: 18px;
+              &:before{
+                content: "\f105";
+                display: block;
+                font-size: 20px;
+                color: black;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-family: FontAwesome;
+                opacity: 0.3;
+              }
             }
           }
           &.total-row{
@@ -183,24 +196,66 @@ ul{
               }
             }
           }
-          &:hover{
+          &:first-of-type,&:last-of-type{
+            td{
+              &:last-of-type{
+                &:before{
+                  display: none;
+                }
+              }
+            }
+            &:hover{
+              background: transparent;
+              cursor: inherit;
+            }
+          }
+          &:nth-child(3){
+            &:hover, &.active{
+              background: #dbe9e9;
+            }
+          }
+          &:hover, &.active{
             background: #efebda;
             td{
               position: relative;
               &:last-of-type{
                 &:before{
-                  content: "\f105";
-                  display: block;
-                  font-size: 20px;
-                  color: black;
-                  position: absolute;
-                  top: 10px;
-                  right: 10px;
-                  font-family: FontAwesome;
+                  opacity: 1;
                 }
               }
             }
           }
+        }
+      }
+    }
+  }
+  .finance-recommendations-content{
+    background: #eef4f4;
+    padding: 10px;
+    h3{
+      font-size: 24px;
+      border-bottom: 2px solid #c5c6c8;
+      line-height: 36px;
+    }
+    ul{
+      margin-bottom: 0px;
+      li{
+        border-bottom: 1px solid #c5c6c8;
+        line-height: 32px;
+        &:last-of-type{
+          border-bottom: 0px;
+        }
+        label{
+          display: inline-block;
+          width: 49%;
+          font-size: 14px;
+          margin-bottom: 0px;
+        }
+        span{
+          display: inline-block;
+          width: 50%;
+          font-size: 18px;
+          text-align: right;
         }
       }
     }
@@ -253,6 +308,7 @@ ul{
         span{
           font-size: 12px;
           display: block;
+          font-weight: bold;
         }
       }
       .chart-status{
@@ -260,11 +316,20 @@ ul{
         display: inline-block;
         border-radius: 20px;
         color: white;
-        z-index: 400;
+        z-index: 399;
         position: relative;
         padding: 5px 15px;
         margin-top: 10px;
         margin-bottom: 5px;
+        i{
+          margin-right: 5px;
+        }
+        &.behind-one-month{
+          background: #ffc744;
+        }
+        &.behind-two-month{
+          background: $red-color;
+        }
       }
       .save-status{
         color: $blue-color;
@@ -275,6 +340,10 @@ ul{
         span{
           display: block;
           margin-top: -3px;
+          font-weight: bold;
+        }
+        &.behind-one-month,&.behind-two-month{
+          color: $red-color;
         }
       }
     }
@@ -342,14 +411,24 @@ ul{
 }
 .next-action-content{
   position: relative;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 10px;
+  &:last-of-type{
+    margin-bottom: 0px;
+    border-bottom: 0px;
+  }
   i{
-    color: $yellow-color;
-    position: absolute;
-    top: 5px;
-    left: 0px;
+    color: $red-color;
+    margin-right: 4px;
+    &.yellow-icon{
+      color: #ffc832;
+    }
+  }
+  span{
+    display: block;
+    padding-left: 20px;
   }
   p{
-    padding-left: 20px;
     padding-right: 118px;
   }
   .btn{
@@ -359,6 +438,13 @@ ul{
     top: 0px;
     right: 0px;
     line-height: 30px;
+  }
+}
+
+.completed-action-content{
+  padding-left: 20px;
+  p{
+    margin-bottom: 10px;
   }
 }
 
@@ -503,7 +589,7 @@ ul{
   }
   .action-list-head{
     position: relative;
-    padding: 10px 240px 10px 54px;
+    padding: 10px 320px 10px 54px;
     .icon-profile-status{
       background: transparent;
       &:before{
@@ -568,34 +654,28 @@ ul{
     p{
       padding-left: 30px;
       margin-bottom: 0px;
-      span{
-        border-bottom: 1px dashed #4a8f92;
-        display: inline-block;
-        padding-bottom: 0px;
-      }
     }
-    .btn{
+    .action-buttons {
       position: absolute;
-      top: 0px;
-      right: 0px;
-    }
-    .explain{
-      position: absolute;
-      right: 160px;
-      font-weight: bold;
-      color: #4a8f92;
-      font-size: 16px;
-      margin-top: -2px;
-      i{
-        margin-right: 5px;
-        vertical-align: middle;
+      right: 54px;
+      margin-top: -10px;
+      .btn {width: 140px;}
+      .explain{
+        font-weight: bold;
+        color: #4a8f92;
+        font-size: 16px;
+        margin-top: -2px;
+        i{
+          margin-right: 5px;
+          vertical-align: middle;
+        }
       }
     }
   }
   .action-list-table{
     margin-top: 20px;
     padding-left: 105px;
-    padding-right: 150px;
+    padding-right: 290px;
     table{
       thead{
         tr{
@@ -632,5 +712,190 @@ ul{
   height: 24px;
   &:before{
     background: url($url-images-icon + "question_mark.png") no-repeat 0 0;
+  }
+}
+
+.popup-main{
+  width: 600px;
+}
+
+.modal{
+  overflow: hidden;
+  .modal-header{
+    background: #ece8de;
+    text-align: center;
+    border-radius: 5px 5px 0px 0px;
+    i{
+      vertical-align: middle;
+      margin-right: 10px;
+      margin-top: -5px;
+    }
+    h4{
+      font-size: 20px;
+      &.explain-tt{
+        color: #4a8f92;
+      }
+    }
+  }
+}
+.action-list-popup{
+  p{
+    margin-bottom: 0px;
+    font-size: 16px;
+    i,strong{
+      display: inline-block;
+    }
+    i{
+      margin-right: 7px;
+    }
+  }
+  ul{
+    li{
+      float: none;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $border-color;
+      &:last-of-type{
+        border-bottom: 0px;
+        padding-bottom: 0px;
+      }
+    }
+  }
+  .ratio-st{
+    margin-right: 30px;
+    margin-left: 6px;
+    strong{
+      margin-left: 15px;
+    }
+  }
+  label.radio-btn{
+    margin-top: 0px;
+  }
+  em{
+    color: #8c8b8b;
+  }
+  .form-popup{
+    padding-left: 48px;
+    .form-popup-ct{
+      position: relative;
+      margin-top: 10px;
+      .form-group{
+        padding-left: 30px;
+        width: 90%;
+        margin-bottom: 0px;
+      }
+      .ratio-st{
+        position: absolute;
+        top: -2px;
+        left: -14px;
+      }
+      label{
+        margin-top: 0px;
+      }
+    }
+  }
+  .modal-body{
+    padding: 15px 20px 15px 20px;
+  }
+  .modal-footer{
+    text-align: center;
+    padding-bottom: 30px;
+    padding
+    button{
+      display: inline-block;
+    }
+  }
+}
+.blue-bg-content{
+  background: #eef4f4;
+  display: block;
+  padding: 10px 20px;
+  font-weight: bold;
+  float: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.tab-explain{
+  .tab-content{
+    ul{
+      border-right: 1px solid $border-color;
+      li{
+        float: none;
+        display: block;
+        border-bottom: 1px solid $border-color;
+        padding: 0px;
+        a{
+          font-size: 14px;
+          padding: 10px 20px;
+          display: block;
+          color: #444444;
+        }
+        &.active{
+          a{
+            font-weight: bold;
+            background: #dbe9e9;
+          }
+        }
+      }
+    }
+  }
+  .tab-detail{
+    font-size: 14px;
+    p{
+      font-size: 14px;
+    }
+  }
+}
+.modal-lg{
+  width: 900px;
+}
+
+
+ul.overview-content{
+  li{
+    .icon-goals-cgr{
+      background: url($url-svg-icon + "icon-al-rolling-goal.svg") no-repeat center;
+      background-size: 60%;
+      min-height: 115px;
+      padding-top: 6px;
+    }
+    .icon-debt-cgr{
+      background: url($url-svg-icon + "icon-al-rolling-debt.svg") no-repeat center;
+      background-size: 60%;
+      min-height: 115px;
+      padding-top: 7px;
+    }
+    .icon-protect-cgr{
+      background: url($url-svg-icon + "icon-al-rolling-policy.svg") no-repeat center;
+      background-size: 70%;
+      min-height: 115px;
+      padding-top: 0px;
+    }
+  }
+}
+
+.congratulation-section{
+  text-align: center;
+  .icon-medal{
+    background: url($url-svg-icon + "icon-al-congratulation.svg") no-repeat center;
+    background-size: 100%;
+    width: 220px;
+    height: 130px;
+    margin: 0 auto;
+  }
+  .rolling-ct{
+    background: url($url-svg-icon + "icon-al-rolling.svg") no-repeat center;
+    background-size: 100%;
+    width: 450px;
+    height: 60px;
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    padding-top: 18px;
+    font-size: 24px;
+  }
+  p{
+    font-size: 18px;
+    padding: 20px 0px 0px;
   }
 }

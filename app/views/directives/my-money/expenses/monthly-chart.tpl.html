@@ -1,0 +1,32 @@
+<div id="group-details-popup" ng-show="selectedExpense != null">
+  <div class="info-icon-container">
+    <div class="popover top fade in">
+      <div class="arrow"></div>
+      <div class="popover-inner">
+        <div class="popover-content debt">
+          <i class="fa fa-times btn-close-popover" aria-hidden="true" ng-click="selectedExpense = null"></i>
+          <label class="title">{{getExpenseName(selectedExpense.kind)}}</label>
+          <ul>
+            <li class="chart-dark-yellow">
+              <span class="chart-color"></span> Current Expenses:  <strong class="current-expense-value">${{selectedExpense.amount}}</strong>
+            </li>
+            <li class="chart-green">
+              <span class="chart-color"></span> 3 Month Average:  <span class="three-months-average-value">${{selectedExpense.three_month_average_amount}}</span>
+            </li>
+          </ul>
+          <br/>
+          <label for="">Categories include:</label>
+          <p ng-hide="subCategories[selectedExpense.kind]['loadDone']">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+          </p>
+          <ul ng-show="subCategories[selectedExpense.kind]['loadDone']">
+            <li ng-repeat="cat in subCategories[selectedExpense.kind]['categories']">
+              <strong>{{cat}}</strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<svg width="100%" ratio="2"></svg>

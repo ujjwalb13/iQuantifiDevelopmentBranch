@@ -1,0 +1,97 @@
+<div class="main-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>
+           My Progress
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content-style">
+    <div class="container main-wrapper">
+      <div class="row">
+        <div class="left-side-bar col-lg-2 col-md-3 col-sm-12 col-xs-12">
+          <progress-sidebar current-page='/achievements'></progress-sidebar>
+        </div>
+        <div class="right-content col-lg-10 col-md-9 col-sm-12 col-xs-12">
+          <div class="wrapper-detail">
+            <div class="congratulation-section">
+              <i class="icon icon-medal"></i>
+              <span class="rolling-ct">
+                Congratulations!
+              </span>
+              <p>
+                Here are your remarkable achievements!
+              </p>
+            </div>
+          </div>
+          <div class="content-wrapper" ng-if="goalsSection">
+            <div class="section-header goals">
+                <i class="icon icon-gl-custom-goal"></i>{{ goalsSection.name }}
+            </div>
+            <div class="wrapper-detail">
+              <ul class="overview-content">
+                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="goal in goalsSection.items">
+                  <div class="icon-goals-cgr">
+                    <span>
+                      <i class="icon {{ goal.type | goalIconClass }} icon-80"></i>
+                    </span>
+                  </div>
+                  <p>
+                    <strong>{{ goal.name }}</strong><br>
+                    <span>{{ goal.amount | dollars }} | {{ goal.date | monthYear }}</span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="content-wrapper" ng-if="debtsSection">
+            <div class="section-header debts">
+                <i class="icon icon-db-debt"></i> {{ debtsSection.name }}
+            </div>
+            <div class="wrapper-detail">
+              <ul class="overview-content">
+                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="debt in debtsSection.items">
+                  <div class="icon-debt-cgr">
+                    <span>
+                      <i class="icon {{ debt.type | debtIconClass }}  icon-80"></i>
+                    </span>
+                  </div>
+                  <p>
+                    <strong>{{ debt.name }}</strong><br>
+                    <span>{{ debt.amount | dollars }} | {{ debt.date | monthYear }}</span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="content-wrapper" ng-if="protectionsSection">
+            <div class="section-header protections">
+                <i class="icon icon-pt-protection"></i>{{ protectionsSection.name }}
+            </div>
+            <div class="wrapper-detail">
+              <ul class="overview-content">
+                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="protection in protectionsSection.items">
+                  <div class="icon-protect-cgr">
+                    <span>
+                      <i class="icon {{ protection.type | protectionIconClass }} icon-80"></i>
+                    </span>
+                  </div>
+                  <p>
+                    <strong> {{ protection.name }}</strong><br>
+                    <span>{{ protection.amount | dollars }} | {{ protection.date | monthYear }}</span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
