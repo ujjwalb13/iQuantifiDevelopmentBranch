@@ -45,7 +45,7 @@
             path: "/my-money/capitalandcashflow"
           }, {
             title: "Accounts",
-            path: "/my-money/accounts"
+            path: "/my-money/accounts-summary"
           }, {
             title: "Net Worth",
             path: "/my-money/networth"

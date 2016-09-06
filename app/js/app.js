@@ -332,6 +332,9 @@
     }).when('/my-money/accounts', {
       templateUrl: '/views/my-money/accounts.html',
       controller: 'AccountsCtrl'
+    }).when('/my-money/accounts-summary', {
+      templateUrl: '/views/my-money/accounts-summary.html',
+      controller: 'AccountsSummaryCtrl'
     }).when('/my-money/accounts/new', {
       templateUrl: '/views/my-money/account-form.html',
       controller: 'AccountFormCtrl'

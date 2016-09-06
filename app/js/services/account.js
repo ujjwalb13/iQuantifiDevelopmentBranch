@@ -9,6 +9,12 @@
           updateList: {
               method: 'POST',
               isArray: true
+          },
+          AccountsSummary: {
+            method: 'GET',
+            isArray: false,
+            url: ENV.apiHost + "/finance/accounts/Summary"
+
           }
       }
       );
