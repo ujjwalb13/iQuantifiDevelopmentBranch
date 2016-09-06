@@ -321,6 +321,9 @@ ul{
         padding: 5px 15px;
         margin-top: 10px;
         margin-bottom: 5px;
+        i{
+          margin-right: 5px;
+        }
         &.behind-one-month{
           background: #ffc744;
         }
