@@ -1,0 +1,155 @@
+﻿<div ng-include src="'/views/my-money/_money-header.html'" class="main-title"></div>
+<div class="container main-wrapper">
+    <div class="row">
+        <div class="left-side-bar col-lg-3 visible-lg">
+            <money-sidebar current-page='/my-money/accounts-summary'></money-sidebar>
+        </div>
+        <div class="right-content col-lg-9">
+            <div class="section-header goals">
+                <i class="icon icon-mm-accounts"></i>Accounts
+            </div>
+            <div class="content-wrapper">
+
+
+
+                <div class="row">
+                    <div class="col-sm-6">
+
+                        <div class="table-static">
+                            
+                            <table class="hovered">
+                                <caption>
+
+                                    <div class="main-title">
+                                        <h4>
+                                            <i class="icon icon-mm-accounts"></i>
+                                            Cash Accounts
+                                        </h4>
+                                    </div>
+                                </caption>
+                                <thead class="dark">
+                                <th>Account Name</th>
+                                <th>Sub</th>
+                                <th>Status</th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in cashaccounts" ng-click="goToAccountEdit(account.guid)">
+                                        <td>{{item.AccountName}} <span class="label label-success" ng-show="item.isLinked">Linked</span></td>
+                                        <td>{{item.AccountSubText}}</td>
+                                        <td>{{item.AccountStatusDisplay}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+ 
+                        <div class="table-static">
+
+                            <table class="hovered">
+                                <caption>
+                                    <div class="main-title">
+                                        <h4>
+                                            <i class="icon icon-db-debt"></i>
+                                            Debts
+                                        </h4>
+                                    </div>
+
+                                </caption>
+                                <thead class="dark">
+                                <th>Account Name</th>
+                                <th>Sub</th>
+                                <th>Status</th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in debts" ng-click="goToAccountEdit(account.guid)">
+                                        <td>{{item.AccountName}} <span class="label label-success" ng-show="item.isLinked">Linked</span></td>
+                                        <td>{{item.AccountSubText}}</td>
+                                        <td>{{item.AccountStatusDisplay}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-sm-6">
+
+                    <div class="table-static">
+                        <table class="hovered">
+                            <caption>
+                                <div class="main-title">
+                                    <h4>
+                                        <i class="icon icon-al-my-money"></i>
+                                        Investments
+                                    </h4>
+                                </div>
+
+                            </caption>
+                            <thead class="dark">
+                            <th>Account Name</th>
+                            <th>Sub</th>
+                            <th>Status</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in investments" ng-click="goToAccountEdit(account.guid)">
+                                    <td>{{item.AccountName}} <span class="label label-success" ng-show="item.isLinked">Linked</span></td>
+                                    <td>{{item.AccountSubText}}</td>
+                                    <td>{{item.AccountStatusDisplay}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <div class="table-static">
+                        <table class="hovered">
+                            <caption>
+                                <div class="main-title">
+                                    <h4>
+                                        <i class="icon icon-pt-protection"></i>
+                                        Policies
+                                    </h4>
+                                </div>
+                            </caption>
+                            <thead class="dark">
+                            <th>Account Name</th>
+                            <th>Sub</th>
+                            <th>Status</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in policies" ng-click="goToAccountEdit(account.guid)">
+                                    <td>{{item.AccountName}} <span class="label label-success" ng-show="item.isLinked">Linked</span></td>
+                                    <td>{{item.AccountSubText}}</td>
+                                    <td>{{item.AccountStatusDisplay}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+ 
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <a ng-href="{{disabled()}}" class="iq-submit-btn btn-primary btn btn-add" role="button">Add New Account</a>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
