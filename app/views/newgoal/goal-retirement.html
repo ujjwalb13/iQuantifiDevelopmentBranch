@@ -55,7 +55,9 @@
             <span ng-show="submitted && propertyProfile.amount.$error.required" class="help-block">Amount is required.</span>
           </div>
         </div>
-      <a class="delete" ng-click="deleteRental($index)"><span>delete</span></a>
+      <a class="delete btn-delete" ng-click="deleteRental($index)">
+         <span class="fa fa-trash" aria-hidden="true"></span>
+      </a>
 
     </div>
 
