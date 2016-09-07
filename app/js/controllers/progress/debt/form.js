@@ -2,7 +2,7 @@
   'use strict';
   var hasProp = {}.hasOwnProperty;
 
-  angular.module('progress').controller('DebtFormCtrl', function($scope, $rootScope, $routeParams, $q, $modal, $location, Scenario, Person, Loan, Credit, MyProgress, utilService, goalService, ENV) {
+  angular.module('progress').controller('DebtFormCtrl', function ($window, $scope, $rootScope, $routeParams, $q, $modal, $location, Scenario, Person, Loan, Credit, MyProgress, utilService, goalService, ENV) {
     var Debt, ModalInstanceCtrl, base, date, downsize, fetchRelated, gotoSummary, i, lookup, socialSecurity, span, submitRelated, years;
     fetchRelated = function() {
       return Scenario.related({
@@ -230,13 +230,15 @@
         }
       }
     };
-    $scope.cancel = function() {
-      return $location.path('/progress');
+    $scope.cancel = function () {
+      return $window.history.back();
     };
     gotoSummary = function(debt) {
       var type;
       type = debt.kind === 'credit_card' ? 'creditcard' : 'loan';
-      return $location.path("/summaries/" + (_.pluralize(type)) + "/" + debt.guid);
+
+      return $window.history.back();
+      //return $location.path("/summaries/" + (_.pluralize(type)) + "/" + debt.guid);
     };
     $scope.openDeleteModal = function(debt) {
       var modalInstance;
