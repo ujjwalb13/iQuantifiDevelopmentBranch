@@ -14,8 +14,9 @@
     };
   });
 
-  angular.module('agera').controller('AccountFormCtrl', function($modal, $scope, $routeParams, $rootScope, $location, $q, Account, Person) {
+  angular.module('agera').controller('AccountFormCtrl', function ($window,$modal, $scope, $routeParams, $rootScope, $location, $q, Account, Person) {
     var ModalInstanceCtrl;
+    $routeParams.accountId
     if ($routeParams.accountId) {
       $q.all([
         Account.get({
@@ -49,7 +50,7 @@
     });
 
     $scope.gotoAccounts = function () {
-      return $location.path('/my-money/accounts');
+      return $window.history.back();
     };
 
     $scope.submit = function(isValid) {
@@ -66,7 +67,7 @@
             msg: 'The account was saved successfully.'
           });
           $rootScope.$broadcast('refresh');
-          return $location.path('my-money/accounts');
+          return $scope.gotoAccounts();
         }, function(err) {
           $scope.processing = false;
           return $rootScope.$broadcast('alert', {
