@@ -164,6 +164,9 @@
       if ($scope.type === 'retirement') {
         $scope.showPrimarySocial = false;
         $scope.showSpouseSocial = false;
+        if (_.isUndefined($scope.obj.spouse_selected_age)) {
+          $scope.obj.spouse_selected_age = 60;
+        }
         if ($scope.person.primary && utilService.getAge($scope.person.primary.dob) >= 40) {
           $scope.showPrimarySocial = true;
         }
