@@ -179,6 +179,29 @@
     };
 
 
+    $scope.RationaleGraphSectionHeight = function (graphDataItem) {
+      var height = (graphDataItem.AmountPercentage * 100) + '%';
+      return height;
+    };
+
+    $scope.RationaleGraphSectionBackgroundColor = function (graphDataItem) {
+
+      if (graphDataItem.CategoryType === "goal" || graphDataItem.CategoryType === "retirement") {
+        return "#8ec54a";
+      }
+      else if (graphDataItem.CategoryType === "debt") {
+        return "#e47b5a";
+      }
+      else if (graphDataItem.CategoryType === "expenses") {
+        return "#e79546";
+      }
+      else if (graphDataItem.CategoryType === "protection") {
+        return "#71aba9";
+      }
+
+      return '#e6e6e6';
+    };
+
 
 
     $scope.$on('clean-timeline', function () {

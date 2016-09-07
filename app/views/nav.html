@@ -878,6 +878,7 @@
       background-color: #c7e2a1;
       position: relative;
       opacity: 0.50;
+      border-top: 1px solid white;
     }
 
     .hilight-box {
@@ -966,9 +967,49 @@
     .rationale-graph-line-label {
       position: absolute;
       width: 70px;
-      margin-top: -7px;
+      margin-top: -9px;
       text-align: right;
+      color: #8c8b8b;
     }
+
+    
+
+
+    .rationale-data-row {
+      box-sizing: border-box;
+    }
+
+    .rationale-data-row-selected {
+      box-sizing: border-box;
+      vertical-align: central;
+      background-color: #eef4f4;
+    }
+
+    .rationale-data-label, .rationale-data-label-selected {
+      display: inline-block;
+      box-sizing: border-box;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .rationale-data-label-selected {
+      font-weight: bold;
+    }
+
+    .rationale-data-circle {
+	    width: 16px;
+	    height: 16px;
+      opacity: 0.50;
+	    background: red;
+	    -moz-border-radius: 10px;
+	    -webkit-border-radius: 10px;
+	    border-radius: 10px;
+      display: inline-block;
+      box-sizing: border-box;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
   </style>
 
   <!-- Rationale Modal -->
@@ -1000,80 +1041,68 @@
 
                       <div class="rationale-graph-line-area">
 
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
+                        <div ng-repeat="graphDataItem in ratSection.GraphDataInfo.GraphDataYLines track by $index" ng-style="{ 'height': RationaleGraphSectionHeight(graphDataItem) }">
+                          <div class="rationale-graph-line-label">{{ graphDataItem.AmountString }}</div>
                           <div class="rationale-graph-line"></div>
                         </div>
 
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
-
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$5,500</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
-                        <div style="height: 10%;">
-                          <div class="rationale-graph-line-label">$0</div>
-                          <div class="rationale-graph-line"></div>
-                        </div>
                       </div>
 
                       <div class="rationale-graph-column">
-                        <!--<div ng-repeat="graphData in ratSection.GraphDataInfo track by $index">
-                          <div class="rationale-graph-column-section" style="background-color: #e47b5a; height: 10%;"></div>
-                        </div>-->
-                        <!--column values-->
-                        <div class="rationale-graph-column-section" style="height: 10%;"></div>
-                        <div style="height: 20%; position: relative;">
-                          <div class="hilight-box"></div>
-                          <div class="hilight-box-bottom"></div>
-                          <div class="hilight-box-bottom-shadow"></div>
-                          <div class="hilight-box-right"></div>
-                          <div class="hilight-box-right-shadow"></div>
+                        <div ng-repeat="graphDataItem in ratSection.GraphDataInfo.GraphDataPoints track by $index" ng-style="{ 'height': RationaleGraphSectionHeight(graphDataItem) }">
+                          
+                          <div ng-if="graphDataItem.isSelected != true" class="rationale-graph-column-section" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }" style="height: 100%;"></div>
+                          
+                          <div ng-if="graphDataItem.isSelected == true" style="height: 100%; position: relative;">
+                            <div class="hilight-box" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }"></div>
+                            <div class="hilight-box-bottom" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }"></div>
+                            <div class="hilight-box-bottom-shadow"></div>
+                            <div class="hilight-box-right" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }"></div>
+                            <div class="hilight-box-right-shadow"></div>
+                          </div>
+
                         </div>
-                        <div class="rationale-graph-column-section" style="background-color: #e47b5a; height: 10%;"></div>
-                        <div class="rationale-graph-column-section" style="background-color: #71aba9; height: 10%;"></div>
-                        <div class="rationale-graph-column-section" style="background-color: #e79546; height: 50%;"></div>
                       </div>
 
                       <!--bottom label-->
-                      <div style="text-align: center; margin-top: 15px;">
+                      <div style="text-align: center; margin-top: 15px; margin-left: 30px;">
                         Total Monthly Cashflow
                       </div>
 
                     </div>
-                    <div class="rationale-area-side" style="margin-left: 50%; background-color: yellow">
-                      data
+                    <div class="rationale-area-side" style="margin-left: 50%;">
+                      <div style="height: 20px;"></div>
+                      <div ng-repeat="graphDataItem in ratSection.GraphDataInfo.GraphDataPoints track by $index">
+                        <div class="rationale-data-row" ng-if="graphDataItem.isSelected != true">
+                          <div class="rationale-data-circle" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }">&nbsp;</div>
+                          <div class="rationale-data-label" style="width: 50%;">{{ graphDataItem.Description }}</div>
+                          <div class="rationale-data-label" style="width: 30%; text-align: right;">{{ graphDataItem.AmountString }}</div>
+                        </div>
+                        <div class="rationale-data-row-selected" ng-if="graphDataItem.isSelected == true">
+                          <div class="rationale-data-circle" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }">&nbsp;</div>
+                          <div class="rationale-data-label-selected" style="width: 50%;">{{ graphDataItem.Description }}</div>
+                          <div class="rationale-data-label-selected" style="width: 30%; text-align: right;">{{ graphDataItem.AmountString }}</div>
+                        </div>
+                      </div>
+                      <div class="rationale-data-row" style="border: 1px solid #e5e0c7; border-left: none; border-right: none;">
+                        <div class="rationale-data-label" style="width: 65%; font-weight: bold; margin-left: 10px;">Total Monthly Cash Flow</div>
+                        <div class="rationale-data-label" style="width: 25%; text-align: right; font-weight: bold;">$6,500</div>
+                      </div>
+                      <div class="rationale-data-row">
+                        <div class="rationale-data-label" style="width: 65%; font-weight: bold; margin-left: 10px; margin-top: 40px; margin-bottom: 5px;">Accounts Associated</div>
+                      </div>
+                      <div style="border: 1px solid #e5e0c7; border-left: none; border-right: none;">
+                        <div class="rationale-data-row">
+                          <div class="rationale-data-label" style="width: 65%; margin-left: 10px;">ZBank Money Market</div>
+                          <div class="rationale-data-label" style="width: 25%; text-align: right;">$6,500</div>
+                        </div>
+                        <div class="rationale-data-row">
+                          <div class="rationale-data-label" style="width: 65%; margin-left: 10px;">ZBank Money Market</div>
+                          <div class="rationale-data-label" style="width: 25%; text-align: right;">$6,500</div>
+                        </div>
+                      </div>
+
+
                     </div>
                   </div>
 
