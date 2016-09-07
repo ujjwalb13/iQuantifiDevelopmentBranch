@@ -13,7 +13,14 @@
       $scope.debts = data.Debts;
     });
 
+    $scope.goToAccountEdit = function (guid) {
+      return $location.path("/my-money/accounts/" + guid);
+    };
 
+    $scope.goToDebtEdit = function (kind, guid) {
+      var editUrl = "/debts/" + (_.pluralize(kind)).toLowerCase() + "/" + guid + "/edit";
+      $location.path(editUrl);
+    }
   });
 
 
