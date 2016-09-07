@@ -184,6 +184,7 @@
       $scope.has.rental = false;
       $scope.has.primaryPension = false;
       $scope.has.spousePension = false;
+      $scope.has.socialSecurity = false;
       if ($scope.obj.rentals.length) {
         $scope.has.rental = true;
       }

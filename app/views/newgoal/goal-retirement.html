@@ -210,12 +210,20 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="cols-sm-12">
-      &nbsp;
+  <div class="form-group row">
+    <label class="control-label col-lg-12">Would you like to include social security?</label>
+
+    <div class="col-lg-2 col-md-6 col-sm-6 ratio-content">
+      <input type="radio" name="radio-includeSocialSecurity" id="yes-includeSocialSecurity" ng-value="true" ng-model="has.socialSecurity">
+      <label for="yes-includeSocialSecurity" class="radio-btn green">Yes</label>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-6 ratio-content">
+      <input type="radio" name="radio-includeSocialSecurity" id="no-includeSocialSecurity" ng-value="false" ng-model="has.socialSecurity">
+      <label for="no-includeSocialSecurity" class="radio-btn grey">No</label>
     </div>
   </div>
 
+  <p>{{ has.socialSecurity }}</p>
 
   <div ng-if="showPrimarySocial">
     <div class="row added form-group">
