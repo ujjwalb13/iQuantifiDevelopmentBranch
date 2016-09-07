@@ -7,7 +7,7 @@
     <span ng-messages="submitted && objForm.name.$error" ng-messages-include="error-messages"></span>
   </div>
   <div class="col-lg-4 col-md-5 col-sm-5 col-xs-6">
-    <label class="control-label">&nbsp;</label>
+    <label class="control-label">Attendee</label>
     <select ng-model="obj.person.guid" ng-change="checkBirthday()" id="person" name="person" class="form-control" tabindex="1" required ng-options="person.guid as (person.first_name + ' ' + person.last_name) for person in people" placeholder="Student"></select>
     <span ng-repeat="error in errors.person" class="help-block">{{ error }}</span>
     <span ng-messages="submitted && objForm.person.$error" ng-messages-include="error-messages"></span>
