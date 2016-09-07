@@ -14,7 +14,6 @@
       <label>{{ obj.owner.first_name + ' ' + obj.owner.last_name }}'s Retirement Age</label>
       <select ng-model="obj.selected_age" name="selectedAge" class="form-control" data-placeholder="Choose Age" tabindex="1" required ng-options="age for age in ages">
       </select>
-      <span class="hint"><span class="star">*</span> Retirement calculation is based on age of younger primary user or spouse.</span>
       <span ng-repeat="error in errors.person" class="help-block">{{ error }}</span>
       <span ng-show="submitted && objForm.selectedAge.$error.required" class="help-block">Age is required.</span>
     </div>
@@ -25,12 +24,22 @@
       <label>{{ person.spouse.first_name + ' ' + person.spouse.last_name }}'s Retirement Age</label>
       <select ng-model="obj.spouse_selected_age" name="spouseSelectedAge" class="form-control" data-placeholder="Choose Age" tabindex="1"  ng-options="age for age in ages">
       </select>
-      <span class="hint"><span class="star">*</span> Retirement calculation is based on age of younger primary user or spouse.</span>
       <span ng-repeat="error in errors.person" class="help-block">{{ error }}</span>
       <span ng-show="submitted && objForm.spouseSelectedAge.$error.required" class="help-block">Age is required.</span>
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-sm-12">
+      Note: Your household retirement amount is calculated from the age of the first person to retire through to age 90 of the youngest spouse.
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="cols-sm-12">
+      &nbsp;
+    </div>
+  </div>
 
   <div class="form-group row">
     <label class="control-label col-lg-12">Do you expect to receive income from a rental property at retirement?</label>
