@@ -223,9 +223,7 @@
     </div>
   </div>
 
-  <p>{{ has.socialSecurity }}</p>
-
-  <div ng-if="showPrimarySocial">
+  <div ng-if="showPrimarySocial && has.socialSecurity">
     <div class="row added form-group">
       <div class="col-lg-8 col-md-8 col-sm-8">
         <label>What is your monthly Social Security benefit at age 62?</label>
@@ -293,7 +291,7 @@
     </div>
   </div>
 
-  <div ng-if="showSpouseSocial">
+  <div ng-if="showSpouseSocial && has.socialSecurity">
     <div class="row added form-group">
       <div class="col-lg-8 col-md-8 col-sm-8">
         <label>What is your spouses' monthly Social Security benefit at age 62?</label>
@@ -309,7 +307,7 @@
     </div>
 
     <div class="row added form-group">
-      <div class="col-lg-9 col-md-8 col-sm-8">
+      <div class="col-lg-10 col-md-8 col-sm-8">
         <label>What is your spouses' monthly Social Security benefit at full retirement age?</label>
         <div class="row">
           <div class="col-sm-4">
@@ -333,7 +331,7 @@
     </div>
 
     <div class="row added form-group">
-      <div class="col-lg-8 col-md-8 col-sm-8">
+      <div class="col-lg-9 col-md-8 col-sm-8">
         <label>What is your spouses' monthly Social Security benefit at age 70?</label>
         <div class="input-group">
           <span class="input-group-addon">$</span>
