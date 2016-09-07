@@ -73,12 +73,10 @@
         </a>
       </div>
     </div>
-  </div>
-
-
-  <div class="row">
-    <div class="cols-sm-12">
-      &nbsp;
+    <div class="row">
+      <div class="cols-sm-12">
+        &nbsp;
+      </div>
     </div>
   </div>
 
@@ -145,19 +143,16 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="cols-sm-12">
-      &nbsp;
-    </div>
-  </div>
 
   <div ng-if="person.spouse">
     <div class="form-group row">
-      <label class="control-label col-sm-4 text-right">Does your spouse have a pension?</label>
+      <label class="control-label col-lg-12">Does your spouse have a pension?</label>
 
-      <div class="col-sm-6">
+      <div class="col-lg-2 col-md-6 col-sm-6 ratio-content">
         <input type="radio" name="radio3" id="yes3" ng-value="true" ng-model="has.spousePension">
         <label for="yes3" class="radio-btn green">Yes</label>
+      </div>
+      <div class="col-lg-2 col-md-6 col-sm-6 ratio-content">
         <input type="radio" name="radio3" id="no3" ng-value="false" ng-model="has.spousePension">
         <label for="no3" class="radio-btn grey">No</label>
       </div>
