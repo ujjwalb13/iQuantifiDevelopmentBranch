@@ -165,10 +165,10 @@
       if ($scope.type === 'retirement') {
         $scope.showPrimarySocial = false;
         $scope.showSpouseSocial = false;
-        if ($scope.person.primary && utilService.getAge($scope.person.primary.dob) >= 45) {
+        if ($scope.person.primary && utilService.getAge($scope.person.primary.dob) >= 40) {
           $scope.showPrimarySocial = true;
         }
-        if ($scope.person.spouse && utilService.getAge($scope.person.spouse.dob) >= 45) {
+        if ($scope.person.spouse && utilService.getAge($scope.person.spouse.dob) >= 40) {
           return $scope.showSpouseSocial = true;
         }
       }

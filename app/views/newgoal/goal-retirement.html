@@ -210,13 +210,13 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" ng-if="!showPrimarySocial && !showSpouseSocial">
     <div class="col-sm-12">
       Since you are under the age of 40, as a conservative measure, we recommend that you do NOT include social security income in your retirement calculations.
     </div>
   </div>
 
-  <div class="form-group row">
+  <div class="form-group row" ng-if="showPrimarySocial || showSpouseSocial">
     <label class="control-label col-lg-12">Would you like to include social security?</label>
 
     <div class="col-lg-2 col-md-6 col-sm-6 ratio-content">
@@ -288,13 +288,12 @@
       </div>
     </div>
 
-
-  </div>
-
-  <div class="row">
-    <div class="cols-sm-12">
-      &nbsp;
+    <div class="row">
+      <div class="cols-sm-12">
+        &nbsp;
+      </div>
     </div>
+
   </div>
 
   <div ng-if="showSpouseSocial && has.socialSecurity">
