@@ -160,10 +160,8 @@
 
     <div ng-if="has.spousePension">
       <div class="row added form-group">
-        <div class="col-sm-4 text-right">
+        <div class="col-lg-8 col-md-8 col-sm-8">
           <label>At what age will your spouse access to their pension?</label>
-        </div>
-        <div class="col-sm-6">
           <select ng-model="obj.pensions.spouse.eligibility_age" name="pension_spouse_eligibility_age" class="form-control" ng-required="has.spousePension"
                   ng-options="age for age in pensionAges">
           </select>
@@ -174,10 +172,8 @@
       </div>
 
       <div class="row added form-group">
-        <div class="col-sm-4 text-right">
+        <div class="col-lg-8 col-md-8 col-sm-8">
           <label>What will your spouse's monthly benefit be at that age?</label>
-        </div>
-        <div class="col-sm-6">
           <div class="input-group">
             <span class="input-group-addon">$</span>
             <input type="tel" name="pension_spouse_amount" id="obj.pensions.spouse.amount" class="form-control" ng-model="obj.pensions.spouse.amount" ng-required="has.spousePension">
@@ -189,10 +185,8 @@
 
 
       <div class="row added form-group">
-        <div class="col-sm-4 text-right">
+        <div class="col-lg-8 col-md-8 col-sm-8">
           <label>At what age must your spouse take their pension amount by?</label>
-        </div>
-        <div class="col-sm-6">
           <select ng-model="obj.pensions.spouse.age_must_take" name="pension_spouse_age_must_take" class="form-control" ng-required="has.spousePension"
                   ng-options="age for age in pensionAges">
           </select>
@@ -203,10 +197,8 @@
       </div>
 
       <div class="row added form-group">
-        <div class="col-sm-4 text-right">
+        <div class="col-lg-8 col-md-8 col-sm-8">
           <label>What will your spouse's monthly benefit be at that age?</label>
-        </div>
-        <div class="col-sm-6">
           <div class="input-group">
             <span class="input-group-addon">$</span>
             <input type="tel" name="pension_spouse_age_must_take_amount" id="obj.pensions.spouse.age_must_take_amount" class="form-control" ng-model="obj.pensions.spouse.age_must_take_amount" ng-required="has.spousePension">
