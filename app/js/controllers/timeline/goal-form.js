@@ -210,14 +210,13 @@
     };
     if ($scope.type.toLowerCase() === 'retirement' && ($scope.obj.person != null)) {
       age = utilService.getAge($scope.obj.person.dob) + 1;
-      start = age < 60 ? 60 : age;
-      end = age < 80 ? 80 : age;
+      start = 60;
+      end = 70;
       $scope.ages = (function() {
         results1 = [];
         for (var l = start; start <= end ? l <= end : l >= end; start <= end ? l++ : l--){ results1.push(l); }
         return results1;
       }).apply(this);
-      $scope.obj.selected_age = age - utilService.getAge($scope.obj.transition_on);
     }
     $scope.filterRelated = function() {
       var debt, expense, goal, len, len1, len2, m, n, o, objDate, ref, ref1, ref2, results2;
