@@ -37,7 +37,6 @@
     $scope.people = {};
     $scope.person = {};
     $scope.person.primary = {};
-    $scope.person.spouse = {};
     Person.query().$promise.then(function(response) {
       return socialSecurity(response);
     });
