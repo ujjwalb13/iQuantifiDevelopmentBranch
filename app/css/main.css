@@ -11293,8 +11293,8 @@ ul {
 /* line 144, ../../app/css/modules/_mainstyle.scss */
 .table-static table tbody tr td {
   border-bottom: 1px solid #e5e0c7;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   height: 50px;
 }
 /* line 149, ../../app/css/modules/_mainstyle.scss */
