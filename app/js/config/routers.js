@@ -492,6 +492,11 @@ angular.module('agera').config(function($routeProvider) {
     controller: 'AccountFormCtrl'
   })
 
+  .when('/my-money/accounts-summary', {
+      templateUrl: '/views/my-money/accounts-summary.html',
+      controller: 'AccountsSummaryCtrl'
+  })
+
   .when('/my-money/capitalandcashflow', {
     templateUrl: '/views/my-money/capitalandcashflow.html',
     controller: 'MyMoneyCapitalandCashflowCtrl'

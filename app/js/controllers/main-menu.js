@@ -45,7 +45,7 @@
             path: "/my-money/capitalandcashflow"
           }, {
             title: "Accounts",
-            path: "/my-money/accounts"
+            path: "/my-money/accounts-summary"
           }, {
             title: "Net Worth",
             path: "/my-money/networth"
@@ -113,6 +113,23 @@
         }
       });
     });
+
+    //This catches the switch from onboarding to regular
+    $rootScope.$watch('currentUser.is_setup_complete', function (newValue, oldValue) {
+      var isSetupComplete;
+      if (!newValue) {
+        return;
+      }
+      isSetupComplete = $rootScope.currentUser.is_setup_complete;
+      return _.each($scope.menuItems, function (item) {
+        if (item.setupRequired !== false) {
+          return item.enabled = isSetupComplete;
+        } else {
+          return item.enabled = true;
+        }
+      });
+    });
+
     $scope.$watch('incompleteActionsCount', function(newValue, oldValue) {
       var myAction;
       if (!newValue) {

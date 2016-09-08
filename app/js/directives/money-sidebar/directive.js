@@ -31,7 +31,7 @@
             icon: "icon-mm-capital-and-cashflow",
             active: false
           }, {
-            link: "/my-money/accounts",
+            link: "/my-money/accounts-summary",
             title: "Accounts",
             icon: "icon-mm-accounts",
             active: false

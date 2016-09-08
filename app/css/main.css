@@ -10279,7 +10279,7 @@ form label {
   background: url("/images/svg/icon-mm-overview.svg") no-repeat;
 }
 .icon-mm-capital-and-cashflow:before {
-  background: url("/images/svg//images/svg/icon-mm-capital-and-cashflow.svg") no-repeat;
+  background: url("/images/svg/icon-mm-capital-and-cashflow.svg") no-repeat;
 }
 /* line 358, ../../app/css/modules/_icons.scss */
 .icon-pt-3-moth-case-reserve:before {
@@ -11293,8 +11293,8 @@ ul {
 /* line 144, ../../app/css/modules/_mainstyle.scss */
 .table-static table tbody tr td {
   border-bottom: 1px solid #e5e0c7;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   height: 50px;
 }
 /* line 149, ../../app/css/modules/_mainstyle.scss */
@@ -18030,37 +18030,6 @@ ul.overview-content li .icon-process.icon-protect .c100 .icon.icon-80 {
   text-align: center;
 }
 
-/* line 1679, ../../app/css/modules/_mainstyle.scss */
-.alert-shortage {
-  background: #e16250;
-  border: 1px solid white;
-  border-radius: 5px;
-  color: white;
-  padding: 11px 42px 10px 63px;
-  line-height: 20px;
-  position: relative;
-  display: block;
-  margin-top: 4px;
-  display: inline-block;
-  cursor: pointer;
-}
-/* line 1691, ../../app/css/modules/_mainstyle.scss */
-.alert-shortage i.fa {
-  color: white;
-  position: absolute;
-  font-size: 22px;
-  top: 8px;
-  font-weight: bold;
-  right: 24px;
-}
-/* line 1699, ../../app/css/modules/_mainstyle.scss */
-.alert-shortage i.icon {
-  float: left;
-  position: absolute;
-  top: 3px;
-  left: 18px;
-}
-
 /* line 1707, ../../app/css/modules/_mainstyle.scss */
 .point-ct {
   width: 80px;
@@ -18542,7 +18511,7 @@ body.body-onboarding .worksheet .info-icon-container {
 .monthly-expenses .monthly-expenses-chart .expense-group .tooltip-icon {display: none;}
 .monthly-expenses .monthly-expenses-chart .expense-group:hover .tooltip-icon {display: block;}
 .monthly-expenses .monthly-expenses-chart .expense-group .group-highlight {fill: none; pointer-events: all;}
-.monthly-expenses .monthly-expenses-chart .expense-group:hover .group-highlight {display: block; fill: #d3d3d3;}
+.monthly-expenses .monthly-expenses-chart .expense-group:hover .group-highlight {display: block; fill: #ededed;}
 .monthly-expenses .monthly-expenses-chart .tick path,
 .monthly-expenses .monthly-expenses-chart .tick line {
   fill: none; stroke: #d3d3d3;

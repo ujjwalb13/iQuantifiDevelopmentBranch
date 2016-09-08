@@ -1,20 +1,22 @@
 ﻿<div ng-include src="'/views/my-money/_money-header.html'" class="main-title"></div>
 <div class="container main-wrapper">
     <div class="row">
-        <div class="left-side-bar col-lg-3 visible-lg">
+        <div class="left-side-bar col-lg-2 visible-lg">
             <money-sidebar current-page='/my-money/expenses'></money-sidebar>
         </div>
-        <div class="right-content col-lg-9">
+        <div class="right-content col-lg-10">
             <div class="section-header goals">
                 <i class="icon icon-mm-expenses"></i>Expenses
             </div>
             <div class="content-wrapper">
                 <div class="wrapper-detail">
                     <div ng-include="'/views/my-money/expenses/_header.html'"></div>
-                    <div ng-include="'/views/my-money/expenses/_monthly_debt_payments_and_policy_premiums.html'"
-                         ng-show="isCurrentView('monthly_debt_and_policy_premiums')" class="tab-pane" id="monthlydebt" role="tabpanel"></div>
                     <div ng-include="'/views/my-money/expenses/_monthly_expenses.html'"
                          ng-show="isCurrentView('monthly_expenses')" class="tab-pane" id="monthlyexpense" role="tabpanel"></div>
+                    <div ng-include="'/views/my-money/expenses/_monthly_debt_payments.html'"
+                         ng-show="isCurrentView('monthly_debt_payments')" class="tab-pane" id="monthlydebt" role="tabpanel"></div>
+                    <div ng-include="'/views/my-money/expenses/_monthly_policy_premiums.html'"
+                         ng-show="isCurrentView('monthly_debt_payments')" class="tab-pane" id="monthlydebt" role="tabpanel"></div>
                 </div>
 
 

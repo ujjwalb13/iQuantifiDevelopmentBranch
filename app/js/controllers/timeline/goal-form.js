@@ -37,7 +37,6 @@
     $scope.people = {};
     $scope.person = {};
     $scope.person.primary = {};
-    $scope.person.spouse = {};
     Person.query().$promise.then(function(response) {
       return socialSecurity(response);
     });
@@ -165,10 +164,13 @@
       if ($scope.type === 'retirement') {
         $scope.showPrimarySocial = false;
         $scope.showSpouseSocial = false;
-        if ($scope.person.primary && utilService.getAge($scope.person.primary.dob) >= 45) {
+        if (_.isUndefined($scope.obj.spouse_selected_age)) {
+          $scope.obj.spouse_selected_age = 60;
+        }
+        if ($scope.person.primary && utilService.getAge($scope.person.primary.dob) >= 40) {
           $scope.showPrimarySocial = true;
         }
-        if ($scope.person.spouse && utilService.getAge($scope.person.spouse.dob) >= 45) {
+        if ($scope.person.spouse && utilService.getAge($scope.person.spouse.dob) >= 40) {
           return $scope.showSpouseSocial = true;
         }
       }
@@ -184,6 +186,7 @@
       $scope.has.rental = false;
       $scope.has.primaryPension = false;
       $scope.has.spousePension = false;
+      $scope.has.socialSecurity = false;
       if ($scope.obj.rentals.length) {
         $scope.has.rental = true;
       }
@@ -210,14 +213,13 @@
     };
     if ($scope.type.toLowerCase() === 'retirement' && ($scope.obj.person != null)) {
       age = utilService.getAge($scope.obj.person.dob) + 1;
-      start = age < 60 ? 60 : age;
-      end = age < 80 ? 80 : age;
+      start = 60;
+      end = 70;
       $scope.ages = (function() {
         results1 = [];
         for (var l = start; start <= end ? l <= end : l >= end; start <= end ? l++ : l--){ results1.push(l); }
         return results1;
       }).apply(this);
-      $scope.obj.selected_age = age - utilService.getAge($scope.obj.transition_on);
     }
     $scope.filterRelated = function() {
       var debt, expense, goal, len, len1, len2, m, n, o, objDate, ref, ref1, ref2, results2;
@@ -483,4 +485,3 @@
 
 }).call(this);
 
-//# sourceMappingURL=goal-form.js.map

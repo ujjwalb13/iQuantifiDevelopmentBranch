@@ -30,7 +30,7 @@
                 <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
                   Edit Goal
                 </button>
-                <a class="btn btn-delete ng-scope">
+                <a class="btn btn-delete ng-scope" ng-if="goal" ng-click="deleteGoal(goal)">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
               </div>
@@ -63,11 +63,11 @@
                             <td><strong>Net Proceeds From Sale of Home</strong></td>
                             <td>$0</td>
                           </tr>
-                          <tr ng-click="changeRightSummayContent('downpayment')">
+                          <tr ng-click="changeRightSummayContent('downpayment')" ng-class="{active: downpaymentActive()}">
                             <td><strong>Downpayment</strong></td>
                             <td>$15,000</td>
                           </tr>
-                          <tr ng-click="changeRightSummayContent('financeRecommendations')">
+                          <tr ng-click="changeRightSummayContent('financeRecommendations')" ng-class="{active: financeRecommendationsActive()}">
                             <td><strong>Finance Amount</strong></td>
                             <td>$235,000</td>
                           </tr>
@@ -103,14 +103,15 @@
                 <h3 class="title-next">Next Action</h3>
                 <div class="next-action-content">
                     <p ng-if="dummyStatus == 'warning' || dummyStatus == 'danger'">
-                      <i class="fa fa-exclamation-circle" ng-class="{'danger': dummyStatus == 'danger'}"></i>
+                      <i class="fa fa-exclamation-circle " ng-if="dummyStatus == 'danger'"></i>
+                      <i class="fa fa-exclamation-circle yellow-icon" ng-if="dummyStatus == 'warning'"></i>
                       <strong>
                         You are currently
                           {{dummyStatus == 'warning' ? "one month" : "two months"}}
                         behind.
                       </strong>
                       <br>
-                      Deposit $2,143 this month towards New Home's downpayment.
+                      <span>Deposit $2,143 this month towards New Home's downpayment.</span>
                       <a href="" class="btn btn-primary">Take Action</a>
                     </p>
                     <p ng-if="dummyStatus == 'safe'">

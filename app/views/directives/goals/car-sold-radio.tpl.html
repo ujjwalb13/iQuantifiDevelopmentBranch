@@ -1,0 +1,15 @@
+<div class="row form-group">
+  <label class="control-label col-lg-12">Will your current car be sold once you purchase this car?</label>
+    <div ng-disabled="!amountEntered()" class="ratio-content col-lg-2 col-md-6 col-sm-6">
+      <div class="ratio-st">
+          <input ng-disabled="!amountEntered()" type="radio" id="current-car-sold-yes" name="current-car-sold" value="true">
+          <label class="radio-btn green" for="current-car-sold-yes">Yes</label>
+      </div>
+    </div>
+    <div ng-disabled="!amountEntered()" class="ratio-content col-lg-3 col-md-6 col-sm-6">
+      <div class="ratio-st">
+        <input ng-disabled="!amountEntered()" type="radio" id="current-car-sold-no" name="current-car-sold" value="false" checked>
+        <label class="radio-btn green" for="current-car-sold-no"> No </label>
+      </div>
+    </div>
+</div>
