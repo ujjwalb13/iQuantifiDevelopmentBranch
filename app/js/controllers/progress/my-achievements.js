@@ -20,7 +20,13 @@
     }
 
     var buildGoalInfo = function(item) {
-      return _.extend(buildItemInfo(item), { icon: $filter('goalIconClass')(item.type) , cgrIcon: "icon-goals-cgr"});
+      var goalInfo = {
+        icon: $filter('goalIconClass')(item.type) ,
+        cgrIcon: "icon-goals-cgr" ,
+        completedActionsModalTile: "Goal Achieved"
+      };
+
+      return _.extend(buildItemInfo(item), goalInfo);
     }
 
     var buildDebtInfo = function(item) {
