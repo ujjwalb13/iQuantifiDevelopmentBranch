@@ -10,92 +10,12 @@
         Cashfinder
       </div>
       <div class="content-wrapper">
-        <div class="row">
-          <div class="table-static col-lg-12">
-            <table class="hovered">
-              <thead class="dark">
-                <th>Category</th>
-                <th>Current</th>
-                <th>New</th>
-                <th></th>
-              </thead>
-              <tbody>
-                <tr ng-repeat="expense in expenses" ng-click="selectExpense(expense)" ng-class="{'active': selectedExpense == expense}">
-                  <td>{{expense.kind | titleize}}</td>
-                  <td>{{expense.amount | dollars}}</td>
-                  <td>{{expense.new_amount | dollars}}</td>
-                  <td class="text-right selected-indicator-wrapper">
-                    <i class="fa fa-chevron-right"></i>
-                    <i class="visible-lg selected-indicator" ng-show="selectedExpense == expense"></i>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <div class="row" ng-include src="'/views/my-features/cashfinder/_find-expense.html'" ng-if="shortage == 0"></div>
+        <div class="row" ng-include src="'/views/my-features/cashfinder/_expenses-list.html'" ng-show="showExpenses"></div>
       </div>
     </div>
-    <div class="beside-right-content col-lg-3" ng-controller="CashfinderEditCtrl">
-      <div class="beside-right-wrapper">
-        <div class="row">
-          <div class="col-sm-12">
-            <form name="EditExpenseForm">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label class="control-label">Modify Monthly Expenses</label>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label class="control-label" for="firstName">Category: </label>
-                    <strong>{{expense.kind | titleize}}</strong>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <div class="help-block">
-                      <i>
-                        <span>Amounts shown are based on data gathered from your associated accounts.</span>
-                      </i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="new_amount" ng-model="expense.new_amount"/>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="row row-gutter-20">
-                    <button type="submit" class="btn col-margin-20 " ng-hide="submitted">Keep {{expense.amount | dollars}}</button>
-                    <button type="submit" class="btn-primary btn col-margin-20 " ng-hide="submitted">Save {{expense.new_amount | dollars}}</button>
-                    <button type="submit" class="btn-primary btn col-margin-20 " ng-show="submitted" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label class="control-label" for="firstName">Category includes</label>
-                    <ul>
-                      <li ng-repeat="category in subcategories">{{category | titleize}}</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+    <div class="beside-right-content col-lg-3" ng-controller="CashfinderEditCtrl" ng-show="selectedExpense">
+      <div ng-include src="'/views/my-features/cashfinder/_expense-edit.html'"></div>
     </div>
   </div>
 </div>

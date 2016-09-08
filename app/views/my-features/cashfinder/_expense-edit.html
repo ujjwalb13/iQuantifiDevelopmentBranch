@@ -1,0 +1,60 @@
+<div class="beside-right-wrapper">
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="EditExpenseForm">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="control-label">Modify Monthly Expenses</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="control-label" for="firstName">Category: </label>
+              <strong>{{expense.kind | titleize}}</strong>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <div class="help-block">
+                <i>
+                  <span>Amounts shown are based on data gathered from your associated accounts.</span>
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <input type="text" class="form-control" name="new_amount" ng-model="expense.new_amount"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row row-gutter-20">
+              <button type="submit" class="btn col-margin-20 " ng-hide="submitted">Keep {{expense.amount | dollars}}</button>
+              <button type="submit" class="btn-primary btn col-margin-20 " ng-hide="submitted">Save {{expense.new_amount | dollars}}</button>
+              <button type="submit" class="btn-primary btn col-margin-20 " ng-show="submitted" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="control-label" for="firstName">Category includes</label>
+              <ul>
+                <li ng-repeat="category in subcategories">{{category | titleize}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
