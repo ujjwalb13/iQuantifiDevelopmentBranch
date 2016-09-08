@@ -99,7 +99,7 @@
 <script type="text/ng-template" id="completedActionsModal">
       <div class="modal-content action-list-popup">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">{{ item.completedActionsModalTile }}</h4>
         </div>
         <div class="modal-body">
@@ -148,7 +148,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="close()">Close</button>
           </div>
         </div>
       </div><!-- /.modal-content -->

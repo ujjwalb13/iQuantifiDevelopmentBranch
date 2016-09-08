@@ -94,6 +94,7 @@
         templateUrl: 'completedActionsModal',
         size: 'lg',
         controller: ModalInstanceCtrl,
+        backdrop: 'static',
         resolve: {
           item: function() {
             return item;
@@ -103,9 +104,11 @@
     }
 
     ModalInstanceCtrl = [
-      '$scope', 'item', function($scope, item) {
+      '$scope', 'item', '$modalInstance', function($scope, item, $modalInstance) {
         $scope.item = item;
-        console.log($scope.item);
+        $scope.close = function() {
+          $modalInstance.dismiss('cancel');
+        }
       }
     ];
   });
