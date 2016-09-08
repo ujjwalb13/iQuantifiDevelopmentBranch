@@ -935,3 +935,60 @@ ul.overview-content{
   top: 3px;
   left: 18px;
 }
+
+.login-form{
+  .logo{
+    width: 220px;
+    display: block;
+    margin: 0 auto;
+    img{
+      width: 100%;
+    }
+  }
+  .login-form-ct{
+    margin: 0 auto;
+    float: none;
+  }
+  .auth-links{
+    li{
+      a{
+        font-weight: bold;
+        color: #4a8f92;
+        font-size: 14px;
+      }
+    }
+  }
+  .text-center{
+    h1{
+      color: $green-color;
+      font-weight: normal;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    button{
+      width: 100%;
+    }
+  }
+  .auth-form{
+    border: 0px;
+    border-radius: 5px;
+    background: #efebda;
+    padding-left: 30px;
+    padding-right: 30px;
+    h3{
+      color: #3b5152;
+      display: block;
+      text-align: center;
+      text-shadow: 0 0px 0 rgba(0, 0, 0, 0);
+      font-size: 22px;
+    }
+    label{
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+}
+
+
+

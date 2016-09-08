@@ -1,27 +1,42 @@
 <div ng-if="!demo">
-
   <style>
-    body, footer { background-color: #3b5152; }
-    footer.footer-app {
-      background-color: transparent;
-      padding: 0px;
-      border-top:none;
+    body{
+      height: 100%;
     }
-    footer p { color: #cfcfcf; }
-    h1 {color: #fff}
+    nav{
+      display: none;
+    }
+    .mm-slideout{
+      height: 100%;
+    }
+    footer{
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      width: 100%;
+      text-align: center;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      border-top: 1px solid #7d7d79;
+    }
+    footer p{
+      color: #c5c6c8 !important;
+    }
   </style>
-
-  <div class="container auth-container">
+  <div class="container auth-container login-form">
     <div class="row">
       <div class="col-sm-12 text-center">
-        <h1>Get Ready to Take Control of Your Finances...</h1>
-        <h3>Log in with your email address</h3>
+        <a href="#" class="logo">
+            <img src="/images/svg/logo.svg" alt="">
+        </a>
+        <h1>Get Ready to Take Control of Your Finances.</h1>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+      <div class="col-md-4 col-xs-6 login-form-ct">
         <form class="auth-form" name="loginForm" role="form" ng-submit="submit(loginForm.$valid)" novalidate>
+          <h3>Log in with your email address</h3>
           <p class="text-danger" ng-show="error.error">{{error.error}}</p>
           <div class="form-group">
             <label class="control-label" for="email">Email</label>
