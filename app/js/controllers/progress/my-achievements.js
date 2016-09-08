@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('progress').controller('MyAchievementsCtrl', function($scope, $location, $routeParams, MyAchievements, $modal) {
-
+    var ModalInstanceCtrl;
     var protectionType = function(protection){
       var type = protection.type.toLowerCase();
       if (type === "reserve") {
@@ -74,9 +74,22 @@
     $scope.openCompletedActions = function(item) {
       $modal.open({
         templateUrl: 'completedActionsModal',
-        size: 'lg'
+        size: 'lg',
+        controller: ModalInstanceCtrl,
+        resolve: {
+          item: function() {
+            return item;
+          }
+        }
       });
     }
+
+    ModalInstanceCtrl = [
+      '$scope', 'item', function($scope, item) {
+        $scope.item = item;
+        console.log($scope.item);
+      }
+    ];
   });
 }).call(this);
 
