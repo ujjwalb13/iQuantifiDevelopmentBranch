@@ -115,10 +115,10 @@
             </div>
           </form>
           <div class="row row-gutter-20">
+            <button class="btn-delete col-margin-20 pull-left" ng-show="editMode" ng-disabled="pending" ng-click="openDeleteModal(lifePolicy)"><span class="fa fa-trash"></span></button>
             <button class="iq-submit-btn btn hidden-xs pull-left col-margin-20" ng-disabled="pending" ng-click="cancel()">Cancel</button>
             <button ng-hide="pending" class="iq-submit-btn btn-success btn pull-left col-margin-20" ng-disabled="lifePolicyForm.$invalid" ng-click="submit(lifePolicyForm.$valid)">{{editMode? 'Save Changes' : 'Add Policy'}}</button>
             <button ng-show="pending" class="iq-submit-btn btn-success btn pull-left col-margin-20" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
-            <button type="button" class="iq-submit-btn btn-danger btn pull-left col-margin-20" ng-click="openDeleteModal(lifePolicy)" ng-show="lifePolicy.guid">Delete</button>
           </div>
         </div>
       </div>
