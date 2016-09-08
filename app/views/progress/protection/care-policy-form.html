@@ -183,3 +183,18 @@
     </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="deletePolicyModal">
+  <div class="modal-header delete-modal-header text-center">
+    <button type="button" class="close" ng-click="close()" aria-hidden="true">&times;</button>
+    <h3 class="modal-title">Delete Policy</h3>
+  </div>
+  <div class="modal-body delete-modal-body">
+    <p class="text-center">Are you <em>sure</em> you want to remove this policy?</p>
+  </div>
+  <div class="modal-footer text-center delete-modal-footer">
+    <button class="iq-submit-btn btn btn-lg" ng-click="close()">Cancel</button>
+    <button class="iq-submit-btn btn btn-success" ng-hide="pending" ng-click="deletePolicy()">Yes, Delete</button>
+    <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="pending" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+  </div>
+</script>
