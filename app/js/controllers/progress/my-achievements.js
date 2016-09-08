@@ -73,7 +73,8 @@
 
     $scope.openCompletedActions = function(item) {
       $modal.open({
-        templateUrl: 'completedActionsModal'
+        templateUrl: 'completedActionsModal',
+        size: 'lg'
       });
     }
   });
