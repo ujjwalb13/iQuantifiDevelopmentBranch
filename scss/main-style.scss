@@ -589,9 +589,12 @@ ul{
   }
   .action-list-head{
     position: relative;
-    padding: 10px 320px 10px 54px;
+    padding: 10px 330px 10px 54px;
     .icon-profile-status{
       background: transparent;
+      position: absolute;
+      top: 14px;
+      left: 58px;
       &:before{
         display: block;
         font-size: 20px;
@@ -652,13 +655,14 @@ ul{
       vertical-align: middle;
     }
     p{
-      padding-left: 30px;
+      padding-left: 50px;
       margin-bottom: 0px;
     }
     .action-buttons {
       position: absolute;
       right: 54px;
       margin-top: -10px;
+      top: 8px;
       .btn {width: 140px;}
       .explain{
         font-weight: bold;
@@ -850,27 +854,47 @@ ul{
   width: 900px;
 }
 
-
-ul.overview-content{
+.overview-content{
   li{
     .icon-goals-cgr{
-      background: url($url-svg-icon + "icon-al-rolling-goal.svg") no-repeat center;
-      background-size: 60%;
-      min-height: 115px;
-      padding-top: 6px;
+      margin: 0 auto;
     }
     .icon-debt-cgr{
-      background: url($url-svg-icon + "icon-al-rolling-debt.svg") no-repeat center;
-      background-size: 60%;
-      min-height: 115px;
-      padding-top: 7px;
+      margin: 0 auto;
     }
     .icon-protect-cgr{
-      background: url($url-svg-icon + "icon-al-rolling-policy.svg") no-repeat center;
-      background-size: 70%;
-      min-height: 115px;
-      padding-top: 0px;
+      margin: 0 auto;
     }
+  }
+}
+.icon-goals-cgr{
+  background: url($url-svg-icon + "icon-al-rolling-goal.svg") no-repeat center;
+  background-size: 100%;
+  min-height: 115px;
+  padding-top: 6px;
+  width: 93px;
+  i{
+    margin: 0 auto;
+  }
+}
+.icon-debt-cgr{
+  background: url($url-svg-icon + "icon-al-rolling-debt.svg") no-repeat center;
+  background-size: 100%;
+  min-height: 115px;
+  padding-top: 7px;
+  width: 93px;
+  i{
+    margin: 0 auto;
+  }
+}
+.icon-protect-cgr{
+  background: url($url-svg-icon + "icon-al-rolling-policy.svg") no-repeat center;
+  background-size: 100%;
+  min-height: 115px;
+  padding-top: 0px;
+  width: 111px;
+  i{
+    margin: 0 auto;
   }
 }
 
@@ -935,3 +959,101 @@ ul.overview-content{
   top: 3px;
   left: 18px;
 }
+
+.login-form{
+  .logo{
+    width: 220px;
+    display: block;
+    margin: 0 auto;
+    img{
+      width: 100%;
+    }
+  }
+  .login-form-ct{
+    margin: 0 auto;
+    float: none;
+  }
+  .auth-links{
+    li{
+      a{
+        font-weight: bold;
+        color: #4a8f92;
+        font-size: 14px;
+      }
+    }
+  }
+  .text-center{
+    h1{
+      color: $green-color;
+      font-weight: normal;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    button{
+      width: 100%;
+    }
+  }
+  .auth-form{
+    border: 0px;
+    border-radius: 5px;
+    background: #efebda;
+    padding-left: 30px;
+    padding-right: 30px;
+    h3{
+      color: #3b5152;
+      display: block;
+      text-align: center;
+      text-shadow: 0 0px 0 rgba(0, 0, 0, 0);
+      font-size: 22px;
+    }
+    label{
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+}
+
+.head-archived-popup{
+  padding-left: 120px;
+  padding-bottom: 50px;
+  position: relative;
+  .icon-cgr{
+    position: absolute;
+    top: -25px;
+    left: 5px;
+  }
+  h4{
+    font-size: 22px;
+    margin-top: 30px;
+    color: #3b5152;
+  }
+  strong{
+    color: #4a8f92;
+  }
+}
+
+.completed-tbl-ct{
+  ul{
+    li{
+      position: relative;
+      @include clearboth;
+      i{
+        left: 19px;
+        position: absolute;
+        top: 12px;
+      }
+      label{
+        width: 30%;
+        float: left;
+        padding-left: 60px;
+      }
+      span{
+        width: 70%;
+        float: left;
+      }
+    }
+  }
+}
+
+
