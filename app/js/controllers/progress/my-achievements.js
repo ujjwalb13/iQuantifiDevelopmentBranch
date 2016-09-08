@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('progress').controller('MyAchievementsCtrl', function($scope, $location, $routeParams, MyAchievements, $modal) {
+  angular.module('progress').controller('MyAchievementsCtrl', function($scope, $location, $routeParams, MyAchievements, $modal, $filter) {
     var ModalInstanceCtrl;
     var protectionType = function(protection){
       var type = protection.type.toLowerCase();
@@ -10,22 +10,25 @@
       return type;
     };
 
-    var buildGoalInfo = function(item) {
+    var buildItemInfo = function(item) {
       return {
         name: item.name,
         amount: item.amount,
         date: item.completed_date,
-        type: item.type,
         guid: item.guid
       }
     }
 
+    var buildGoalInfo = function(item) {
+      return _.extend(buildItemInfo(item), { icon: $filter('goalIconClass')(item.type) });
+    }
+
     var buildDebtInfo = function(item) {
-      return _.extend(buildGoalInfo(item), { type: item.kind });
+      return _.extend(buildItemInfo(item), { icon: $filter('debtIconClass')(item.kind) });
     }
 
     var buildProtectionInfo = function(item) {
-      return _.extend(buildGoalInfo(item), { type: protectionType(item) });
+      return _.extend(buildItemInfo(item), { icon: $filter('protectionIconClass')(protectionType(item)) });
     }
 
     MyAchievements.get().$promise.then(function(data) {

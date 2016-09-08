@@ -37,7 +37,7 @@
                 <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="goal in goalsSection.items" ng-click="openCompletedActions(goal)">
                   <div class="icon-goals-cgr">
                     <span>
-                      <i class="icon {{ goal.type | goalIconClass }} icon-80"></i>
+                      <i class="icon {{ goal.icon }} icon-80"></i>
                     </span>
                   </div>
                   <p>
@@ -57,7 +57,7 @@
                 <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="debt in debtsSection.items">
                   <div class="icon-debt-cgr">
                     <span>
-                      <i class="icon {{ debt.type | debtIconClass }}  icon-80"></i>
+                      <i class="icon {{ debt.icon }}  icon-80"></i>
                     </span>
                   </div>
                   <p>
@@ -77,7 +77,7 @@
                 <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="protection in protectionsSection.items">
                   <div class="icon-protect-cgr">
                     <span>
-                      <i class="icon {{ protection.type | protectionIconClass }} icon-80"></i>
+                      <i class="icon {{ protection.icon }} icon-80"></i>
                     </span>
                   </div>
                   <p>
