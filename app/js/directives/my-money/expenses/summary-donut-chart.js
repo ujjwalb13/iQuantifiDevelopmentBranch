@@ -70,12 +70,34 @@
         .selectAll("text")
         .data(pie(data), key);
 
+      // text.enter()
+      //   .append("text")
+      //   .attr("dy", ".35em")
+      //   .text(function(d) {
+      //     return d.data.label;
+        // });
       text.enter()
-        .append("text")
-        .attr("dy", ".35em")
-        .text(function(d) {
-          return d.data.label;
-        });
+      .append('foreignObject')
+      .attr("dy", ".35em")
+      .attr('x', 50)
+      .attr('y', 130)
+      .attr('width', 150)
+      .attr('height', 100)
+      .append("xhtml:body")
+      .html('<div class="des-chart-content total-chart">\
+        <i class="icon icon-pattern"></i>\
+        <p>\
+          <span>Total Monthly Committed Expenses</span>\
+          <strong>%5,480 (88%)</strong>\
+        </p>\
+      </div>\
+      <div class="des-chart-content">\
+        <i class="icon icon-pt-protection"></i>\
+        <p>\
+          <span>Total Monthly Committed Expenses</span>\
+          <strong>%5,480 (88%)</strong>\
+        </p>\
+      </div>')
 
       function midAngle(d){
         return d.startAngle + (d.endAngle - d.startAngle)/2;
