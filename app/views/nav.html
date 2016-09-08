@@ -930,15 +930,17 @@
     }
 
     .rationale-area {
-      width: 600px;
-      height: 500px;
-      position: absolute;
+      width: 630px;
+      min-height: 500px;
+      position: relative;
     }
 
     .rationale-area-side {
-      width: 50%;
-      position: absolute;
+      width: 49%;
       height: 100%;
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
     }
 
     .rationale-graph-line-area {
@@ -1001,12 +1003,12 @@
 	    height: 16px;
       opacity: 0.50;
 	    background: red;
-	    -moz-border-radius: 10px;
-	    -webkit-border-radius: 10px;
-	    border-radius: 10px;
+	    -moz-border-radius: 8px;
+	    -webkit-border-radius: 8px;
+	    border-radius: 8px;
       display: inline-block;
       box-sizing: border-box;
-      margin-left: 10px;
+      margin-left: 18px;
       margin-right: 10px;
     }
 
@@ -1014,30 +1016,45 @@
 
   <!-- Rationale Modal -->
   <div class="modal fade" id="rationaleModal" role="dialog">
-    <div class="modal-dialog" style="width: 850px;">
+    <div class="modal-dialog" style="width: 900px;">
 
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="{{type}}"><span class="goal-icon {{ icon(type) }}"></span><span>{{'Explain' | titleize}}</span></h4>
+          <h4 class="modal-title">
+            <i class="icon-explain"></i><span style="color:#4a8f92;">{{'Explain' | titleize}}</span>
+          </h4>
         </div>
-        <div class="modal-body" style="height: 550px;">
+        <div class="modal-body" style="min-height: 400px;">
 
           <!-- tabs left -->
-          <div class="tabbable tabs-left">
-            <ul class="nav nav-tabs">
-              <li ng-repeat="ratSection in $root.rationaleResults.RationaleSections track by $index">
-                <a data-toggle="tab" data-target="#{{ ratSection.SectionKey }}">{{ ratSection.SectionName }}</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div ng-repeat="ratSection in $root.rationaleResults.RationaleSections track by $index" class="tab-pane" id="{{ ratSection.SectionKey }}">
+          <div class="row">
+            <div style="background-color: #eef4f4; font-weight: bold; margin: 0px 20px; padding: 12px 20px; margin-bottom: 20px;">
+              These are the factors involved in your recommendation:
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="left-side-bar col-lg-3 col-md-3 col-sm-12 col-xs-12" style="float: none; position: absolute; height: 80%;">
+              <ul>
+                <li></li>
+                <li ng-repeat="ratSection in $root.rationaleResults.RationaleSections track by $index" ng-click="setTabTo(ratSection.SectionKey)">
+                  <a href="javascript:void(0)" ng-class="{'active': ($root.rationaleResults.SelectedSection == ratSection.SectionKey) }">
+                    <span>{{ ratSection.SectionName }}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>            
+            <div class="right-content col-lg-9 col-md-9 col-sm-12 col-xs-12 col-lg-offset-3">
+              <div ng-repeat="ratSection in $root.rationaleResults.RationaleSections track by $index" 
+                   class="content-wrapper" ng-show="$root.rationaleResults.SelectedSection == ratSection.SectionKey" id="{{ ratSection.SectionKey }}">
                 <div ng-bind-html="ratSection.SectionHTML"></div>
-                <div ng-if="ratSection.GraphDataInfo != null" style="margin-left: 170px;">
-                  
+                
+                <div ng-if="ratSection.GraphDataInfo != null" >
+
 
                   <div class="rationale-area">
-                    <div class="rationale-area-side">
+                    <div class="rationale-area-side" style="height: 500px;">
 
                       <div class="rationale-graph-line-area">
 
@@ -1050,9 +1067,9 @@
 
                       <div class="rationale-graph-column">
                         <div ng-repeat="graphDataItem in ratSection.GraphDataInfo.GraphDataPoints track by $index" ng-style="{ 'height': RationaleGraphSectionHeight(graphDataItem) }">
-                          
+
                           <div ng-if="graphDataItem.isSelected != true" class="rationale-graph-column-section" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }" style="height: 100%;"></div>
-                          
+
                           <div ng-if="graphDataItem.isSelected == true" style="height: 100%; position: relative;">
                             <div class="hilight-box" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }"></div>
                             <div class="hilight-box-bottom" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }"></div>
@@ -1070,8 +1087,8 @@
                       </div>
 
                     </div>
-                    <div class="rationale-area-side" style="margin-left: 50%;">
-                      <div style="height: 20px;"></div>
+                    <div class="rationale-area-side">
+                      <div style="height: 15px;"></div>
                       <div ng-repeat="graphDataItem in ratSection.GraphDataInfo.GraphDataPoints track by $index">
                         <div class="rationale-data-row" ng-if="graphDataItem.isSelected != true">
                           <div class="rationale-data-circle" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }">&nbsp;</div>
@@ -1079,25 +1096,21 @@
                           <div class="rationale-data-label" style="width: 30%; text-align: right;">{{ graphDataItem.AmountString }}</div>
                         </div>
                         <div class="rationale-data-row-selected" ng-if="graphDataItem.isSelected == true">
-                          <div class="rationale-data-circle" ng-style="{ 'background-color': RationaleGraphSectionBackgroundColor(graphDataItem) }">&nbsp;</div>
+                          <i class="icon {{graphDataItem.Goal | timelineGoalIcon}}" style="display:inline-block; height: 30px; width: 30px; margin-left: 10px; margin-right: 5px;"></i>
                           <div class="rationale-data-label-selected" style="width: 50%;">{{ graphDataItem.Description }}</div>
                           <div class="rationale-data-label-selected" style="width: 30%; text-align: right;">{{ graphDataItem.AmountString }}</div>
                         </div>
                       </div>
                       <div class="rationale-data-row" style="border: 1px solid #e5e0c7; border-left: none; border-right: none;">
-                        <div class="rationale-data-label" style="width: 65%; font-weight: bold; margin-left: 10px;">Total Monthly Cash Flow</div>
+                        <div class="rationale-data-label" style="width: 67%; font-weight: bold; margin-left: 10px;">Total Monthly Cash Flow</div>
                         <div class="rationale-data-label" style="width: 25%; text-align: right; font-weight: bold;">$6,500</div>
                       </div>
                       <div class="rationale-data-row">
-                        <div class="rationale-data-label" style="width: 65%; font-weight: bold; margin-left: 10px; margin-top: 40px; margin-bottom: 5px;">Accounts Associated</div>
+                        <div class="rationale-data-label" style="width: 67%; font-weight: bold; margin-left: 10px; margin-top: 40px; margin-bottom: 5px;">Accounts Associated</div>
                       </div>
                       <div style="border: 1px solid #e5e0c7; border-left: none; border-right: none;">
                         <div class="rationale-data-row">
-                          <div class="rationale-data-label" style="width: 65%; margin-left: 10px;">ZBank Money Market</div>
-                          <div class="rationale-data-label" style="width: 25%; text-align: right;">$6,500</div>
-                        </div>
-                        <div class="rationale-data-row">
-                          <div class="rationale-data-label" style="width: 65%; margin-left: 10px;">ZBank Money Market</div>
+                          <div class="rationale-data-label" style="width: 67%; margin-left: 10px;">ZBank Money Market</div>
                           <div class="rationale-data-label" style="width: 25%; text-align: right;">$6,500</div>
                         </div>
                       </div>
@@ -1117,7 +1130,7 @@
 
 
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer text-center delete-modal-footer">
           <button type="button" class="iq-submit-btn btn-success btn" data-dismiss="modal" ng-click="cancel()">Got it</button>
         </div>
       </div>

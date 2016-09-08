@@ -486,3 +486,4 @@
 }).call(this);
 
 //# sourceMappingURL=goal-form.js.map
+>>>>>>> refs/remotes/origin/master

@@ -115,7 +115,8 @@
         $rootScope.rationaleResults = null;
         $rootScope.rationaleResults = rationaleResult;
 
-        if (rationaleResult != null) {
+        if (rationaleResult != null && rationaleResult.RationaleSections != null && rationaleResult.RationaleSections.length > 0) {
+          $rootScope.rationaleResults.SelectedSection = rationaleResult.RationaleSections[0].SectionKey;
           $("#rationaleModal").modal({ backdrop: false });
         }
       });
