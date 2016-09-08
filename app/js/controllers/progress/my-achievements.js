@@ -104,8 +104,15 @@
     }
 
     ModalInstanceCtrl = [
-      '$scope', 'item', '$modalInstance', function($scope, item, $modalInstance) {
+      '$scope', 'item', '$modalInstance', 'ENV', '$http', function($scope, item, $modalInstance, ENV, $http) {
         $scope.item = item;
+
+        $http.get(ENV.apiHost + "/plan/achievements/" + $scope.item.guid).
+          success(function (results) {
+            $scope.completedActions = _.map(results, function(action) {
+              return { description: action.description, date: action.assigned_on };
+            })
+          });
         $scope.close = function() {
           $modalInstance.dismiss('cancel');
         }

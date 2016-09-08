@@ -118,31 +118,12 @@
             </div>
             <div class="completed-tbl-ct">
               <ul>
-                <li>
+                <li ng-repeat="action in completedActions">
                   <i class="icon-profile-status icon-pf-complete"></i>
                   <label>
-                    May 2016:
+                    {{ action.date | monthYear }}:
                   </label>
-                  <span>Goal successfully achieved!</span>
-                </li>
-                <li>
-                  <i class="icon-profile-status icon-pf-complete"></i>
-                  <label>
-                    February 2016:
-                  </label>
-                  <span>Transfer $2,500 from Lisa Savings to John Savings for John Smith.</span>
-                </li><li>
-                  <i class="icon-profile-status icon-pf-complete"></i>
-                  <label>
-                    January 2016:
-                  </label>
-                  <span>Transfer $2,500 from Lisa Savings to John Savings for John Smith.</span>
-                </li><li>
-                  <i class="icon-profile-status icon-pf-complete"></i>
-                  <label>
-                    January 2016:
-                  </label>
-                  <span>Goal added.</span>
+                  <span>{{ action.description }}</span>
                 </li>
               </ul>
             </div>
