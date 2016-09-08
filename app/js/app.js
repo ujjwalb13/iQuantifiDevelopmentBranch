@@ -119,10 +119,9 @@ app.run(function ($http, $rootScope, $location, $window, Auth, toaster) {
     } else {
       $rootScope.backPath = null;
     }
-    if (/^\/onboard/.test($location.path())) {
-      return $rootScope.isOnboarding = true;
-    } else {
-      return $rootScope.isOnboarding = false;
+    $rootScope.isOnboarding = false
+    if (/^\/onboard/.test($location.path()) || /^\/login/.test($location.path())) {
+      $rootScope.isOnboarding = true;
     }
   });
   $rootScope.$on('screen:dim', function() {
