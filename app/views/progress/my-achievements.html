@@ -34,7 +34,7 @@
             </div>
             <div class="wrapper-detail">
               <ul class="overview-content">
-                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="goal in goalsSection.items">
+                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="goal in goalsSection.items" ng-click="openCompletedActions(goal)">
                   <div class="icon-goals-cgr">
                     <span>
                       <i class="icon {{ goal.type | goalIconClass }} icon-80"></i>

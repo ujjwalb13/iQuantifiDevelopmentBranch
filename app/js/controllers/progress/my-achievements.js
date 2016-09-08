@@ -10,6 +10,24 @@
       return type;
     };
 
+    var buildGoalInfo = function(item) {
+      return {
+        name: item.name,
+        amount: item.amount,
+        date: item.completed_date,
+        type: item.type,
+        guid: item.guid
+      }
+    }
+
+    var buildDebtInfo = function(item) {
+      return _.extend(buildGoalInfo(item), { type: item.kind });
+    }
+
+    var buildProtectionInfo = function(item) {
+      return _.extend(buildGoalInfo(item), { type: protectionType(item) });
+    }
+
     MyAchievements.get().$promise.then(function(data) {
       var sections = data.Sections;
       var goalsSection = _.find(sections, function(item) {
@@ -20,7 +38,7 @@
         $scope.goalsSection = {
           name: goalsSection.SectionName,
           items:  _.map(goalsSection.Goals, function(item) {
-            return { name: item.name, amount: item.amount, date: item.completed_date, type: item.type };
+            return buildGoalInfo(item);
           })
         };
       }
@@ -33,7 +51,7 @@
         $scope.debtsSection = {
           name: debtsSection.SectionName,
           items:  _.map(debtsSection.Goals, function(item) {
-            return { name: item.name, amount: item.amount, date: item.completed_date, type: item.kind };
+            return buildDebtInfo(item);
           })
         };
       }
@@ -46,12 +64,17 @@
         $scope.protectionsSection = {
           name: protectionsSection.SectionName,
           items:  _.map(protectionsSection.Goals, function(item) {
-            return { name: item.name, amount: item.amount, date: item.completed_date, type: protectionType(item) };
+            return buildProtectionInfo(item);
           })
         };
       }
 
     });
+
+    $scope.openCompletedActions = function(item) {
+      console.log("openCompletedActions", item);
+    }
+
   });
 }).call(this);
 
