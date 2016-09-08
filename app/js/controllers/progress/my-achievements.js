@@ -25,16 +25,25 @@
         cgrIcon: "icon-goals-cgr" ,
         completedActionsModalTile: "Goal Achieved"
       };
-
       return _.extend(buildItemInfo(item), goalInfo);
     }
 
     var buildDebtInfo = function(item) {
-      return _.extend(buildItemInfo(item), { icon: $filter('debtIconClass')(item.kind), cgrIcon: "icon-debt-cgr"});
+      var debtInfo = {
+        icon: $filter('debtIconClass')(item.kind),
+        cgrIcon: "icon-debt-cgr",
+        completedActionsModalTile: "Debt Paid-off"
+      };
+      return _.extend(buildItemInfo(item), debtInfo);
     }
 
     var buildProtectionInfo = function(item) {
-      return _.extend(buildItemInfo(item), { icon: $filter('protectionIconClass')(protectionType(item)), cgrIcon: "icon-protect-cgr" });
+      var protectionInfo = {
+        icon: $filter('protectionIconClass')(protectionType(item)),
+        cgrIcon: "icon-protect-cgr",
+        completedActionsModalTile: "Policy In-place"
+      };
+      return _.extend(buildItemInfo(item), protectionInfo);
     }
 
     MyAchievements.get().$promise.then(function(data) {
