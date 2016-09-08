@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('progress').controller('MyAchievementsCtrl', function($scope, $location, $routeParams, MyAchievements) {
+  angular.module('progress').controller('MyAchievementsCtrl', function($scope, $location, $routeParams, MyAchievements, $modal) {
 
     var protectionType = function(protection){
       var type = protection.type.toLowerCase();
@@ -72,9 +72,10 @@
     });
 
     $scope.openCompletedActions = function(item) {
-      console.log("openCompletedActions", item);
+      $modal.open({
+        templateUrl: 'completedActionsModal'
+      });
     }
-
   });
 }).call(this);
 
