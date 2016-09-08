@@ -31,7 +31,7 @@
                 <p ng-show="submitted && carePolicyForm.company.$error.pattern" class="help-block">Company is invalid.</p>
               </div>
             </div>
-           
+
 
             <div class="row form-group" ng-class="{'has-error': submitted && carePolicyForm.person.$invalid}">
               <div class="col-lg-6 col-sm-8">
@@ -61,7 +61,7 @@
             </div>
 
             <div class="row form-group"ng-class="{'has-error': submitted && (carePolicyForm.payment.$invalid || carePolicyForm.payment_period.$invalid)}">
-              
+
               <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
                 <label class="control-label">Payment Amount</label>
                 <div class="input-group">
@@ -79,7 +79,7 @@
             </div>
 
             <div class="row form-group" ng-class="{'has-error': submitted && (carePolicyForm.amount.$invalid || carePolicyForm.benefit_amount_period.$invalid)}">
-              
+
               <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
                 <label class="control-label">Benefit Amount</label>
                 <div class="input-group">
@@ -113,9 +113,9 @@
                 <div class="input-group">
                   <span class="input-group-addon">Days</span>
                   <select class="form-control " id="elimination_period" name="elimination_period" required ng-model="carePolicy.elimination_period" ng-options="period for period in eliminationPeriod"></select>
-                  
+
                 </div>
-                
+
                 <p ng-show="submitted && carePolicyForm.elimination_period.$error.required" class="help-block">Elimination is required.</p>
               </div>
 
@@ -142,7 +142,7 @@
             </div>
 
             <div class="row form-group" ng-class="{'has-error': submitted && carePolicyForm.benefit_increase.$invalid}">
-              
+
               <div class="col-lg-6 col-sm-8">
                 <label class="control-label">Inflation Protection (Benefit Increase Option)</label>
                 <select class="form-control" id="benefit_increase" name="benefit_increase" required ng-model="carePolicy.benefit_increase" ng-options="period for period in benefitIncrease"></select>
@@ -173,10 +173,10 @@
 
           </form>
           <div class="row row-gutter-20">
+            <button class="btn-delete col-margin-20 pull-left" ng-show="editMode" ng-disabled="pending" ng-click="openDeleteModal(carePolicy)"><span class="fa fa-trash"></span></button>
             <button class="iq-submit-btn btn hidden-xs pull-left col-margin-20" ng-disabled="pending" ng-click="cancel()">Cancel</button>
             <button ng-hide="pending" class="iq-submit-btn btn-success btn pull-left col-margin-20" ng-disabled="carePolicyForm.$invalid" ng-click="submit(carePolicyForm.$valid)">{{editMode? 'Save Changes' : 'Add Policy'}}</button>
             <button ng-show="pending" class="iq-submit-btn btn-success btn pull-left col-margin-20" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
-            <button type="button" class="iq-submit-btn btn-danger btn pull-left col-margin-20" ng-click="openDeleteModal(carePolicy)" ng-show="carePolicy.guid">Delete</button>
           </div>
         </div>
       </div>
