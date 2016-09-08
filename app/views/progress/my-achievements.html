@@ -54,7 +54,7 @@
             </div>
             <div class="wrapper-detail">
               <ul class="overview-content">
-                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="debt in debtsSection.items">
+                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="debt in debtsSection.items" ng-click="openCompletedActions(debt)">
                   <div class="icon-debt-cgr">
                     <span>
                       <i class="icon {{ debt.icon }}  icon-80"></i>
@@ -74,7 +74,7 @@
             </div>
             <div class="wrapper-detail">
               <ul class="overview-content">
-                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="protection in protectionsSection.items">
+                <li class="col-lg-15 col-md-3 col-sm-4 col-xs-6" ng-repeat="protection in protectionsSection.items" ng-click="openCompletedActions(protection)">
                   <div class="icon-protect-cgr">
                     <span>
                       <i class="icon {{ protection.icon }} icon-80"></i>
@@ -104,7 +104,7 @@
         </div>
         <div class="modal-body">
           <div class="head-archived-popup">
-            <div class="icon-goals-cgr">
+            <div class="{{ item.cgrIcon }} icon-cgr">
               <span>
                 <i class="icon {{ item.icon }} icon-80"></i>
               </span>

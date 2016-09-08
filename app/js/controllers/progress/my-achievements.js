@@ -20,15 +20,15 @@
     }
 
     var buildGoalInfo = function(item) {
-      return _.extend(buildItemInfo(item), { icon: $filter('goalIconClass')(item.type) });
+      return _.extend(buildItemInfo(item), { icon: $filter('goalIconClass')(item.type) , cgrIcon: "icon-goals-cgr"});
     }
 
     var buildDebtInfo = function(item) {
-      return _.extend(buildItemInfo(item), { icon: $filter('debtIconClass')(item.kind) });
+      return _.extend(buildItemInfo(item), { icon: $filter('debtIconClass')(item.kind), cgrIcon: "icon-debt-cgr"});
     }
 
     var buildProtectionInfo = function(item) {
-      return _.extend(buildItemInfo(item), { icon: $filter('protectionIconClass')(protectionType(item)) });
+      return _.extend(buildItemInfo(item), { icon: $filter('protectionIconClass')(protectionType(item)), cgrIcon: "icon-protect-cgr" });
     }
 
     MyAchievements.get().$promise.then(function(data) {
