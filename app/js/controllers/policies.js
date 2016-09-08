@@ -92,7 +92,9 @@
           return $modalInstance.dismiss('cancel');
         };
         return $scope.deletePolicy = function() {
+          $scope.pending = true;
           return policy.$delete().then(function(result) {
+            $scope.pending = false;
             $modalInstance.close(policy);
             $rootScope.$broadcast('alert', {
               type: 'success',
@@ -100,6 +102,7 @@
             });
             return $location.path('/policies');
           }, function(err) {
+            $scope.pending = false;
             $modalInstance.dismiss('cancel');
             return $rootScope.$broadcast('alert', {
               type: 'danger',
