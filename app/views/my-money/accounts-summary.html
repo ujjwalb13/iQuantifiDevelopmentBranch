@@ -3,6 +3,17 @@
     .account-summary-background {
         background: rgba(239, 234, 218, 0.44);
     }
+
+    .white-circle-plus {
+        width: 18px;
+        height: 18px;
+        background: url("/images/svg/icon-al-add-white.svg");
+        content: " ";
+        display: inline-block;
+        text-align:center;
+        vertical-align: text-top
+            
+    }
 </style>
 <div class="container main-wrapper">
     <div class="row">
@@ -18,13 +29,50 @@
                     <div class="col-sm-9">
                     </div>
                     <div class="col-sm-3">
-                        <a ng-href="{{disabled()}}" class="iq-submit-btn btn-primary btn btn-add pull-right" role="button">
-                            <span class="fa-stack" style="color:white">
-                                <i class="fa fa-plus fa-stack-1x"></i>
-                                <i class="fa fa-circle-thin fa-stack-2x"></i>
-                            </span>
-                             Add Account
-                        </a>
+                        <div class="dropdown open">
+
+
+                            <md-menu md-position-mode="target-right target" md-offset="0 55">
+
+                                <a ng-href="{{disabled()}}" class="iq-submit-btn btn-primary btn btn-add pull-right dropdown-toggle" role="button" ng-click="openMenu($mdOpenMenu, $event)">
+                                    <!--<span class="fa-stack" style="color:white">
+                                        <i class="fa fa-plus fa-stack-1x"></i>
+                                        <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                    </span>-->
+                                    <i class="white-circle-plus"></i> Add Account <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+
+                                <md-menu-content width="4">
+                                    <md-menu-item>
+                                        <md-button ng-click="goToAccountNew()">
+                                            Cash Account
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="goToAccountNew()">
+                                            Investment
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="goToDebtNew()">
+                                            Debt
+                                        </md-button>
+                                    </md-menu-item>   
+                                    <md-menu-item>
+                                        <md-button ng-click="goToPolicyNew()">
+                                            Policy
+                                        </md-button>
+                                    </md-menu-item>   
+                                </md-menu-content>
+                            </md-menu>
+
+
+
+
+
+
+
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -119,7 +167,7 @@
                                     <!--<td>{{item.AccountName}} <span class="label label-success" ng-show="item.isLinked">Linked</span></td>
                                     <td>{{item.AccountSubText}}</td>
                                     <td>{{item.AccountStatusDisplay}}</td>-->
-                                    
+
 
                                 </tr>
                             </tbody>
@@ -127,7 +175,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-
+           
                     <div class="table-static">
                         <table class="account-summary-background">
                             <caption>
