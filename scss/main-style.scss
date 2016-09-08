@@ -142,6 +142,111 @@ ul{
   }
 }
 
+.cashfinder-tbl{
+  &.table-static{
+    td,th{
+      font-size: 14px;
+    }
+    table{
+      thead{
+        tr{
+          th{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            &:last-of-type{
+              padding-right: 40px;
+            }
+          }
+        }
+      }
+      tbody{
+        tr{
+          position: relative;
+          td{
+            padding-top: 0px;
+            padding-bottom: 0px;
+            height: 45px;
+            position: relative;
+            &:last-of-type{
+              padding-right: 40px;
+              strong{
+                color: #e79546;
+              }
+              &:before{
+                content: "\f105";
+                display: block;
+                font-size: 20px;
+                color: black;
+                position: absolute;
+                top: 8px;
+                right: 10px;
+                font-family: FontAwesome;
+                opacity: 0.3;
+              }
+            }
+          }
+          &.total-row{
+            td{
+              font-size: 18px;
+              font-weight: normal;
+              &:last-of-type{
+                font-weight: bold;
+              }
+            }
+          }
+          &:last-of-type{
+            td{
+              color: #8c8b8b;
+              a{
+                color: #8c8b8b;
+              }
+              &:last-of-type{
+                &:before{
+                  display: none;
+                }
+              }
+            }
+            &:hover{
+              background: transparent;
+              cursor: inherit;
+            }
+          }
+          &.active{
+            td{
+              &:last-of-type{
+                &:after{
+                  content: "";
+                  display: block;
+                  width: 0;
+                  height: 0;
+                  border-top: 15px solid transparent;
+                  border-bottom: 15px solid transparent;
+                  border-right:15px solid #efeada;
+                  position: absolute;
+                  top: 6px;
+                  right: -30px;
+                }
+              }
+            }
+          }
+          &:hover, &.active{
+            background: #efebda;
+            cursor: pointer;
+            td{
+              position: relative;
+              &:last-of-type{
+                &:before{
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .sum-main-content{
   margin-top: 30px;
   .table-static{
@@ -960,6 +1065,95 @@ ul{
   left: 18px;
 }
 
+
+/*=========================Cashfinder================*/
+
+.cashfinder-head{
+  padding-bottom: 15px;
+  h4{
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  .input-group{
+    margin-right: 15px;
+  }
+}
+
+.modify-monthly{
+  margin-bottom: 20px;
+  h4{
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  em{
+    color: #8c8b8b;
+    display: block;
+    margin-bottom: 15px;
+  }
+  label{
+    font-weight: normal;
+    font-size: 16px;
+    strong{
+      font-weight: bold;
+    }
+  }
+  p{
+    margin-bottom: 20px;
+  }
+  .form-group{
+    width: 100%;
+    margin-bottom: 15px;
+    .input-group{
+      width: 100%;
+    }
+  }
+}
+
+.category-includes{
+  ul{
+    li{
+      position: relative;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      &:after{
+        content: " " ;
+        display: block;
+        width: 8px;
+        height: 12px;
+        background: url($url-images-icon + "green-bullet-arrow-sm.png") no-repeat 0 0;
+        position: absolute;
+        top: 5px;
+      }
+      a{
+        display: block;
+        padding-left: 20px;
+        color: #444444;
+      }
+    }
+  }
+}
+
+.cashfinder-main{
+  display: table;
+  .cashfinder-left-content{
+    display: table-cell;
+    float: none;
+  }
+  .beside-right-content{
+    display: table-cell;
+    height: auto;
+    .beside-right-wrapper{
+      height: 100%;
+      width: 100%;
+      display: inline-block;
+    }
+  }
+}
+
+
+
 .login-form{
   .logo{
     width: 220px;
@@ -1055,5 +1249,7 @@ ul{
     }
   }
 }
+
+
 
 
