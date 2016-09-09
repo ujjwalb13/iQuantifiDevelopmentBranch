@@ -53,10 +53,16 @@
       $scope.selectedExpense = expense
     }
 
+    $scope.isOriginalRecommendation = function(expense) {
+      return expense.new_amount === expense.recommended_amount
+    }
     $scope.reset = function() {
       $rootScope.overrides = {};
       $rootScope.showAllExpenses = false;
-      return CashfinderService.fetchData();
+      _.each($rootScope.expenses, function(expense){
+
+        expense.new_amount = expense.recommended_amount || expense.amount;
+      })
     };
     $scope.save = function() {
       var expense, i, len, ref;
@@ -111,11 +117,7 @@
     };
 
     return $scope.save = function() {
-      $scope.saving = true;
       $rootScope.overrides[$scope.selectedExpense.kind] = $scope.selectedExpense.new_amount;
-      return CashfinderService.fetchData().then(function() {
-        $scope.saving = false;
-      });
     };
   });
 
