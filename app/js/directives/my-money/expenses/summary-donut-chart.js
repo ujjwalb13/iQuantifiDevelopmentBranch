@@ -54,7 +54,7 @@
         .innerRadius(radius * 0.4);
 
       var outerArc = d3.svg.arc()
-        .innerRadius(radius * 1.8)
+        .innerRadius(radius * 0.8)
         .outerRadius(radius * 0.5);
 
       var pie = d3.layout.pie()
@@ -167,7 +167,8 @@
           return function(t) {
             var d2 = interpolate(t);
             var pos = outerArc.centroid(d2);
-            pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+            pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+            pos[1] += 30;
             return [arc.centroid(d2), outerArc.centroid(d2), pos];
           };
         });
