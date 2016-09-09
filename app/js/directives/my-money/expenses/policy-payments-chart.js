@@ -23,6 +23,7 @@
           scope.totalValue = totalPolicies;
           scope.totalPercent = Math.round(10000.0 * totalPolicies / totalExpenses)/100;
           scope.chart_title = "Total Monthly Policy Premiums";
+          scope.icon = "icon-pt-life"
        });
     };
 

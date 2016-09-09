@@ -21,8 +21,9 @@
             return item;
           });
           scope.totalValue = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="debt"}).total_amount;
-          scope.totalPercent = Math.round(10000.0 * scope.totalDebt / totalExpenses)/100;
+          scope.totalPercent = Math.round(10000.0 * scope.totalValue / totalExpenses)/100;
           scope.chart_title = "Total Monthly Debt Payments";
+          scope.icon = "icon-db-auto-loan";
        });
     };
 
