@@ -90,6 +90,7 @@
             $rootScope.processing = false;
             if (newShortage > 0) {
               $rootScope.shortage = newShortage;
+              setDefaultSelectExpense();
             } else {
               return $location.path('/');
             }
