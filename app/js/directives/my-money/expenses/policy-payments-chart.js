@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('agera').directive('debtPaymentsChart', function(ENV, $http, Expense, DebtAndPolicyPayment, $q) {
+  angular.module('agera').directive('policyPaymentsChart', function(ENV, $http, Expense, DebtAndPolicyPayment, $q) {
     var getChartData, link;
     link = function(scope, element, attrs) {
        $q.all([
@@ -10,19 +10,19 @@
         .then(function(response){
           var expenses = response[0];
           var debtsAndPolicyPayments = response[1];
-          var debt = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="debt"});
-          var totalDebts = debt.total_amount;
-          var totalPolicies = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="policy"}).total_amount;
+          var policy = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="policy"});
+          var totalDebts = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="debt"}).total_amount;
+          var totalPolicies = policy.total_amount;
           var totalExpenses = _.reduce(expenses, function(total, item){ return item.amount + total; }, 0) + totalDebts + totalPolicies;
           var svg = d3.select(element.find("svg")[0]);
-          drawChart(scope, debt.Detail, svg);
-          scope.debtPayments = _.map(debt.Detail, function(item){
+          drawChart(scope, policy.Detail, svg);
+          scope.debtPayments = _.map(policy.Detail, function(item){
             item.percent = Math.round(10000.0 * item.amount / totalExpenses) / 100;
             return item;
           });
-          scope.totalValue = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="debt"}).total_amount;
-          scope.totalPercent = Math.round(10000.0 * scope.totalDebt / totalExpenses)/100;
-          scope.chart_title = "Total Monthly Debt Payments";
+          scope.totalValue = totalPolicies;
+          scope.totalPercent = Math.round(10000.0 * totalPolicies / totalExpenses)/100;
+          scope.chart_title = "Total Monthly Policy Premiums";
        });
     };
 
@@ -114,7 +114,7 @@
         .attr("x", function(d) {return x(d.name) + (group_margin / 2);})
         .attr("y", function(d) { return y(d.amount);})
         .attr("height", function(d) {return height - y(d.amount);})
-        .style("fill", function(d) { return "#dd644d";});
+        .style("fill", function(d) { return "#509093";});
 
       chartGroups.selectAll("rect.group-highlight").data(function(d) { return [d];})
       .enter()
