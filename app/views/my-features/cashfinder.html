@@ -4,18 +4,18 @@
     <div class="left-side-bar col-lg-2 visible-lg">
       <feature-sidebar current-page='/my-features/cashfinder'></feature-sidebar>
     </div>
-    <div class="right-content col-lg-7">
+    <div class="right-content col-lg-10">
       <div class="section-header myfeatures">
         <i class="icon icon-ft-cash-finder"></i>
         Cashfinder
       </div>
-      <div class="content-wrapper">
-        <div class="row" ng-include src="'/views/my-features/cashfinder/_find-expense.html'" ng-if="shortage == 0"></div>
-        <div class="row" ng-include src="'/views/my-features/cashfinder/_expenses-list.html'" ng-show="showExpenses"></div>
+      <div class="content-wrapper row cashfinder-main">
+        <div class="cashfinder-left-content col-md-8 col-xs-6">
+          <div ng-include src="'/views/my-features/cashfinder/_find-expense.html'" ng-if="shortage == 0"></div>
+          <div ng-include src="'/views/my-features/cashfinder/_expenses-list.html'" ng-show="showExpenses"></div>
+        </div>
+        <div class="beside-right-content col-md-4 col-xs-6" ng-include src="'/views/my-features/cashfinder/_expense-edit.html'"></div>
       </div>
-    </div>
-    <div class="beside-right-content col-lg-3" ng-controller="CashfinderEditCtrl" ng-show="selectedExpense">
-      <div ng-include src="'/views/my-features/cashfinder/_expense-edit.html'"></div>
     </div>
   </div>
 </div>

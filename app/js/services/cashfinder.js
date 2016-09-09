@@ -8,8 +8,7 @@
         return $http.post(ENV.apiHost + "/advice/cashfinder", {
           overrides: $rootScope.overrides
         }).then(function(data) {
-          $rootScope.expenses = _.filter(data.data.expenses, function(expense){
-            return expense.amount });
+          $rootScope.expenses = data.data.expenses;
 
           $rootScope.shortage = data.data.shortage;
 

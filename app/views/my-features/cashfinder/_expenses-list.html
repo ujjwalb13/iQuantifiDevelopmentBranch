@@ -1,21 +1,31 @@
-<div class="table-static col-lg-12">
+<div class="table-static cashfinder-tbl">
   <table class="hovered">
     <thead class="dark">
       <th>Category</th>
       <th>Current</th>
       <th>New</th>
-      <th></th>
     </thead>
     <tbody>
-      <tr ng-repeat="expense in expenses" ng-click="selectExpense(expense)" ng-class="{'active': selectedExpense == expense}">
+      <tr ng-repeat="expense in filteredExpenses = (expenses | filter: reducibleExpenseFilter)" ng-click="selectExpense(expense)" ng-class="{'active': selectedExpense == expense}">
         <td>{{expense.kind | titleize}}</td>
         <td>{{expense.amount | dollars}}</td>
-        <td>{{expense.new_amount | dollars}}</td>
-        <td class="text-right selected-indicator-wrapper">
-          <i class="fa fa-chevron-right"></i>
-          <i class="visible-lg selected-indicator" ng-show="selectedExpense == expense"></i>
+        <td><strong>{{expense.new_amount | dollars}}</strong></td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <a href="#">
+            <i class="fa fa-chevron-up"></i>
+            <span>Hide non-reducible</span>
+          </a>
         </td>
       </tr>
     </tbody>
   </table>
+  <div class="cashfinder-foot">
+    <p><strong>Note:</strong> The changes you save will also reflect in your current monthly expense sheet.</p>
+    <div class="row-gutter-20">
+      <button type="button" class="btn btn-cancel col-margin-20">Cancel</button>
+      <button type="button" class="btn btn-primary col-margin-20">Save New</button>
+    </div>
+  </div>
 </div>

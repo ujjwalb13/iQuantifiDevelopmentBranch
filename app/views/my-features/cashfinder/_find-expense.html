@@ -1,18 +1,19 @@
-<div class="col-lg-12">
-  <p><strong>How much cash do you want to find to apply to your goals?</strong></p>
-  <form name="expenseForm" class="row" novalidate ng-submit="findCash(expenseForm.$valid)">
+<div class="cashfinder-head">
+<h4>How much cash do you want to find to apply to your goals?</h4>
+  <form name="expenseForm" novalidate ng-submit="findCash(expenseForm.$valid)" class="form-horizontal">
     <div class="col-lg-4">
       <div class="form-group" ng-class="{'has-error': submitted && expenseForm.expensesAmount.$invalid}">
-        <div class="input-group" >
-          <span class="input-group-addon">$</span>
-          <input type="text" name="expensesAmount" placeholder="0" class="form-control" required ng-model="expense.amount" currency-input>
+        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+          <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input type="text" class="form-control" name="expensesAmount" id="exampleInputAmount" placeholder="Amount" ng-model="cashfinder.amount" required currency-input>
         </div>
         <span ng-show="submitted && expenseForm.expensesAmount.$error.required" class="help-block">Expenses is required.</span>
 
       </div>
     </div>
-    <div class="col-lg-4">
-      <button type="submit" class="btn btn-primary" ng-hide="processing" >Find Cash</button>
+    <div class="col-lg-8">
+      <button type="submit" class="btn btn-primary" ng-hide="processing">Find Cash</button>
       <button type="submit" class="btn btn-primary" ng-disabled="true" ng-show="processing">Processing</button>
     </div>
   </form>

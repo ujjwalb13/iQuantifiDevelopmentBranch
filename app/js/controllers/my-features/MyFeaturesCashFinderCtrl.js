@@ -11,8 +11,8 @@
         $rootScope.showExpenses = false
       }
     });
-
-    $scope.expense = {}
+    $scope.showAllExpenses = false;
+    $scope.cashfinder = {}
 
     $scope.findCash = function(isValid) {
       $scope.submitted = true
@@ -22,7 +22,7 @@
 
       CashfinderService.fetchData().then(function(){
         $rootScope.expenses = _.filter($rootScope.expenses, function(expense){
-          return expense.amount <= $scope.expense.amount;
+          return expense.amount <= $scope.cashfinder.amount;
         })
         if ($rootScope.expenses.length > 0) {
           $rootScope.showExpenses = true;
@@ -32,6 +32,14 @@
         $scope.processing = false;
         $scope.submitted = false;
       })
+    }
+
+    $scope.reducibleExpenseFilter = function(item){
+      return function() {
+        console.log(item);
+          return item.amount != item.new_amount
+
+      }
     }
 
     $scope.selectExpense = function(expense) {
