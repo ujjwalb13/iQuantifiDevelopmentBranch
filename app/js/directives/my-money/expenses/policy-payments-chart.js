@@ -114,7 +114,7 @@
         .attr("x", function(d) {return x(d.name) + (group_margin / 2);})
         .attr("y", function(d) { return y(d.amount);})
         .attr("height", function(d) {return height - y(d.amount);})
-        .style("fill", function(d) { return "red";});
+        .style("fill", function(d) { return "#509093";});
 
       chartGroups.selectAll("rect.group-highlight").data(function(d) { return [d];})
       .enter()
