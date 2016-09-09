@@ -50,12 +50,12 @@
       var center_group = svg.append("g").attr("class", "center_group");
 
       var arc = d3.svg.arc()
-        .outerRadius(radius * 0.8)
-        .innerRadius(radius * 0.4);
+        .innerRadius(radius * 0.4)
+        .outerRadius(radius * 0.8);
 
       var outerArc = d3.svg.arc()
         .innerRadius(radius * 0.8)
-        .outerRadius(radius * 0.5);
+        .outerRadius(radius * 0.8);
 
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })
@@ -133,7 +133,6 @@
       })
       .attr('y', function(d){
         var pos = radius * Math.sin(Math.PI/2 - midAngle(d));
-        console.log("xxx",d,outerArc.centroid(d), donut_size/2 - pos)
         return donut_size/2 - pos + 30;
       })
       .append("xhtml:body")
@@ -167,7 +166,7 @@
           return function(t) {
             var d2 = interpolate(t);
             var pos = outerArc.centroid(d2);
-            pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+            pos[0] = radius * 1.5 * (midAngle(d2) < Math.PI ? 1 : -1);
             pos[1] += 30;
             return [arc.centroid(d2), outerArc.centroid(d2), pos];
           };
@@ -187,7 +186,6 @@
         .text("$" + data.totalExpenses);
     }
     function summaryData(expenses, debtsAndPolicyPayments) {
-      console.log("summaryData", expenses, debtsAndPolicyPayments);
       var commitedExpenses = _.select(expenses, function(item){return isCommittedExpense(item.kind);})
       var discretionaryExpenses = _.select(expenses, function(item){return !isCommittedExpense(item.kind);})
       var totalDiscretionaryExpenses = _.reduce(discretionaryExpenses, function(total, item){ return item.amount + total; }, 0);
