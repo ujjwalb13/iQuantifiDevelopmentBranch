@@ -38,8 +38,9 @@
       width = Number.parseInt(svg.style("width"));
       donut_size = width/3;
       var radius = width/6;
+      var total_monthly_height = 50;
       var color = d3.scale.ordinal().range(["#e3973d", "#e3973d", "#d36351", "#508b8e"]);
-      svg.style("width", width + "px").style("height", (donut_size + 30) + "px");
+      svg.style("width", width + "px").style("height", (donut_size + total_monthly_height) + "px");
       svg = svg.append("g");
       svg.attr("transform", "translate(" + width / 2 + "," + donut_size / 2 + ")")
 
@@ -133,7 +134,8 @@
       })
       .attr('y', function(d){
         var pos = radius * Math.sin(Math.PI/2 - midAngle(d));
-        return donut_size/2 - pos + 30;
+        var extra_pos = midAngle(d) < Math.PI ? 0 : total_monthly_height;
+        return donut_size/2 - pos + extra_pos;
       })
       .append("xhtml:body")
       .html(function(d){
@@ -167,7 +169,7 @@
             var d2 = interpolate(t);
             var pos = outerArc.centroid(d2);
             pos[0] = radius * 1.5 * (midAngle(d2) < Math.PI ? 1 : -1);
-            pos[1] += 30;
+            if(midAngle(d2) > Math.PI) { pos[1] += total_monthly_height; }
             return [arc.centroid(d2), outerArc.centroid(d2), pos];
           };
         });
