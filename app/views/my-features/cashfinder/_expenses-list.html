@@ -31,8 +31,11 @@
   <div class="cashfinder-foot">
     <p><strong>Note:</strong> The changes you save will also reflect in your current monthly expense sheet.</p>
     <div class="row-gutter-20">
-      <button type="button" class="btn btn-cancel col-margin-20" ng-click="reset()">Reset</button>
-      <button type="button" class="btn btn-primary col-margin-20" ng-click="save()">Save New</button>
+      <button type="button" class="btn btn-cancel col-margin-20" ng-click="reset()" ng-disabled="processing">Reset</button>
+      <button type="button" class="btn btn-primary col-margin-20" ng-click="save()" ng-show="!processing">Save New</button>
+      <button type="button" class="btn btn-primary col-margin-20" disabled ng-show="processing">
+        <i class="fa fa-circle-o-notch fa-spin"></i> Processing
+      </button>
     </div>
   </div>
 </div>

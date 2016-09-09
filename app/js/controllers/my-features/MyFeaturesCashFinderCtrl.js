@@ -4,10 +4,14 @@
     var TaxModalInstanceCtrl;
     $rootScope.$broadcast('clearAlerts');
 
+    var setDefaultSelectExpense = function() {
+      $scope.selectedExpense = $rootScope.expenses[0]
+    }
+
     CashfinderService.fetchData().then(function(){
       if ($rootScope.shortage > 0) {
         $rootScope.showExpenses = true
-        $scope.selectedExpense = $rootScope.expenses[0];
+        setDefaultSelectExpense();
       } else {
         $rootScope.showExpenses = false
       }
@@ -27,7 +31,7 @@
         })
         if ($rootScope.expenses.length > 0) {
           $rootScope.showExpenses = true;
-          $scope.selectedExpense = $rootScope.expenses[0];
+          setDefaultSelectExpense();
         } else {
           $rootScope.showExpenses = false;
         }
@@ -57,35 +61,37 @@
       return expense.new_amount === expense.recommended_amount
     }
     $scope.reset = function() {
+      $scope.selectedExpense = {};
       $rootScope.overrides = {};
       $rootScope.showAllExpenses = false;
       _.each($rootScope.expenses, function(expense){
-
         expense.new_amount = expense.recommended_amount || expense.amount;
       })
+      _.defer(function(){
+        setDefaultSelectExpense();
+      })
     };
+
     $scope.save = function() {
-      var expense, i, len, ref;
-      $rootScope.loading = true;
-      ref = $rootScope.expenses;
-      for (i = 0, len = ref.length; i < len; i++) {
-        expense = ref[i];
+      $rootScope.processing = true;
+      _.each($rootScope.expenses, function(expense){
         expense.amount = expense.new_amount;
-      }
-      return Expense.save({
-        expenses: $rootScope.expenses
-      }).$promise.then(function(result) {
-        return Scenario.shortage().$promise.then(function(data) {
-          var newShortage;
-          newShortage = data.shortage;
-          $rootScope.loading = false;
-          if (newShortage > 0) {
-            return $scope.openDoneModal();
-          } else {
-            return $location.path('/');
-          }
-        });
       });
+
+      Expense.save({expenses: $rootScope.expenses})
+        .$promise
+        .then(function(result) {
+          return Scenario.shortage().$promise.then(function(data) {
+            var newShortage;
+            newShortage = data.shortage;
+            $rootScope.processing = false;
+            if (newShortage > 0) {
+              return $scope.openDoneModal();
+            } else {
+              return $location.path('/');
+            }
+          });
+        });
     };
     return $scope.openDoneModal = function() {
       var modalInstance;
@@ -107,16 +113,19 @@
     $scope.$watch('selectedExpense', function(newValue, oldValue){
       if (newValue != null && newValue != oldValue) {
         $scope.expense = newValue;
+        $scope.beingEditExpense = {amount: $scope.expense.new_amount};
         fetchSubcategories($scope.expense.kind);
       }
     })
 
     $scope.keep = function() {
       $scope.selectedExpense.new_amount = $scope.selectedExpense.amount;
+      $scope.beingEditExpense.amount = $scope.selectedExpense.amount;
       $rootScope.overrides[$scope.selectedExpense.kind] = $scope.selectedExpense.new_amount;
     };
 
     return $scope.save = function() {
+      $scope.selectedExpense.new_amount = $scope.beingEditExpense.amount
       $rootScope.overrides[$scope.selectedExpense.kind] = $scope.selectedExpense.new_amount;
     };
   });
