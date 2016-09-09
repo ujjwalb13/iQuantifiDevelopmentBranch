@@ -1,45 +1,35 @@
 (function() {
   'use strict';
-  angular.module('agera').directive('summaryDonutChart', function() {
+  angular.module('agera').directive('summaryDonutChart', function($q, Expense, DebtAndPolicyPayment) {
     var link = function(scope, element, attrs) {
-      var data = [
-        {
-          label: "Total Monthly Discretionary Expenses",
-          amount: 20,
-          kind: "commited",
-          color: "gray",
-          icon: "icon-mm-expenses"
-        },
-        {
-          label: "Monthly Committed Expenses",
-          amount: 50,
-          kind: "commited",
-          color: "blue",
-          icon: "icon-mm-expenses"
-        },
-        {
-          label: "Monthly Debt Payments",
-          amount: 10,
-          kind: "commited",
-          color: "green",
-          icon: "icon-db-debt"
-        },
-        {
-          label: "Monthly Policy Premiums",
-          amount: 5,
-          kind: "commited",
-          color: "red",
-          icon: "icon-pt-protection"
-        },
-      ]
-      // Expense.query().$promise.then(function(expenses){
-      //   scope.subCategories = genereateSubCategories(expenses);
-      //   var svg = d3.select(element.find("svg")[0]);
-      //   drawChart(scope, expenses, svg);
-      // });
-      var svg = d3.select(element.find("svg")[0]);
-      drawChart(scope, svg, data)
+      $q.all([
+        getExpenses(),
+        getDebtAndPolicyPayments()
+      ])
+      .then(function(response){
+        var expenses = response[0];
+        var debtsAndPolicyPayments = response[1];
+        var data = summaryData(expenses, debtsAndPolicyPayments);
+        var svg = d3.select(element.find("svg")[0]);
+        drawChart(scope, svg, data)
+       });
     };
+
+    function getExpenses() {
+       var d = $q.defer();
+       var result = Expense.query({}, function() {
+            d.resolve(result);
+       });
+       return d.promise;
+    }
+
+    function getDebtAndPolicyPayments() {
+       var d = $q.defer();
+       var result = DebtAndPolicyPayment.query({}, function() {
+            d.resolve(result);
+       });
+       return d.promise;
+    }
 
     function drawChart(scope, svg, data) {
       var width, height, donut_size;
@@ -56,11 +46,11 @@
       svg.append("g").attr("class", "lines");
 
       var arc = d3.svg.arc()
-        .outerRadius(radius * 0.75)
-        .innerRadius(radius * 0.4);
+        .outerRadius(radius)
+        .innerRadius(radius * 0.5);
 
       var outerArc = d3.svg.arc()
-        .innerRadius(radius * 0.5)
+        .innerRadius(radius * 0.8)
         .outerRadius(radius * 0.9);
 
       var pie = d3.layout.pie()
@@ -96,20 +86,18 @@
 
       text.enter()
       .append('foreignObject')
-      .attr('width', 300)
+      .attr('width', donut_size)
       // .attr("dy", ".35em")
       .attr('x', function(d){
         return midAngle(d) < Math.PI ? (width * 2 / 3) : 0;
       })
       .attr('y', function(d){
-        var pos = radius * Math.sin(midAngle(d) * 57.3);
-        console.log("foreignObject:y",midAngle(d), pos);
-        return pos + donut_size/2;
+        var pos = radius * Math.sin(Math.PI/2 - midAngle(d));
+        console.log("xxx",d,outerArc.centroid(d), donut_size/2 - pos)
+        return donut_size/2 - pos;
       })
       .append("xhtml:body")
       .html(function(d){
-        console.log("render label",d);
-
         var percent = Math.round(10000 * (d.endAngle - d.startAngle) / 2 / Math.PI)/100.0;
         return '<div class="des-chart-content">\
         <i class="icon ' + d.data.icon + '"></i>\
@@ -143,6 +131,47 @@
             return [arc.centroid(d2), outerArc.centroid(d2), pos];
           };
         });
+    }
+    function summaryData(expenses, debtsAndPolicyPayments) {
+      console.log("summaryData", expenses, debtsAndPolicyPayments);
+      var commitedExpenses = _.select(expenses, function(item){return isCommittedExpense(item.kind);})
+      var discretionaryExpenses = _.select(expenses, function(item){return !isCommittedExpense(item.kind);})
+      var data = [
+        {
+          label: "Total Monthly Discretionary Expenses",
+          amount: _.reduce(discretionaryExpenses, function(total, item){ return item.amount + total; }, 0),
+          kind: "commited",
+          color: "gray",
+          icon: "icon-mm-expenses"
+        },
+        {
+          label: "Monthly Committed Expenses",
+          amount: _.reduce(commitedExpenses, function(total, item){ return item.amount + total; }, 0),
+          kind: "commited",
+          color: "blue",
+          icon: "icon-mm-expenses"
+        },
+        {
+          label: "Monthly Debt Payments",
+          amount: _.detect(debtsAndPolicyPayments, function(item){return item.kind =="debt"}).total_amount,
+          kind: "commited",
+          color: "green",
+          icon: "icon-db-debt"
+        },
+        {
+          label: "Monthly Policy Premiums",
+          amount: _.detect(debtsAndPolicyPayments, function(item){return item.kind =="policy"}).total_amount,
+          kind: "commited",
+          color: "red",
+          icon: "icon-pt-protection"
+        },
+      ];
+      return _.select(data, function(item){return item.amount > 0});
+    }
+
+    function isCommittedExpense(expense_kind) {
+      var commited_expense_kinds = ["car_insurance", "cell_phone", "education", "health_insurance", "rent", "groceries", "transportation", "utilities", "cable_internet", "healthcare"];
+      return _.include(commited_expense_kinds, expense_kind);
     }
 
     return {
