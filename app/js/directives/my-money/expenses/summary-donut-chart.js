@@ -3,10 +3,34 @@
   angular.module('agera').directive('summaryDonutChart', function() {
     var link = function(scope, element, attrs) {
       var data = [
-        {label: "Total Monthly Discretionary Expenses", amount: 20, kind: "commited", color: "gray"},
-        {label: "Monthly Committed Expenses", amount: 50, kind: "commited", color: "blue"},
-        {label: "Monthly Debt Payments", amount: 10, kind: "commited", color: "green"},
-        {label: "Monthly Policy Premiums", amount: 5, kind: "commited", color: "red"},
+        {
+          label: "Total Monthly Discretionary Expenses",
+          amount: 20,
+          kind: "commited",
+          color: "gray",
+          icon: "icon-mm-expenses"
+        },
+        {
+          label: "Monthly Committed Expenses",
+          amount: 50,
+          kind: "commited",
+          color: "blue",
+          icon: "icon-mm-expenses"
+        },
+        {
+          label: "Monthly Debt Payments",
+          amount: 10,
+          kind: "commited",
+          color: "green",
+          icon: "icon-db-debt"
+        },
+        {
+          label: "Monthly Policy Premiums",
+          amount: 5,
+          kind: "commited",
+          color: "red",
+          icon: "icon-pt-protection"
+        },
       ]
       // Expense.query().$promise.then(function(expenses){
       //   scope.subCategories = genereateSubCategories(expenses);
@@ -76,54 +100,69 @@
       //   .text(function(d) {
       //     return d.data.label;
         // });
+      // text.append('foreignObject')
+      // .attr("dy", ".35em")
+      // .attr('x', 50)
+      // .attr('y', 150)
+      // .attr('width', 150)
+      // .attr('height', 100)
+      // .append("xhtml:body")
+      // .html('<div class="des-chart-content total-chart">\
+      //   <i class="icon icon-pattern"></i>\
+      //   <p>\
+      //     <span>Total Monthly Committed Expenses</span>\
+      //     <strong>%5,480 (88%)</strong>\
+      //   </p>\
+      // </div>');
+      console.log("circle:height", donut_size, "radius", radius);
       text.enter()
       .append('foreignObject')
-      .attr("dy", ".35em")
-      .attr('x', 50)
-      .attr('y', 130)
-      .attr('width', 150)
-      .attr('height', 100)
+      .attr('width', 300)
+      // .attr("dy", ".35em")
+      .attr('x', function(d){
+        return midAngle(d) < Math.PI ? (width * 2 / 3) : 0;
+      })
+      .attr('y', function(d){
+        var pos = radius * Math.sin(midAngle(d) * 57.3);
+        console.log("foreignObject:y",midAngle(d), pos);
+        return pos + donut_size/2;
+      })
+      // .attr('height', 100)
       .append("xhtml:body")
-      .html('<div class="des-chart-content total-chart">\
-        <i class="icon icon-pattern"></i>\
+      .html(function(d){
+        return '<div class="des-chart-content">\
+        <i class="icon ' + d.data.icon + '"></i>\
         <p>\
-          <span>Total Monthly Committed Expenses</span>\
-          <strong>%5,480 (88%)</strong>\
+          <span>'+d.data.label+'</span>\
+          <strong>' + d.data.amount + ' ('+ d.value +'%)</strong>\
         </p>\
-      </div>\
-      <div class="des-chart-content">\
-        <i class="icon icon-pt-protection"></i>\
-        <p>\
-          <span>Total Monthly Committed Expenses</span>\
-          <strong>%5,480 (88%)</strong>\
-        </p>\
-      </div>')
+      </div>'});
 
       function midAngle(d){
         return d.startAngle + (d.endAngle - d.startAngle)/2;
       }
 
-      text.transition().duration(1000)
-        .attrTween("transform", function(d) {
-          this._current = this._current || d;
-          var interpolate = d3.interpolate(this._current, d);
-          this._current = interpolate(0);
-          return function(t) {
-            var d2 = interpolate(t);
-            var pos = outerArc.centroid(d2);
-            pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
-            return "translate("+ pos +")";
-          };
-        })
-        .styleTween("text-anchor", function(d){
-          this._current = this._current || d;
-          var interpolate = d3.interpolate(this._current, d);
-          this._current = interpolate(0);
-          return function(t) {
-            var d2 = interpolate(t);
-            return midAngle(d2) < Math.PI ? "start":"end";
-          };
-        });
+      // text.transition().duration(1000)
+      //   .attrTween("transform", function(d) {
+      //     this._current = this._current || d;
+      //     var interpolate = d3.interpolate(this._current, d);
+      //     this._current = interpolate(0);
+      //     return function(t) {
+      //       var d2 = interpolate(t);
+      //       var pos = outerArc.centroid(d2);
+      //       pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+      //       return "translate("+ pos +")";
+      //     };
+      //   })
+      //   .styleTween("text-anchor", function(d){
+      //     this._current = this._current || d;
+      //     var interpolate = d3.interpolate(this._current, d);
+      //     this._current = interpolate(0);
+      //     return function(t) {
+      //       var d2 = interpolate(t);
+      //       return midAngle(d2) < Math.PI ? "start":"end";
+      //     };
+      //   });
 
       text.exit().remove();
 
