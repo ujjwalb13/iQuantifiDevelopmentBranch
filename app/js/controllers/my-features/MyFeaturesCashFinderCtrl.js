@@ -45,7 +45,7 @@
         return {}
       } else {
         return function(item) {
-          return item.amount > 0;
+          return item.reduce_by > 0;
         }
       }
     }
@@ -81,25 +81,20 @@
       Expense.save({expenses: $rootScope.expenses})
         .$promise
         .then(function(result) {
+          $rootScope.expenses = result
+          _.each($rootScope.expenses, function(expense){
+            expense.new_amount = expense.recommended_amount || expense.amount;
+          })
           return Scenario.shortage().$promise.then(function(data) {
-            var newShortage;
-            newShortage = data.shortage;
+            var newShortage = data.shortage;
             $rootScope.processing = false;
             if (newShortage > 0) {
-              return $scope.openDoneModal();
+              $rootScope.shortage = newShortage;
             } else {
               return $location.path('/');
             }
           });
         });
-    };
-    return $scope.openDoneModal = function() {
-      var modalInstance;
-      return modalInstance = $modal.open({
-        templateUrl: 'doneModal',
-        controller: TaxModalInstanceCtrl,
-        windowClass: 'new-iq-modal yellow'
-      });
     };
   });
 
