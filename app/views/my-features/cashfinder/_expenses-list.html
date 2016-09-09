@@ -6,17 +6,24 @@
       <th>New</th>
     </thead>
     <tbody>
-      <tr ng-repeat="expense in filteredExpenses = (expenses | filter: reducibleExpenseFilter)" ng-click="selectExpense(expense)" ng-class="{'active': selectedExpense == expense}">
+      <tr ng-repeat="expense in filteredExpenses = (expenses | filter: reducibleExpenseFilter())" ng-click="selectExpense(expense)" ng-class="{'active': selectedExpense == expense}">
         <td>{{expense.kind | titleize}}</td>
         <td>{{expense.amount | dollars}}</td>
-        <td><strong>{{expense.new_amount | dollars}}</strong></td>
+        <td>
+          <span ng-show="expense.new_amount == expense.amount">{{expense.new_amount | dollars}}</span>
+          <strong ng-show="expense.new_amount != expense.amount">{{expense.new_amount | dollars}}</strong>
+        </td>
       </tr>
       <tr>
         <td colspan="3">
-          <a href="#">
+          <span href="javascript:void(0)" ng-click="toggleExpenseView()" ng-show="showAllExpenses">
             <i class="fa fa-chevron-up"></i>
             <span>Hide non-reducible</span>
-          </a>
+          </span>
+          <span href="javascript:void(0)" ng-click="toggleExpenseView()" ng-show="!showAllExpenses">
+            <i class="fa fa-chevron-down"></i>
+            <span ng-show="!showAllExpenses">View all</span>
+          </span>
         </td>
       </tr>
     </tbody>
