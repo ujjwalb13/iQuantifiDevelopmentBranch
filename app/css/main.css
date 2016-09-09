@@ -12043,6 +12043,7 @@ body .right-content .selected-indicator-wrapper .selected-indicator {
   background: #efeada;
   position: relative;
   padding: 15px;
+  padding-bottom: 0;
 }
 
 /* line 817, ../../app/css/modules/_mainstyle.scss */

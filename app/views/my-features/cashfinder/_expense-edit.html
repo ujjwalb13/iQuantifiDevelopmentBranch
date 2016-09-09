@@ -1,0 +1,36 @@
+<div class="beside-right-wrapper" ng-controller="CashfinderEditCtrl" ng-show="selectedExpense">
+  <div class="modify-monthly">
+    <h4>Modify Monthly Expenses</h4>
+    <label>
+      Category: <strong>{{expense.kind | titleize}}</strong>
+    </label>
+    <em>Amounts shown are based on data gathered from your associated accounts.</em>
+    <form class="form-inline" name="EditExpenseForm">
+      <div class="form-group">
+        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="beingEditExpense.amount"  currency-input>
+        </div>
+      </div>
+      <p>
+        Based on your income and goals, the
+        recommended amount to spend on this
+        category per month is <strong>{{expense.amount | dollars}}</strong>. <br>
+        You are over by <strong>{{beingEditExpense.amount | dollars}}</strong>.
+      </p>
+      <div class="row-gutter-20">
+        <button type="button" class="btn btn-cancel col-margin-20" ng-click="keep()">Keep</button>
+        <button type="button" class="btn btn-primary col-margin-20" ng-click="save()">Save</button>
+      </div>
+    </form>
+  </div>
+  <div class="category-includes">
+    <label>Category includes:</label>
+    <ul>
+      <li ng-repeat="category in subcategories">
+        <a href="javascript:void(0)">{{category | titleize}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
