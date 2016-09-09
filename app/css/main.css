@@ -11293,8 +11293,8 @@ ul {
 /* line 144, ../../app/css/modules/_mainstyle.scss */
 .table-static table tbody tr td {
   border-bottom: 1px solid #e5e0c7;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   height: 50px;
 }
 /* line 149, ../../app/css/modules/_mainstyle.scss */
@@ -12043,6 +12043,7 @@ body .right-content .selected-indicator-wrapper .selected-indicator {
   background: #efeada;
   position: relative;
   padding: 15px;
+  padding-bottom: 0;
 }
 
 /* line 817, ../../app/css/modules/_mainstyle.scss */
@@ -12071,7 +12072,7 @@ footer.footer-app.no-border {
   width: 100%;
   margin: 0 auto;
   background: #f8f6ef;
-  padding-bottom: 35px;
+  padding-bottom: 25px;
   overflow: hidden;
 }
 /* line 840, ../../app/css/modules/_mainstyle.scss */
@@ -12102,7 +12103,6 @@ footer.footer-app.no-border {
 /* line 864, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-img-content {
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
-  height: 300px !important;
 }
 /* line 868, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-img-content img {
@@ -12110,23 +12110,25 @@ footer.footer-app.no-border {
 }
 /* line 873, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-text-content h2 {
-  padding: 10px 0px;
+  padding: 15px 0px 10px 0px;
   margin: 0px;
   text-align: center;
+  font-size: 26px;
 }
 /* line 878, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-text-content p {
-  padding: 0 30px;
+  padding: 0 15px;
   text-align: center;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 18px;
 }
+
 /* line 883, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-text-content p br {
-  display: block;
-  margin-top: 5px;
+  /*display: block;
+  margin-top: 0px;
   margin-bottom: 5px;
-  content: " ";
+  content: " ";*/
 }
 /* line 889, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-text-content p .btn-link {
@@ -12161,7 +12163,8 @@ footer.footer-app.no-border {
 
 /* line 917, ../../app/css/modules/_mainstyle.scss */
 .modal.guided-modal .modal-dialog {
-  width: 640px;
+  width: 550px;
+  margin: 15px auto;
 }
 
 /* line 924, ../../app/css/modules/_mainstyle.scss */
@@ -12176,7 +12179,7 @@ footer.footer-app.no-border {
 }
 /* line 930, ../../app/css/modules/_mainstyle.scss */
 .guided-icon ul li i {
-  margin: 15px auto 10px;
+  margin: 5px auto 5px;
 }
 /* line 933, ../../app/css/modules/_mainstyle.scss */
 .guided-icon ul li span {
@@ -19086,7 +19089,6 @@ body.body-onboarding .worksheet .info-icon-container {
 .summary-chart .chart-des-left {
   position: absolute;
   top: 70px;
-  left: 12px;
 }
 /* line 2313, ../../app/css/modules/_mainstyle.scss */
 .summary-chart .chart-des-right {
@@ -19253,7 +19255,6 @@ body.body-onboarding .worksheet .info-icon-container {
   }
   /* line 109, ../../app/css/modules/_responsive.scss */
   .modal.guided-modal .modal-guide-content .guided-img-content {
-    height: 215px !important;
     background-size: 100%;
   }
   /* line 112, ../../app/css/modules/_responsive.scss */
@@ -23533,33 +23534,7 @@ body.body-onboarding .corner-btn {
 }
 /* line 35, ../../app/css/section/timeline/timeline/_timeline.scss */
 .guided-modal .modal-dialog .guided-img-content {
-  height: 400px;
   width: 100%;
-}
-/* line 38, ../../app/css/section/timeline/timeline/_timeline.scss */
-.guided-modal .modal-dialog .guided-img-content.step-1 {
-  background: url(/images/guide_slide_1.jpg) no-repeat;
-  background-size: 100% auto;
-}
-/* line 39, ../../app/css/section/timeline/timeline/_timeline.scss */
-.guided-modal .modal-dialog .guided-img-content.step-2 {
-  background: url(/images/guide_slide_2.jpg) no-repeat;
-  background-size: 100% auto;
-}
-/* line 40, ../../app/css/section/timeline/timeline/_timeline.scss */
-.guided-modal .modal-dialog .guided-img-content.step-3 {
-  background: url(/images/guide_slide_3.jpg) no-repeat;
-  background-size: 100% auto;
-}
-/* line 41, ../../app/css/section/timeline/timeline/_timeline.scss */
-.guided-modal .modal-dialog .guided-img-content.step-4 {
-  background: url(/images/guide_slide_4.jpg) no-repeat;
-  background-size: 100% auto;
-}
-/* line 42, ../../app/css/section/timeline/timeline/_timeline.scss */
-.guided-modal .modal-dialog .guided-img-content.step-5 {
-  background: url(/images/guide_slide_5.jpg) no-repeat;
-  background-size: 100% auto;
 }
 
 /* line 4, ../../app/css/section/timeline/_actions.scss */

@@ -1,0 +1,22 @@
+<div style="width:100%">
+  <div class="col-md-7 col-xs-12 chart-content">
+    <svg width="50%" ratio="1"></svg>
+  </div>
+
+  <div class="col-md-5 col-xs-12 chart-des">
+    <div class="des-chart-content total-chart">
+      <i class="icon {{icon}}"></i>
+      <p>
+        <span>{{chart_title}}</span>
+        <strong>${{totalValue}} ({{totalPercent}}%)</strong>
+      </p>
+    </div>
+    <div class="des-chart-content" ng-repeat="debt in debtPayments">
+      <i class="icon {{icon}}"></i>
+      <p>
+        <span>{{debt.name}}</span>
+        <strong>${{debt.amount}} ({{debt.percent}}%)</strong>
+      </p>
+    </div>
+  </div>
+</div>

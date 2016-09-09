@@ -1,25 +1,24 @@
 ﻿<div ng-include src="'/views/my-features/_feature-header.html'" class="main-title"></div>
 <div class="container main-wrapper">
-    <div class="row">
-        <div class="left-side-bar col-lg-2 visible-lg">
-            <feature-sidebar current-page='/my-features/cashfinder'></feature-sidebar>
-        </div>
-        <div class="right-content col-lg-10">
-            <div class="section-header goals">
-                <i class="icon icon-mm-net-worth"></i>Cash Finder
-            </div>
-            <div class="content-wrapper">
-
-
-
-
-
-
-            </div>
-        </div>
+  <div class="row">
+    <div class="left-side-bar col-lg-2 visible-lg">
+      <feature-sidebar current-page='/my-features/cashfinder'></feature-sidebar>
     </div>
+    <div class="right-content col-lg-10">
+      <div class="section-header myfeatures">
+        <i class="icon icon-ft-cash-finder"></i>
+        Cashfinder
+      </div>
+      <div class="content-wrapper row cashfinder-main">
+        <div class="cashfinder-left-content col-md-8 col-xs-6">
+          <div ng-include src="'/views/my-features/cashfinder/_find-expense.html'" ng-if="shortage == 0"></div>
+          <div class="cashfinder-head" ng-show="shortage > 0">
+            <strong>Find: {{shortage | dollars}}</strong>
+          </div>
+          <div ng-include src="'/views/my-features/cashfinder/_expenses-list.html'" ng-show="showExpenses"></div>
+        </div>
+        <div class="beside-right-content col-md-4 col-xs-6" ng-include src="'/views/my-features/cashfinder/_expense-edit.html'"></div>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-
-

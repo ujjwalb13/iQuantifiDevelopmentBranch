@@ -52,14 +52,14 @@
       chart.append("rect")
       .attr("class", "chart-background1")
       .attr("width", (width - margin.left - margin.right)/2)
-      .attr("height", height)
+      .attr("height", chart_height)
       .attr("fill", "#fafafa")
 
       chart.append("rect")
       .attr("class", "chart-background2")
       .attr("width", (width - margin.left - margin.right)/2)
       .attr("x", (width - margin.left - margin.right)/2)
-      .attr("height", height)
+      .attr("height", chart_height)
       .attr("fill", "#ffffff")
 
       chart.append('g')

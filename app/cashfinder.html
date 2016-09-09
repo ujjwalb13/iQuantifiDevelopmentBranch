@@ -1,0 +1,201 @@
+<div ng-include src="'/views/my-features/_feature-header.html'" class="main-title"></div>
+<div class="container main-wrapper">
+    <div class="row">
+        <div class="left-side-bar col-lg-2 visible-lg">
+            <feature-sidebar current-page='/my-features/cashfinder'></feature-sidebar>
+        </div>
+        <div class="right-content col-lg-10">
+            <div class="section-header myfeatures">
+                <i class="icon icon-ft-cash-finder"></i>Cash Finder
+            </div>
+            <div class="content-wrapper row cashfinder-main">
+                <div class="cashfinder-left-content col-md-8 col-xs-6">
+                    <div class="cashfinder-head">
+                        <h4>How much cash do you want to find to apply to your goals?</h4>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">$</div>
+                                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Find Cash</button>
+                        </form>
+                    </div>
+                    <div class="table-static cashfinder-tbl" style="width: 100%;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Current</th>
+                                    <th>New</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>$500</td>
+                                    <td><strong>$375</strong></td>
+                                </tr>
+                                <tr class="active">
+                                    <td>Dining</td>
+                                    <td>$275</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>$500</td>
+                                    <td>$375</td>
+                                </tr>
+                                <tr>
+                                    <td>Dining</td>
+                                    <td>$275</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>$500</td>
+                                    <td>$375</td>
+                                </tr>
+                                <tr>
+                                    <td>Dining</td>
+                                    <td>$275</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>$500</td>
+                                    <td>$375</td>
+                                </tr>
+                                <tr>
+                                    <td>Dining</td>
+                                    <td>$275</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>$500</td>
+                                    <td>$375</td>
+                                </tr>
+                                <tr>
+                                    <td>Dining</td>
+                                    <td>$275</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>$500</td>
+                                    <td>$375</td>
+                                </tr>
+                                <tr>
+                                    <td>Dining</td>
+                                    <td>$275</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>$500</td>
+                                    <td>$375</td>
+                                </tr>
+                                <tr>
+                                    <td>Dining</td>
+                                    <td>$275</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>$500</td>
+                                    <td>$375</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <a href="#">
+                                            <i class="fa fa-chevron-up"></i>
+                                            <span>Hide non-reducible</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cashfinder-foot">
+                        <p><strong>Note:</strong> The changes you save will also reflect in your current monthly expense sheet.</p>
+                        <button type="button" class="btn btn-cancel">Cancel</button>
+                        <button type="button" class="btn btn-primary">Save New</button>
+                    </div>
+                </div>
+                <div class="beside-right-content col-md-4 col-xs-6">
+                    <div class="beside-right-wrapper">
+                        <div class="modify-monthly">
+                            <h4>Modify Monthly Expenses</h4>
+                            <label>
+                                Category: <strong>Other</strong>
+                            </label>
+                            <em>Amounts shown are based on data gathered from your associated accounts.</em>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                    </div>
+                                </div>
+                                <p>
+                                    Based on your income and goals, the
+                                    recommended amount to spend on this
+                                    category per month is <strong>$375</strong>. <br>
+                                    You are over by <strong>$125</strong>.
+                                </p>
+                                <button type="button" class="btn btn-cancel">Keep $500</button>
+                                <button type="button" class="btn btn-primary">Save $375</button>
+                            </form>
+                        </div>
+                        <div class="category-includes">
+                            <label>Category includes:</label>
+                            <ul>
+                                <li>
+                                    <a href="#">Allowance</a>
+                                </li>
+                                <li>
+                                    <a href="#">Veterinary</a>
+                                </li>
+                                <li>
+                                    <a href="#">Business Services</a>
+                                </li>
+                                <li>
+                                    <a href="#">Fees & Charges</a>
+                                </li>
+                                <li>
+                                    <a href="#">Financial</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pets</a>
+                                </li>
+                                <li>
+                                    <a href="#">Furnishings</a>
+                                </li>
+                                <li>
+                                    <a href="#">Lawn & Garden</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pet Food & Supplies</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pet Grooming</a>
+                                </li>
+                                <li>
+                                    <a href="#">Check</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
