@@ -1,7 +1,7 @@
 <div class="cashfinder-head">
 <h4>How much cash do you want to find to apply to your goals?</h4>
   <form name="expenseForm" novalidate ng-submit="findCash(expenseForm.$valid)" class="form-horizontal">
-    <div class="col-lg-4">
+    <div class="col-lg-4 pull-left">
       <div class="form-group" ng-class="{'has-error': submitted && expenseForm.expensesAmount.$invalid}">
         <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
           <div class="input-group">
@@ -12,7 +12,7 @@
 
       </div>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-8 pull-left">
       <button type="submit" class="btn btn-primary" ng-hide="processing">Find Cash</button>
       <button type="submit" class="btn btn-primary" ng-disabled="true" ng-show="processing">Processing</button>
     </div>

@@ -19,8 +19,10 @@
         category per month is <strong>{{expense.amount | dollars}}</strong>. <br>
         You are over by <strong>{{expense.new_amount | dollars}}</strong>.
       </p>
-      <button type="button" class="btn btn-cancel">Keep</button>
-      <button type="button" class="btn btn-primary">Save</button>
+      <div class="row-gutter-20">
+        <button type="button" class="btn btn-cancel col-margin-20">Keep</button>
+        <button type="button" class="btn btn-primary col-margin-20">Save</button>
+      </div>
     </form>
   </div>
   <div class="category-includes">
