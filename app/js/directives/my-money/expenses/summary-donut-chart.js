@@ -11,7 +11,9 @@
         var debtsAndPolicyPayments = response[1];
         var data = summaryData(expenses, debtsAndPolicyPayments);
         var svg = d3.select(element.find("svg")[0]);
-        drawChart(scope, svg, data)
+        drawChart(scope, svg, data);
+        scope.totalMonthlyCommittedExpenses = data.totalMonthlyCommittedExpenses;
+        scope.monthlyCommittedExpensesPercent = data.monthlyCommittedExpensesPercent;
        });
     };
 
@@ -36,30 +38,43 @@
       width = Number.parseInt(svg.style("width"));
       donut_size = width/3;
       var radius = width/6;
-      var color = d3.scale.ordinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-      svg.style("width", width + "px").style("height", donut_size + "px");
+      var color = d3.scale.ordinal().range(["#e3973d", "#e3973d", "#d36351", "#508b8e"]);
+      svg.style("width", width + "px").style("height", (donut_size + 30) + "px");
       svg = svg.append("g");
       svg.attr("transform", "translate(" + width / 2 + "," + donut_size / 2 + ")")
 
       svg.append("g").attr("class", "slices");
+      svg.append("g").attr("class", "slices_pattern");
       svg.append("g").attr("class", "labels");
       svg.append("g").attr("class", "lines");
+      var center_group = svg.append("g").attr("class", "center_group");
 
       var arc = d3.svg.arc()
-        .outerRadius(radius)
-        .innerRadius(radius * 0.5);
+        .outerRadius(radius * 0.8)
+        .innerRadius(radius * 0.4);
 
       var outerArc = d3.svg.arc()
-        .innerRadius(radius * 0.8)
-        .outerRadius(radius * 0.9);
+        .innerRadius(radius * 1.8)
+        .outerRadius(radius * 0.5);
 
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })
         .sort(null);
 
+      svg.append("svg:pattern")
+          .attr("id", "commited_pattern")
+          .attr("width", 5)
+          .attr("height", 5)
+          .attr("patternUnits", "userSpaceOnUse")
+          .append("svg:image")
+          .attr("xlink:href", '/images/icon/pattern.png')
+          .attr("width", 5)
+          .attr("height", 5)
+          .attr("x", 0)
+          .attr("y", 0);
       var slices = svg.select(".slices")
         .selectAll("path.slice")
-        .data(pie(data));
+        .data(pie(data.pies));
 
       slices.enter()
         .insert("path")
@@ -75,26 +90,51 @@
             return arc(interpolate(t));
           };
         })
-
       slices.exit().remove();
+
+      var slices_pattern = svg.select(".slices_pattern")
+        .selectAll("path.slice")
+        .data(pie(data.pies));
+
+      slices_pattern.enter()
+        .insert("path")
+        .style("fill", function(d) {
+          if(d.data.kind == "commited") {
+            return "url(#commited_pattern)";
+          } else {
+            return color(d.data.color);
+          }
+        })
+        .attr("class", "slice");
+
+      slices_pattern.transition()
+        .attrTween("d", function(d) {
+          this._current = this._current || d;
+          var interpolate = d3.interpolate(this._current, d);
+          this._current = interpolate(0);
+          return function(t) {
+            return arc(interpolate(t));
+          };
+        })
+      slices_pattern.exit().remove();
+
 
 
       var key = function(d){ return d.data.label; };
       var text = svg.select(".labels")
         .selectAll("text")
-        .data(pie(data), key);
+        .data(pie(data.pies), key);
 
       text.enter()
       .append('foreignObject')
       .attr('width', donut_size)
-      // .attr("dy", ".35em")
       .attr('x', function(d){
         return midAngle(d) < Math.PI ? (width * 2 / 3) : 0;
       })
       .attr('y', function(d){
         var pos = radius * Math.sin(Math.PI/2 - midAngle(d));
         console.log("xxx",d,outerArc.centroid(d), donut_size/2 - pos)
-        return donut_size/2 - pos;
+        return donut_size/2 - pos + 30;
       })
       .append("xhtml:body")
       .html(function(d){
@@ -114,7 +154,7 @@
 
       var polyline = svg.select(".lines")
         .selectAll("polyline")
-        .data(pie(data), key)
+        .data(pie(data.pies), key)
         .enter().append("polyline")
         .attr("fill", "none")
         .attr("stroke", "#000");
@@ -131,42 +171,66 @@
             return [arc.centroid(d2), outerArc.centroid(d2), pos];
           };
         });
+      center_group.append("svg:text")
+        .attr("text-anchor", "middle")
+        .attr("dy", -10)
+        .text("Total Monthly");
+      center_group.append("svg:text")
+        .attr("text-anchor", "middle")
+        .attr("dy", 5)
+        .text("Expenses");
+      center_group.append("svg:text")
+        .attr("text-anchor", "middle")
+        .attr("dy", 25)
+        .style("font-weight", "bold")
+        .text("$" + data.totalExpenses);
     }
     function summaryData(expenses, debtsAndPolicyPayments) {
       console.log("summaryData", expenses, debtsAndPolicyPayments);
       var commitedExpenses = _.select(expenses, function(item){return isCommittedExpense(item.kind);})
       var discretionaryExpenses = _.select(expenses, function(item){return !isCommittedExpense(item.kind);})
+      var totalDiscretionaryExpenses = _.reduce(discretionaryExpenses, function(total, item){ return item.amount + total; }, 0);
+      var totalCommittedExpenses = _.reduce(commitedExpenses, function(total, item){ return item.amount + total; }, 0);
+      var totalDebts = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="debt"}).total_amount;
+      var totalPolicies = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="policy"}).total_amount;
+      var totalMonthlyCommittedExpenses = totalCommittedExpenses + totalDebts + totalPolicies;
+      var totalExpenses = totalMonthlyCommittedExpenses + totalDiscretionaryExpenses;
       var data = [
         {
           label: "Total Monthly Discretionary Expenses",
-          amount: _.reduce(discretionaryExpenses, function(total, item){ return item.amount + total; }, 0),
-          kind: "commited",
+          amount: totalDiscretionaryExpenses,
+          kind: "discretionary",
           color: "gray",
           icon: "icon-mm-expenses"
         },
         {
           label: "Monthly Committed Expenses",
-          amount: _.reduce(commitedExpenses, function(total, item){ return item.amount + total; }, 0),
+          amount: totalCommittedExpenses,
           kind: "commited",
           color: "blue",
           icon: "icon-mm-expenses"
         },
         {
           label: "Monthly Debt Payments",
-          amount: _.detect(debtsAndPolicyPayments, function(item){return item.kind =="debt"}).total_amount,
+          amount: totalDebts,
           kind: "commited",
           color: "green",
           icon: "icon-db-debt"
         },
         {
           label: "Monthly Policy Premiums",
-          amount: _.detect(debtsAndPolicyPayments, function(item){return item.kind =="policy"}).total_amount,
+          amount: totalPolicies,
           kind: "commited",
           color: "red",
           icon: "icon-pt-protection"
         },
       ];
-      return _.select(data, function(item){return item.amount > 0});
+      return {
+        pies: _.select(data, function(item){return item.amount > 0}),
+        totalMonthlyCommittedExpenses: totalMonthlyCommittedExpenses,
+        totalExpenses: totalExpenses,
+        monthlyCommittedExpensesPercent: Math.round(10000.0 * totalMonthlyCommittedExpenses / totalExpenses) / 100
+      };
     }
 
     function isCommittedExpense(expense_kind) {
