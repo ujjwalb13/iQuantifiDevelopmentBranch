@@ -12071,7 +12071,7 @@ footer.footer-app.no-border {
   width: 100%;
   margin: 0 auto;
   background: #f8f6ef;
-  padding-bottom: 35px;
+  padding-bottom: 25px;
   overflow: hidden;
 }
 /* line 840, ../../app/css/modules/_mainstyle.scss */
@@ -12109,23 +12109,25 @@ footer.footer-app.no-border {
 }
 /* line 873, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-text-content h2 {
-  padding: 10px 0px;
+  padding: 15px 0px 10px 0px;
   margin: 0px;
   text-align: center;
+  font-size: 26px;
 }
 /* line 878, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-text-content p {
-  padding: 0 30px;
+  padding: 0 15px;
   text-align: center;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 18px;
 }
+
 /* line 883, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-text-content p br {
-  display: block;
-  margin-top: 5px;
+  /*display: block;
+  margin-top: 0px;
   margin-bottom: 5px;
-  content: " ";
+  content: " ";*/
 }
 /* line 889, ../../app/css/modules/_mainstyle.scss */
 .modal-guide-content .guided-text-content p .btn-link {
@@ -12160,7 +12162,8 @@ footer.footer-app.no-border {
 
 /* line 917, ../../app/css/modules/_mainstyle.scss */
 .modal.guided-modal .modal-dialog {
-  width: 640px;
+  width: 550px;
+  margin: 15px auto;
 }
 
 /* line 924, ../../app/css/modules/_mainstyle.scss */
@@ -12175,7 +12178,7 @@ footer.footer-app.no-border {
 }
 /* line 930, ../../app/css/modules/_mainstyle.scss */
 .guided-icon ul li i {
-  margin: 15px auto 10px;
+  margin: 5px auto 5px;
 }
 /* line 933, ../../app/css/modules/_mainstyle.scss */
 .guided-icon ul li span {
