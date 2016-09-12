@@ -38,17 +38,17 @@
                         <label class="control-label" for="type">Type</label>
                         <select name="type" class="form-control" name="type" id="type" required ng-model="account.kind">
                             <option value=""></option>
-                            <option value="checking">Checking</option>
-                            <option value="savings">Savings</option>
-                            <option value="market">Money Market</option>
-                            <option value="brokerage">Brokerage</option>
-                            <option value="other">Other</option>
-                            <option value="education">529 Plan</option>
-                            <option value="ira401k">401k/403b</option>
-                            <option value="ira_roth">Roth IRA</option>
-                            <option value="ira">IRA</option>
-                            <option value="ira_sep">Sep IRA</option>
-                            <option value="ira_simple">Simple IRA</option>
+                            <option value="checking" ng-if="addmode=='' || addmode=='cash'">Checking</option>
+                            <option value="savings" ng-if="addmode=='' || addmode=='cash'">Savings</option>
+                            <option value="market" ng-if="addmode=='' || addmode=='cash'">Money Market</option>
+                            <option value="brokerage" ng-if="addmode=='' || addmode=='cash'">Brokerage</option>
+                            <option value="other" ng-if="addmode=='' || addmode=='cash'">Other</option>
+                            <option value="education" ng-if="addmode=='' || addmode=='investment'">529 Plan</option>
+                            <option value="ira401k" ng-if="addmode=='' || addmode=='investment'">401k/403b</option>
+                            <option value="ira_roth" ng-if="addmode=='' || addmode=='investment'">Roth IRA</option>
+                            <option value="ira" ng-if="addmode=='' || addmode=='investment'">IRA</option>
+                            <option value="ira_sep" ng-if="addmode=='' || addmode=='investment'">Sep IRA</option>
+                            <option value="ira_simple" ng-if="addmode=='' || addmode=='investment'">Simple IRA</option>
                         </select>
                         <span ng-show="submitted && accountForm.type.$error.required" class="help-block">Type is required.</span>
                     </div>

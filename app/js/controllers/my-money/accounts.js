@@ -16,6 +16,7 @@
 
   angular.module('agera').controller('AccountFormCtrl', function ($window,$modal, $scope, $routeParams, $rootScope, $location, $q, Account, Person) {
     var ModalInstanceCtrl;
+    $scope.addMode = "cash";
     $routeParams.accountId
     if ($routeParams.accountId) {
       $q.all([
@@ -28,6 +29,7 @@
         return $scope.people = data[1];
       });
     } else {
+      $scope.addmode = $routeParams.addmode;
       $scope.account = new Account();
       $scope.people = Person.query();
       $scope.editMode = false;

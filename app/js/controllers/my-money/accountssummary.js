@@ -52,8 +52,11 @@
       return $location.path("/my-money/accounts/" + guid);
     };
 
-    $scope.goToAccountNew = function () {
-      return $location.path("/my-money/accounts/new");
+    $scope.goToAccountNewCash = function () {
+      return $location.path("/my-money/accounts/new/cash");
+    };
+    $scope.goToAccountNewInvestment = function () {
+      return $location.path("/my-money/accounts/new/investment");
     };
 
     $scope.goToDebtNew = function () {
