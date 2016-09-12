@@ -23,7 +23,9 @@
         guid: $routeParams.guid
       }).$promise.then(function(object) {
         $scope.goal = object.goal();
-        console.log($scope.goal);
+        $scope.schedule = object.schedule;
+
+        console.log($scope.schedule);
       });
     }
 
