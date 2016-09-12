@@ -11382,10 +11382,11 @@ ul {
 /* line 238, ../../app/css/modules/_mainstyle.scss */
 .btn {
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 14px;
   height: 40px;
   line-height: 18px;
   font-weight: bold;
+  letter-spacing: 0;
 }
 /* line 244, ../../app/css/modules/_mainstyle.scss */
 .btn.btn-default {
@@ -12446,11 +12447,16 @@ ul.overview-content li .icon-process.icon-protect .c100 .icon.icon-80 {
 }
 /* line 1172, ../../app/css/modules/_mainstyle.scss */
 .timeline-ct .timeline-btm {
-  background: #eeebda;
+  background: #fff;
   width: 100%;
   position: absolute;
   bottom: 0px;
   border-radius: 0 0 5px 5px;
+}
+.timeline-ct .timeline-btm .zoom-range {
+  background: #eeebda;
+  height: 40px;
+  position: absolute;
 }
 /* line 1179, ../../app/css/modules/_mainstyle.scss */
 .timeline-ct .timeline-point {
