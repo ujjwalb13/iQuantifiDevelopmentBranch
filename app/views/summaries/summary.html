@@ -38,7 +38,7 @@
                 <ul>
                   <li>
                     <label for="">Purchase Date</label>
-                    <p>Sep 2018</p>
+                    <p ng-if="goal.transition_on">{{ goal.transition_on | monthYear}}</p>
                   </li>
                   <li>
                     <label for="">Total Goal Amount</label>
