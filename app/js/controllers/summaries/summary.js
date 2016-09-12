@@ -23,6 +23,7 @@
         guid: $routeParams.guid
       }).$promise.then(function(object) {
         $scope.goal = object.goal();
+        console.log($scope.goal);
       });
     }
 

@@ -42,7 +42,7 @@
                   </li>
                   <li>
                     <label for="">Total Goal Amount</label>
-                    <p>$250,000</p>
+                    <p>{{ goal.amount | dollars }}</p>
                   </li>
                 </ul>
               </div>
@@ -75,7 +75,7 @@
                           </tr>
                           <tr class="total-row">
                             <td>Total Purchase Price</td>
-                            <td>$250,000</td>
+                            <td>{{ goal.amount | dollars }}</td>
                           </tr>
                         </tbody>
                     </table>
