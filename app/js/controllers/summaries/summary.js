@@ -320,7 +320,7 @@
     $scope.dummyScheduleData[6]["balance"] = 200;
     $scope.dummyScheduleData[9]["balance"] = 300;
     $scope.dummyScheduleData[12]["balance"] = 400;
-    $scope.dummyStatus = "safe";
+    $scope.scheduleStatus = "safe";
     $scope.dummyBubbleText = "Saved $7,200";
 
     if ($routeParams.behind == 1) {
@@ -329,7 +329,7 @@
       $scope.dummyScheduleData[6]["balance"] = 200;
       $scope.dummyScheduleData[9]["balance"] = 300;
       $scope.dummyScheduleData[12]["balance"] = 300;
-      $scope.dummyStatus = "warning";
+      $scope.scheduleStatus = "warning";
       $scope.dummyBubbleText = "Need $2,143";
     } else if ($routeParams.behind == 2) {
       $scope.dummyScheduleData[0]["balance"] = 100;
@@ -337,7 +337,7 @@
       $scope.dummyScheduleData[6]["balance"] = 200;
       $scope.dummyScheduleData[9]["balance"] = 200;
       $scope.dummyScheduleData[12]["balance"] = 200;
-      $scope.dummyStatus = "danger";
+      $scope.scheduleStatus = "danger";
       $scope.dummyBubbleText = "Need $2,143";
     }
 
