@@ -12446,11 +12446,16 @@ ul.overview-content li .icon-process.icon-protect .c100 .icon.icon-80 {
 }
 /* line 1172, ../../app/css/modules/_mainstyle.scss */
 .timeline-ct .timeline-btm {
-  background: #eeebda;
+  background: #fff;
   width: 100%;
   position: absolute;
   bottom: 0px;
   border-radius: 0 0 5px 5px;
+}
+.timeline-ct .timeline-btm .zoom-range {
+  background: #eeebda;
+  height: 40px;
+  position: absolute;
 }
 /* line 1179, ../../app/css/modules/_mainstyle.scss */
 .timeline-ct .timeline-point {

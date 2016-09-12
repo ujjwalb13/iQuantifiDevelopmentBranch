@@ -88,6 +88,8 @@
           grab-slide-brush>
           <i class="fa fa-angle-right"></i>
         </a>
+        <span ng-style="positionX(context.brush.startX, context.brush.endX - context.brush.startX + 1)" class="zoom-range">
+        </span>
         <a href="javascript:void(0)" class="nav-ctrl brush-end"
           slide-brush
           ng-style="positionX(context.brush.endX)"
