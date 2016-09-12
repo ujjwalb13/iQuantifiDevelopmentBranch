@@ -109,7 +109,7 @@
     $scope.$watch('selectedExpense', function(newValue, oldValue){
       if (newValue != null && newValue != oldValue) {
         $scope.expense = newValue;
-        $scope.beingEditExpense = {amount: $scope.expense.new_amount};
+        $scope.beingEditExpense = {amount: $scope.expense.amount, new_amount: $scope.expense.new_amount};
         fetchSubcategories($scope.expense.kind);
       }
     })
@@ -117,11 +117,12 @@
     $scope.keep = function() {
       $scope.selectedExpense.new_amount = $scope.selectedExpense.amount;
       $scope.beingEditExpense.amount = $scope.selectedExpense.amount;
+      $scope.beingEditExpense.new_amount = $scope.selectedExpense.new_amount;
       $rootScope.overrides[$scope.selectedExpense.kind] = $scope.selectedExpense.new_amount;
     };
 
     return $scope.save = function() {
-      $scope.selectedExpense.new_amount = $scope.beingEditExpense.amount
+      $scope.selectedExpense.new_amount = $scope.beingEditExpense.new_amount
       $rootScope.overrides[$scope.selectedExpense.kind] = $scope.selectedExpense.new_amount;
     };
   });
