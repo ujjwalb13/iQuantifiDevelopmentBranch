@@ -22,8 +22,7 @@
       Obj.get({
         guid: $routeParams.guid
       }).$promise.then(function(object) {
-        $scope.goal = object;
-        console.log("111", $scope.goal);
+        $scope.goal = object.goal();
       });
     }
 
