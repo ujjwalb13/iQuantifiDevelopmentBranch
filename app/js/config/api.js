@@ -5,7 +5,7 @@ angular.module('config', [])
   debug: false,
   apiHost: (
       function () {
-        //return 'http://localhost:53205/api';
+        return 'http://localhost:53205/api';
 
         return 'http://iquantifi.azurewebsites.net/api';
 
