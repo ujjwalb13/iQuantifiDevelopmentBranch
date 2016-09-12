@@ -73,11 +73,11 @@
                     <tr ng-repeat="row in option | partition:2">
                     <td>
                       <strong>{{row[0].percent}}%</strong>
-                      <span>{{row[0].name}}</span>
+                      <a href="{{row[0].url}}" target="_blank"><span>{{row[0].name}}</span></a>
                     </td>
                     <td>
                       <strong>{{row[1].percent}}%</strong>
-                      <span>{{row[1].name}}</span>
+                      <a href="{{row[1].url}}" target="_blank"><span>{{row[1].name}}</span></a>
                     </td>
                     </tr>
                   </tbody>
