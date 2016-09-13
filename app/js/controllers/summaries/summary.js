@@ -25,7 +25,8 @@
         $scope.goal = object.goal();
         $scope.schedule = object.schedule;
 
-        console.log($scope.schedule);
+        console.log("goal", $scope.goal);
+        console.log("schedule", $scope.schedule);
       });
     }
 

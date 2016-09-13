@@ -69,7 +69,7 @@
                           </tr>
                           <tr ng-click="changeRightSummayContent('financeRecommendations')" ng-class="{active: financeRecommendationsActive()}">
                             <td><strong>Finance Amount</strong></td>
-                            <td>$235,000</td>
+                            <td>{{ goal.projected_finance_amount | dollars }} </td>
                           </tr>
                           <tr>
                           </tr>
