@@ -407,6 +407,7 @@
             $scope.obj = goal;
             return submitRelated().then(function() {
               $rootScope.$broadcast('refresh');
+              $rootScope.$broadcast('dirty-timeline');
               return gotoSummary(goal);
             });
           }, function(response) {
