@@ -9,10 +9,10 @@ angular.module('config', [])
 
         return 'http://iquantifi.azurewebsites.net/api';
 
-        if (window.location.hostname.toUpperCase() == 'localhost'.toUpperCase())
-          return 'http://localhost:53205/api';
-        else
-          return window.location.protocol + '//' + window.location.hostname + '/api';
+        //if (window.location.hostname.toUpperCase() == 'localhost'.toUpperCase())
+        //  return 'http://localhost:53205/api';
+        //else
+        //  return window.location.protocol + '//' + window.location.hostname + '/api';
 
       })(),
   fbAppId: '648677845173289'
