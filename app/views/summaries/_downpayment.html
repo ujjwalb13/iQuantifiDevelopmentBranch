@@ -1,22 +1,22 @@
 <div class="chart-downpayment" ng-show="downpaymentActive()">
-    <div class="chart-content" ng-if="dummyStatus=='warning'">
+    <div class="chart-content" ng-if="scheduleStatus=='warning'">
       <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="behindOneMonthStatus"></goal-progress-circle>
     </div>
-    <div class="chart-content" ng-if="dummyStatus=='danger'">
+    <div class="chart-content" ng-if="scheduleStatus=='danger'">
       <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="behindTwoMonthStatus"></goal-progress-circle>
     </div>
-    <div class="chart-content" ng-if="dummyStatus=='safe'">
+    <div class="chart-content" ng-if="scheduleStatus=='safe'">
       <goal-progress-circle complete="24" incomplete="0" permonth="2143" status="ontrackStatus"></goal-progress-circle>
     </div>
   <div class="downpayment-wrapper">
     <div class="downpayment-content">
       <h3>Downpayment</h3>
       <ul>
-        <li class="save"><label>Saved</label> <span>$3,300</span></li>
-        <li><label>From Capital</label> <span>$2,000</span></li>
-        <li><label>From Cashflow</label> <span>$1,300</span></li>
-        <li class="needed"><label>Needed</label> <strong>$12,700</strong></li>
-        <li><label>Total</label> <strong>$15,000</strong></li>
+        <li class="save"><label>Saved</label> <span>{{ schedule.saved | dollars }}</span></li>
+        <li><label>From Capital</label> <span> {{ schedule.saved_from_capital | dollars }} </span></li>
+        <li><label>From Cashflow</label> <span> {{ schedule.saved_from_cashflow | dollars }} </span></li>
+        <li class="needed"><label>Needed</label> <strong>{{ schedule.saving_needed | dollars }}</strong></li>
+        <li><label>Total</label> <strong>{{ schedule.total | dollars }}</strong></li>
       </ul>
     </div>
   </div>

@@ -82,8 +82,43 @@
                 </div>
               </div>
               <div class="col-md-6 col-xs-12">
-                <div ng-include="'/views/summaries/_downpayment.html'"></div>
-                <div ng-include="'/views/summaries/_finance_recommendations.html'"></div>
+                <div class="chart-downpayment" ng-show="downpaymentActive()">
+                    <div class="chart-content" ng-if="scheduleStatus=='warning'">
+                      <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="behindOneMonthStatus"></goal-progress-circle>
+                    </div>
+                    <div class="chart-content" ng-if="scheduleStatus=='danger'">
+                      <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="behindTwoMonthStatus"></goal-progress-circle>
+                    </div>
+                    <div class="chart-content" ng-if="scheduleStatus=='safe'">
+                      <goal-progress-circle complete="24" incomplete="0" permonth="2143" status="ontrackStatus"></goal-progress-circle>
+                    </div>
+                  <div class="downpayment-wrapper">
+                    <div class="downpayment-content">
+                      <h3>Downpayment</h3>
+                      <ul>
+                        <li class="save"><label>Saved</label> <span>{{ schedule.saved | dollars }}</span></li>
+                        <li><label>From Capital</label> <span> {{ schedule.saved_from_capital | dollars }} </span></li>
+                        <li><label>From Cashflow</label> <span> {{ schedule.saved_from_cashflow | dollars }} </span></li>
+                        <li class="needed"><label>Needed</label> <strong>{{ schedule.saving_needed | dollars }}</strong></li>
+                        <li><label>Total</label> <strong>{{ schedule.total | dollars }}</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                  <div class="finance-recommendations" ng-show="financeRecommendationsActive()">
+                    <div class="finance-recommendations-wrapper">
+                      <div class="finance-recommendations-content">
+                        <h3>Finance Recommendations</h3>
+                        <ul>
+                          <li><label>Start Date</label> <span ng-if="goal.transition_on">{{ goal.transition_on | monthYear }}</span></li>
+                          <li><label>Loan Amount</label> <span>{{ goal.projected_finance_amount | dollars }}</span></li>
+                          <li><label>Interest rate</label> <span>{{ goal.rate*100 }}%</span></li>
+                          <li><label>Term in Years</label> <span>{{ goal.terms / 12}} </span></li>
+                          <li><label>Monthly Payment</label> <span>{{ goal.projected_payment | dollars }}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>

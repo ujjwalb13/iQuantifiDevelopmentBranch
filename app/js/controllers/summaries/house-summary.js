@@ -1,30 +1,13 @@
 (function() {
   'use strict';
-  angular.module('summaries').controller('summariesSummaryCtrl', function($scope, $rootScope, $routeParams, $http, $location, ENV, configService, Car, College, Credit, Baby, House, Loan, Relocation, Rent, Reserve, Retirement, Ring, Travel, Wedding, Purchase) {
-    var lookup = {
-      cars: Car,
-      colleges: College,
-      babies: Baby,
-      houses: House,
-      loans: Loan,
-      relocations: Relocation,
-      rents: Rent,
-      reserves: Reserve,
-      retirements: Retirement,
-      creditcards: Credit,
-      rings: Ring,
-      travels: Travel,
-      weddings: Wedding,
-      purchases: Purchase
-    };
-    var Obj = lookup[$routeParams.type];
-    if (Obj) {
-      Obj.get({
-        guid: $routeParams.guid
-      }).$promise.then(function(object) {
-        $scope.goal = object;
-      });
-    }
+  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary) {
+
+    HouseSummary.get({
+      guid: $routeParams.guid
+    }).$promise.then(function(object) {
+      $scope.goal = object.goal();
+      $scope.schedule = object.schedule;
+    });
 
     $scope.goToEdit = function(goal) {
       var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
