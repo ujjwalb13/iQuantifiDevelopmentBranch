@@ -1,11 +1,11 @@
 (function() {
   'use strict';
-  angular.module('summaries').controller('summariesSummaryCtrl', function($scope, $rootScope, $routeParams, $http, $location, ENV, configService, Car, College, Credit, Baby, HouseSummary, Loan, Relocation, Rent, Reserve, Retirement, Ring, Travel, Wedding, Purchase) {
+  angular.module('summaries').controller('summariesSummaryCtrl', function($scope, $rootScope, $routeParams, $http, $location, ENV, configService, Car, College, Credit, Baby, House, Loan, Relocation, Rent, Reserve, Retirement, Ring, Travel, Wedding, Purchase) {
     var lookup = {
       cars: Car,
       colleges: College,
       babies: Baby,
-      houses: HouseSummary,
+      houses: House,
       loans: Loan,
       relocations: Relocation,
       rents: Rent,
@@ -22,11 +22,7 @@
       Obj.get({
         guid: $routeParams.guid
       }).$promise.then(function(object) {
-        $scope.goal = object.goal();
-        $scope.schedule = object.schedule;
-
-        console.log("goal", $scope.goal);
-        console.log("schedule", $scope.schedule);
+        $scope.goal = object;
       });
     }
 
