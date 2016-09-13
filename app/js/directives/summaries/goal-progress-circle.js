@@ -1,6 +1,14 @@
 (function() {
   'use strict';
   angular.module('summaries').directive('goalProgressCircle', function() {
+    var strokeColor = "#fff";
+    var strokeWidth = 2;
+    var width = 220;
+    var height = 220;
+
+    console.log("11111");
+
+
     return {
       restrict: 'E',
       replace: true,
@@ -19,7 +27,7 @@
         }
 
         return scope.$watch('complete', function(newValue, oldValue) {
-          var arc, arcOuter, arcTween, background, complete, completeEndAngle, height, incomplete, incompleteColor, radius, svg, width, strokeColor, strokeWidth;
+          var arc, arcOuter, arcTween, background, complete, completeEndAngle, incomplete, incompleteColor, radius, svg;
           if ((newValue == null) || (typeof isNaN === "function" ? isNaN(newValue) : void 0)) {
             return;
           }
@@ -31,10 +39,7 @@
           } else {
             incompleteColor = '#ffc744';
           }
-          strokeColor = "#fff";
-          strokeWidth = 2;
-          width = 220;
-          height = 220;
+
 
           radius = Math.min(width, height) / 2;
           arcOuter = radius - 40;
