@@ -66,16 +66,29 @@
                         <select class="form-control" id="owner" name="owner" required ng-model="account.person.guid" ng-options="person.guid as (person.first_name + ' ' + person.last_name) for person in owners"></select>
                         <span ng-show="submitted && accountForm.owner.$error.required" class="help-block">Person is required.</span>
                     </div>
+
+                    <div class="row row-gutter-20">
+
+                        <button ng-show="editMode && deleting" class="btn-delete col-margin-20 pull-left"><span class="fa fa-circle-o-notch fa-spin"></span></button>
+                        <button ng-show="editMode && !deleting" class="btn-delete col-margin-20 pull-left" ng-click="openDeleteModal(account)"><span class="fa fa-trash"></span></button>
+                        <button class="iq-submit-btn btn hidden-xs col-margin-20 pull-left" ng-click="gotoAccounts()">Cancel</button>
+                        <button type="submit" class="iq-submit-btn btn-primary btn col-margin-20 pull-left" ng-disabled="submitted && accountForm.$invalid" ng-hide="processing" ng-click="submit(accountForm.$valid)">{{editMode ? 'Save Changes' : 'Add Account'}}</button>
+                        <button type="submit" class="iq-submit-btn btn-primary btn col-margin-20 pull-left" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+
+
+
+                    </div>
                 </div>
 
                 <div class="col-md-4 ">
                     <div class="beside-right-content">
-                        <div class="beside-right-wrapper" style="min-height:350px" >
+                        <div class="beside-right-wrapper" style="min-height:350px; padding:20px" >
                             <div class="row" ng-if="associatedgoals.length > 0" style="padding-left:10px">Item Associated with this account:</div>
-                            <div class="row" ng-repeat="goal in associatedgoals" ng-if="associatedgoals.length > 0" style="margin:15px">
+                            <div class="row" ng-repeat="goal in associatedgoals" ng-if="associatedgoals.length > 0" style="margin:10px">
                                 <div class="col-md-5">
-                                    <i ng-if="goal.kind" class="icon {{ goal.kind | protectionIconClass }} icon-80"></i>
-                                    <i ng-if="goal.type" class="icon {{ goal.type | goalIconClass }} icon-80"></i>
+                                    <i ng-if="goal.category == 'protection'" class="icon {{ goal.kind | protectionIconClass }} icon-80"></i>
+                                    <i ng-if="goal.category == 'goal'" class="icon {{ goal.type | goalIconClass }} icon-80"></i>
+                                    <i ng-if="goal.category == 'debt'" class="icon {{ goal.kind | debtIconClass }}  icon-80"></i>
                                 </div>
                                 <div class="col-md-7">
 
@@ -94,23 +107,6 @@
                 </div>
             </div>
         </form>
-        <div class="row row-gutter-20">
-
-            <!--<button type="submit" class="iq-submit-btn btn-primary btn" ng-disabled="submitted && accountForm.$invalid" ng-hide="processing">Save</button>
-            <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
-            <a class="iq-submit-btn btn" href="/#/my-money/accounts">Back</a>
-            <button type="button" class="iq-submit-btn btn-danger btn" ng-click="openDeleteModal(account)" ng-show="account.guid">Delete</button>-->
-
-            <button ng-show="editMode && deleting" class="btn-delete col-margin-20 pull-left"><span class="fa fa-circle-o-notch fa-spin"></span></button>
-            <button ng-show="editMode && !deleting" class="btn-delete col-margin-20 pull-left" ng-click="openDeleteModal(account)"><span class="fa fa-trash"></span></button>
-            <button class="iq-submit-btn btn hidden-xs col-margin-20 pull-left" ng-click="gotoAccounts()">Cancel</button>
-            <button type="submit" class="iq-submit-btn btn-primary btn col-margin-20 pull-left" ng-disabled="submitted && accountForm.$invalid" ng-hide="processing" ng-click="submit(accountForm.$valid)">{{editMode ? 'Save Changes' : 'Add Account'}}</button>
-            <button type="submit" class="iq-submit-btn btn-primary btn col-margin-20 pull-left" ng-show="processing" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
-
-
-
-        </div>
-
     </div>
 </div>
 
