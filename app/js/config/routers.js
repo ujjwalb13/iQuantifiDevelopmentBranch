@@ -347,6 +347,11 @@ angular.module('agera').config(function($routeProvider) {
     controller: 'houseSummaryCtrl'
   })
 
+  .when('/summaries/goals/retirements/:guid', {
+    templateUrl: '/views/summaries/retirement-summary.html',
+    controller: 'retirementSummaryCtrl'
+  })
+
   .when('/two-factor-auth', {
     templateUrl: '/views/two-factor-auth.html',
     controller: 'TwoFactorAuthCtrl',
