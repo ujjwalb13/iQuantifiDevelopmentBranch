@@ -5,8 +5,15 @@
     var strokeWidth = 2;
     var width = 220;
     var height = 220;
+    var radius = Math.min(width, height) / 2;
+    var arcOuter = radius - 40;
+    var arc = d3.svg.arc().innerRadius(radius - 5).outerRadius(arcOuter).startAngle(function(d) {
+      return d.startAngle + 0;
+    }).endAngle(function(d) {
+      return d.endAngle + 0;
+    });
 
-    console.log("11111");
+    console.log("2222");
 
 
     return {
@@ -27,7 +34,7 @@
         }
 
         return scope.$watch('complete', function(newValue, oldValue) {
-          var arc, arcOuter, arcTween, background, complete, completeEndAngle, incomplete, incompleteColor, radius, svg;
+          var arcTween, background, complete, completeEndAngle, incomplete, incompleteColor, svg;
           if ((newValue == null) || (typeof isNaN === "function" ? isNaN(newValue) : void 0)) {
             return;
           }
@@ -41,13 +48,7 @@
           }
 
 
-          radius = Math.min(width, height) / 2;
-          arcOuter = radius - 40;
-          arc = d3.svg.arc().innerRadius(radius - 5).outerRadius(arcOuter).startAngle(function(d) {
-            return d.startAngle + 0;
-          }).endAngle(function(d) {
-            return d.endAngle + 0;
-          });
+
           svg = d3.select(element[0]).append('svg').attr('width', width).attr('height', height).append('g').attr('transform', "translate(" + (width / 2) + ", " + (height / 2) + ")");
           completeEndAngle = (scope.complete / 100) * 2 * Math.PI;
           background = svg.append('path').datum({
