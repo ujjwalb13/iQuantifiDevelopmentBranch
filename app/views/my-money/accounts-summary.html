@@ -14,6 +14,7 @@
         vertical-align: text-top
             
     }
+
 </style>
 <div class="container main-wrapper">
     <div class="row">
@@ -27,11 +28,22 @@
             <div class="content-wrapper">
                 <div class="row">
                     <div class="col-sm-9">
+                        <div class="tab-header pull-left" >
+                            <ul>
+                                <li ng-class="{active: noFilter}">
+                                    <a ng-click="changeCategoryFilter('')" style="border: 1px solid white;cursor: pointer"><span>All Accounts</span></a>
+                                </li>
+                                <li ng-class="{active: categoryFilter.category == 'Linked'}" >
+                                    <a ng-click="changeCategoryFilter('Linked')" style="border: 1px solid white;cursor: pointer"><span>Linked Account</span></a>
+                                </li>
+                                <li ng-class="{active: categoryFilter.category == 'Manual'}">
+                                    <a ng-click="changeCategoryFilter('Manual')" style="border: 1px solid white;cursor: pointer"><span>Manual Accounts</span></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="dropdown open">
-
-
                             <md-menu md-position-mode="target-right target" md-offset="0 55">
 
                                 <a ng-href="{{disabled()}}" class="iq-submit-btn btn-primary btn btn-add pull-right dropdown-toggle" role="button" ng-click="openMenu($mdOpenMenu, $event)">
@@ -44,12 +56,12 @@
 
                                 <md-menu-content width="4">
                                     <md-menu-item>
-                                        <md-button ng-click="goToAccountNew()">
+                                        <md-button ng-click="goToAccountNewCash()">
                                             Cash Account
                                         </md-button>
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button ng-click="goToAccountNew()">
+                                        <md-button ng-click="goToAccountNewInvestment()">
                                             Investment
                                         </md-button>
                                     </md-menu-item>
@@ -94,13 +106,14 @@
                                     <tr ng-repeat="item in cashaccounts" ng-click="goToAccountEdit(item.AccountId)">
                                         <td><i class="fa fa-link" ng-show="item.isLinked"></i></td>
                                         <td class="col-lg-10">
-                                            <p>
-                                                {{item.AccountName}}
-                                            </p>
-                                            <b>{{item.AccountSubText}}</b>
+                                            <div style="height: 50px;">
+                                                <p ng-bind-html="item.AccountName"> </p>
+                                                <b> <span ng-bind-html="item.AccountSubText"></span></b>
+                                            </div>
                                         </td>
                                         <td class="text-right"><i class="fa fa-chevron-right"></i></td>
                                     </tr>
+                                    <tr><td class="col-lg-12" colspan="3"><a class="pull-right">View More...</a></td></tr>
                                 </tbody>
                             </table>
 
@@ -124,13 +137,14 @@
                                 <tbody>
                                     <tr ng-repeat="item in debts" ng-click="goToDebtEdit(item.AccountType, item.AccountId)">
                                         <td class="col-lg-10">
-                                            <p>
-                                                {{item.AccountName}}
-                                            </p>
-                                            <b>{{item.AccountSubText}}</b>
+                                            <div style="height: 50px;">
+                                                <p ng-bind-html="item.AccountName"> </p>
+                                                <b> <span ng-bind-html="item.AccountSubText"></span></b>
+                                            </div>
                                         </td>
                                         <td class="text-right"><i class="fa fa-chevron-right"></i></td>
                                     </tr>
+                                    <tr><td class="col-lg-12" colspan="2"><a class="pull-right">View More...</a></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -148,7 +162,7 @@
                             <caption>
                                 <div class="main-title" style="margin-bottom: -8px">
                                     <h4>
-                                        <i class="icon icon-al-my-money"></i>
+                                        <i class="icon icon-mm-investment"></i>
                                         Investments
                                     </h4>
                                 </div>
@@ -158,18 +172,13 @@
                             <tbody>
                                 <tr ng-repeat="item in investments" ng-click="goToAccountEdit(item.AccountId)">
                                     <td class="col-lg-10">
-                                        <p>
-                                            {{item.AccountName}}
-                                        </p>
-                                        <b>{{item.AccountSubText}}</b>
+                                        <div style="height: 50px;">
+                                            <p ng-bind-html="item.AccountName"> </p>
+                                            <b> <span ng-bind-html="item.AccountSubText"></span></b>
+                                        </div>
                                     </td>
-                                    <td class="text-right"><i class="fa fa-chevron-right"></i></td>
-                                    <!--<td>{{item.AccountName}} <span class="label label-success" ng-show="item.isLinked">Linked</span></td>
-                                    <td>{{item.AccountSubText}}</td>
-                                    <td>{{item.AccountStatusDisplay}}</td>-->
-
-
                                 </tr>
+                                <tr><td class="col-lg-12" colspan="2"><a class="pull-right">View More...</a></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -189,15 +198,16 @@
                             <thead class="dark">
 
                             <tbody>
-                                <tr ng-repeat="item in policies" ng-click="goToAccountEdit(account.guid)">
-                                    <td class="col-lg-10">
-                                        <p>
-                                            {{item.AccountName}}
-                                        </p>
-                                        <b>{{item.AccountSubText}}</b>
+                                <tr ng-repeat="item in policies" ng-click="goToPolicyEdit(item.guid,item.AccountType)">
+                                    <td class="col-lg-10" style="">
+                                        <div style="height: 50px;">
+                                            <p ng-bind-html="item.AccountName"> </p>
+                                            <b> <span ng-bind-html="item.AccountSubText"></span></b>
+                                        </div>
                                     </td>
                                     <td class="text-right"><i class="fa fa-chevron-right"></i></td>
                                 </tr>
+                                <tr><td class="col-lg-12" colspan="2"><a class="pull-right">View More...</a></td></tr>
                             </tbody>
                         </table>
                     </div>

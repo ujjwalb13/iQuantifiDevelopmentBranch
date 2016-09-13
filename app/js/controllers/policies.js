@@ -22,7 +22,7 @@
     }).apply(this);
   });
 
-  angular.module('agera').controller('LifePolicyFormCtrl', function($modal, $scope, $rootScope, $routeParams, $location, $q, Person, PolicyLife) {
+  angular.module('agera').controller('LifePolicyFormCtrl', function ($window, $modal, $scope, $rootScope, $routeParams, $location, $q, Person, PolicyLife) {
     var ModalInstanceCtrl, i, ref, results;
     $scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     $scope.years = (function() {
@@ -83,9 +83,10 @@
         }
       });
     };
-    $scope.cancel = function() {
-      return $location.path('/progress');
+    goBack = function () {
+      return $window.history.go(-2);
     };
+
     return ModalInstanceCtrl = [
       '$scope', '$modalInstance', '$location', 'policy', function($scope, $modalInstance, $location, policy) {
         $scope.close = function() {
@@ -114,7 +115,7 @@
     ];
   });
 
-  angular.module('agera').controller('DisabilityPolicyFormCtrl', function($modal, $scope, $rootScope, $routeParams, $q, $location, Person, PolicyDisability) {
+  angular.module('agera').controller('DisabilityPolicyFormCtrl', function ($window, $modal, $scope, $rootScope, $routeParams, $q, $location, Person, PolicyDisability) {
     var ModalInstanceCtrl, i, ref, results;
     $scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     $scope.years = (function() {
@@ -175,9 +176,10 @@
         }
       });
     };
-    $scope.cancel = function() {
-      return $location.path('/progress');
+    $scope.cancel = function () {
+      return $window.history.go(-2);
     };
+
     return ModalInstanceCtrl = [
       '$scope', '$modalInstance', '$location', 'policy', function($scope, $modalInstance, $location, policy) {
         $scope.close = function() {
@@ -206,7 +208,7 @@
     ];
   });
 
-  angular.module('agera').controller('CarePolicyFormCtrl', function($modal, $scope, $rootScope, $routeParams, $q, $location, Person, PolicyCare) {
+  angular.module('agera').controller('CarePolicyFormCtrl', function($window,$modal, $scope, $rootScope, $routeParams, $q, $location, Person, PolicyCare) {
     var ModalInstanceCtrl, i, ref, results;
     $scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     $scope.years = (function() {
@@ -214,8 +216,9 @@
       for (var i = ref = moment().year(); ref <= 1900 ? i <= 1900 : i >= 1900; ref <= 1900 ? i++ : i--){ results.push(i); }
       return results;
     }).apply(this);
+
     $scope.cancel = function() {
-      return $location.path('/progress');
+      return $window.history.go(-2);
     };
     $scope.paymentPeriods = ['Weekly', 'Twice a month', 'Monthly', 'Semi-annually', 'Annually'];
     $scope.benefitAmountPeriods = ['Daily', 'Monthly'];

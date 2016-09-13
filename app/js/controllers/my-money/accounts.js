@@ -16,6 +16,7 @@
 
   angular.module('agera').controller('AccountFormCtrl', function ($window,$modal, $scope, $routeParams, $rootScope, $location, $q, Account, Person) {
     var ModalInstanceCtrl;
+    $scope.addmode = "";
     $routeParams.accountId
     if ($routeParams.accountId) {
       $q.all([
@@ -24,10 +25,12 @@
         }).$promise, Person.query().$promise
       ]).then(function(data) {
         $scope.account = data[0];
+        $scope.associatedgoals = $scope.account.AssociatedGoals;
         $scope.editMode = true;
         return $scope.people = data[1];
       });
     } else {
+      $scope.addmode = $routeParams.addmode;
       $scope.account = new Account();
       $scope.people = Person.query();
       $scope.editMode = false;
