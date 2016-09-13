@@ -114,12 +114,7 @@
       if (goal.type == null) {
         return;
       }
-      var importantGoals = ["house", "retirement"];
-      if (_.contains(importantGoals, goal.type)) {
-        return $location.path("/summaries/goals/" + (_.pluralize(goal.type.toLowerCase())) + "/" + goal.guid);
-      } else {
-        return $location.path("/summaries/" + (_.pluralize(goal.type.toLowerCase())) + "/" + goal.guid);
-      }
+      return $location.path("/summaries/" + (_.pluralize(goal.type.toLowerCase())) + "/" + goal.guid);
     };
     $scope.isGoalSectionActive = function() {
       return !$scope.noFilter && $scope.categoryFilter['goal'];

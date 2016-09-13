@@ -337,19 +337,19 @@ angular.module('agera').config(function($routeProvider) {
     controller: 'summariesPolicyCtrl'
   })
 
-  .when('/summaries/:type/:guid?', {
-    templateUrl: '/views/summaries/summary.html',
-    controller: 'summariesSummaryCtrl'
-  })
-
-  .when('/summaries/goals/houses/:guid', {
+  .when('/summaries/houses/:guid', {
     templateUrl: '/views/summaries/house-summary.html',
     controller: 'houseSummaryCtrl'
   })
 
-  .when('/summaries/goals/retirements/:guid', {
+  .when('/summaries/retirements/:guid', {
     templateUrl: '/views/summaries/retirement-summary.html',
     controller: 'retirementSummaryCtrl'
+  })
+
+  .when('/summaries/:type/:guid?', {
+    templateUrl: '/views/summaries/summary.html',
+    controller: 'summariesSummaryCtrl'
   })
 
   .when('/two-factor-auth', {
