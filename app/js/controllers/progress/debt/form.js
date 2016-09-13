@@ -235,7 +235,10 @@
       return goBack();
     };
 
-    goBack = function() {
+    goBack = function () {
+      if ($scope.editMode)
+        return $window.history.go(-1);
+      else
         return $window.history.go(-2);
       //return $location.path("/summaries/" + (_.pluralize(type)) + "/" + debt.guid);
     };

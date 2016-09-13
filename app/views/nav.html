@@ -302,7 +302,7 @@
   </style>
 
   <!-- save timeline drop down - NEW DESIGN -->
-  <div class="modal fade" role="dialog" modal-show="saveMenu" ng-cloak>
+  <div class="modal fade" role="dialog" modal-show="saveMenu" ng-cloak data-backdrop="static">
     <!--<div class="save-dropdown-menu" ng-class="{'ui-show': saveMenu}" style="width: 800px; margin-left: -400px;">-->
 
     <div class="modal-dialog" style="width: 800px;">
@@ -1009,8 +1009,7 @@
       display: inline-block;
       box-sizing: border-box;
       margin-left: 18px;
-      margin-right: 10px;
-    }
+      margin-right: 10px;    }
 
   </style>
 
@@ -1131,7 +1130,7 @@
 
         </div>
         <div class="modal-footer text-center delete-modal-footer">
-          <button type="button" class="iq-submit-btn btn-success btn" data-dismiss="modal" ng-click="cancel()">Got it</button>
+          <button type="button" class="iq-submit-btn btn-success btn" data-dismiss="modal">Got it</button>
         </div>
       </div>
     </div>
