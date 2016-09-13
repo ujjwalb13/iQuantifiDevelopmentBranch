@@ -3,7 +3,7 @@
   var hasProp = {}.hasOwnProperty;
 
   angular.module('progress').controller('DebtFormCtrl', function ($window, $scope, $rootScope, $routeParams, $q, $modal, $location, Scenario, Person, Loan, Credit, MyProgress, utilService, goalService, ENV) {
-    var Debt, ModalInstanceCtrl, base, date, downsize, fetchRelated, gotoSummary, i, lookup, socialSecurity, span, submitRelated, years;
+    var Debt, ModalInstanceCtrl, base, date, downsize, fetchRelated, goBack, i, lookup, socialSecurity, span, submitRelated, years;
     fetchRelated = function() {
       return Scenario.related({
         type: $scope.type,
@@ -210,7 +210,7 @@
             $scope.obj = goal;
             return submitRelated().then(function() {
               $rootScope.$broadcast('refresh');
-              return gotoSummary(goal);
+              return goBack(goal);
             });
           }, function(response) {
             $scope.errors = response.data.errors;
@@ -221,7 +221,7 @@
             $scope.obj = goal;
             return submitRelated().then(function() {
               $rootScope.$broadcast('refresh');
-              return gotoSummary(goal);
+              return goBack(goal);
             });
           }, function(response) {
             $scope.errors = response.data.errors;
@@ -230,16 +230,16 @@
         }
       }
     };
-    $scope.cancel = function () {
-      return $window.history.back();
-    };
-    gotoSummary = function(debt) {
-      var type;
-      type = debt.kind === 'credit_card' ? 'creditcard' : 'loan';
 
-      return $window.history.back();
+    $scope.cancel = function () {
+      return goBack();
+    };
+
+    goBack = function() {
+        return $window.history.go(-2);
       //return $location.path("/summaries/" + (_.pluralize(type)) + "/" + debt.guid);
     };
+
     $scope.openDeleteModal = function(debt) {
       var modalInstance;
       return modalInstance = $modal.open({
@@ -267,7 +267,7 @@
               type: 'success',
               msg: 'The debt was deleted successfully.'
             });
-            return $location.path('/progress');
+            return goBack();
           }, function(response) {
             return $rootScope.$broadcast('alert', {
               type: 'danger',

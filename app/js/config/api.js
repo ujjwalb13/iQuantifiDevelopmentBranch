@@ -7,7 +7,7 @@ angular.module('config', [])
       function () {
         //return 'http://localhost:53205/api';
 
-        return 'http://iquantifi.azurewebsites.net/api';
+        //return 'http://iquantifi.azurewebsites.net/api';
 
         if (window.location.hostname.toUpperCase() == 'localhost'.toUpperCase())
           return 'http://localhost:53205/api';

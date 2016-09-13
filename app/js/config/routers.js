@@ -476,7 +476,10 @@ angular.module('agera').config(function($routeProvider) {
     templateUrl: '/views/my-money/account-form.html',
     controller: 'AccountFormCtrl'
   })
-
+  .when('/my-money/accounts/new/:addmode', {
+    templateUrl: '/views/my-money/account-form.html',
+    controller: 'AccountFormCtrl'
+  })
   .when('/my-money/accounts/link/:sender?', {
     templateUrl: '/views/aggregation/link-account.html',
     controller: 'LinkAccountCtrl',

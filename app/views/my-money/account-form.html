@@ -18,7 +18,7 @@
     <div class="content-wrapper">
         <form name="accountForm" role="form" ng-submit="submit(accountForm.$valid)" novalidate>
             <div class="row">
-                <div class="col-md-4 col-sm-8">
+                <div class="col-md-4">
 
                     <div class="form-group" ng-class="{'has-error': submitted && accountForm.name.$invalid}">
                         <label class="control-label" for="name">Name</label>
@@ -38,17 +38,17 @@
                         <label class="control-label" for="type">Type</label>
                         <select name="type" class="form-control" name="type" id="type" required ng-model="account.kind">
                             <option value=""></option>
-                            <option value="checking">Checking</option>
-                            <option value="savings">Savings</option>
-                            <option value="market">Money Market</option>
-                            <option value="brokerage">Brokerage</option>
-                            <option value="other">Other</option>
-                            <option value="education">529 Plan</option>
-                            <option value="ira401k">401k/403b</option>
-                            <option value="ira_roth">Roth IRA</option>
-                            <option value="ira">IRA</option>
-                            <option value="ira_sep">Sep IRA</option>
-                            <option value="ira_simple">Simple IRA</option>
+                            <option value="checking" ng-if="addmode=='' || addmode=='cash'">Checking</option>
+                            <option value="savings" ng-if="addmode=='' || addmode=='cash'">Savings</option>
+                            <option value="market" ng-if="addmode=='' || addmode=='cash'">Money Market</option>
+                            <option value="brokerage" ng-if="addmode=='' || addmode=='cash'">Brokerage</option>
+                            <option value="other" ng-if="addmode=='' || addmode=='cash'">Other</option>
+                            <option value="education" ng-if="addmode=='' || addmode=='investment'">529 Plan</option>
+                            <option value="ira401k" ng-if="addmode=='' || addmode=='investment'">401k/403b</option>
+                            <option value="ira_roth" ng-if="addmode=='' || addmode=='investment'">Roth IRA</option>
+                            <option value="ira" ng-if="addmode=='' || addmode=='investment'">IRA</option>
+                            <option value="ira_sep" ng-if="addmode=='' || addmode=='investment'">Sep IRA</option>
+                            <option value="ira_simple" ng-if="addmode=='' || addmode=='investment'">Simple IRA</option>
                         </select>
                         <span ng-show="submitted && accountForm.type.$error.required" class="help-block">Type is required.</span>
                     </div>
@@ -65,6 +65,31 @@
                         <label class="control-label" for="owner">Owner</label>
                         <select class="form-control" id="owner" name="owner" required ng-model="account.person.guid" ng-options="person.guid as (person.first_name + ' ' + person.last_name) for person in owners"></select>
                         <span ng-show="submitted && accountForm.owner.$error.required" class="help-block">Person is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <div class="beside-right-content">
+                        <div class="beside-right-wrapper" style="min-height:350px" >
+                            <div class="row" ng-if="associatedgoals.length > 0" style="padding-left:10px">Item Associated with this account:</div>
+                            <div class="row" ng-repeat="goal in associatedgoals" ng-if="associatedgoals.length > 0" style="margin:15px">
+                                <div class="col-md-5">
+                                    <i ng-if="goal.kind" class="icon {{ goal.kind | protectionIconClass }} icon-80"></i>
+                                    <i ng-if="goal.type" class="icon {{ goal.type | goalIconClass }} icon-80"></i>
+                                </div>
+                                <div class="col-md-7">
+
+                                    <div style="align-content:center">
+                                        <b>{{goal.name}}</b><br />
+                                        {{goal.amount | dollars}}
+                                    </div>
+                                </div>
+                                <span>
+
+                                </span>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
