@@ -2,17 +2,34 @@
   'use strict';
   angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary) {
 
+    var donutStatus = function(scheduleStatus) {
+      if (scheduleStatus === "safe") {
+        return "ontrack";
+      } else if (scheduleStatus === "warning") {
+        return "behindOneMonth";
+      } else {
+        return "behindTwoMonth";
+      }
+    }
+
     HouseSummary.get({
       guid: $routeParams.guid
     }).$promise.then(function(object) {
       $scope.goal = object.goal();
       $scope.schedule = object.schedule;
+      $scope.donutStatus = donutStatus($scope.schedule.status);
+
+      console.log($scope.donutStatus );
+      console.log("goal", $scope.goal);
+      console.log("schedule", $scope.schedule);
     });
 
     $scope.goToEdit = function(goal) {
       var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
       $location.path(editUrl);
     }
+
+
 
     $scope.ontrackStatus = "ontrack";
     $scope.behindOneMonthStatus = "behindOneMonth";
