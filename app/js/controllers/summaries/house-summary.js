@@ -1,35 +1,40 @@
 (function() {
   'use strict';
-  angular.module('summaries').controller('summariesSummaryCtrl', function($scope, $rootScope, $routeParams, $http, $location, ENV, configService, Car, College, Credit, Baby, House, Loan, Relocation, Rent, Reserve, Retirement, Ring, Travel, Wedding, Purchase) {
-    var lookup = {
-      cars: Car,
-      colleges: College,
-      babies: Baby,
-      houses: House,
-      loans: Loan,
-      relocations: Relocation,
-      rents: Rent,
-      reserves: Reserve,
-      retirements: Retirement,
-      creditcards: Credit,
-      rings: Ring,
-      travels: Travel,
-      weddings: Wedding,
-      purchases: Purchase
-    };
-    var Obj = lookup[$routeParams.type];
-    if (Obj) {
-      Obj.get({
-        guid: $routeParams.guid
-      }).$promise.then(function(object) {
-        $scope.goal = object;
-      });
+  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary) {
+
+    var donutStatus = function(scheduleStatus) {
+      if (scheduleStatus === "safe") {
+        return "ontrack";
+      } else if (scheduleStatus === "warning") {
+        return "behindOneMonth";
+      } else {
+        return "behindTwoMonth";
+      }
     }
+
+    $scope.complete = 0;
+    $scope.incomplete = 0;
+    $scope.donutAmount = 0;
+
+    HouseSummary.get({
+      guid: $routeParams.guid
+    }).$promise.then(function(object) {
+      $scope.goal = object.goal();
+      $scope.schedule = object.schedule;
+      $scope.donutStatus = donutStatus($scope.schedule.status);
+      $scope.complete = $scope.schedule.saved * 100 / $scope.schedule.total;
+      $scope.donutAmount = $scope.goal.projected_payment;
+      console.log($scope.donutStatus );
+      console.log("goal", $scope.goal);
+      console.log("schedule", $scope.schedule);
+    });
 
     $scope.goToEdit = function(goal) {
       var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
       $location.path(editUrl);
     }
+
+
 
     $scope.ontrackStatus = "ontrack";
     $scope.behindOneMonthStatus = "behindOneMonth";
