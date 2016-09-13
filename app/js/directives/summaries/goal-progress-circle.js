@@ -13,7 +13,7 @@
       return d.endAngle + 0;
     });
 
-    console.log("2222");
+    console.log("4444");
 
 
     return {
@@ -27,6 +27,7 @@
         permonth: '='
       },
       link: function(scope, element, attrs) {
+        var svg = d3.select(element[0]).append('svg').attr('width', width).attr('height', height).append('g').attr('transform', "translate(" + (width / 2) + ", " + (height / 2) + ")");
         scope.behindStatusClass = function() {
           if (scope.status === 'behindTwoMonth') return "behind-two-month";
           if (scope.status === 'behindOneMonth') return "behind-one-month";
@@ -34,7 +35,7 @@
         }
 
         return scope.$watch('complete', function(newValue, oldValue) {
-          var arcTween, background, complete, completeEndAngle, incomplete, incompleteColor, svg;
+          var arcTween, background, complete, completeEndAngle, incomplete, incompleteColor;
           if ((newValue == null) || (typeof isNaN === "function" ? isNaN(newValue) : void 0)) {
             return;
           }
@@ -48,8 +49,6 @@
           }
 
 
-
-          svg = d3.select(element[0]).append('svg').attr('width', width).attr('height', height).append('g').attr('transform', "translate(" + (width / 2) + ", " + (height / 2) + ")");
           completeEndAngle = (scope.complete / 100) * 2 * Math.PI;
           background = svg.append('path').datum({
             startAngle: 0,
