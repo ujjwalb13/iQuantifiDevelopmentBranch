@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('myMoney').controller('MyMoneyUpdateExpensesSheetCtrl', function($scope, $routeParams, $location, Expense, $http, ENV, $rootScope) {
+  angular.module('myMoney').controller('MyMoneyUpdateExpensesSheetCtrl', function($window, $scope, $routeParams, $location, Expense, $http, ENV, $rootScope) {
     var getExpenseName, getPercentage, hideAllSubCategories, updateExpenseValues;
     getExpenseName = function(kind) {
       var kind_formatted;
@@ -112,10 +112,11 @@
       }).$promise.then(function(result) {
         $scope.processing = false;
         $rootScope.expensesView = "monthly_expenses";
-        return $rootScope.$broadcast('alert', {
+        $rootScope.$broadcast('alert', {
           type: 'success',
           msg: 'Your expenses were updated successfully.'
         });
+        return $window.history.back();
       }, function(err) {
         $scope.processing = false;
         return $rootScope.$broadcast('alert', {
@@ -134,9 +135,8 @@
       hideAllSubCategories();
       return $scope.expenseSubcategories[expenseKind]['showed'] = true;
     };
-    $scope.cancelSavingExpenses = function() {
-      updateExpenseValues();
-      return $rootScope.expensesView = "monthly_expenses";
+    $scope.cancelSavingExpenses = function () {
+      return $window.history.back();
     };
     $scope.expenseSubcategories = {};
     _.each($scope.expenses, function(expense) {
