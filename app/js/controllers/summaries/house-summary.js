@@ -12,13 +12,18 @@
       }
     }
 
+    $scope.complete = 0;
+    $scope.incomplete = 0;
+    $scope.donutAmount = 0;
+
     HouseSummary.get({
       guid: $routeParams.guid
     }).$promise.then(function(object) {
       $scope.goal = object.goal();
       $scope.schedule = object.schedule;
       $scope.donutStatus = donutStatus($scope.schedule.status);
-
+      $scope.complete = $scope.schedule.saved * 100 / $scope.schedule.total;
+      $scope.donutAmount = $scope.goal.projected_payment;
       console.log($scope.donutStatus );
       console.log("goal", $scope.goal);
       console.log("schedule", $scope.schedule);
