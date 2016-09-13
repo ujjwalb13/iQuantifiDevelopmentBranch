@@ -18,7 +18,7 @@
     <div class="content-wrapper">
         <form name="accountForm" role="form" ng-submit="submit(accountForm.$valid)" novalidate>
             <div class="row">
-                <div class="col-md-4 col-sm-8">
+                <div class="col-md-4">
 
                     <div class="form-group" ng-class="{'has-error': submitted && accountForm.name.$invalid}">
                         <label class="control-label" for="name">Name</label>
@@ -65,6 +65,31 @@
                         <label class="control-label" for="owner">Owner</label>
                         <select class="form-control" id="owner" name="owner" required ng-model="account.person.guid" ng-options="person.guid as (person.first_name + ' ' + person.last_name) for person in owners"></select>
                         <span ng-show="submitted && accountForm.owner.$error.required" class="help-block">Person is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <div class="beside-right-content">
+                        <div class="beside-right-wrapper" style="min-height:350px" >
+                            <div class="row" ng-if="associatedgoals.length > 0" style="padding-left:10px">Item Associated with this account:</div>
+                            <div class="row" ng-repeat="goal in associatedgoals" ng-if="associatedgoals.length > 0" style="margin:15px">
+                                <div class="col-md-5">
+                                    <i ng-if="goal.kind" class="icon {{ goal.kind | protectionIconClass }} icon-80"></i>
+                                    <i ng-if="goal.type" class="icon {{ goal.type | goalIconClass }} icon-80"></i>
+                                </div>
+                                <div class="col-md-7">
+
+                                    <div style="align-content:center">
+                                        <b>{{goal.name}}</b><br />
+                                        {{goal.amount | dollars}}
+                                    </div>
+                                </div>
+                                <span>
+
+                                </span>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
