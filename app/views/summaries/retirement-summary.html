@@ -84,13 +84,13 @@
               <div class="col-md-6 col-xs-12">
                 <div class="chart-downpayment" ng-show="downpaymentActive()">
                     <div class="chart-content" ng-if="scheduleStatus=='warning'">
-                      <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="behindOneMonthStatus"></goal-progress-circle>
+                      <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="scheduleStatus"></goal-progress-circle>
                     </div>
                     <div class="chart-content" ng-if="scheduleStatus=='danger'">
-                      <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="behindTwoMonthStatus"></goal-progress-circle>
+                      <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="scheduleStatus"></goal-progress-circle>
                     </div>
                     <div class="chart-content" ng-if="scheduleStatus=='safe'">
-                      <goal-progress-circle complete="24" incomplete="0" permonth="2143" status="ontrackStatus"></goal-progress-circle>
+                      <goal-progress-circle complete="24" incomplete="0" permonth="2143" status="scheduleStatus"></goal-progress-circle>
                     </div>
                   <div class="downpayment-wrapper">
                     <div class="downpayment-content">
