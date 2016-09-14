@@ -187,15 +187,15 @@
             return index <= nowIndex && d.status == "paid";
           });
 
-          var ontrackAreaClosePoints = [{date: _.last(ontrackPathData).date, dotValue: 0}, {date: _.first(ontrackPathData).date, dotValue: 0}];
+          if (ontrackPathData.length > 0) {
+            var ontrackAreaClosePoints = [{date: _.last(ontrackPathData).date, dotValue: 0}, {date: _.first(ontrackPathData).date, dotValue: 0}];
 
-          svg.append('path')
-            .datum(ontrackPathData.concat(ontrackAreaClosePoints))
-            .attr('class', 'ontrack area')
-            .attr('d', line)
-            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
-
-
+            svg.append('path')
+              .datum(ontrackPathData.concat(ontrackAreaClosePoints))
+              .attr('class', 'ontrack area')
+              .attr('d', line)
+              .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+          }
 
           svg.selectAll('.xline-balance').data(nowPathData).enter().append('line')
           .attr('x1', function(d) {
@@ -241,10 +241,6 @@
                 return 'warning line';
               }
             });
-
-          var ontrackPathData = _.filter(data, function(d, index) {
-            return index <= nowIndex && d.status == "paid";
-          });
 
           svg.append('path')
             .datum(ontrackPathData)
