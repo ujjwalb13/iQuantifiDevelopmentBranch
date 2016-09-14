@@ -23,7 +23,7 @@
                     </div>
                     <div class="goal-summary-head">
                         <div class="pull-left">
-                            <i class="icon icon-gl-baby icon-80"></i>
+                            <i class="icon {{ goal.type | goalIconClass }} icon-80"></i>
                             <h3>
                                 {{ goal.name }}
                             </h3>
@@ -77,12 +77,12 @@
                     </div>
                 </div>
                 <div class="content-wrapper">
-                    <div class="section-header">
+                    <div class="section-header" ng-if="schedule.data.length > 1">
                         Action Tracker
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
-                            <div class="chart-content" ng-if="schedule.data.length > 2">
+                            <div class="chart-content" ng-if="schedule.data.length > 1">
                                 <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
                                 </goal-action-tracker>
                             </div>
