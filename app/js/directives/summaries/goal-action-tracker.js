@@ -170,63 +170,61 @@
             return index <= nowIndex;
           });
 
-          // var nowAreaClosePoints = [{date: _.last(nowPathData).date, dotValue: 0}, {date: _.first(nowPathData).date, dotValue: 0}];
+          var nowAreaClosePoints = [{date: _.last(nowPathData).date, dotValue: 0}, {date: _.first(nowPathData).date, dotValue: 0}];
 
-          // svg.append('path').datum(nowPathData.concat(nowAreaClosePoints))
-          //   .attr('d', line)
-          //   .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
-          //   .attr('class', function(d) {
-          //     if (scope.status == "danger") {
-          //       return 'danger area';
-          //     } else {
-          //       return 'warning area';
-          //     }
-          //   });
+          svg.append('path').datum(nowPathData.concat(nowAreaClosePoints))
+            .attr('d', line)
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
+            .attr('class', function(d) {
+              if (scope.status == "danger") {
+                return 'danger area';
+              } else {
+                return 'warning area';
+              }
+            });
 
-          // var ontrackPathData = _.filter(data, function(d, index) {
-          //   return index <= nowIndex && d.status == "paid";
-          // });
+          var ontrackPathData = _.filter(data, function(d, index) {
+            return index <= nowIndex && d.status == "paid";
+          });
 
+          var ontrackAreaClosePoints = [{date: _.last(ontrackPathData).date, dotValue: 0}, {date: _.first(ontrackPathData).date, dotValue: 0}];
 
-          // var ontrackAreaClosePoints = [{date: _.last(ontrackPathData).date, dotValue: 0}, {date: _.first(ontrackPathData).date, dotValue: 0}];
-
-
-          // svg.append('path')
-          //   .datum(ontrackPathData.concat(ontrackAreaClosePoints))
-          //   .attr('class', 'ontrack area')
-          //   .attr('d', line)
-          //   .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+          svg.append('path')
+            .datum(ontrackPathData.concat(ontrackAreaClosePoints))
+            .attr('class', 'ontrack area')
+            .attr('d', line)
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
 
 
-          // svg.selectAll('.xline-balance').data(nowPathData).enter().append('line')
-          // .attr('x1', function(d) {
-          //   return x(d.date);
-          // })
-          // .attr('x2', function(d) {
-          //   return x(d.date);
-          // })
-          // .attr('y1', function(d) {
-          //   return y(d.dotValue);
-          // })
-          // .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
-          // .attr('class', function(d) {
-          //   if (d.status == "pay") {
-          //     if (scope.status == "danger") {
-          //       return 'danger xline-balance';
-          //     } else {
-          //       return 'warning xline-balance';
-          //     }
-          //   } else {
-          //     return 'ontrack xline-balance';
-          //   }
-          // });
+          svg.selectAll('.xline-balance').data(nowPathData).enter().append('line')
+          .attr('x1', function(d) {
+            return x(d.date);
+          })
+          .attr('x2', function(d) {
+            return x(d.date);
+          })
+          .attr('y1', function(d) {
+            return y(d.dotValue);
+          })
+          .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
+          .attr('class', function(d) {
+            if (d.status == "pay") {
+              if (scope.status == "danger") {
+                return 'danger xline-balance';
+              } else {
+                return 'warning xline-balance';
+              }
+            } else {
+              return 'ontrack xline-balance';
+            }
+          });
 
-          // svg.selectAll('.xline-balance').attr('y2', function(d) {
-          //   return height - y(d3.max(data, function(d) {
-          //     return d.projected_balance;
-          //   }));
-          // });
+          svg.selectAll('.xline-balance').attr('y2', function(d) {
+            return height - y(d3.max(data, function(d) {
+              return d.projected_balance;
+            }));
+          });
 
           svg.append('path').datum(data)
             .attr('d', line)
