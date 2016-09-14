@@ -341,7 +341,10 @@ angular.module('agera').config(function($routeProvider) {
     templateUrl: '/views/summaries/house-summary.html',
     controller: 'houseSummaryCtrl'
   })
-
+  .when('/summaries/cars/:guid', {
+    templateUrl: '/views/summaries/car-summary.html',
+    controller: 'carSummaryCtrl'
+  })
   .when('/summaries/retirements/:guid', {
     templateUrl: '/views/summaries/retirement-summary.html',
     controller: 'retirementSummaryCtrl'

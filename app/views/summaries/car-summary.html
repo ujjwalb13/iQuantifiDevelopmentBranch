@@ -1,0 +1,138 @@
+﻿<div class="main-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>
+                    My Progress
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content-style">
+    <div class="container main-wrapper">
+        <div class="row">
+            <div class="left-side-bar col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                <progress-sidebar current-page=''></progress-sidebar>
+            </div>
+            <div class="right-content col-lg-10 col-md-9 col-sm-12 col-xs-12">
+                <div class="content-wrapper">
+                    <div class="section-header goals">
+                        <i class="icon icon-gl-custom-goal"></i>Goal Summary
+                    </div>
+                    <div class="goal-summary-head">
+                        <div class="pull-left">
+                            <i class="icon icon-gl-car icon-80"></i>
+                            <h3>
+                                {{ goal.name }}
+                            </h3>
+                            <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
+                                Edit Goal
+                            </button>
+                            <a class="btn btn-delete ng-scope" ng-if="goal" ng-click="deleteGoal(goal)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="pull-right">
+                            <ul>
+                                <li>
+                                    <label for="">Purchase Date</label>
+                                    <p ng-if="goal.transition_on">{{ goal.transition_on | monthYear}}</p>
+                                </li>
+                                <li>
+                                    <label for="">Total Goal Amount</label>
+                                    <p>{{ goal.amount | dollars }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="row sum-main-content">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="table-static" style="width: 100%;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Start Saving Date</th>
+                                            <th>{{ schedule.start_saving_date ? (schedule.start_saving_date |  monthYear) : ""}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Net Proceeds From Sale of Home</strong></td>
+                                            <td>{{ goal.trade_in | dollars }}</td>
+                                        </tr>
+                                        <tr ng-click="changeRightSummayContent('downpayment')" ng-class="{active: downpaymentActive()}">
+                                            <td><strong>Downpayment</strong></td>
+                                            <td>{{ schedule.total | dollars }}</td>
+                                        </tr>
+                                        <tr ng-click="changeRightSummayContent('financeRecommendations')" ng-class="{active: financeRecommendationsActive()}">
+                                            <td><strong>Finance Amount</strong></td>
+                                            <td>{{ goal.projected_finance_amount | dollars }} </td>
+                                        </tr>
+                                        <tr></tr>
+                                        <tr class="total-row">
+                                            <td>Total Purchase Price</td>
+                                            <td>{{ goal.amount | dollars }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div ng-include="'/views/summaries/_downpayment.html'"></div>
+                            <div ng-include="'/views/summaries/_finance_recommendations.html'"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-wrapper">
+                    <div class="section-header">
+                        Action Tracker
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="chart-content" ng-if="schedule.data.length > 2">
+                                <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
+                                </goal-action-tracker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <h3 class="title-next">Next Action</h3>
+                            <div class="next-action-content">
+                                <p ng-if="scheduleStatus == 'warning' || scheduleStatus == 'danger'">
+                                    <i class="fa fa-exclamation-circle " ng-if="scheduleStatus == 'danger'"></i>
+                                    <i class="fa fa-exclamation-circle yellow-icon" ng-if="scheduleStatus == 'warning'"></i>
+                                    <strong>
+                                        You are currently
+                                        {{scheduleStatus == 'warning' ? "one month" : "two months"}}
+                                        behind.
+                                    </strong>
+                                    <br>
+                                    <span>Deposit $2,143 this month towards New Home's downpayment.</span>
+                                    <a href="" class="btn btn-primary">Take Action</a>
+                                </p>
+                                <p ng-if="scheduleStatus == 'safe'">
+                                    You’re currently on track! No action needed at this time.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-wrapper">
+                    <div class="section-header">
+                        Completed Actions
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div ng-include="'/views/summaries/_completed_actions.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
