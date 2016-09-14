@@ -121,8 +121,10 @@
 
                     <p ng-repeat="action in actions">
                       <span>{{  action.description }}</span>
+                      <a href="javascript:void(0)" ng-click="completeAction(action)" class="btn btn-success">
+                        Take Action
+                      </a>
                     </p>
-
                 </div>
               </div>
             </div>
