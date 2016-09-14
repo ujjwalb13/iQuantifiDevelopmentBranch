@@ -1,10 +1,14 @@
 (function() {
   'use strict';
-  angular.module('summaries').controller('retirementSummaryCtrl', function($scope, $location, $routeParams, Retirement) {
-    Retirement.get({
-      guid: $routeParams.guid
-    }).$promise.then(function(object) {
-      $scope.goal = object;
+  angular.module('summaries').controller('retirementSummaryCtrl', function($scope, $location, $routeParams, Retirement, $q) {
+    $q.all([
+      Retirement.summary({guid: $routeParams.guid}).$promise,
+      Retirement.accounts({guid: $routeParams.guid}).$promise])
+    .then(function(data) {
+        console.log(data)
+      $scope.goal = data[0].retirement;
+      $scope.schedule = data[0].schedule;
+      $scope.accounts = data[1]
     });
 
     $scope.goToEdit = function(goal) {

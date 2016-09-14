@@ -30,14 +30,11 @@
                 <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
                   Edit Goal
                 </button>
-                <a class="btn btn-delete ng-scope" ng-if="goal" ng-click="deleteGoal(goal)">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                </a>
               </div>
               <div class="pull-right">
                 <ul>
                   <li>
-                    <label for="">Purchase Date</label>
+                    <label for="">Retirement Date</label>
                     <p ng-if="goal.transition_on">{{ goal.transition_on | monthYear}}</p>
                   </li>
                   <li>
@@ -54,28 +51,22 @@
                     <table>
                         <thead>
                           <tr>
-                            <th>Start Saving Date</th>
-                            <th>{{ schedule.start_saving_date ? (schedule.start_saving_date |  monthYear) : ""}}</th>
+                            <th>Goal Details</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td><strong>Net Proceeds From Sale of Home</strong></td>
-                            <td>{{ goal.trade_in | dollars }}</td>
-                          </tr>
-                          <tr ng-click="changeRightSummayContent('downpayment')" ng-class="{active: downpaymentActive()}">
-                            <td><strong>Downpayment</strong></td>
-                            <td>{{ schedule.total | dollars }}</td>
-                          </tr>
-                          <tr ng-click="changeRightSummayContent('financeRecommendations')" ng-class="{active: financeRecommendationsActive()}">
-                            <td><strong>Finance Amount</strong></td>
-                            <td>{{ goal.projected_finance_amount | dollars }} </td>
+                            <td><strong>Total Current Balance</strong></td>
+                            <td>{{ schedule.balance | dollars }}</td>
                           </tr>
                           <tr>
+                            <td><strong>Recomemended Contributions</strong></td>
+                            <td>{{ schedule.total_contributions | dollars }}</td>
                           </tr>
-                          <tr class="total-row">
-                            <td>Total Purchase Price</td>
-                            <td>{{ goal.amount | dollars }}</td>
+                          <tr>
+                            <td><strong>401K Employer Match </strong></td>
+                            <td>???</td>
                           </tr>
                         </tbody>
                     </table>
@@ -83,22 +74,20 @@
               </div>
               <div class="col-md-6 col-xs-12">
                 <div class="chart-downpayment" ng-show="downpaymentActive()">
-                    <div class="chart-content" ng-if="scheduleStatus=='warning'">
+                    <div class="chart-content" ng-if="schedule.status=='warning'">
                       <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="scheduleStatus"></goal-progress-circle>
                     </div>
-                    <div class="chart-content" ng-if="scheduleStatus=='danger'">
+                    <div class="chart-content" ng-if="schedule.status=='danger'">
                       <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="scheduleStatus"></goal-progress-circle>
                     </div>
-                    <div class="chart-content" ng-if="scheduleStatus=='safe'">
+                    <div class="chart-content" ng-if="schedule.status=='safe'">
                       <goal-progress-circle complete="24" incomplete="0" permonth="2143" status="scheduleStatus"></goal-progress-circle>
                     </div>
                   <div class="downpayment-wrapper">
                     <div class="downpayment-content">
-                      <h3>Downpayment</h3>
+                      <h3>2016 Contributions</h3>
                       <ul>
                         <li class="save"><label>Saved</label> <span>{{ schedule.saved | dollars }}</span></li>
-                        <li><label>From Capital</label> <span> {{ schedule.saved_from_capital | dollars }} </span></li>
-                        <li><label>From Cashflow</label> <span> {{ schedule.saved_from_cashflow | dollars }} </span></li>
                         <li class="needed"><label>Needed</label> <strong>{{ schedule.saving_needed | dollars }}</strong></li>
                         <li><label>Total</label> <strong>{{ schedule.total | dollars }}</strong></li>
                       </ul>
