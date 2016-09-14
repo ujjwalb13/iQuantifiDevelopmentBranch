@@ -92,8 +92,8 @@
             </div>
             <div class="row">
               <div class="col-md-12 col-xs-12">
-                <div class="chart-content">
-                  <goal-action-tracker schedule="dummyScheduleData" bubble-text="dummyBubbleText" baseline="dummyBaseline" status="scheduleStatus">
+                <div class="chart-content" ng-if="schedule.data.length > 2">
+                  <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
                   </goal-action-tracker>
                 </div>
               </div>
