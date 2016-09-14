@@ -61,7 +61,9 @@
     }).$promise.then(function(object) {
       $scope.goal = object.goal();
       fetchGoalData($scope.goal, object.schedule);
-      $scope.completedActions = object.completed_actions
+      $scope.completedActions = object.completed_actions;
+      $scope.actions = object.actions;
+      console.log($scope.actions);
     });
 
     $scope.goToEdit = function(goal) {

@@ -102,21 +102,27 @@
               <div class="col-md-12 col-xs-12">
                 <h3 class="title-next">Next Action</h3>
                 <div class="next-action-content">
-                    <p ng-if="scheduleStatus == 'warning' || scheduleStatus == 'danger'">
-                      <i class="fa fa-exclamation-circle " ng-if="scheduleStatus == 'danger'"></i>
-                      <i class="fa fa-exclamation-circle yellow-icon" ng-if="scheduleStatus == 'warning'"></i>
+                    <p ng-if="status == 'warning' || status == 'danger'">
+                      <i class="fa fa-exclamation-circle " ng-if="status == 'danger'"></i>
+                      <i class="fa fa-exclamation-circle yellow-icon" ng-if="status == 'warning'"></i>
                       <strong>
                         You are currently
-                          {{scheduleStatus == 'warning' ? "one month" : "two months"}}
+                          {{status == 'warning' ? "one month" : "two months"}}
                         behind.
                       </strong>
                       <br>
                       <span>Deposit $2,143 this month towards New Home's downpayment.</span>
                       <a href="" class="btn btn-primary">Take Action</a>
                     </p>
-                    <p ng-if="scheduleStatus == 'safe'">
+
+                    <p ng-if="actions.length == 0">
                       You’re currently on track! No action needed at this time.
                     </p>
+
+                    <p ng-repeat="action in actions">
+                      <span>{{  action.description }}</span>
+                    </p>
+
                 </div>
               </div>
             </div>
