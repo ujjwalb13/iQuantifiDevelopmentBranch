@@ -274,16 +274,16 @@
             return y(d.dotValue);
           }).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
-          // nowDatum = data[nowIndex];
-          // if ((nowDatum != null) && scope.bubbleText && nowDatum.dotValue >= nowDatum.projected_balance) {
-          //   svg.selectAll('.circle').select(function(d, i) {
-          //     if (i === nowIndex) {
-          //       return this;
-          //     } else {
-          //       return null;
-          //     }
-          //   }).on('mouseover', tip.show);
-          // }
+          nowDatum = data[nowIndex];
+          if ((nowDatum != null) && scope.bubbleText && nowDatum.dotValue >= nowDatum.projected_balance) {
+            svg.selectAll('.circle').select(function(d, i) {
+              if (i === nowIndex) {
+                return this;
+              } else {
+                return null;
+              }
+            }).on('mouseover', tip.show);
+          }
           angular.element(document).ready(function() {
             _.defer(function(){
               nowRectEl = angular.element(".circle:eq(" + nowIndex + ")");
