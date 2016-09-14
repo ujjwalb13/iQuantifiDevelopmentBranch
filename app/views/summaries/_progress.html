@@ -1,0 +1,16 @@
+﻿<div class="chart-downpayment" ng-show="downpaymentActive()">
+    <div class="chart-content">
+        <goal-progress-circle complete="percentComplete" incomplete="percentIncomplete" permonth="payment" status="status"></goal-progress-circle>
+    </div>
+
+    <div class="downpayment-wrapper">
+        <div class="downpayment-content">
+            <h3>Progress</h3>
+            <ul>
+                <li class="save"><label>Saved</label> <span>{{ schedule.saved | dollars }}</span></li>
+                <li class="needed"><label>Needed</label> <strong>{{ schedule.saving_needed | dollars }}</strong></li>
+                <li><label>Total</label> <strong>{{ schedule.total | dollars }}</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
