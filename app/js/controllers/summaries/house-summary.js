@@ -96,6 +96,18 @@
     $scope.changeRightSummayContent = function(contentType) {
       $scope.currentRightSummary = contentType;
     }
+    // for action list
+    $scope.getActionStatus = function(action) {
+      if (action.is_complete) {
+        return 'complete-status';
+      } else if (moment(action.assigned_on).utc().isSame(moment().utc(), 'month') || moment(action.assigned_on).utc().isAfter(moment())) {
+        return 'pending-status';
+      } else if (moment(action.assigned_on).utc().isSame(moment().utc().subtract(1, 'months'), 'month')) {
+        return 'warning-status-yellow';
+      } else {
+        return 'warning-status';
+      }
+    };
   });
 }).call(this);
 
