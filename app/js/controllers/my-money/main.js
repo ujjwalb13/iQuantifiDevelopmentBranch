@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('myMoney').controller('MyMoneyExpenseCtrl', function($scope, $routeParams, $location, Expense, $http, ENV, $rootScope) {
+  angular.module('myMoney').controller('MyMoneyExpenseCtrl', function($scope, $routeParams, $location, Expense, DebtAndPolicyPayment, $http, ENV, $rootScope) {
     var setDefaultData, updateCategoryFilter;
     setDefaultData = function() {
       $scope.noFilter = true;
@@ -82,7 +82,13 @@
       return $rootScope.expensesView === viewName;
     };
     setDefaultData();
-    return updateCategoryFilter();
+    updateCategoryFilter();
+    Expense.query().$promise.then(function(response) {
+      $scope.expenses = response;
+    });
+    DebtAndPolicyPayment.query().$promise.then(function(response) {
+      $scope.debtsAndPolicyPayments = response;
+    });
   });
 
 }).call(this);
