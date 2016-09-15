@@ -116,7 +116,7 @@
                     You’re currently on track! No action needed at this time.
                   </p>
                   <p ng-if="actions.length > 0">
-                    <div ng-include="'/views/summaries/_next_action.html'"></div>
+                    <actions-list actions="actions"></actions-list>
                   </p>
                 </div>
 
