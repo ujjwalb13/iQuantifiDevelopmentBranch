@@ -9,6 +9,13 @@
       },
 
       link: function($scope, element, attributes) {
+
+        $scope.goToSingleAction = function(action) {
+          if (matchmedia.isPhone()) {
+            return $location.path("/actions/" + action.guid);
+          }
+        };
+
         $scope.getActionStatus = function(action) {
           if (action.is_complete) {
             return 'complete-status';
