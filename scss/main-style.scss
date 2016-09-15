@@ -515,13 +515,6 @@ ul{
   padding-bottom: 5px;
 }
 .next-action-content{
-  position: relative;
-  border-bottom: 1px solid $border-color;
-  margin-bottom: 10px;
-  &:last-of-type{
-    margin-bottom: 0px;
-    border-bottom: 0px;
-  }
   i{
     color: $red-color;
     margin-right: 4px;
@@ -529,20 +522,18 @@ ul{
       color: #ffc832;
     }
   }
-  span{
-    display: block;
-    padding-left: 20px;
-  }
-  p{
-    padding-right: 118px;
-  }
-  .btn{
-    font-size: 14px;
-    padding: 5px 10px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    line-height: 30px;
+  .action-list-content{
+    .action-list-head{
+      .icon-profile-status{
+        left: 0px;
+      }
+      p{
+        padding-left: 0px;
+      }
+      .action-buttons{
+        right: 15px;
+      }
+    }
   }
 }
 

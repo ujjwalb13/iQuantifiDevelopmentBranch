@@ -46,10 +46,13 @@
     };
     $scope.save = function() {
       $scope.saveMenu = false;
-      return Scenario.save().$promise.then(function() {
-        $rootScope.$broadcast('refresh');
-        return $scope.saveMenu = false;
-      });
+      //$rootScope.$broadcast('refresh');
+      return true;
+
+      //return Scenario.save().$promise.then(function() {
+      //  $rootScope.$broadcast('refresh');
+      //  return $scope.saveMenu = false;
+      //});
     };
 
 

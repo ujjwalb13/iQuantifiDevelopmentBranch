@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary) {
+  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary, Action, $rootScope) {
     var getNeed = function(current, target) {
       var amt;
       amt = target - current;
@@ -61,7 +61,8 @@
     }).$promise.then(function(object) {
       $scope.goal = object.goal();
       fetchGoalData($scope.goal, object.schedule);
-      $scope.completedActions = object.completed_actions
+      $scope.completedActions = object.completed_actions;
+      $scope.actions = object.actions;
     });
 
     $scope.goToEdit = function(goal) {
@@ -81,6 +82,7 @@
     $scope.changeRightSummayContent = function(contentType) {
       $scope.currentRightSummary = contentType;
     }
+
   });
 }).call(this);
 
