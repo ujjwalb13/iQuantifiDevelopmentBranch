@@ -102,32 +102,22 @@
               <div class="col-md-12 col-xs-12">
                 <h3 class="title-next">Next Action</h3>
                 <div class="next-action-content">
-                  <div ng-include="'/views/summaries/_next_action.html'"></div>
-              <!--
-                    <p ng-if="status == 'warning' || status == 'danger'">
-                      <i class="fa fa-exclamation-circle " ng-if="status == 'danger'"></i>
-                      <i class="fa fa-exclamation-circle yellow-icon" ng-if="status == 'warning'"></i>
-                      <strong>
-                        You are currently
-                          {{status == 'warning' ? "one month" : "two months"}}
-                        behind.
-                      </strong>
-                      <br>
-                      <span>Deposit $2,143 this month towards New Home's downpayment.</span>
-                      <a href="" class="btn btn-primary">Take Action</a>
-                    </p>
-
-                    <p ng-if="actions.length == 0">
-                      You’re currently on track! No action needed at this time.
-                    </p>
-
-                    <p ng-repeat="action in actions">
-                      <span>{{  action.description }}</span>
-                      <a href="javascript:void(0)" ng-click="completeAction(action)" class="btn btn-success">
-                        Take Action
-                      </a>
-                    </p>
-                -->
+                  <p ng-if="status == 'warning' || status == 'danger'">
+                    <i class="fa fa-exclamation-circle " ng-if="status == 'danger'"></i>
+                    <i class="fa fa-exclamation-circle yellow-icon" ng-if="status == 'warning'"></i>
+                    <strong>
+                      You are currently
+                        {{status == 'warning' ? "one month" : "two months"}}
+                      behind.
+                    </strong>
+                    <br>
+                  </p>
+                  <p ng-if="actions.length == 0">
+                    You’re currently on track! No action needed at this time.
+                  </p>
+                  <p ng-if="actions.length > 0">
+                    <div ng-include="'/views/summaries/_next_action.html'"></div>
+                  </p>
                 </div>
 
               </div>
