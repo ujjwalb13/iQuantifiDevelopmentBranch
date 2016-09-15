@@ -73,23 +73,17 @@
                 </div>
               </div>
               <div class="col-md-6 col-xs-12">
-                <div class="chart-downpayment" ng-show="downpaymentActive()">
-                    <div class="chart-content" ng-if="schedule.status=='warning'">
-                      <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="scheduleStatus"></goal-progress-circle>
-                    </div>
-                    <div class="chart-content" ng-if="schedule.status=='danger'">
-                      <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="scheduleStatus"></goal-progress-circle>
-                    </div>
-                    <div class="chart-content" ng-if="schedule.status=='safe'">
-                      <goal-progress-circle complete="24" incomplete="0" permonth="2143" status="scheduleStatus"></goal-progress-circle>
-                    </div>
+                <div class="chart-downpayment">
+                  <div class="chart-content">
+                    <goal-progress-circle complete="percentComplete" incomplete="percentIncomplete" permonth="payment" status="status"></goal-progress-circle>
+                  </div>
                   <div class="downpayment-wrapper">
                     <div class="downpayment-content">
-                      <h3>2016 Contributions</h3>
+                      <h3>{{thisYear}} Contributions</h3>
                       <ul>
-                        <li class="save"><label>Saved</label> <span>{{ schedule.saved | dollars }}</span></li>
-                        <li class="needed"><label>Needed</label> <strong>{{ schedule.saving_needed | dollars }}</strong></li>
-                        <li><label>Total</label> <strong>{{ schedule.total | dollars }}</strong></li>
+                        <li class="save"><label>Saved</label> <span>{{ schedule.saved_this_year | dollars }}</span></li>
+                        <li class="needed"><label>Needed</label> <strong>{{ schedule.saving_needed_this_year | dollars }}</strong></li>
+                        <li><label>Total</label> <strong>{{ schedule.total_contributions_this_year | dollars }}</strong></li>
                       </ul>
                     </div>
                   </div>
@@ -117,7 +111,7 @@
             <div class="row">
               <div class="col-md-12 col-xs-12">
                 <div class="chart-content">
-                  <goal-action-tracker schedule="dummyScheduleData" bubble-text="dummyBubbleText" baseline="dummyBaseline" status="scheduleStatus">
+                  <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
                   </goal-action-tracker>
                 </div>
               </div>
