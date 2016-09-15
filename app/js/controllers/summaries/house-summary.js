@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary) {
+  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary, Action, $rootScope) {
     var getNeed = function(current, target) {
       var amt;
       amt = target - current;
@@ -108,6 +108,29 @@
         return 'warning-status';
       }
     };
+
+    $scope.showRationale = function (action) {
+      Action.getRationale({guid: action.guid}).$promise.then(function (rationaleResult) {
+
+        $rootScope.rationaleResults = null;
+        $rootScope.rationaleResults = rationaleResult;
+
+        if (rationaleResult != null && rationaleResult.RationaleSections != null && rationaleResult.RationaleSections.length > 0) {
+          $rootScope.rationaleResults.SelectedSection = rationaleResult.RationaleSections[0].SectionKey;
+          $("#rationaleModal").modal({ backdrop: false });
+        }
+      });
+      return true;
+    };
+
+    $scope.openUrl = function(action) {
+      if (action.actionable_href.match(/^http/)) {
+        return action.actionable_href;
+      } else {
+        return "/#/actions/" + action.guid + "/open";
+      }
+    };
+
   });
 }).call(this);
 
