@@ -341,7 +341,7 @@ angular.module('agera').config(function($routeProvider) {
     controller: 'houseSummaryCtrl'
   })
   .when('/summaries/cars/:guid', {
-    templateUrl: '/views/summaries/car-summary.html',
+    templateUrl: '/views/summaries/finance-summary.html',
     controller: 'basicSummaryCtrl',
     resolve: {
       summaryService: function (CarSummary) {
@@ -395,7 +395,7 @@ angular.module('agera').config(function($routeProvider) {
     }
   })
   .when('/summaries/rings/:guid', {
-    templateUrl: '/views/summaries/ring-summary.html',
+    templateUrl: '/views/summaries/finance-summary.html',
     controller: 'basicSummaryCtrl',
     resolve: {
       summaryService: function (WeddingSummary) {

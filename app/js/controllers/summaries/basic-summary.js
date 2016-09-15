@@ -1,7 +1,7 @@
 ﻿(function () {
   'use strict';
 
-  angular.module('summaries').controller('basicSummaryCtrl', function ($scope, $location, $routeParams, summaryService) {
+  angular.module('summaries').controller('basicSummaryCtrl', function ($scope, $location, $routeParams, summaryService, Action) {
     var getNeed = function (current, target) {
       var amt;
       amt = target - current;
@@ -63,6 +63,7 @@
       $scope.goal = object.goal();
       fetchGoalData($scope.goal, object.schedule);
       $scope.completedActions = object.completed_actions
+      $scope.actions = object.actions;
     });
 
     $scope.goToEdit = function (goal) {
