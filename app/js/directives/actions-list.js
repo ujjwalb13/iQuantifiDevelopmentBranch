@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('agera').directive('actionsList', function() {
+  angular.module('agera').directive('actionsList', function(Action, matchmedia, $location, $rootScope) {
     return {
       restrict: 'EA',
       templateUrl: '/views/directives/actions-list.tpl.html',
@@ -9,6 +9,13 @@
       },
 
       link: function($scope, element, attributes) {
+
+        $scope.goToSingleAction = function(action) {
+          if (matchmedia.isPhone()) {
+            return $location.path("/actions/" + action.guid);
+          }
+        };
+
         $scope.getActionStatus = function(action) {
           if (action.is_complete) {
             return 'complete-status';

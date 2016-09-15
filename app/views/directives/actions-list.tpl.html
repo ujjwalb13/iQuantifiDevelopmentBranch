@@ -10,12 +10,17 @@
         <i class="icon-explain"></i>
         Explain
       </a>
-      <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="btn btn-primary col-margin-20 hidden-xs"
-        ng-if="!action.is_complete"
+
+      <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="btn btn-success col-margin-20 hidden-xs" ng-if="action.name === 'open_account' && !action.is_complete" ng-click="completeAction(action)" ng-disabled="!action.is_completable">Take Action</a>
+
+      <a ng-href="javascript:void(0)" class="btn btn-success col-margin-20 hidden-xs"
+        ng-if="action.name !== 'apply' && action.name !== 'open_account' && !action.is_complete"
         ng-click="completeAction(action)"
         ng-disabled="!action.is_completable">Take Action</a>
 
-      <a href="javascript:void(0)" ng-if="action.is_complete" class="btn btn-primary btn-complete col-margin-20">Completed</a>
+      <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="btn btn-success col-margin-20 hidden-xs" ng-if="action.name === 'apply' && !action.is_complete" ng-disabled="!action.is_completable">Take Action</a>
+
+      <a href="javascript:void(0)" ng-if="action.is_complete" class="btn btn-success btn-complete col-margin-20">Completed</a>
     </span>
   </div>
   <div class="action-list-table" ng-if="action.positions.length && !action.is_complete">
