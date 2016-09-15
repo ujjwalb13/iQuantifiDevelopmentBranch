@@ -1,38 +1,16 @@
 (function() {
   'use strict';
-  angular.module('agera').directive('summaryDonutChart', function($q, Expense, DebtAndPolicyPayment) {
+  angular.module('agera').directive('summaryDonutChart', function() {
     var link = function(scope, element, attrs) {
-      $q.all([
-        getExpenses(),
-        getDebtAndPolicyPayments()
-      ])
-      .then(function(response){
-        var expenses = response[0];
-        var debtsAndPolicyPayments = response[1];
-        var data = summaryData(expenses, debtsAndPolicyPayments);
+      scope.$watchGroup(["expenses", "debtsAndPolicyPayments"], function(newValues, oldValues, scope) {
+        if(_.any(newValues, function(item){return item === undefined;})) { return;}
+        var data = summaryData(scope.expenses, scope.debtsAndPolicyPayments);
         var svg = d3.select(element.find("svg")[0]);
         drawChart(scope, svg, data);
         scope.totalMonthlyCommittedExpenses = data.totalMonthlyCommittedExpenses;
         scope.monthlyCommittedExpensesPercent = data.monthlyCommittedExpensesPercent;
-       });
+      });
     };
-
-    function getExpenses() {
-       var d = $q.defer();
-       var result = Expense.query({}, function() {
-            d.resolve(result);
-       });
-       return d.promise;
-    }
-
-    function getDebtAndPolicyPayments() {
-       var d = $q.defer();
-       var result = DebtAndPolicyPayment.query({}, function() {
-            d.resolve(result);
-       });
-       return d.promise;
-    }
-
     function drawChart(scope, svg, data) {
       var width, height, donut_size;
       width = Number.parseInt(svg.style("width"));
