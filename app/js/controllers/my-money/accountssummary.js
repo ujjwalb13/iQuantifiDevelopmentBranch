@@ -44,22 +44,17 @@
     }
 
 
-
-
-
-
-    $scope.goToAccountEdit = function (guid) {
-      return $location.path("/my-money/accounts/" + guid);
-    };
-
     $scope.goToAccountNewCash = function () {
       return $location.path("/my-money/accounts/new/cash");
     };
+
     $scope.goToAccountNewInvestment = function () {
+
       return $location.path("/my-money/accounts/new/investment");
     };
 
     $scope.goToDebtNew = function () {
+
       return $location.path("/add-debts");
     };
 
@@ -68,11 +63,22 @@
     };
 
 
+    $scope.goToAccountEdit = function (guid) {
+      if (guid == null) return;
+
+      return $location.path("/my-money/accounts/" + guid);
+    };
+
     $scope.goToDebtEdit = function (kind, guid) {
+      if (guid == null) return;
+
       var editUrl = "/debts/" + (_.pluralize(kind)).toLowerCase() + "/" + guid + "/edit";
       $location.path(editUrl);
     }
+
     $scope.goToPolicyEdit = function (kind, guid) {
+      if (guid == null) return;
+
       var editUrl = "/policies/" + (_.pluralize(kind)).toLowerCase() + "/" + guid;
       $location.path(editUrl);
     }

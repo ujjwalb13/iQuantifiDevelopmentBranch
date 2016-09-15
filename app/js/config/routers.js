@@ -336,6 +336,77 @@ angular.module('agera').config(function($routeProvider) {
     templateUrl: '/views/summaries/policy.html',
     controller: 'summariesPolicyCtrl'
   })
+  .when('/summaries/houses/:guid', {
+    templateUrl: '/views/summaries/house-summary.html',
+    controller: 'houseSummaryCtrl'
+  })
+  .when('/summaries/cars/:guid', {
+    templateUrl: '/views/summaries/car-summary.html',
+    controller: 'basicSummaryCtrl',
+    resolve: {
+      summaryService: function (CarSummary) {
+        return CarSummary;
+      }
+    }
+  })
+  .when('/summaries/babies/:guid', {
+    templateUrl: '/views/summaries/basic-summary.html',
+    controller: 'basicSummaryCtrl',
+    resolve: {
+      summaryService: function (BabySummary) {
+        return BabySummary;
+      }
+    }
+  })
+  .when('/summaries/travels/:guid', {
+    templateUrl: '/views/summaries/basic-summary.html',
+    controller: 'basicSummaryCtrl',
+    resolve: {
+      summaryService: function (TravelSummary) {
+        return TravelSummary;
+      }
+    }
+  })
+  .when('/summaries/purchases/:guid', {
+    templateUrl: '/views/summaries/basic-summary.html',
+    controller: 'basicSummaryCtrl',
+    resolve: {
+      summaryService: function (PurchaseSummary) {
+        return PurchaseSummary;
+      }
+    }
+  })
+  .when('/summaries/weddings/:guid', {
+    templateUrl: '/views/summaries/basic-summary.html',
+    controller: 'basicSummaryCtrl',
+    resolve: {
+      summaryService: function (WeddingSummary) {
+        return WeddingSummary;
+      }
+    }
+  })
+  .when('/summaries/relocations/:guid', {
+    templateUrl: '/views/summaries/basic-summary.html',
+    controller: 'basicSummaryCtrl',
+    resolve: {
+      summaryService: function (RelocationSummary) {
+        return RelocationSummary;
+      }
+    }
+  })
+  .when('/summaries/rings/:guid', {
+    templateUrl: '/views/summaries/ring-summary.html',
+    controller: 'basicSummaryCtrl',
+    resolve: {
+      summaryService: function (WeddingSummary) {
+        return WeddingSummary;
+      }
+    }
+  })
+  .when('/summaries/retirements/:guid', {
+    templateUrl: '/views/summaries/retirement-summary.html',
+    controller: 'retirementSummaryCtrl'
+  })
 
   .when('/summaries/:type/:guid?', {
     templateUrl: '/views/summaries/summary.html',
@@ -471,7 +542,6 @@ angular.module('agera').config(function($routeProvider) {
     templateUrl: '/views/my-money/accounts.html',
     controller: 'AccountsCtrl'
   })
-
   .when('/my-money/accounts/new', {
     templateUrl: '/views/my-money/account-form.html',
     controller: 'AccountFormCtrl'

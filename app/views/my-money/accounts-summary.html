@@ -78,12 +78,6 @@
                                 </md-menu-content>
                             </md-menu>
 
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -111,9 +105,9 @@
                                                 <b> <span ng-bind-html="item.AccountSubText"></span></b>
                                             </div>
                                         </td>
-                                        <td class="text-right"><i class="fa fa-chevron-right"></i></td>
+                                        <td class="text-right"><i class="fa fa-chevron-right" ng-if="item.AccountId != null"></i></td>
                                     </tr>
-                                    <tr><td class="col-lg-12" colspan="3"><a class="pull-right">View More...</a></td></tr>
+                                    <tr><td class="col-lg-12" colspan="3"><a class="pull-right" ng-href="/#/my-money/accounts">View More...</a></td></tr>
                                 </tbody>
                             </table>
 
@@ -142,7 +136,7 @@
                                                 <b> <span ng-bind-html="item.AccountSubText"></span></b>
                                             </div>
                                         </td>
-                                        <td class="text-right"><i class="fa fa-chevron-right"></i></td>
+                                        <td class="text-right"><i class="fa fa-chevron-right" ng-if="item.AccountId != null"></i></td>
                                     </tr>
                                     <tr><td class="col-lg-12" colspan="2"><a class="pull-right">View More...</a></td></tr>
                                 </tbody>
@@ -177,8 +171,10 @@
                                             <b> <span ng-bind-html="item.AccountSubText"></span></b>
                                         </div>
                                     </td>
+                                    <td class="text-right"><i class="fa fa-chevron-right" ng-if="item.AccountId != null"></i></td>
                                 </tr>
-                                <tr><td class="col-lg-12" colspan="2"><a class="pull-right">View More...</a></td></tr>
+                                </tr>
+                                <tr><td class="col-lg-12" colspan="3"><a class="pull-right" ng-href="/#/my-money/accounts">View More...</a></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -205,7 +201,7 @@
                                             <b> <span ng-bind-html="item.AccountSubText"></span></b>
                                         </div>
                                     </td>
-                                    <td class="text-right"><i class="fa fa-chevron-right"></i></td>
+                                    <td class="text-right"><i class="fa fa-chevron-right" ng-if="item.AccountId != null"></i></td>
                                 </tr>
                                 <tr><td class="col-lg-12" colspan="2"><a class="pull-right">View More...</a></td></tr>
                             </tbody>

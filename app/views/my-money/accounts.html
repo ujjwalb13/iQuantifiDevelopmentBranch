@@ -2,7 +2,7 @@
 <div class="container main-wrapper">
     <div class="row">
         <div class="left-side-bar col-lg-2 visible-lg">
-            <money-sidebar current-page='/my-money/accounts'></money-sidebar>
+            <money-sidebar current-page='/my-money/accounts-summary'></money-sidebar>
         </div>
         <div class="right-content col-lg-10">
             <div class="section-header goals">
@@ -14,34 +14,43 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="table-static">
-                            <table class="hovered">
-                                <thead class="dark">
-                                <th>Account Name</th>
-                                <th>Type</th>
-                                <th class="hidden-xs">Owner</th>
-                                <th class="text-right">Balance</th>
-                                <th class="visible-xs"></th>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="account in accounts" ng-click="goToAccountEdit(account.guid)">
-                                        <td>{{account.name}} <span class="label label-success" ng-show="account.mx_guid">Linked</span></td>
-                                        <td>{{account.kind | translate | titleize}}</td>
-                                        <td class="hidden-xs">{{account.person.first_name}} {{account.person.last_name}}</td>
-                                        <td class="text-right">{{account.balance | dollars}}</td>
-                                        <td class="visible-xs"><i class="fa fa-chevron-right"></i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="pull-left" ng-href="/#/my-money/accounts-summary">< Back to Account Summary</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a ng-href="{{disabled()}}" class="iq-submit-btn btn-primary btn btn-add pull-right" role="button">Add New Account</a>
+                            </div>
                         </div>
-                    </div>
+
+
+                        <div class="row" style="margin-top:10px">
+                            <div class="table-static">
+                                <table class="hovered">
+                                    <thead class="dark">
+                                    <th>Account Name</th>
+                                    <th>Type</th>
+                                    <th class="hidden-xs">Owner</th>
+                                    <th class="text-right">Balance</th>
+                                    <th class="visible-xs"></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="account in accounts" ng-click="goToAccountEdit(account.guid)">
+                                            <td>{{account.name}} <span class="label label-success" ng-show="account.mx_guid">Linked</span></td>
+                                            <td>{{account.kind | translate | titleize}}</td>
+                                            <td class="hidden-xs">{{account.person.first_name}} {{account.person.last_name}}</td>
+                                            <td class="text-right">{{account.balance | dollars}}</td>
+                                            <td class="visible-xs"><i class="fa fa-chevron-right"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>                    </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <a ng-href="{{disabled()}}" class="iq-submit-btn btn-primary btn btn-add" role="button">Add New Account</a>
-                    </div>
-                </div>
+
 
 
 

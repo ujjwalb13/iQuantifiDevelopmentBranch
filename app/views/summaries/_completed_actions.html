@@ -1,10 +1,4 @@
-  <div class="sc-completed-actions">
-    <div class="container">
-      <div class="arrow-down"></div>
-      <h1>Completed Actions</h1>
-      <ul class="actions-list">
-        <li ng-show="!completedActions.length"><span>You have no completed actions.</span></li>
-        <li ng-repeat="action in completedActions"><span>{{action.completed_on | monthYear}} - {{action.description}}</span></li>
-      </ul>
-    </div>
-  </div>
+<div class="completed-action-content">
+  <p ng-show="!completedActions.length">You have no completed actions.</p>
+  <p ng-repeat="action in completedActions">{{action.completed_on | monthYear}} - {{action.description}}</p>
+</div>

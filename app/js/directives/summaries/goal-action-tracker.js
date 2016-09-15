@@ -66,6 +66,7 @@
               break;
             }
           }
+
           margin = {
             top: 20,
             right: 0,
@@ -183,16 +184,18 @@
             });
 
           var ontrackPathData = _.filter(data, function(d, index) {
-            return index <= nowIndex && d.balance >= d.projected_balance;
+            return index <= nowIndex && d.status == "paid";
           });
 
-          var ontrackAreaClosePoints = [{date: _.last(ontrackPathData).date, dotValue: 0}, {date: _.first(ontrackPathData).date, dotValue: 0}];
+          if (ontrackPathData.length > 0) {
+            var ontrackAreaClosePoints = [{date: _.last(ontrackPathData).date, dotValue: 0}, {date: _.first(ontrackPathData).date, dotValue: 0}];
 
-          svg.append('path')
-            .datum(ontrackPathData.concat(ontrackAreaClosePoints))
-            .attr('class', 'ontrack area')
-            .attr('d', line)
-            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+            svg.append('path')
+              .datum(ontrackPathData.concat(ontrackAreaClosePoints))
+              .attr('class', 'ontrack area')
+              .attr('d', line)
+              .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+          }
 
           svg.selectAll('.xline-balance').data(nowPathData).enter().append('line')
           .attr('x1', function(d) {
@@ -206,7 +209,7 @@
           })
           .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
           .attr('class', function(d) {
-            if (d.balance < d.projected_balance) {
+            if (d.status == "pay") {
               if (scope.status == "danger") {
                 return 'danger xline-balance';
               } else {
@@ -239,9 +242,6 @@
               }
             });
 
-          var ontrackPathData = _.filter(data, function(d, index) {
-            return index <= nowIndex && d.balance >= d.projected_balance;
-          });
           svg.append('path')
             .datum(ontrackPathData)
             .attr('class', 'ontrack line')
@@ -252,7 +252,7 @@
             if (moment(d.date) > moment()) {
               return 'circle';
             } else {
-              if (d.balance < d.projected_balance) {
+              if (d.status === "pay") {
                 if (scope.status == "danger") {
                   return 'danger circle';
                 } else {

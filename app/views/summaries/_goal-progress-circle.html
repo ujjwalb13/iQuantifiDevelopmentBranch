@@ -6,16 +6,16 @@
     <p/>
     <div class="track-status chart-status {{ behindStatusClass() }}" ng-switch on="status">
       <div class="middle-line"></div>
-      <i class="fa fa-check" ng-switch-when="ontrack"></i>
-      <span ng-switch-when="ontrack">ON TRACK</span>
-      <i class="fa fa-exclamation-circle warning" ng-switch-when="behindOneMonth"></i>
-      <span ng-switch-when="behindOneMonth">ACTION DUE</span>
-      <i class="fa fa-exclamation-circle danger" ng-switch-when="behindTwoMonth"></i>
-      <span ng-switch-when="behindTwoMonth">ACTION DUE</span>
+      <i class="fa fa-check" ng-switch-when="safe"></i>
+      <span ng-switch-when="safe">ON TRACK</span>
+      <i class="fa fa-exclamation-circle warning" ng-switch-when="warning"></i>
+      <span ng-switch-when="warning">ACTION DUE</span>
+      <i class="fa fa-exclamation-circle danger" ng-switch-when="danger"></i>
+      <span ng-switch-when="danger">ACTION DUE</span>
     </div>
     <div class="save-per-month save-status {{ behindStatusClass() }} ">
       <strong>{{permonth | dollars}}</strong>
-      <span>{{ status === "ontrack" ? 'Save Per Month' : "Behind" }}</span>
+      <span>{{ status === "safe" ? 'Save Per Month' : "Behind" }}</span>
     </div>
   </div>
 </div>
