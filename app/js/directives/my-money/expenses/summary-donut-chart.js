@@ -244,8 +244,8 @@
       transclude: true,
       templateUrl: "/views/directives/my-money/expenses/summary-donut-chart.tpl.html",
       scope: {
-        currentExpensesColor: '@',
-        threeMonthsAverageColor: '@'
+        expenses: "=",
+        debtsAndPolicyPayments: "="
       },
       link: link
     };

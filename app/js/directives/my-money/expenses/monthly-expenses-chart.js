@@ -8,13 +8,12 @@
         return Expense.getName(kind);
       }
       scope.$watch('expenses', function(newValue, oldValue) {
-        if(newValue === undefined) {return;}
-        console.log("watch expenses", oldValue, newValue);
-        scope.totalAmount = _.reduce(newValue, function(total, item){ return item.amount + total; }, 0);
-        scope.totalThreeMonthAverageAmount = _.reduce(newValue, function(total, item){ return item.three_month_average_amount + total; }, 0);
-        scope.subCategories = genereateSubCategories(newValue);
+        if(scope.expenses === undefined) {return;}
+        scope.totalAmount = _.reduce(scope.expenses, function(total, item){ return item.amount + total; }, 0);
+        scope.totalThreeMonthAverageAmount = _.reduce(scope.expenses, function(total, item){ return item.three_month_average_amount + total; }, 0);
+        scope.subCategories = genereateSubCategories(scope.expenses);
         var svg = d3.select(element.find("svg")[0]);
-        drawChart(scope, newValue, svg);
+        drawChart(scope, scope.expenses, svg);
       });
 
     };

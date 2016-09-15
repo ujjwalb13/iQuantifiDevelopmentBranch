@@ -132,7 +132,11 @@
       restrict: 'E',
       transclude: true,
       templateUrl: "/views/directives/my-money/expenses/debt-payments-chart.tpl.html",
-      link: link
+      link: link,
+      scope: {
+        expenses: "=",
+        debtsAndPolicyPayments: "="
+      }
     };
   });
 
