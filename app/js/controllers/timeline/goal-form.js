@@ -87,8 +87,30 @@
     } else {
       if ($scope.obj.original_amount) {
         $scope.obj.amount = $scope.obj.original_amount;
+        $scope.obj.original_amount = null;
       }
-      date = $scope.obj.transition_on;
+
+      if ($scope.obj.original_loanamt) {
+        $scope.obj.loanamt = $scope.obj.original_loanamt;
+        $scope.obj.original_loanamt = null;
+      }
+
+      if ($scope.obj.original_downpayment) {
+        $scope.obj.downpayment = $scope.obj.original_downpayment;
+        $scope.obj.original_downpayment = null;
+      }
+
+
+      if ($scope.obj.original_transition_on) {
+        date = $scope.obj.original_transition_on;
+        $scope.obj.date = date;
+        $scope.obj.transition_on = date;
+        $scope.obj.original_transition_on = null;
+      }
+      else {
+        date = $scope.obj.transition_on;
+      }
+
       if ($scope.type === 'college') {
         $scope.obj.tuition_total = $scope.obj.projected_need;
       }
