@@ -131,6 +131,14 @@
       }
     };
 
+    $scope.target = function(href) {
+      if (href.match(/^http/)) {
+        return '_blank';
+      } else {
+        return '_self';
+      }
+    };
+
   });
 }).call(this);
 
