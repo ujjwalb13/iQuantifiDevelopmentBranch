@@ -495,7 +495,6 @@ ul{
             color: $green-color;
           }
           &.needed{
-             border-bottom: 1px solid $border-color;
              strong{
               color: $blue-color;
              }
@@ -1245,3 +1244,7 @@ ul{
 
 
 
+.retirement-summary {
+  .sum-main-content .chart-content {top: -22px;}
+  .sum-main-content .downpayment-wrapper {padding-top: 15px;}
+}

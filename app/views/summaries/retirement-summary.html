@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div class="main-content-style">
+<div class="main-content-style retirement-summary">
     <div class="container main-wrapper">
       <div class="row">
         <div class="left-side-bar col-lg-2 col-md-3 col-sm-12 col-xs-12">
@@ -47,14 +47,9 @@
             </div>
             <div class="row sum-main-content">
               <div class="col-md-6 col-xs-12">
+                <div class="section-header">Goal Details</div>
                 <div class="table-static" style="width: 100%;">
                     <table>
-                        <thead>
-                          <tr>
-                            <th>Goal Details</th>
-                            <th></th>
-                          </tr>
-                        </thead>
                         <tbody>
                           <tr>
                             <td><strong>Total Current Balance</strong></td>
@@ -66,7 +61,7 @@
                           </tr>
                           <tr>
                             <td><strong>401K Employer Match </strong></td>
-                            <td>???</td>
+                            <td>{{ goal.employer_match | dollars }}</td>
                           </tr>
                         </tbody>
                     </table>
@@ -120,22 +115,19 @@
               <div class="col-md-12 col-xs-12">
                 <h3 class="title-next">Next Action</h3>
                 <div class="next-action-content">
-                    <p ng-if="scheduleStatus == 'warning' || scheduleStatus == 'danger'">
-                      <i class="fa fa-exclamation-circle " ng-if="scheduleStatus == 'danger'"></i>
-                      <i class="fa fa-exclamation-circle yellow-icon" ng-if="scheduleStatus == 'warning'"></i>
-                      <strong>
-                        You are currently
-                          {{scheduleStatus == 'warning' ? "one month" : "two months"}}
-                        behind.
-                      </strong>
-                      <br>
-                      <span>Deposit $2,143 this month towards New Home's downpayment.</span>
-                      <a href="" class="btn btn-primary">Take Action</a>
-                    </p>
-                    <p ng-if="scheduleStatus == 'safe'">
-                      You’re currently on track! No action needed at this time.
-                    </p>
+                  <p ng-if="status == 'warning' || status == 'danger'">
+                    <i class="fa fa-exclamation-circle " ng-if="status == 'danger'"></i>
+                    <i class="fa fa-exclamation-circle yellow-icon" ng-if="status == 'warning'"></i>
+                    <strong>
+                      You are currently
+                        {{status == 'warning' ? "one month" : "two months"}}
+                      behind.
+                    </strong>
+                    <br>
+                  </p>
+                  <summaries-next-actions actions="actions"></summaries-next-actions>
                 </div>
+
               </div>
             </div>
           </div>
@@ -145,10 +137,7 @@
             </div>
             <div class="row">
               <div class="col-md-12 col-xs-12">
-                <div class="completed-action-content">
-                  <p>Sep 2016 - Open or link a Brokerage account for House 8888</p>
-                  <p>Sep 2016 - Deposit $27 this month towards House 8888's downpayment.</p>
-                </div>
+                <div ng-include="'/views/summaries/_completed_actions.html'"></div>
               </div>
             </div>
           </div>

@@ -4,10 +4,7 @@
 
     Retirement.summary({guid: $routeParams.guid}).$promise
     .then(function(data) {
-        console.log(data)
-      $scope.goal = data.retirement;
-      $scope.schedule = data.schedule;
-      fetchGoalData($scope.goal, $scope.schedule);
+      fetchGoalData(data);
     });
 
     $scope.goToEdit = function(goal) {
@@ -53,14 +50,19 @@
       return Math.max(percent, 0);
     };
 
-    var fetchGoalData = function(goal, schedule) {
+    var fetchGoalData = function(data) {
+      var goal, schedule
+      $scope.goal = goal = data.retirement
+      $scope.schedule = schedule = data.schedule
+
       $scope.thisYear = moment().year();
       $scope.payment = schedule.payment;
       $scope.status = schedule.status;
-      $scope.actions = goal.actions;
-      var total = $scope.schedule.total_contributions_this_year;
-      $scope.percentComplete = getPercent($scope.schedule.saved_this_year, total);
-      $scope.percentIncomplete = getPercent($scope.schedule.saving_needed_this_year, total);
+      $scope.actions = data.actions;
+      $scope.comletedActions = data.completed_actions;
+      var total = schedule.total_contributions_this_year;
+      $scope.percentComplete = getPercent(schedule.saved_this_year, total);
+      $scope.percentIncomplete = getPercent(schedule.saving_needed_this_year, total);
     };
   });
 }).call(this);
