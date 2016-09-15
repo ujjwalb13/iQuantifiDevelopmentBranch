@@ -7,11 +7,16 @@
       scope.getExpenseName = function(kind) {
         return Expense.getName(kind);
       }
-      Expense.query().$promise.then(function(expenses){
-        scope.subCategories = genereateSubCategories(expenses);
+      scope.$watch('expenses', function(newValue, oldValue) {
+        if(newValue === undefined) {return;}
+        console.log("watch expenses", oldValue, newValue);
+        scope.totalAmount = _.reduce(newValue, function(total, item){ return item.amount + total; }, 0);
+        scope.totalThreeMonthAverageAmount = _.reduce(newValue, function(total, item){ return item.three_month_average_amount + total; }, 0);
+        scope.subCategories = genereateSubCategories(newValue);
         var svg = d3.select(element.find("svg")[0]);
-        drawChart(scope, expenses, svg);
+        drawChart(scope, newValue, svg);
       });
+
     };
     function drawChart(scope, expenses, svg) {
       var chart, chartArea, chartGroups, chart_height, child_margin, color, expenses, detail_icon_height, expense_types, group_margin, height, margin, width, ratio, x, x1, xAxis, y, yAxis;
@@ -199,7 +204,8 @@
       templateUrl: "/views/directives/my-money/expenses/monthly-chart.tpl.html",
       scope: {
         currentExpensesColor: '@',
-        threeMonthsAverageColor: '@'
+        threeMonthsAverageColor: '@',
+        expenses: "="
       },
       link: link
     };
