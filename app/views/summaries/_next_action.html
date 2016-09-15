@@ -1,17 +1,45 @@
-<div class="sc-next-action">
-  <div class="sc-container container text-center">
-    <div class="arrow-down"></div>
-    <h1>Next <ng-pluralize count="actions.length"
-                           when="{'0': 'Action',
-                                  '1': 'Action',
-                                  'other': 'Actions'}">
-    </ng-pluralize>
-    </h1>
-    <div class="skew-neg action" ng-repeat="action in actions">
-      <div class="skew-pos">
-        <p ng-click="addMortgage()" ng-class="{cursor: cursor()}">{{action.description.replace(' with the following allocation:', '.')}}</p>
-      </div>
-    </div>
+<div ng-repeat="action in actions" class="action-list-content" id="action-{{action.guid}}"
+  ng-click="goToSingleAction(action)">
+  <div class="action-list-head {{getActionStatus(action)}}">
+    <i class="icon-profile-status"></i>
+    <p class="visible-md-inline-block visible-lg-inline-block description" termify>{{action.description}}</p>
+    <p class="hidden-md hidden-lg description" termify>{{action.short_desc}}</p>
 
+    <span class="pull-right row-gutter-20 action-buttons">
+      <a href="javascript:void(0)" class="explain col-margin-20" ng-click="showRationale(action)" ng-if="!action.is_complete">
+        <i class="icon-explain"></i>
+        Explain
+      </a>
+      <a ng-href="{{openUrl(action)}}" target="{{target(action.actionable_href)}}" class="btn btn-primary col-margin-20 hidden-xs"
+        ng-if="!action.is_complete"
+        ng-click="completeAction(action)"
+        ng-disabled="!action.is_completable">Take Action</a>
+
+      <a href="javascript:void(0)" ng-if="action.is_complete" class="btn btn-primary btn-complete col-margin-20">Completed</a>
+    </span>
+  </div>
+  <div class="action-list-table" ng-if="action.positions.length && !action.is_complete">
+    <div class="table-static" style="width: 100%;" ng-repeat="option in action.positions">
+      <table>
+        <thead>
+          <tr>
+            <th>Recommended</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in option | partition:2">
+          <td>
+            <strong>{{row[0].percent}}%</strong>
+            <a href="{{row[0].url}}" target="_blank"><span>{{row[0].name}}</span></a>
+          </td>
+          <td>
+            <strong>{{row[1].percent}}%</strong>
+            <a href="{{row[1].url}}" target="_blank"><span>{{row[1].name}}</span></a>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

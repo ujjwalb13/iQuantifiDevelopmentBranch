@@ -62,8 +62,21 @@
       $scope.goal = object.goal();
       fetchGoalData($scope.goal, object.schedule);
       $scope.completedActions = object.completed_actions;
-      $scope.actions = object.actions;
-      console.log($scope.actions);
+      $scope.actions = [
+        {
+          actionable_href: "/goals/houses/f4d98ea9-57cd-4c32-b55b-2882bbde613f",
+          amount: 1120,
+          assigned_on: "2016-09-01T00:00:00+00:00",
+          description: "Deposit $1,120 this month into New Market Account",
+          goal_guid: "f4d98ea9-57cd-4c32-b55b-2882bbde613f",
+          guid: "4a3026c6-b4ca-4ae6-b538-56bb20300c9f",
+          is_completable: true,
+          is_complete: false,
+          name: "pay",
+          short_desc: "Deposit $1,120 this month into New Market Account",
+          transaction_type: "Cashflow"
+        }
+      ];
     });
 
     $scope.goToEdit = function(goal) {
