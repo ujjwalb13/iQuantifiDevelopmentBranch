@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('agera').directive('actionsList', function() {
+  angular.module('agera').directive('actionsList', function(Action, matchmedia, $location, $rootScope) {
     return {
       restrict: 'EA',
       templateUrl: '/views/directives/actions-list.tpl.html',
