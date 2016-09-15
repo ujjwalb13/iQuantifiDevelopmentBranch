@@ -139,6 +139,19 @@
       }
     };
 
+    $scope.completeAction = function(action) {
+      var option;
+      if (action.positions != null) {
+        option = angular.element("#action-" + action.guid + " div.slick-active.slick-center div.slide").data('option-id') || angular.element("#action-" + action.guid + " div.slick-center div.slide").data('option-id');
+      }
+      return Action.update({
+        guid: action.guid,
+        option: option
+      }).$promise.then(function() {
+        action.is_complete = true;
+        return $rootScope.$broadcast('refreshActionsCount');
+      });
+    };
   });
 }).call(this);
 
