@@ -63,6 +63,7 @@
       fetchGoalData($scope.goal, object.schedule);
       $scope.completedActions = object.completed_actions;
       $scope.actions = object.actions;
+      $scope.goal.icon = "icon-gl-house";
     });
 
     $scope.goToEdit = function(goal) {
