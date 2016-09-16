@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary, Action, $rootScope) {
+  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary) {
     var getNeed = function(current, target) {
       var amt;
       amt = target - current;
@@ -63,10 +63,11 @@
       fetchGoalData($scope.goal, object.schedule);
       $scope.completedActions = object.completed_actions;
       $scope.actions = object.actions;
+      $scope.goal.icon = "icon-gl-house";
     });
 
     $scope.goToEdit = function(goal) {
-      var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
+      var editUrl = ["/goals/houses/", goal.guid, "/edit"].join("");
       $location.path(editUrl);
     }
 
