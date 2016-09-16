@@ -417,16 +417,24 @@ angular.module('agera').config(function($routeProvider) {
       }
     }
   })
-
+  .when('/summaries/loans/:guid', {
+    templateUrl: '/views/summaries/debt-summary.html',
+    controller: 'debtSummaryCtrl',
+    resolve: {
+      summaryService: function (LoanSummary) {
+        return LoanSummary;
+      }
+    }
+  })
   .when('/summaries/retirements/:guid', {
     templateUrl: '/views/summaries/retirement-summary.html',
     controller: 'retirementSummaryCtrl'
   })
 
-  .when('/summaries/:type/:guid?', {
-    templateUrl: '/views/summaries/summary.html',
-    controller: 'summariesSummaryCtrl'
-  })
+  //.when('/summaries/:type/:guid?', {
+  //  templateUrl: '/views/summaries/summary.html',
+  //  controller: 'summariesSummaryCtrl'
+  //})
 
   .when('/two-factor-auth', {
     templateUrl: '/views/two-factor-auth.html',
