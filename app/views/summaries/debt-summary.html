@@ -1,0 +1,140 @@
+﻿<div class="main-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>
+                    My Progress
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content-style">
+    <div class="container main-wrapper">
+        <div class="row">
+            <div class="left-side-bar col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                <progress-sidebar current-page=''></progress-sidebar>
+            </div>
+            <div class="right-content col-lg-10 col-md-9 col-sm-12 col-xs-12">
+                <div class="content-wrapper">
+                    <div class="section-header debts">
+                        <i class="icon icon-db-debt"></i>My Debts
+                    </div>
+                    <div class="goal-summary-head">
+                        <div class="pull-left">
+                            <i class="icon {{ debt.kind | debtIconClass }} icon-80"></i>
+                            <h3>
+                                {{ debt.name }}
+                            </h3>
+                            <button class="btn btn-blue" ng-if="debt" ng-click="goToEdit(debt)">
+                                Edit Debt
+                            </button>
+                            <a class="btn btn-delete ng-scope" ng-if="goal" ng-click="deleteDebt(debt)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="pull-right">
+                            <ul>
+                                <li>
+                                    <label for="">Payoff Date</label>
+                                    <p ng-if="debt.transition_on">{{ debt.transition_on | monthYear}}</p>
+                                </li>
+                                <li>
+                                    <label for="">Total Payoff</label>
+                                    <p>{{ debt.amount | dollars }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="row sum-main-content">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="table-static" style="width: 100%;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Payoff Date</th>
+                                            <th>{{ debt.transition_on | monthYear}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Orgination Date</strong></td>
+                                            <td>{{ debt.transition_on | monthYear}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total Goal Amount</strong></td>
+                                            <td>{{ debt.amount | dollars }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Current Balance</strong></td>
+                                            <td>{{ debt.amount | dollars }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Interest Rate</strong></td>
+                                            <td>{{ debt.rate }}%</td>
+                                        </tr>
+                                        <tr ng-if="debt.orginate_terms > 0">
+                                            <td><strong>Terms</strong></td>
+                                            <td>{{ debt.originate_terms / 12 }} years</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total Payoff</strong></td>
+                                            <td><p>{{ debt.amount | dollars }}</p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div ng-include="'/views/summaries/_debtprogress.html'"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-wrapper">
+                    <div class="section-header" ng-if="schedule.data.length > 1">
+                        Action Tracker
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="chart-content" ng-if="schedule.data.length > 1">
+                                <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
+                                </goal-action-tracker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <h3 class="title-next">Next Action</h3>
+                            <div class="next-action-content">
+                                <p ng-if="status == 'warning' || status == 'danger'">
+                                    <i class="fa fa-exclamation-circle " ng-if="status == 'danger'"></i>
+                                    <i class="fa fa-exclamation-circle yellow-icon" ng-if="status == 'warning'"></i>
+                                    <strong>
+                                        You are currently
+                                        {{status == 'warning' ? "one month" : "two months"}}
+                                        behind.
+                                    </strong>
+                                    <br>
+                                </p>
+                                <summaries-next-actions actions="actions"></summaries-next-actions>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-wrapper">
+                    <div class="section-header">
+                        Completed Actions
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div ng-include="'/views/summaries/_completed_actions.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
