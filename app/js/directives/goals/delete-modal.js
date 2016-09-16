@@ -9,11 +9,13 @@
       },
       link: function(scope) {
         var ModalInstanceCtrl = [
-          '$location', '$scope', '$modalInstance', 'goalService', 'goal', function($location, $scope, $modalInstance, goalService, goal) {
+          '$location', '$scope', '$rootScope', '$modalInstance', 'goalService', 'goal', function($location, $scope, $rootScope, $modalInstance, goalService, goal) {
             $scope.goal = goal;
             if ($scope.goal.category == "goal") {
               $scope.modalTitle = "Delete the goal?";
               $scope.confirmMessage = "Are you sure, you want to delete this goal?";
+              $scope.successMsg = "The goal was deleted successfully.";
+              $scope.dangerMsg = "There was an error deleting the goal.";
             }
 
             $scope.close = function() {
@@ -26,13 +28,14 @@
                 $modalInstance.close("okay");
                 $rootScope.$broadcast('alert', {
                   type: 'success',
-                  msg: 'The goal was deleted successfully.'
+                  msg: $scope.successMsg
                 });
+                return $location.path('/progress');
               }, function(response) {
                 $modalInstance.dismiss('cancel');
                 return $rootScope.$broadcast('alert', {
                   type: 'danger',
-                  msg: 'There was an error deleting the goal.'
+                  msg: $scope.dangerMsg
                 });
               })["finally"](function() {
                 return $scope.pending = false;
