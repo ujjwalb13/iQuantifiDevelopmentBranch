@@ -11,6 +11,9 @@
         var ModalInstanceCtrl = [
           '$location', '$scope', '$modalInstance', 'goalService', 'goal', function($location, $scope, $modalInstance, goalService, goal) {
             $scope.goal = goal;
+            if ($scope.goal.category == "goal") {
+              $scope.modalTitle = "Delete the goal?";
+            }
 
             $scope.close = function() {
               return $modalInstance.dismiss('cancel');
