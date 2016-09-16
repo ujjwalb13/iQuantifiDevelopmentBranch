@@ -1,7 +1,9 @@
 (function() {
   'use strict';
   angular.module('agera').filter('debtIconClass', function() {
-    return function(input) {
+    return function (input) {
+      if (!input) return;
+
       input = input.toLowerCase();
 
       if (input === "car") {

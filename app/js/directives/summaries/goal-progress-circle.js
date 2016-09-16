@@ -21,7 +21,8 @@
         complete: '=',
         incomplete: '=?',
         status: '=',
-        permonth: '='
+        permonth: '=',
+        topmessage: '=',
       },
       link: function(scope, element, attrs) {
         var svg = d3.select(element[0]).append('svg').attr('width', width).attr('height', height).append('g').attr('transform', "translate(" + (width / 2) + ", " + (height / 2) + ")");
@@ -30,7 +31,7 @@
             endAngle: 2 * Math.PI
           }).style('fill', '#e5e0c7')
             .attr('d', arc);
-
+  
         scope.behindStatusClass = function() {
           if (scope.status === 'danger') return "behind-two-month";
           if (scope.status === 'warning') return "behind-one-month";

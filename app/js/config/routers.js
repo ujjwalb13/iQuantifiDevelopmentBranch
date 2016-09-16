@@ -403,6 +403,16 @@ angular.module('agera').config(function($routeProvider) {
       }
     }
   })
+  .when('/summaries/creditcards/:guid', {
+    templateUrl: '/views/summaries/debt-summary.html',
+    controller: 'debtSummaryCtrl',
+    resolve: {
+      summaryService: function (CreditCardSummary) {
+        return CreditCardSummary;
+      }
+    }
+  })
+
   .when('/summaries/retirements/:guid', {
     templateUrl: '/views/summaries/retirement-summary.html',
     controller: 'retirementSummaryCtrl'

@@ -1,7 +1,7 @@
 ﻿(function () {
   'use strict';
 
-  angular.module('summaries').controller('basicSummaryCtrl', function ($scope, $location, $routeParams, summaryService, Action) {
+  angular.module('summaries').controller('debtSummaryCtrl', function ($scope, $location, $routeParams, summaryService, Action) {
     var getNeed = function (current, target) {
       var amt;
       amt = target - current;
@@ -40,15 +40,16 @@
       return Math.max(percent, 0);
     };
 
-    var fetchGoalData = function (goal, schedule) {
+    var fetchDebtData = function (debt, schedule) {
       var currentPeriod, total;
       $scope.schedule = schedule;
       $scope.payment = schedule.payment;
       $scope.status = schedule.status;
-      $scope.needed = getNeed($scope.schedule.balance, goal.downpayment || goal.amount);
+      $scope.topmessage = "Completed!";
+      $scope.needed = getNeed($scope.schedule.balance, debt.amount);
       $scope.saved = schedule.balance;
       currentPeriod = getCurrentPeriod(schedule);
-      total = $scope.goal.downpayment || $scope.goal.amount;
+      total = $scope.debt.amount;
       $scope.percentComplete = getPercent($scope.schedule.balance, total);
       if ($scope.status === 'safe') {
         $scope.percentIncomplete = 0;
@@ -60,14 +61,14 @@
     summaryService.get({
       guid: $routeParams.guid,
     }).$promise.then(function (object) {
-      $scope.goal = object.goal();
-      fetchGoalData($scope.goal, object.schedule);
+      $scope.debt = object.debt;
+      fetchDebtData($scope.debt, object.schedule);
       $scope.completedActions = object.completed_actions
       $scope.actions = object.actions;
     });
 
-    $scope.goToEdit = function (goal) {
-      var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
+    $scope.goToEdit = function (debt) {
+      var editUrl = "/" + (_.pluralize(debt.category)) + "/" + (_.pluralize(debt.goal_type.toLowerCase())) + "/" + debt.guid + "/edit";
       $location.path(editUrl);
     }
 
@@ -84,7 +85,7 @@
       $scope.currentRightSummary = contentType;
     }
   });
-  
+
 
 
 }).call(this);
