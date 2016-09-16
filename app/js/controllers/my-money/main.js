@@ -90,7 +90,6 @@
           detail.amount = Math.round(100.0 * detail.amount) / 100;
         });
       });
-      console.log("roundDebtsAndPolicy", response);
       return response;
     }
     function roundExpenses(response) {
@@ -98,7 +97,6 @@
         item.amount = Math.round(100.0 * item.amount) / 100;
         item.three_month_average_amount = Math.round(100.0 * item.three_month_average_amount) / 100;
       });
-      console.log("roundExpenses", response);
       return response;
     }
     Expense.query().$promise.then(function(response) {

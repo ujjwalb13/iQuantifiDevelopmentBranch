@@ -14,7 +14,7 @@
 
     function drawChart(scope, svg, data) {
       var width, height, donut_size;
-      width = Number.parseInt(svg.style("width"));
+      width = parseInt(svg.style("width"));
       donut_size = width/3;
       var radius = width/6;
       var total_monthly_height = 50;
@@ -99,13 +99,10 @@
         })
       slices_pattern.exit().remove();
 
-
-
       var key = function(d){ return d.data.label; };
       var labels = svg.select(".labels")
         .selectAll("text")
         .data(pie(data.pies), key);
-
 
       var labelContainers = svg.select(".labels").selectAll(".label-container")
       .data(pie(data.pies))
