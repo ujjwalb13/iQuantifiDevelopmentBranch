@@ -67,7 +67,7 @@
     });
 
     $scope.goToEdit = function(goal) {
-      editUrl = ["/goals/houses/", goal.guid, "/edit"].join("");
+      var editUrl = ["/goals/houses/", goal.guid, "/edit"].join("");
       $location.path(editUrl);
     }
 
