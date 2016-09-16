@@ -1,13 +1,13 @@
-﻿(function () {
+(function() {
   'use strict';
-  angular.module('summaries').controller('basicSummaryCtrl', function ($scope, $location, $routeParams, summaryService) {
-    var getNeed = function (current, target) {
+  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary) {
+    var getNeed = function(current, target) {
       var amt;
       amt = target - current;
       return Math.max(amt, 0);
     };
 
-    var getCurrentPeriod = function (schedule) {
+    var getCurrentPeriod = function(schedule) {
       var i, len, month, ref;
       ref = schedule.data;
       for (i = 0, len = ref.length; i < len; i++) {
@@ -19,7 +19,7 @@
       return {};
     };
 
-    var getPercent = function (current, target) {
+    var getPercent = function(current, target) {
       var amt;
       if (!current || !target) {
         return 0;
@@ -28,20 +28,19 @@
       return getSafePercent(amt);
     };
 
-    var getPercentIncomplete = function (current, target, complete) {
+    var getPercentIncomplete = function(current, target, complete) {
       var amt;
       amt = getPercent(current, target);
       return getSafePercent(Math.min(100 - complete, amt));
     };
 
-    var getSafePercent = function (percent) {
+    var getSafePercent = function(percent) {
       percent = Math.min(percent, 100);
       return Math.max(percent, 0);
     };
 
-    var fetchGoalData = function (goal, schedule) {
+    var fetchGoalData = function(goal, schedule) {
       var currentPeriod, total;
-      $scope.topmessage = "Completed!";
       $scope.schedule = schedule;
       $scope.payment = schedule.payment;
       $scope.status = schedule.status;
@@ -57,9 +56,9 @@
       }
     };
 
-    summaryService.get({
+    HouseSummary.get({
       guid: $routeParams.guid
-    }).$promise.then(function (object) {
+    }).$promise.then(function(object) {
       $scope.goal = object.goal();
       fetchGoalData($scope.goal, object.schedule);
       $scope.completedActions = object.completed_actions;
@@ -67,21 +66,21 @@
       $scope.goal.icon = "icon-gl-house";
     });
 
-    $scope.goToEdit = function (goal) {
+    $scope.goToEdit = function(goal) {
       var editUrl = ["/goals/houses/", goal.guid, "/edit"].join("");
       $location.path(editUrl);
     }
 
     $scope.currentRightSummary = "downpayment";
-    $scope.downpaymentActive = function () {
+    $scope.downpaymentActive = function() {
       return $scope.currentRightSummary === "downpayment";
     }
 
-    $scope.financeRecommendationsActive = function () {
+    $scope.financeRecommendationsActive = function() {
       return $scope.currentRightSummary === "financeRecommendations";
     }
 
-    $scope.changeRightSummayContent = function (contentType) {
+    $scope.changeRightSummayContent = function(contentType) {
       $scope.currentRightSummary = contentType;
     }
 

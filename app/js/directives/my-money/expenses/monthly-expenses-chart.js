@@ -7,11 +7,15 @@
       scope.getExpenseName = function(kind) {
         return Expense.getName(kind);
       }
-      Expense.query().$promise.then(function(expenses){
-        scope.subCategories = genereateSubCategories(expenses);
+      scope.$watch('expenses', function(newValue, oldValue) {
+        if(scope.expenses === undefined) {return;}
+        scope.totalAmount = _.reduce(scope.expenses, function(total, item){ return item.amount + total; }, 0);
+        scope.totalThreeMonthAverageAmount = _.reduce(scope.expenses, function(total, item){ return item.three_month_average_amount + total; }, 0);
+        scope.subCategories = genereateSubCategories(scope.expenses);
         var svg = d3.select(element.find("svg")[0]);
-        drawChart(scope, expenses, svg);
+        drawChart(scope, scope.expenses, svg);
       });
+
     };
     function drawChart(scope, expenses, svg) {
       var chart, chartArea, chartGroups, chart_height, child_margin, color, expenses, detail_icon_height, expense_types, group_margin, height, margin, width, ratio, x, x1, xAxis, y, yAxis;
@@ -25,13 +29,13 @@
       child_margin = 4;
       detail_icon_height = 35;
       var title_height = 25;
-      width = Number.parseInt(svg.style("width"));
-      ratio = Number.parseFloat(svg.attr("ratio"));
+      width = parseInt(svg.style("width"));
+      ratio = parseFloat(svg.attr("ratio"));
       height = Math.round(width / ratio)
       chart_height = height + detail_icon_height + title_height;
       expense_types = ["amount", "three_month_average_amount"];
       color = d3.scale.ordinal().range([scope.currentExpensesColor, scope.threeMonthsAverageColor]);
-      svg = svg.style('width', width).style('height', chart_height + margin.top + margin.bottom).append("g");
+      svg = svg.style('width', width + "px").style('height', chart_height + margin.top + margin.bottom + "px").append("g");
       x = d3.scale.ordinal().domain(expenses.map(function(d) { return Expense.getName(d.kind);}))
       .rangeRoundBands([0, width - margin.left - margin.right]);
       var max_value = d3.max(expenses, function(d) { return Math.max(d.amount, d.three_month_average_amount);})
@@ -53,14 +57,14 @@
       .attr("class", "chart-background1")
       .attr("width", (width - margin.left - margin.right)/2)
       .attr("height", chart_height)
-      .attr("fill", "#fafafa")
+      .attr("fill", "#fafafa");
 
       chart.append("rect")
       .attr("class", "chart-background2")
       .attr("width", (width - margin.left - margin.right)/2)
       .attr("x", (width - margin.left - margin.right)/2)
       .attr("height", chart_height)
-      .attr("fill", "#ffffff")
+      .attr("fill", "#ffffff");
 
       chart.append('g')
       .attr('class', 'y axis')
@@ -120,7 +124,7 @@
       .attr("height", chart_height)
       .attr("transform", "translate(0, " + title_height + ")");
 
-      chartGroups = chartArea.selectAll("expense-group")
+      chartGroups = chartArea.selectAll(".expense-group")
       .data(expenses)
       .enter()
       .append("g")
@@ -152,28 +156,24 @@
         .attr("height", function(d) {return height + detail_icon_height - y(d.value);})
         .style("fill", function(d) { return color(d.key);});
 
-      chartGroups.selectAll("foreignObject.tooltip-icon")
-      .data(function(d){return [d]})
-      .enter()
-      .append("foreignObject")
-        .attr("class", "tooltip-icon")
-        .attr("x", function(d) { return x(Expense.getName(d.kind)) })
-        .attr("y", title_height)
-        .attr("width", x.rangeBand())
-        .attr("height", detail_icon_height)
-      .append("xhtml:div")
-        .attr("class", "info-icon-container")
-        .style("top", title_height + "px")
-        .style("left", function(d){return (x(Expense.getName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px"})
-      .append("xhtml:span")
-        .attr("class", "info-icon fa fa-info")
-        .on("click", function(d){
-          $("#group-details-popup .info-icon-container").css("top", title_height + "px")
-          $("#group-details-popup .info-icon-container").css("left", (x(Expense.getName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px")
-          scope.selectedExpense = d;
-          dislaySubcategories(d.kind, scope);
-          scope.$digest();
-        });
+      chartGroups.selectAll("image.tooltip-icon").data(function(d) {
+        return [d];
+      })
+      .enter().append("svg:image")
+      .attr("class", "tooltip-icon")
+      .attr("cursor", "pointer")
+      .attr("x", function(d) { return x(Expense.getName(d.kind)) + (x.rangeBand() - 20)/2})
+      .attr("y", (detail_icon_height - 20)/2)
+      .attr("width", 20)
+      .attr("height", 20)
+      .attr("xlink:href", "/images/icon/info.png")
+      .on("click", function(d){
+        $("#group-details-popup .info-icon-container").css("top", title_height + "px")
+        $("#group-details-popup .info-icon-container").css("left", (x(Expense.getName(d.kind)) + (x.rangeBand() / 2) + margin.left + (group_margin/2) + (child_margin/2)) + "px")
+        scope.selectedExpense = d;
+        dislaySubcategories(d.kind, scope);
+        scope.$digest();
+      });;
     }
     function genereateSubCategories(expenses) {
       var subCategories = {}
@@ -199,7 +199,8 @@
       templateUrl: "/views/directives/my-money/expenses/monthly-chart.tpl.html",
       scope: {
         currentExpensesColor: '@',
-        threeMonthsAverageColor: '@'
+        threeMonthsAverageColor: '@',
+        expenses: "="
       },
       link: link
     };

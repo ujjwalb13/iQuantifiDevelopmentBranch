@@ -1,47 +1,27 @@
 (function() {
   'use strict';
-  angular.module('agera').directive('policyPaymentsChart', function(ENV, $http, Expense, DebtAndPolicyPayment, $q) {
+  angular.module('agera').directive('policyPaymentsChart', function(ENV, $http) {
     var getChartData, link;
     link = function(scope, element, attrs) {
-       $q.all([
-          getExpenses(),
-          getDebtAndPolicyPayments()
-        ])
-        .then(function(response){
-          var expenses = response[0];
-          var debtsAndPolicyPayments = response[1];
-          var policy = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="policy"});
-          var totalDebts = _.detect(debtsAndPolicyPayments, function(item){return item.kind =="debt"}).total_amount;
-          var totalPolicies = policy.total_amount;
-          var totalExpenses = _.reduce(expenses, function(total, item){ return item.amount + total; }, 0) + totalDebts + totalPolicies;
-          var svg = d3.select(element.find("svg")[0]);
-          drawChart(scope, policy.Detail, svg);
-          scope.debtPayments = _.map(policy.Detail, function(item){
-            item.percent = Math.round(10000.0 * item.amount / totalExpenses) / 100;
-            return item;
-          });
-          scope.totalValue = totalPolicies;
-          scope.totalPercent = Math.round(10000.0 * totalPolicies / totalExpenses)/100;
-          scope.chart_title = "Total Monthly Policy Premiums";
-          scope.icon = "icon-pt-life"
-       });
+
+      scope.$watchGroup(["expenses", "debtsAndPolicyPayments"], function(newValues, oldValues, scope) {
+        if(_.any(newValues, function(item){return item === undefined;})) { return;}
+        var policy = _.detect(scope.debtsAndPolicyPayments, function(item){return item.kind =="policy"});
+        var totalDebts = _.detect(scope.debtsAndPolicyPayments, function(item){return item.kind =="debt"}).total_amount;
+        var totalPolicies = policy.total_amount;
+        var totalExpenses = _.reduce(scope.expenses, function(total, item){ return item.amount + total; }, 0) + totalDebts + totalPolicies;
+        var svg = d3.select(element.find("svg")[0]);
+        drawChart(scope, policy.Detail, svg);
+        scope.debtPayments = _.map(policy.Detail, function(item){
+          item.percent = Math.round(10000.0 * item.amount / totalExpenses) / 100;
+          return item;
+        });
+        scope.totalValue = totalPolicies;
+        scope.totalPercent = Math.round(10000.0 * totalPolicies / totalExpenses)/100;
+        scope.chart_title = "Total Monthly Policy Premiums";
+        scope.icon = "icon-pt-life"
+      });
     };
-
-    function getExpenses() {
-       var d = $q.defer();
-       var result = Expense.query({}, function() {
-            d.resolve(result);
-       });
-       return d.promise;
-    }
-
-    function getDebtAndPolicyPayments() {
-       var d = $q.defer();
-       var result = DebtAndPolicyPayment.query({}, function() {
-            d.resolve(result);
-       });
-       return d.promise;
-    }
     function drawChart(scope, debts, svg) {
       var chart, chartArea, chartGroups, chart_height, color, detail_icon_height, expense_types, group_margin, height, margin, width, ratio, x, xAxis, y, yAxis;
       margin = {
@@ -132,7 +112,11 @@
       restrict: 'E',
       transclude: true,
       templateUrl: "/views/directives/my-money/expenses/debt-payments-chart.tpl.html",
-      link: link
+      link: link,
+      scope: {
+        expenses: "=",
+        debtsAndPolicyPayments: "="
+      }
     };
   });
 

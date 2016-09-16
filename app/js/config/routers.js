@@ -337,11 +337,16 @@ angular.module('agera').config(function($routeProvider) {
     controller: 'summariesPolicyCtrl'
   })
   .when('/summaries/houses/:guid', {
-    templateUrl: '/views/summaries/house-summary.html',
-    controller: 'houseSummaryCtrl'
+    templateUrl: '/views/summaries/finance-summary.html',
+    controller: 'basicSummaryCtrl',
+    resolve: {
+      summaryService: function (HouseSummary) {
+        return HouseSummary;
+      }
+    }
   })
   .when('/summaries/cars/:guid', {
-    templateUrl: '/views/summaries/car-summary.html',
+    templateUrl: '/views/summaries/finance-summary.html',
     controller: 'basicSummaryCtrl',
     resolve: {
       summaryService: function (CarSummary) {
@@ -395,11 +400,29 @@ angular.module('agera').config(function($routeProvider) {
     }
   })
   .when('/summaries/rings/:guid', {
-    templateUrl: '/views/summaries/ring-summary.html',
+    templateUrl: '/views/summaries/finance-summary.html',
     controller: 'basicSummaryCtrl',
     resolve: {
       summaryService: function (WeddingSummary) {
         return WeddingSummary;
+      }
+    }
+  })
+  .when('/summaries/creditcards/:guid', {
+    templateUrl: '/views/summaries/debt-summary.html',
+    controller: 'debtSummaryCtrl',
+    resolve: {
+      summaryService: function (CreditCardSummary) {
+        return CreditCardSummary;
+      }
+    }
+  })
+  .when('/summaries/loans/:guid', {
+    templateUrl: '/views/summaries/debt-summary.html',
+    controller: 'debtSummaryCtrl',
+    resolve: {
+      summaryService: function (LoanSummary) {
+        return LoanSummary;
       }
     }
   })
@@ -408,10 +431,10 @@ angular.module('agera').config(function($routeProvider) {
     controller: 'retirementSummaryCtrl'
   })
 
-  .when('/summaries/:type/:guid?', {
-    templateUrl: '/views/summaries/summary.html',
-    controller: 'summariesSummaryCtrl'
-  })
+  //.when('/summaries/:type/:guid?', {
+  //  templateUrl: '/views/summaries/summary.html',
+  //  controller: 'summariesSummaryCtrl'
+  //})
 
   .when('/two-factor-auth', {
     templateUrl: '/views/two-factor-auth.html',
