@@ -1,0 +1,23 @@
+<a class="btn btn-delete" ng-click="showModal(goal)">
+  <i class="fa fa-trash" aria-hidden="true"></i>
+</a>
+
+<script type="text/ng-template" id="deleteGoalModal">
+  <div class="modal-header delete-modal-header text-center">
+    <h3 class="modal-title"> {{ modalTitle }}</h3>
+  </div>
+  <div class="modal-body delete-modal-body">
+    <p class="text-center">
+      <i class="icon {{ goal.icon }} icon-80 inline"></i>
+    </p>
+    <p class="text-center">
+      {{ goal.name | titleize }}
+    </p>
+    <p class="text-center"> {{ confirmMessage }} </p>
+  </div>
+  <div class="modal-footer text-center delete-modal-footer">
+    <button class="iq-submit-btn btn btn-lg" ng-click="close()">Cancel</button>
+    <button class="iq-submit-btn btn btn-primary" ng-hide="pending" ng-click="delete()">Yes, Delete</button>
+    <button type="submit" class="iq-submit-btn btn-primary btn" ng-show="pending" disabled><i class="fa fa-circle-o-notch fa-spin"></i> Processing</button>
+  </div>
+</script>
