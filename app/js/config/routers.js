@@ -337,8 +337,13 @@ angular.module('agera').config(function($routeProvider) {
     controller: 'summariesPolicyCtrl'
   })
   .when('/summaries/houses/:guid', {
-    templateUrl: '/views/summaries/house-summary.html',
-    controller: 'houseSummaryCtrl'
+    templateUrl: '/views/summaries/finance-summary.html',
+    controller: 'basicSummaryCtrl',
+    resolve: {
+      summaryService: function (HouseSummary) {
+        return HouseSummary;
+      }
+    }
   })
   .when('/summaries/cars/:guid', {
     templateUrl: '/views/summaries/finance-summary.html',

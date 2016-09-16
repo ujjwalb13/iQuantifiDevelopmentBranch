@@ -1,7 +1,6 @@
 ﻿(function () {
   'use strict';
-
-  angular.module('summaries').controller('basicSummaryCtrl', function ($scope, $location, $routeParams, summaryService, Action) {
+  angular.module('summaries').controller('basicSummaryCtrl', function ($scope, $location, $routeParams, summaryService) {
     var getNeed = function (current, target) {
       var amt;
       amt = target - current;
@@ -42,6 +41,7 @@
 
     var fetchGoalData = function (goal, schedule) {
       var currentPeriod, total;
+      $scope.topmessage = "Completed!";
       $scope.schedule = schedule;
       $scope.payment = schedule.payment;
       $scope.status = schedule.status;
@@ -58,16 +58,17 @@
     };
 
     summaryService.get({
-      guid: $routeParams.guid,
+      guid: $routeParams.guid
     }).$promise.then(function (object) {
       $scope.goal = object.goal();
       fetchGoalData($scope.goal, object.schedule);
-      $scope.completedActions = object.completed_actions
+      $scope.completedActions = object.completed_actions;
       $scope.actions = object.actions;
+      $scope.goal.icon = "icon-gl-house";
     });
 
     $scope.goToEdit = function (goal) {
-      var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
+      var editUrl = ["/goals/houses/", goal.guid, "/edit"].join("");
       $location.path(editUrl);
     }
 
@@ -83,10 +84,8 @@
     $scope.changeRightSummayContent = function (contentType) {
       $scope.currentRightSummary = contentType;
     }
+
   });
-  
-
-
 }).call(this);
 
 //# sourceMappingURL=summary.js.map

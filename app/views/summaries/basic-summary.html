@@ -30,9 +30,7 @@
                             <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
                                 Edit Goal
                             </button>
-                            <a class="btn btn-delete ng-scope" ng-if="goal" ng-click="deleteGoal(goal)">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
+                            <goals-delete-modal goal="goal" ng-if="goal"></goals-delete-modal>
                         </div>
                         <div class="pull-right">
                             <ul>
