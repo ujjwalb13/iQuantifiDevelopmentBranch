@@ -431,10 +431,10 @@ angular.module('agera').config(function($routeProvider) {
     controller: 'retirementSummaryCtrl'
   })
 
-  .when('/summaries/:type/:guid?', {
-    templateUrl: '/views/summaries/summary.html',
-    controller: 'summariesSummaryCtrl'
-  })
+  //.when('/summaries/:type/:guid?', {
+  //  templateUrl: '/views/summaries/summary.html',
+  //  controller: 'summariesSummaryCtrl'
+  //})
 
   .when('/two-factor-auth', {
     templateUrl: '/views/two-factor-auth.html',

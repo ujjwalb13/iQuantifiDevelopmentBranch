@@ -30,9 +30,6 @@
                             <button class="btn btn-blue" ng-if="debt" ng-click="goToEdit(debt)">
                                 Edit Debt
                             </button>
-                            <a class="btn btn-delete ng-scope" ng-if="goal" ng-click="deleteDebt(debt)">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
                         </div>
                         <div class="pull-right">
                             <ul>
@@ -93,12 +90,12 @@
                     </div>
                 </div>
                 <div class="content-wrapper">
-                    <div class="section-header" ng-if="schedule.data.length > 1">
+                    <div class="section-header" ng-if="schedule.data.length > 2">
                         Action Tracker
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
-                            <div class="chart-content" ng-if="schedule.data.length > 1">
+                            <div class="chart-content" ng-if="schedule.data.length > 2">
                                 <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
                                 </goal-action-tracker>
                             </div>
