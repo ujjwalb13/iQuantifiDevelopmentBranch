@@ -5,8 +5,8 @@
       <ul>
         <li><label>Start Date</label> <span ng-if="goal.transition_on">{{ goal.transition_on | monthYear }}</span></li>
         <li><label>Loan Amount</label> <span>{{ goal.projected_finance_amount | dollars }}</span></li>
-        <li><label>Interest rate</label> <span>{{ goal.rate }}%</span></li>
-        <li><label>Term in Years</label> <span>{{ goal.terms / 12}} </span></li>
+        <li><label>Interest rate</label> <span ng-if="goal.rate">{{ goal.rate }}%</span></li>
+        <li><label>Term in Years</label> <span ng-if="goal.terms">{{ goal.terms / 12}} </span></li>
         <li><label>Monthly Payment</label> <span>{{ goal.projected_payment | dollars }}</span></li>
       </ul>
     </div>
