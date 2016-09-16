@@ -83,11 +83,27 @@
     };
     setDefaultData();
     updateCategoryFilter();
+    function roundDebtsAndPolicy(response) {
+      _.each(response, function(item){
+        item.total_amount = Math.round(100.0 * item.total_amount) / 100;
+        _.each(item.Detail, function(detail){
+          detail.amount = Math.round(100.0 * detail.amount) / 100;
+        });
+      });
+      return response;
+    }
+    function roundExpenses(response) {
+      _.each(response, function(item){
+        item.amount = Math.round(100.0 * item.amount) / 100;
+        item.three_month_average_amount = Math.round(100.0 * item.three_month_average_amount) / 100;
+      });
+      return response;
+    }
     Expense.query().$promise.then(function(response) {
-      $scope.expenses = response;
+      $scope.expenses = roundExpenses(response);
     });
     DebtAndPolicyPayment.query().$promise.then(function(response) {
-      $scope.debtsAndPolicyPayments = response;
+      $scope.debtsAndPolicyPayments = roundDebtsAndPolicy(response);
     });
   });
 
