@@ -9,7 +9,6 @@
       },
 
       link: function($scope, element, attributes) {
-
         $scope.goToSingleAction = function(action) {
           if (matchmedia.isPhone()) {
             return $location.path("/actions/" + action.guid);
@@ -58,7 +57,8 @@
           }
         };
 
-        $scope.completeAction = function(action) {
+        $scope.completeAction = function (action) {
+          action.processing = true;
           var option;
           if (action.positions != null) {
             option = angular.element("#action-" + action.guid + " div.slick-active.slick-center div.slide").data('option-id') || angular.element("#action-" + action.guid + " div.slick-center div.slide").data('option-id');
@@ -66,7 +66,8 @@
           return Action.update({
             guid: action.guid,
             option: option
-          }).$promise.then(function() {
+          }).$promise.then(function () {
+            action.processing = false;
             action.is_complete = true;
             return $rootScope.$broadcast('refreshActionsCount');
           });
