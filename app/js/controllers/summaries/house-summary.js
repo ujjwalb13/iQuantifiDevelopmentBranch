@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary, Action, $rootScope) {
+  angular.module('summaries').controller('houseSummaryCtrl', function($scope, $location, $routeParams, HouseSummary) {
     var getNeed = function(current, target) {
       var amt;
       amt = target - current;
@@ -67,7 +67,7 @@
     });
 
     $scope.goToEdit = function(goal) {
-      var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
+      editUrl = ["/goals/houses/", goal.guid, "/edit"].join("");
       $location.path(editUrl);
     }
 
