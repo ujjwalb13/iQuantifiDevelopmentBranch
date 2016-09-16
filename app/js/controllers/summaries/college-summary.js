@@ -4,6 +4,7 @@
    
     var fetchGoalData = function(goal, schedule) {
       $scope.schedule = schedule;
+      $scope.collegeType = goal.is_public ? 'Public' : 'Private'
     };
 
     CollegeSummary.get({
