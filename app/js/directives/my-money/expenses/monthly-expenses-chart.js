@@ -124,7 +124,7 @@
       .attr("height", chart_height)
       .attr("transform", "translate(0, " + title_height + ")");
 
-      chartGroups = chartArea.selectAll("expense-group")
+      chartGroups = chartArea.selectAll(".expense-group")
       .data(expenses)
       .enter()
       .append("g")

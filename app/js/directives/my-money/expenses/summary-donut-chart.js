@@ -11,6 +11,7 @@
         scope.monthlyCommittedExpensesPercent = data.monthlyCommittedExpensesPercent;
       });
     };
+
     function drawChart(scope, svg, data) {
       var width, height, donut_size;
       width = Number.parseInt(svg.style("width"));
@@ -51,9 +52,11 @@
           .attr("height", 5)
           .attr("x", 0)
           .attr("y", 0);
+
       var slices = svg.select(".slices")
         .selectAll("path.slice")
         .data(pie(data.pies));
+
 
       slices.enter()
         .insert("path")
@@ -74,7 +77,6 @@
       var slices_pattern = svg.select(".slices_pattern")
         .selectAll("path.slice")
         .data(pie(data.pies));
-
       slices_pattern.enter()
         .insert("path")
         .style("fill", function(d) {
@@ -100,36 +102,72 @@
 
 
       var key = function(d){ return d.data.label; };
-      var text = svg.select(".labels")
+      var labels = svg.select(".labels")
         .selectAll("text")
         .data(pie(data.pies), key);
 
-      text.enter()
-      .append('foreignObject')
-      .attr('width', donut_size)
-      .attr('x', function(d){
-        return midAngle(d) < Math.PI ? (width * 2 / 3) : 0;
-      })
-      .attr('y', function(d){
-        var pos = radius * Math.sin(Math.PI/2 - midAngle(d));
-        var extra_pos = midAngle(d) < Math.PI ? 0 : total_monthly_height;
-        return donut_size/2 - pos + extra_pos;
-      })
-      .append("xhtml:body")
-      .html(function(d){
-        var percent = Math.round(10000 * (d.endAngle - d.startAngle) / 2 / Math.PI)/100.0;
-        return '<div class="des-chart-content">\
-        <i class="icon ' + d.data.icon + '"></i>\
-        <p>\
-          <span>'+d.data.label+'</span>\
-          <strong>$' + d.value + ' ('+ percent +'%)</strong>\
-        </p>\
-      </div>'});
 
-      function midAngle(d){
-        return d.startAngle + (d.endAngle - d.startAngle)/2;
-      }
-      text.exit().remove();
+      var labelContainers = svg.select(".labels").selectAll(".label-container")
+      .data(pie(data.pies))
+      .enter()
+      .append("g")
+      .attr("class", "label-container");
+
+      labelContainers.transition().duration(1000)
+      .attrTween("transform", function(d) {
+        this._current = this._current || d;
+        var interpolate = d3.interpolate(this._current, d);
+        this._current = interpolate(0);
+        return function(t) {
+          var d2 = interpolate(t);
+          var pos = outerArc.centroid(d2);
+          pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+          if(midAngle(d2) > Math.PI) {pos[0] -= width/3;}
+          if(midAngle(d2) > Math.PI) { pos[1] += total_monthly_height; }
+          return "translate("+ pos +")";
+        };
+      })
+      .attr("text-anchor", "start");
+
+      labelContainers.selectAll("image.icon").data(function(d) {
+        return [d];
+      })
+      .enter().append("svg:image")
+      .attr("y", -10)
+      .attr('width', 36)
+      .attr('height', 36)
+      .attr("xlink:href", function(d) {
+        return d.data.icon;
+      });
+
+      labelContainers.selectAll("text.expense-label").data(function(d) {
+        return [d];
+      })
+      .enter()
+      .append("text")
+        .attr("dx", "56px")
+        .attr("class", "expense-label")
+        .attr("font-weight", "bold")
+        .attr("font-size", "14px")
+        .text(function(d){
+          return d.data.label;
+        });
+      labelContainers.selectAll("text.expense-value").data(function(d) {
+        return [d];
+      })
+      .enter()
+      .append("text")
+        .attr("dx", "56px")
+        .attr("dy", "20px")
+        .attr("class", "expense-value")
+        .attr("font-weight", "bold")
+        .attr("font-size", "14px")
+        .text(function(d){
+          var percent = Math.round(10000 * (d.endAngle - d.startAngle) / 2 / Math.PI)/100.0;
+          return "$" + d.value + " ("+ percent +"%)";
+        });
+
+      labels.exit().remove();
 
       var polyline = svg.select(".lines")
         .selectAll("polyline")
@@ -146,8 +184,11 @@
           return function(t) {
             var d2 = interpolate(t);
             var pos = outerArc.centroid(d2);
-            pos[0] = radius * 1.5 * (midAngle(d2) < Math.PI ? 1 : -1);
-            if(midAngle(d2) > Math.PI) { pos[1] += total_monthly_height; }
+            pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+            if(midAngle(d2) > Math.PI) {
+              pos[0] *= 1.5;
+              pos[1] += total_monthly_height;
+            }
             return [arc.centroid(d2), outerArc.centroid(d2), pos];
           };
         });
@@ -164,6 +205,11 @@
         .attr("dy", 25)
         .style("font-weight", "bold")
         .text("$" + data.totalExpenses);
+
+    }
+
+    function midAngle(d){
+      return d.startAngle + (d.endAngle - d.startAngle)/2;
     }
     function summaryData(expenses, debtsAndPolicyPayments) {
       var commitedExpenses = _.select(expenses, function(item){return isCommittedExpense(item.kind);})
@@ -180,28 +226,28 @@
           amount: totalDiscretionaryExpenses,
           kind: "discretionary",
           color: "gray",
-          icon: "icon-mm-expenses"
+          icon: "/images/svg/icon-mm-expenses.svg"
         },
         {
           label: "Monthly Committed Expenses",
           amount: totalCommittedExpenses,
           kind: "commited",
           color: "blue",
-          icon: "icon-mm-expenses"
+          icon: "/images/svg/icon-mm-expenses.svg"
         },
         {
           label: "Monthly Debt Payments",
           amount: totalDebts,
           kind: "commited",
           color: "green",
-          icon: "icon-db-debt"
+          icon: "/images/svg/icon-db-debt.svg"
         },
         {
           label: "Monthly Policy Premiums",
           amount: totalPolicies,
           kind: "commited",
           color: "red",
-          icon: "icon-pt-protection"
+          icon: "/images/svg/icon-pt-protection.svg"
         },
       ];
       return {
