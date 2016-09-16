@@ -13,6 +13,7 @@
             $scope.goal = goal;
             if ($scope.goal.category == "goal") {
               $scope.modalTitle = "Delete the goal?";
+              $scope.confirmMessage = "Are you sure, you want to delete this goal?";
             }
 
             $scope.close = function() {
