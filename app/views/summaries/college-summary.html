@@ -1,0 +1,158 @@
+<div class="main-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>
+           My Progress
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content-style">
+    <div class="container main-wrapper">
+      <div class="row">
+        <div class="left-side-bar col-lg-2 col-md-3 col-sm-12 col-xs-12">
+          <progress-sidebar current-page=''></progress-sidebar>
+        </div>
+        <div class="right-content col-lg-10 col-md-9 col-sm-12 col-xs-12">
+          <div class="content-wrapper">
+            <div class="section-header goals">
+                <i class="icon icon-gl-custom-goal"></i>Goal Summary
+            </div>
+            <div class="goal-summary-head">
+              <div class="pull-left">
+                <i class="icon icon-gl-college icon-80"></i>
+                <h3>
+                  {{ goal.name }}
+                </h3>
+                <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
+                  Edit Goal
+                </button>
+                <a class="btn btn-delete ng-scope" ng-if="goal" ng-click="deleteGoal(goal)">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="pull-right">
+                <ul>
+                  <li>
+                    <label for="">Start Date</label>
+                    <p>{{ goal.start_on | monthYear}}</p>
+                  </li>
+                  <li>
+                    <label for="">Total Goal Amount</label>
+                    <p>{{ goal.amount | dollars }}</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="row sum-main-content">
+              <div class="col-md-6 col-xs-12">
+                <div class="section-header">Goal Details</div>
+                <div class="table-static" style="width: 100%;">
+                    <table>
+                      <tr>
+                        <td><strong>Start Saving Date</strong></td>
+                        <td>{{ schedule.start_saving_date ? (schedule.start_saving_date |  monthYear) : ""}}</th>
+                      </tr>
+                      <tr>
+                        <td><strong>State of Residence</strong></td>
+                        <td>{{ goal.residence_state}}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>State Attending College</strong></td>
+                        <td>{{ goal.college_state}}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>College Type</strong></td>
+                        <td>{{ goal.is_public ? "Public" : "Private"}}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Years Attending</strong></td>
+                        <td>{{ goal.years_attending}}</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Parents Contribution</strong></td>
+                        <td>{{ goal.percentage}}</td>
+                      </tr>
+
+                    </table>
+                </div>
+              </div>
+              <!-- <div class="col-md-6 col-xs-12">
+                <div ng-include="'/views/summaries/_downpayment.html'"></div>
+              </div> -->
+            </div>
+          </div>
+          <div class= "row">
+            <div class="col-md-12 col-xs-12">
+              <h3>College Saving Accounts</h3>
+              <div class="table-static" style="width: 100%;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Account Name</th>
+                      <th>Type</th>
+                      <th>Owner</th>
+                      <th>Balance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>123</td>
+                      <td>123</td>
+                      <td>123</td>
+                      <td>123</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="content-wrapper">
+            <div class="section-header" ng-if="schedule.data.length > 2">Action Tracker
+            </div>
+            <div class="row" ng-if="schedule.data.length > 2">
+              <div class="col-md-12 col-xs-12">
+                <div class="chart-content" >
+                  <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
+                  </goal-action-tracker>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
+                <h3 class="title-next">Next Action</h3>
+                <div class="next-action-content">
+                  <p ng-if="status == 'warning' || status == 'danger'">
+                    <i class="fa fa-exclamation-circle " ng-if="status == 'danger'"></i>
+                    <i class="fa fa-exclamation-circle yellow-icon" ng-if="status == 'warning'"></i>
+                    <strong>
+                      You are currently
+                        {{status == 'warning' ? "one month" : "two months"}}
+                      behind.
+                    </strong>
+                    <br>
+                  </p>
+                  <summaries-next-actions actions="actions"></summaries-next-actions>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="content-wrapper">
+            <div class="section-header">Completed Actions
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
+                <div ng-include="'/views/summaries/_completed_actions.html'"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
