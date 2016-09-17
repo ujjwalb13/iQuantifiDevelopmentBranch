@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div class="main-content-style">
+<div class="main-content-style retirement-summary">
     <div class="container main-wrapper">
       <div class="row">
         <div class="left-side-bar col-lg-2 col-md-3 col-sm-12 col-xs-12">
@@ -30,14 +30,11 @@
                 <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
                   Edit Goal
                 </button>
-                <a class="btn btn-delete ng-scope" ng-if="goal" ng-click="deleteGoal(goal)">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                </a>
               </div>
               <div class="pull-right">
                 <ul>
                   <li>
-                    <label for="">Purchase Date</label>
+                    <label for="">Retirement Date</label>
                     <p ng-if="goal.transition_on">{{ goal.transition_on | monthYear}}</p>
                   </li>
                   <li>
@@ -50,57 +47,38 @@
             </div>
             <div class="row sum-main-content">
               <div class="col-md-6 col-xs-12">
+                <div class="section-header">Goal Details</div>
                 <div class="table-static" style="width: 100%;">
                     <table>
-                        <thead>
-                          <tr>
-                            <th>Start Saving Date</th>
-                            <th>{{ schedule.start_saving_date ? (schedule.start_saving_date |  monthYear) : ""}}</th>
-                          </tr>
-                        </thead>
                         <tbody>
                           <tr>
-                            <td><strong>Net Proceeds From Sale of Home</strong></td>
-                            <td>{{ goal.trade_in | dollars }}</td>
-                          </tr>
-                          <tr ng-click="changeRightSummayContent('downpayment')" ng-class="{active: downpaymentActive()}">
-                            <td><strong>Downpayment</strong></td>
-                            <td>{{ schedule.total | dollars }}</td>
-                          </tr>
-                          <tr ng-click="changeRightSummayContent('financeRecommendations')" ng-class="{active: financeRecommendationsActive()}">
-                            <td><strong>Finance Amount</strong></td>
-                            <td>{{ goal.projected_finance_amount | dollars }} </td>
+                            <td><strong>Total Current Balance</strong></td>
+                            <td>{{ schedule.balance | dollars }}</td>
                           </tr>
                           <tr>
+                            <td><strong>Recomemended Contributions</strong></td>
+                            <td>{{ schedule.total_contributions_this_year | dollars }}</td>
                           </tr>
-                          <tr class="total-row">
-                            <td>Total Purchase Price</td>
-                            <td>{{ goal.amount | dollars }}</td>
+                          <tr>
+                            <td><strong>401K Employer Match </strong></td>
+                            <td>{{ goal.employer_match | dollars }}</td>
                           </tr>
                         </tbody>
                     </table>
                 </div>
               </div>
               <div class="col-md-6 col-xs-12">
-                <div class="chart-downpayment" ng-show="downpaymentActive()">
-                    <div class="chart-content" ng-if="scheduleStatus=='warning'">
-                      <goal-progress-circle complete="24" incomplete="10" permonth="2143" status="scheduleStatus"></goal-progress-circle>
-                    </div>
-                    <div class="chart-content" ng-if="scheduleStatus=='danger'">
-                      <goal-progress-circle complete="24" incomplete="10" permonth="4286" status="scheduleStatus"></goal-progress-circle>
-                    </div>
-                    <div class="chart-content" ng-if="scheduleStatus=='safe'">
-                      <goal-progress-circle complete="24" incomplete="0" permonth="2143" status="scheduleStatus"></goal-progress-circle>
-                    </div>
+                <div class="chart-downpayment">
+                  <div class="chart-content">
+                    <goal-progress-circle complete="percentComplete" incomplete="percentIncomplete" permonth="payment" status="status"></goal-progress-circle>
+                  </div>
                   <div class="downpayment-wrapper">
                     <div class="downpayment-content">
-                      <h3>Downpayment</h3>
+                      <h3>{{thisYear}} Contributions</h3>
                       <ul>
-                        <li class="save"><label>Saved</label> <span>{{ schedule.saved | dollars }}</span></li>
-                        <li><label>From Capital</label> <span> {{ schedule.saved_from_capital | dollars }} </span></li>
-                        <li><label>From Cashflow</label> <span> {{ schedule.saved_from_cashflow | dollars }} </span></li>
-                        <li class="needed"><label>Needed</label> <strong>{{ schedule.saving_needed | dollars }}</strong></li>
-                        <li><label>Total</label> <strong>{{ schedule.total | dollars }}</strong></li>
+                        <li class="save"><label>Saved</label> <span>{{ schedule.saved_this_year | dollars }}</span></li>
+                        <li class="needed"><label>Needed</label> <strong>{{ schedule.saving_needed_this_year | dollars }}</strong></li>
+                        <li><label>Total</label> <strong>{{ schedule.total_contributions_this_year | dollars }}</strong></li>
                       </ul>
                     </div>
                   </div>
@@ -128,8 +106,51 @@
             <div class="row">
               <div class="col-md-12 col-xs-12">
                 <div class="chart-content">
-                  <goal-action-tracker schedule="dummyScheduleData" bubble-text="dummyBubbleText" baseline="dummyBaseline" status="scheduleStatus">
+                  <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
                   </goal-action-tracker>
+                </div>
+                <div class="formula">
+                  <div class="formula-inner">
+                    <div class="block block-1">
+                      <div class="block">
+                        <div class="title">Total Current Balance</div>
+                        <div>{{ schedule.balance | dollars }}</div>
+                      </div>
+                      <div class="block operator">
+                        +
+                      </div>
+                      <div class="block">
+                        <div class="title">Recommended Contributions</div>
+                        <div>{{ schedule.total_contributions_this_year | dollars }}</div>
+                      </div>
+                    </div>
+                    <div class="block">
+                      <div class="block operator">
+                        +
+                      </div>
+                    </div>
+                    <div class="block block-2">
+                      <div class="block">
+                        <div class="title">Projected Growth</div>
+                        <div>{{ schedule.projected_growth | dollars }}</div>
+                      </div>
+                    </div>
+                    <div class="hidden-lg">
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="block">
+                      <div class="block operator">
+                        =
+                      </div>
+                    </div>
+                    <div class="block block-3">
+                      <div class="block">
+                        <div class="title">Total Future Value</div>
+                        <div>{{ schedule.estimated_future_value | dollars }}</div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -137,35 +158,34 @@
               <div class="col-md-12 col-xs-12">
                 <h3 class="title-next">Next Action</h3>
                 <div class="next-action-content">
-                    <p ng-if="scheduleStatus == 'warning' || scheduleStatus == 'danger'">
-                      <i class="fa fa-exclamation-circle " ng-if="scheduleStatus == 'danger'"></i>
-                      <i class="fa fa-exclamation-circle yellow-icon" ng-if="scheduleStatus == 'warning'"></i>
-                      <strong>
-                        You are currently
-                          {{scheduleStatus == 'warning' ? "one month" : "two months"}}
-                        behind.
-                      </strong>
-                      <br>
-                      <span>Deposit $2,143 this month towards New Home's downpayment.</span>
-                      <a href="" class="btn btn-primary">Take Action</a>
-                    </p>
-                    <p ng-if="scheduleStatus == 'safe'">
-                      You’re currently on track! No action needed at this time.
-                    </p>
+                  <p ng-if="status == 'warning' || status == 'danger'">
+                    <i class="fa fa-exclamation-circle " ng-if="status == 'danger'"></i>
+                    <i class="fa fa-exclamation-circle yellow-icon" ng-if="status == 'warning'"></i>
+                    <strong>
+                      You are currently
+                        {{status == 'warning' ? "one month" : "two months"}}
+                      behind.
+                    </strong>
+                    <br>
+                  </p>
+                  <summaries-next-actions actions="actions"></summaries-next-actions>
                 </div>
+
               </div>
             </div>
           </div>
+          <!-- <div class="content-wrapper">
+            <div class="section-header">Total Current Balance (All Present Account Balances)
+            </div>
+            <div ng-include="'/views/summaries/_current-balance.html'" class="current-balance"></div>
+          </div> -->
 
           <div class="content-wrapper">
             <div class="section-header">Completed Actions
             </div>
             <div class="row">
               <div class="col-md-12 col-xs-12">
-                <div class="completed-action-content">
-                  <p>Sep 2016 - Open or link a Brokerage account for House 8888</p>
-                  <p>Sep 2016 - Deposit $27 this month towards House 8888's downpayment.</p>
-                </div>
+                <div ng-include="'/views/summaries/_completed_actions.html'"></div>
               </div>
             </div>
           </div>
