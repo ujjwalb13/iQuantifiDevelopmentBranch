@@ -1256,6 +1256,25 @@ ul{
     }
   }
 
+  .formula {
+    text-align: center;
+    .formula-inner {display: inline-block;}
+    .block {
+      float: left;
+      text-align: center;
+      .title { font-weight: bold;}
+      padding: 5px;
+      &.block-1 {background: #e9f3dc}
+      &.block-2 {background: #cceada}
+      &.block-3 {background: #f8f6ef}
+    }
+    .operator {
+      line-height: 40px;
+      font-weight: bold;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
   .current-balance {
     padding: 0 15px;
     .person {

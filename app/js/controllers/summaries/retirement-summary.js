@@ -59,7 +59,8 @@
       $scope.payment = schedule.payment;
       $scope.status = schedule.status;
       $scope.actions = data.actions;
-      $scope.comletedActions = data.completed_actions;
+      $scope.completedActions = data.completed_actions;
+
       var total = schedule.total_contributions_this_year;
       $scope.percentComplete = getPercent(schedule.saved_this_year, total);
       $scope.percentIncomplete = getPercent(schedule.saving_needed_this_year, total);
