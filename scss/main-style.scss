@@ -1262,6 +1262,7 @@ ul{
     .block {
       float: left;
       text-align: center;
+      border-radius: 3px;
       .title { font-weight: bold;}
       padding: 5px;
       &.block-1 {background: #e9f3dc}
