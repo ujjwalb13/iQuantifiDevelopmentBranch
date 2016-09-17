@@ -495,7 +495,6 @@ ul{
             color: $green-color;
           }
           &.needed{
-             border-bottom: 1px solid $border-color;
              strong{
               color: $blue-color;
              }
@@ -1245,3 +1244,112 @@ ul{
 
 
 
+.retirement-summary {
+  .sum-main-content .chart-content {top: -22px;}
+  .sum-main-content .downpayment-wrapper {padding-top: 15px;}
+  .sum-main-content .table-static table tbody tr{
+    &:hover {
+      background: transparent;
+    }
+    td:before {
+      content: "" !important;
+    }
+  }
+
+  .formula {
+    text-align: center;
+    .formula-inner {display: inline-block;}
+    .block {
+      margin: 5px 0;
+      float: left;
+      text-align: center;
+      border-radius: 3px;
+      .title { font-weight: bold;}
+      padding: 5px;
+      &.block-1 {background: #e9f3dc}
+      &.block-2 {background: #cceada}
+      &.block-3 {background: #f8f6ef}
+    }
+    .operator {
+      line-height: 40px;
+      font-weight: bold;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+  .current-balance {
+    padding: 0 15px;
+    .person {
+      .title-text {
+        color: #3b5152;
+      }
+
+      .header {
+        background: #dbe9e9;
+        padding: 5px 15px;
+        font-size: 1.5em;
+        text-shadow: none;
+        .name {
+          color: #3b5152;
+        }
+        .amount {
+          color: #4a8f92;
+          float: right;
+        }
+      }
+      .account-detail {
+        padding: 5px 15px;
+        background: #eef4f4;
+
+        table.account-table {
+          width: 100%;
+          border-top: none;
+
+          .account-indicator {
+            i {
+              width: 15px;
+              height: 15px;
+              border-radius: 50%;
+              display: block;
+              &.green {
+                background: #99cb5c;
+              }
+              &.yellow {
+                background: #e99f58;
+              }
+              &.purple {
+                background: #a88cc6;
+              }
+
+            }
+          }
+          .group-name {
+            padding-left: 0;
+            color: #3b5152;
+          }
+          .account-name {
+            width: 50%;
+          }
+          .balance-title { font-size: 0.8em; padding-right: 0}
+          tfoot > tr > td:last-of-type {padding-right: 20px;}
+          tfoot > tr > td {padding-top: 5px; padding-bottom: 5px; border-bottom: 2px solid #e5e0c7;}
+        }
+      }
+
+      .other-income {
+        padding: 15px;
+        .header {
+          padding: 5px;
+          color: #3b5152;
+          background: none;
+          font-size: 1.2em;
+        }
+
+        table tr {
+          th, td {text-align: center}
+          th:first-of-type, td:first-of-type {text-align: left;}
+        }
+      }
+    }
+  }
+}
