@@ -114,14 +114,14 @@
                     <div class="block block-1">
                       <div class="block">
                         <div class="title">Total Current Balance</div>
-                        <div>12423</div>
+                        <div>{{ schedule.balance | dollars }}</div>
                       </div>
                       <div class="block operator">
                         +
                       </div>
                       <div class="block">
                         <div class="title">Recommended Contributions</div>
-                        <div>123412</div>
+                        <div>{{ schedule.total_contributions | dollars }}</div>
                       </div>
                     </div>
                     <div class="block">
@@ -132,7 +132,7 @@
                     <div class="block block-2">
                       <div class="block">
                         <div class="title">Projected Growth</div>
-                        <div>123412</div>
+                        <div>{{ schedule.projected_growth | dollars }}</div>
                       </div>
                     </div>
                     <div class="block">
@@ -143,7 +143,7 @@
                     <div class="block block-3">
                       <div class="block">
                         <div class="title">Total Future Value</div>
-                        <div>123412</div>
+                        <div>{{ schedule.estimated_future_value | dollars }}</div>
                       </div>
                     </div>
                     <div class="clearfix"></div>
