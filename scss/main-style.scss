@@ -1247,4 +1247,12 @@ ul{
 .retirement-summary {
   .sum-main-content .chart-content {top: -22px;}
   .sum-main-content .downpayment-wrapper {padding-top: 15px;}
+  .sum-main-content .table-static table tbody tr{
+    &:hover {
+      background: transparent;
+    }
+    td:before {
+      content: "" !important;
+    }
+  }
 }
