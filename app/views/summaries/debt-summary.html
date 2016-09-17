@@ -18,29 +18,28 @@
             </div>
             <div class="right-content col-lg-10 col-md-9 col-sm-12 col-xs-12">
                 <div class="content-wrapper">
-                    <div class="section-header goals">
-                        <i class="icon icon-gl-custom-goal"></i>Goal Summary
+                    <div class="section-header debts">
+                        <i class="icon icon-db-debt"></i>My Debts
                     </div>
                     <div class="goal-summary-head">
                         <div class="pull-left">
-                            <i class="icon {{ goal.type | goalIconClass }} icon-80"></i>
+                            <i class="icon {{ debt.kind | debtIconClass }} icon-80"></i>
                             <h3>
-                                {{ goal.name }}
+                                {{ debt.name }}
                             </h3>
-                            <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
-                                Edit Goal
+                            <button class="btn btn-blue" ng-if="debt" ng-click="goToEdit(debt)">
+                                Edit Debt
                             </button>
-                            <goals-delete-modal goal="goal" ng-if="goal"></goals-delete-modal>
                         </div>
                         <div class="pull-right">
                             <ul>
                                 <li>
-                                    <label for="">Purchase Date</label>
-                                    <p ng-if="goal.transition_on">{{ goal.transition_on | monthYear}}</p>
+                                    <label for="">Payoff Date</label>
+                                    <p ng-if="debt.transition_on">{{ debt.transition_on | monthYear}}</p>
                                 </li>
                                 <li>
-                                    <label for="">Total Goal Amount</label>
-                                    <p>{{ goal.amount | dollars }}</p>
+                                    <label for="">Total Payoff</label>
+                                    <p>{{ debt.amount | dollars }}</p>
                                 </li>
                             </ul>
                         </div>
@@ -52,35 +51,51 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Start Saving Date</th>
-                                            <th>{{ schedule.start_saving_date ? (schedule.start_saving_date |  monthYear) : ""}}</th>
+                                            <th>Payoff Date</th>
+                                            <th>{{ debt.transition_on | monthYear}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><strong>Goal Date</strong></td>
-                                            <td>{{ goal.transition_on | monthYear}}</td>
+                                            <td><strong>Orgination Date</strong></td>
+                                            <td>{{ debt.transition_on | monthYear}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Total Goal Amount</strong></td>
-                                            <td>{{ goal.amount | dollars }}</td>
+                                            <td>{{ debt.amount | dollars }}</td>
                                         </tr>
-                                     </tbody>
+                                        <tr>
+                                            <td><strong>Current Balance</strong></td>
+                                            <td>{{ debt.amount | dollars }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Interest Rate</strong></td>
+                                            <td>{{ debt.rate }}%</td>
+                                        </tr>
+                                        <tr ng-if="debt.orginate_terms > 0">
+                                            <td><strong>Terms</strong></td>
+                                            <td>{{ debt.originate_terms / 12 }} years</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total Payoff</strong></td>
+                                            <td><p>{{ debt.amount | dollars }}</p></td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="col-md-6 col-xs-12">
-                            <div ng-include="'/views/summaries/_progress.html'"></div>
+                            <div ng-include="'/views/summaries/_debtprogress.html'"></div>
                         </div>
                     </div>
                 </div>
                 <div class="content-wrapper">
-                    <div class="section-header" ng-if="schedule.data.length > 1">
+                    <div class="section-header" ng-if="schedule.data.length > 2">
                         Action Tracker
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
-                            <div class="chart-content" ng-if="schedule.data.length > 1">
+                            <div class="chart-content" ng-if="schedule.data.length > 2">
                                 <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
                                 </goal-action-tracker>
                             </div>
