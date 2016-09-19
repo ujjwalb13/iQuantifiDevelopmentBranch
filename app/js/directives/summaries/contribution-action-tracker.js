@@ -62,6 +62,22 @@
             }
           }
 
+          list = [];
+          amt = scope.baseline;
+          ref1 = scope.schedule;
+          for (m = 0, len3 = ref1.length; m < len3; m++) {
+            month = ref1[m];
+            amt = (amt + month.payment) * (1 + (configService.growthRate / 12));
+            list.push({
+              date: month.date,
+              value: amt
+            });
+          }
+          mtnData = getBars(list);
+
+          console.log("2222");
+          console.log(mtnData);
+
           margin = {
             top: 20,
             right: 0,
@@ -160,6 +176,15 @@
             return scope.bubbleText;
           });
           svg.call(tip);
+
+          if (mtnData != null) {
+            area = d3.svg.area().x(function(d) {
+              return x(d.date);
+            }).y0(height).y1(function(d) {
+              return y(d.value);
+            });
+            svg.append('path').datum(mtnData).attr('class', 'area').attr('d', area).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+          }
 
           var nowPathData = _.filter(data, function(d, index) {
             return index <= nowIndex;
