@@ -78,7 +78,7 @@
             top: 20,
             right: 0,
             bottom: 30,
-            left: 60
+            left: 100
           };
           width = 910 - margin.left - margin.right;
           height = 400 - margin.top - margin.bottom;
