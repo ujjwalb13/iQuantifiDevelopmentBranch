@@ -9,7 +9,9 @@
         schedule: '=',
         bubbleText: '=',
         baseline: '=',
-        status: '='
+        status: '=',
+        projectedAreaLabel: '=',
+        contributionAreaLabel: '='
       },
       link: function(scope, element, attrs) {
         return scope.$watch('schedule', function(newValue, oldValue) {
@@ -287,7 +289,7 @@
             .attr("y", y(height) - labelPadding)
             .attr("font-size", "14px")
             .attr("text-anchor", "end")
-            .text("Total Current Balance + Recommended Contributions")
+            .text(scope.contributionAreaLabel)
             .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
           svg.append("text")
@@ -295,7 +297,7 @@
             .attr("y", y(lastDatum.dotValue) - labelPadding)
             .attr("font-size", "14px")
             .attr("text-anchor", "end")
-            .text("Projected Growth")
+            .text(scope.projectedAreaLabel)
             .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
           nowDatum = data[nowIndex];
