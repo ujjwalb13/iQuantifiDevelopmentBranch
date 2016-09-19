@@ -14,10 +14,13 @@
 
     function drawChart(scope, svg, data) {
       var width, height, donut_size;
+      var label_positions = {}
       width = parseInt(svg.style("width"));
       donut_size = width/3;
       var radius = width/6;
+      console.log("radius",radius);
       var total_monthly_height = 50;
+      var label_container_height = 40;
       var color = d3.scale.ordinal().range(["#e3973d", "#e3973d", "#d36351", "#508b8e"]);
       svg.style("width", width + "px").style("height", (donut_size + total_monthly_height) + "px");
       svg = svg.append("g");
@@ -119,8 +122,10 @@
           var d2 = interpolate(t);
           var pos = outerArc.centroid(d2);
           pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
-          if(midAngle(d2) > Math.PI) {pos[0] -= width/3;}
+          if(midAngle(d2) > Math.PI) { pos[0] -= width/3;}
           if(midAngle(d2) > Math.PI) { pos[1] += total_monthly_height; }
+          label_positions[d.data.label] = pos;
+          adjust_label_positions(label_positions);
           return "translate("+ pos +")";
         };
       })
@@ -170,9 +175,8 @@
         .selectAll("polyline")
         .data(pie(data.pies), key)
         .enter().append("polyline")
-        .attr("fill", "none")
-        .attr("stroke", "#000");
-
+        .attr("stroke", "#000")
+        .attr("fill", "none");
       polyline.transition().duration(1000)
         .attrTween("points", function(d){
           this._current = this._current || d;
@@ -234,14 +238,14 @@
         },
         {
           label: "Monthly Debt Payments",
-          amount: totalDebts,
+          amount: 10,
           kind: "commited",
           color: "green",
           icon: "/images/svg/icon-db-debt.svg"
         },
         {
           label: "Monthly Policy Premiums",
-          amount: totalPolicies,
+          amount: 10,
           kind: "commited",
           color: "red",
           icon: "/images/svg/icon-pt-protection.svg"
@@ -258,6 +262,27 @@
     function isCommittedExpense(expense_kind) {
       var commited_expense_kinds = ["car_insurance", "cell_phone", "education", "health_insurance", "rent", "groceries", "transportation", "utilities", "cable_internet", "healthcare"];
       return _.include(commited_expense_kinds, expense_kind);
+    }
+
+    function isCollide(pos1, pos2, width, height) {
+      if(pos1[0] + width < pos2[0]) { return true;}
+      if(pos2[0] + width < pos1[0]) { return true; }
+      if(pos1[1] + height < pos2[1]) { return true};
+      if(pos2[1] + height < pos1[1]) { return true};
+      return false;
+    }
+
+    function adjust_label_positions(label_positions) {
+      console.log("adjust_label_positions", label_positions);
+      var labels = Object.keys(label_positions)
+      if(labels.length == 0){return;}
+      for(i = 0; i< labels.length; i ++) {
+        for (j = 1; j < labels.length; j ++) {
+          if(isCollide(label_positions[labels[i]], label_positions[labels[j]], width/3, label_container_height)) {
+
+          }
+        }
+      }
     }
 
     return {
