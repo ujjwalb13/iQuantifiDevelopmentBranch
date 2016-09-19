@@ -4,7 +4,20 @@
     var obj;
     obj = $resource(ENV.apiHost + "/goals/retirements/:guid", {
       guid: '@guid'
-    });
+    },
+    {
+      summary: {
+        url: ENV.apiHost + "/goals/retirements/:guid/Summary",
+        method: 'GET',
+        isArray: false
+      },
+      accounts: {
+        url: ENV.apiHost + "/goals/retirements/:guid/Accounts",
+        method: 'GET',
+        isArray: true
+      }
+    }
+    );
     obj.prototype.actions = function() {
       return $http.get(ENV.apiHost + "/goals/retirements/" + this.guid + "/actions");
     };
@@ -17,9 +30,7 @@
     obj.prototype.schedule = function() {
       return $http.get(ENV.apiHost + "/goals/retirements/" + this.guid + "/schedule");
     };
-    obj.prototype.accounts = function() {
-      return $http.get(ENV.apiHost + "/goals/retirements/" + this.guid + "/accounts");
-    };
+
     obj.type = 'goal';
     obj.kind = 'retirement';
     obj.dateTitle = 'Retirement Date';

@@ -2,7 +2,7 @@
   <div class="chart-main-content">
     <p class="percent-completep downpay-status">
       <strong class="complete-text">{{complete}}%</strong>
-      <span>Downpayment saved!</span>
+      <span>{{ topmessage }}</span>
     <p/>
     <div class="track-status chart-status {{ behindStatusClass() }}" ng-switch on="status">
       <div class="middle-line"></div>
