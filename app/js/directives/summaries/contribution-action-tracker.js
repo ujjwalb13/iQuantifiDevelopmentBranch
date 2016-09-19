@@ -12,7 +12,6 @@
         status: '='
       },
       link: function(scope, element, attrs) {
-        console.log("8888");
         return scope.$watch('schedule', function(newValue, oldValue) {
           var amt, area, bgBarWidth, commasFormatter, d, data, dotValue, downColor, firstDate, getBars, height, i, j, k, l, lastDate, len, len1, len2, len3, line, list, m, margin, maxBars, month, mtnData, now, nowColor, nowDatum, nowIndex, nowRectEl, ref, ref1, svg, tip, upColor, width, x, xAxis, xDateFormat, y, yAxis,
             yAxisTicks;
@@ -280,6 +279,24 @@
           }).attr('cy', function(d) {
             return y(d.dotValue);
           }).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
+          var lastDatum = data[data.length - 1];
+          var labelPadding = 10;
+          svg.append("text")
+            .attr("x", x(lastDatum.date) - labelPadding)
+            .attr("y", y(height) - labelPadding)
+            .attr("font-size", "14px")
+            .attr("text-anchor", "end")
+            .text("Total Current Balance + Recommended Contributions")
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
+          svg.append("text")
+            .attr("x", x(lastDatum.date) - labelPadding)
+            .attr("y", y(lastDatum.dotValue) - labelPadding)
+            .attr("font-size", "14px")
+            .attr("text-anchor", "end")
+            .text("Projected Growth")
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
           nowDatum = data[nowIndex];
           if ((nowDatum != null) && scope.bubbleText && nowDatum.dotValue >= nowDatum.projected_balance) {
