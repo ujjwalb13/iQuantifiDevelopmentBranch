@@ -41,7 +41,10 @@
           return true;
         };
 
-        $scope.openUrl = function(action) {
+        $scope.openUrl = function (action) {
+
+          return "/#/mortgage";
+
           if (action.actionable_href.match(/^http/)) {
             return action.actionable_href;
           } else {
@@ -49,7 +52,9 @@
           }
         };
 
-        $scope.target = function(href) {
+        $scope.target = function (href) {
+          return '_blank';
+
           if (href.match(/^http/)) {
             return '_blank';
           } else {
