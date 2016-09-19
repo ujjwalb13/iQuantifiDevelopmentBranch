@@ -74,10 +74,6 @@
             });
           }
           mtnData = getBars(list);
-
-          console.log("2222");
-          console.log(mtnData);
-
           margin = {
             top: 20,
             right: 0,
@@ -143,6 +139,15 @@
           .attr('class', 'xline')
           .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
+          if (mtnData != null) {
+            area = d3.svg.area().x(function(d) {
+              return x(d.date);
+            }).y0(height).y1(function(d) {
+              return y(d.value);
+            });
+            svg.append('path').datum(mtnData).attr('class', 'projected-area').attr('d', area).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+          }
+
           svg.selectAll('.xline').attr('y1', function(d) {
             return height - y(d3.max(data, function(d) {
               return d.projected_balance;
@@ -177,14 +182,7 @@
           });
           svg.call(tip);
 
-          if (mtnData != null) {
-            area = d3.svg.area().x(function(d) {
-              return x(d.date);
-            }).y0(height).y1(function(d) {
-              return y(d.value);
-            });
-            svg.append('path').datum(mtnData).attr('class', 'area').attr('d', area).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
-          }
+
 
           var nowPathData = _.filter(data, function(d, index) {
             return index <= nowIndex;
