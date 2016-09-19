@@ -83,7 +83,8 @@
         }
       });
     };
-    goBack = function () {
+
+    $scope.goBack = function () {
       return $window.history.go(-2);
     };
 
