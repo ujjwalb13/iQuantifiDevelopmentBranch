@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div class="main-content-style">
+<div class="main-content-style retirement-summary">
     <div class="container main-wrapper">
       <div class="row">
         <div class="left-side-bar col-lg-2 col-md-3 col-sm-12 col-xs-12">
@@ -30,15 +30,13 @@
                 <button class="btn btn-blue" ng-if="goal" ng-click="goToEdit(goal)">
                   Edit Goal
                 </button>
-                <a class="btn btn-delete ng-scope" ng-if="goal" ng-click="deleteGoal(goal)">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                </a>
+                <goals-delete-modal goal="goal" ng-if="goal"></goals-delete-modal>
               </div>
               <div class="pull-right">
                 <ul>
                   <li>
                     <label for="">Start Date</label>
-                    <p>{{ goal.start_on | monthYear}}</p>
+                    <p>{{ goal.transition_on | monthYear}}</p>
                   </li>
                   <li>
                     <label for="">Total Goal Amount</label>
@@ -81,9 +79,23 @@
                     </table>
                 </div>
               </div>
-              <!-- <div class="col-md-6 col-xs-12">
-                <div ng-include="'/views/summaries/_downpayment.html'"></div>
-              </div> -->
+              <div class="col-md-6 col-xs-12">
+                <div class="chart-downpayment">
+                  <div class="chart-content">
+                    <goal-progress-circle complete="percentComplete" incomplete="percentIncomplete" permonth="payment" status="status"></goal-progress-circle>
+                  </div>
+                  <div class="downpayment-wrapper">
+                    <div class="downpayment-content">
+                      <h3>{{thisYear}} Contributions</h3>
+                      <ul>
+                        <li class="save"><label>Saved</label> <span>{{ schedule.saved_this_year | dollars }}</span></li>
+                        <li class="needed"><label>Needed</label> <strong>{{ schedule.saving_needed_this_year | dollars }}</strong></li>
+                        <li><label>Total</label> <strong>{{ schedule.total_contributions_this_year | dollars }}</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+              </div>
+
             </div>
           </div>
           <div class= "row">
@@ -114,11 +126,47 @@
           <div class="content-wrapper">
             <div class="section-header" ng-if="schedule.data.length > 2">Action Tracker
             </div>
-            <div class="row" ng-if="schedule.data.length > 2">
+            <div class="row">
               <div class="col-md-12 col-xs-12">
-                <div class="chart-content" >
+                <div class="chart-content">
                   <goal-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status">
                   </goal-action-tracker>
+                </div>
+                <div class="formula">
+                  <div class="formula-inner">
+                    <div class="block block-1">
+                      <div class="block">
+                        <div class="title">College Contributions</div>
+                        <div>{{ (schedule.total_contributions-schedule.balance) | dollars }}</div>
+                      </div>
+                    </div>
+                    <div class="block">
+                      <div class="block operator">
+                        +
+                      </div>
+                    </div>
+                    <div class="block block-2">
+                      <div class="block">
+                        <div class="title">Projected Growth</div>
+                        <div>{{ schedule.projected_growth | dollars }}</div>
+                      </div>
+                    </div>
+                    <div class="hidden-lg">
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="block">
+                      <div class="block operator">
+                        =
+                      </div>
+                    </div>
+                    <div class="block block-3">
+                      <div class="block">
+                        <div class="title">Estimated Future Value</div>
+                        <div>{{ schedule.estimated_future_value | dollars }}</div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
                 </div>
               </div>
             </div>
