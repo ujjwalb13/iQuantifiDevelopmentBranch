@@ -110,19 +110,13 @@
           x.domain(data.map(function(d) {
             return d.date;
           }));
-          if (mtnData != null) {
-            y.domain([
-              0, d3.max(mtnData, function(d) {
-                return d.value;
-              })
-            ]);
-          } else {
-            y.domain([
-              0, d3.max(data, function(d) {
-                return Math.max(d.projected_balance, d.balance);
-              })
-            ]);
-          }
+
+          y.domain([
+            0, d3.max(mtnData, function(d) {
+              return d.value;
+            })
+          ]);
+
           svg.append('g').attr('class', 'x axis').attr('transform', "translate(0, " + height + ")").call(xAxis);
           svg.append('g').attr('class', 'y axis').call(yAxis);
 
@@ -132,6 +126,17 @@
             return y(d.value);
           });
           svg.append('path').datum(mtnData).attr('class', 'projected-area').attr('d', projectedArea).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
+          // var contributionArea = d3.svg.area().x(function(d) {
+          //   return x(d.date);
+          // })
+          // .y0(function(d) {
+          //   return 100;
+          // })
+          // .y1(function(d) {
+          //   return y(d.dotValue);
+          // });
+          // svg.append('path').datum(data).attr('class', 'contribution-area').attr('d', contributionArea).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
           svg.selectAll('.xline').data(data).enter().append('line')
           .attr('x1', function(d) {
