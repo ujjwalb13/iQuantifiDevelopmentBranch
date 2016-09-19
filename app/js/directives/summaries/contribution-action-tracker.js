@@ -221,11 +221,11 @@
           .attr('x2', function(d) {
             return x(d.date);
           })
-          .attr('y1', function(d) {
+          .attr('y2', function(d) {
             return y(d.dotValue);
           })
           .attr('y1', function(d) {
-            height;
+            return height;
           })
           .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
           .attr('class', function(d) {

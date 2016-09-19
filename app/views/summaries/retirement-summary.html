@@ -193,15 +193,3 @@
       </div>
     </div>
 </div>
-
-<div class="sc-action-tracker" ng-if="schedule.data.length > 2">
-  <div class="sc-container container">
-    <div class="arrow-down"></div>
-    <h1>Action Tracker</h1>
-    <action-chart schedule="schedule.data" goal-kind="goalKind" goal-type="goalType" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status"></action-chart>
-    <div class="legend" ng-if="goalKind == 'college' || goalKind == 'retirement'">
-      <div class="box gray"></div><span>{{goalKind == 'college' && 'College Contribution' || goalKind == 'retirement' && 'Retirement Contributions'}}</span>
-      <div class="box blue"></div><span>Estimated Future Value</span>
-    </div>
-  </div>
-</div>
