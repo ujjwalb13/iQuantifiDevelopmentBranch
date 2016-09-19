@@ -126,6 +126,13 @@
           svg.append('g').attr('class', 'x axis').attr('transform', "translate(0, " + height + ")").call(xAxis);
           svg.append('g').attr('class', 'y axis').call(yAxis);
 
+          var projectedArea = d3.svg.area().x(function(d) {
+            return x(d.date);
+          }).y0(height).y1(function(d) {
+            return y(d.value);
+          });
+          svg.append('path').datum(mtnData).attr('class', 'projected-area').attr('d', projectedArea).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
           svg.selectAll('.xline').data(data).enter().append('line')
           .attr('x1', function(d) {
             return x(d.date);
@@ -139,14 +146,7 @@
           .attr('class', 'xline')
           .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
-          if (mtnData != null) {
-            area = d3.svg.area().x(function(d) {
-              return x(d.date);
-            }).y0(height).y1(function(d) {
-              return y(d.value);
-            });
-            svg.append('path').datum(mtnData).attr('class', 'projected-area').attr('d', area).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
-          }
+
 
           svg.selectAll('.xline').attr('y1', function(d) {
             return height - y(d3.max(data, function(d) {
