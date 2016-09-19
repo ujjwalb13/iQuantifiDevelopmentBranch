@@ -127,16 +127,16 @@
           });
           svg.append('path').datum(mtnData).attr('class', 'projected-area').attr('d', projectedArea).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
-          // var contributionArea = d3.svg.area().x(function(d) {
-          //   return x(d.date);
-          // })
-          // .y0(function(d) {
-          //   return 100;
-          // })
-          // .y1(function(d) {
-          //   return y(d.dotValue);
-          // });
-          // svg.append('path').datum(data).attr('class', 'contribution-area').attr('d', contributionArea).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+          var contributionArea = d3.svg.area().x(function(d) {
+            return x(d.date);
+          })
+          .y0(function(d) {
+            return height;
+          })
+          .y1(function(d) {
+            return y(d.dotValue);
+          });
+          svg.append('path').datum(data).attr('class', 'contribution-area').attr('d', contributionArea).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
           svg.selectAll('.xline').data(data).enter().append('line')
           .attr('x1', function(d) {
@@ -148,16 +148,11 @@
           .attr('y2', function(d) {
             return 0;
           })
+          .attr('y1', function(d) {
+            return height;
+          })
           .attr('class', 'xline')
           .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
-
-
-
-          svg.selectAll('.xline').attr('y1', function(d) {
-            return height - y(d3.max(data, function(d) {
-              return d.projected_balance;
-            }));
-          });
 
           var yAxisTickTransforms = [];
           svg.selectAll(".y .tick").each(function(data) {
@@ -186,8 +181,6 @@
             return scope.bubbleText;
           });
           svg.call(tip);
-
-
 
           var nowPathData = _.filter(data, function(d, index) {
             return index <= nowIndex;
@@ -230,6 +223,9 @@
           .attr('y1', function(d) {
             return y(d.dotValue);
           })
+          .attr('y1', function(d) {
+            height;
+          })
           .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
           .attr('class', function(d) {
             if (d.status == "pay") {
@@ -241,12 +237,6 @@
             } else {
               return 'ontrack xline-balance';
             }
-          });
-
-          svg.selectAll('.xline-balance').attr('y2', function(d) {
-            return height - y(d3.max(data, function(d) {
-              return d.projected_balance;
-            }));
           });
 
           svg.append('path').datum(data)
