@@ -14,6 +14,10 @@
     <div class="container main-wrapper">
       <div class="row">
         <div class="left-side-bar col-lg-2 col-md-3 col-sm-12 col-xs-12">
+            <ul>
+                <li></li>
+
+            </ul>
           <ul ng-class="{'dropdown-active': dropdownActive}">
               <li ng-click="toogleDropdown()">
                 <a href="javascript:void(0)" class="active">
@@ -21,6 +25,11 @@
                   <span> {{ selectedSectionAttributes['text'] }}</span>
                 </a>
                 <span class="icon-arrow-down"></span>
+              </li>
+              <li ng-click="/#">
+                  <a href="/#/">
+                      <i class="fa fa-chevron-left fa-2x" aria-hidden="true" style="padding-top:5px; color:dimgray"></i><span>Back to Dashboard</span>
+                  </a>
               </li>
               <li ng-click="removeFilter()">
                 <a href="javascript:void(0)" ng-class="{'active': noFilter}">

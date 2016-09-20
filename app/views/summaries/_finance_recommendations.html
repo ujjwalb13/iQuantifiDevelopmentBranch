@@ -1,14 +1,14 @@
 <div class="finance-recommendations" ng-show="financeRecommendationsActive()">
   <div class="finance-recommendations-wrapper">
     <div class="finance-recommendations-content">
-      <h3>Finance Recommendations</h3>
-      <ul>
+        <h3>Finance Recommendations&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/#/mortgage" target="_blank" class="btn btn-blue">Apply</a></h3>
+    <ul>
         <li><label>Start Date</label> <span ng-if="goal.transition_on">{{ goal.transition_on | monthYear }}</span></li>
         <li><label>Loan Amount</label> <span>{{ goal.projected_finance_amount | dollars }}</span></li>
         <li><label>Interest rate</label> <span ng-if="goal.rate">{{ goal.rate }}%</span></li>
         <li><label>Term in Years</label> <span ng-if="goal.terms">{{ goal.terms / 12}} </span></li>
         <li><label>Monthly Payment</label> <span>{{ goal.projected_payment | dollars }}</span></li>
-      </ul>
-    </div>
+    </ul>
+</div>
   </div>
 </div>

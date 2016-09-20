@@ -41,7 +41,9 @@
           return true;
         };
 
-        $scope.openUrl = function(action) {
+        $scope.openUrl = function (action) {
+
+
           if (action.actionable_href.match(/^http/)) {
             return action.actionable_href;
           } else {
@@ -49,7 +51,8 @@
           }
         };
 
-        $scope.target = function(href) {
+        $scope.target = function (href) {
+
           if (href.match(/^http/)) {
             return '_blank';
           } else {
