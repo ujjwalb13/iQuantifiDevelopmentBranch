@@ -120,12 +120,15 @@
         this._current = interpolate(0);
         return function(t) {
           var d2 = interpolate(t);
-          var pos = outerArc.centroid(d2);
-          pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
-          if(midAngle(d2) > Math.PI) { pos[0] -= width/3;}
-          if(midAngle(d2) > Math.PI) { pos[1] += total_monthly_height; }
-          label_positions[d.data.label] = pos;
-          adjust_label_positions(label_positions);
+          var pos = label_positions[d.data.label];
+          if(pos === undefined) {
+            pos = outerArc.centroid(d2);
+            pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+            if(midAngle(d2) > Math.PI) { pos[0] -= width/3;}
+            if(midAngle(d2) > Math.PI) { pos[1] += total_monthly_height; }
+            label_positions[d.data.label] = pos;
+            adjust_label_positions(label_positions, width/3, label_container_height);
+          }
           return "translate("+ pos +")";
         };
       })
@@ -265,21 +268,26 @@
     }
 
     function isCollide(pos1, pos2, width, height) {
-      if(pos1[0] + width < pos2[0]) { return true;}
-      if(pos2[0] + width < pos1[0]) { return true; }
-      if(pos1[1] + height < pos2[1]) { return true};
-      if(pos2[1] + height < pos1[1]) { return true};
+      // console.log("--isCollide:width", pos1[0], pos2[0], width);
+      console.log("--isCollide:height", pos1[1], pos2[1], height);
+      // if(pos1[0] + width < pos2[0]) { return true;}
+      // if(pos2[0] + width < pos1[0]) { return true; }
+      if(pos1[1] <= (pos2[1] + height) && pos1[1] >= pos2[1]) { return true};
+      if(pos2[1] <= (pos1[1] + height) && pos2[1] >= pos1[1]) { return true};
       return false;
     }
 
-    function adjust_label_positions(label_positions) {
+    function adjust_label_positions(label_positions, label_width, label_height) {
       console.log("adjust_label_positions", label_positions);
       var labels = Object.keys(label_positions)
-      if(labels.length == 0){return;}
+      var i, j;
       for(i = 0; i< labels.length; i ++) {
-        for (j = 1; j < labels.length; j ++) {
-          if(isCollide(label_positions[labels[i]], label_positions[labels[j]], width/3, label_container_height)) {
-
+        for (j = i + 1; j < labels.length; j ++) {
+          if(isCollide(label_positions[labels[i]], label_positions[labels[j]], label_width, label_height)) {
+            //move above object up
+            //move behind object down
+            //don't move up if touch the top
+            //don't move down if touch the bottom
           }
         }
       }
