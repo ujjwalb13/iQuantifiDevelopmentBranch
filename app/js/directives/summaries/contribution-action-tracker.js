@@ -9,10 +9,11 @@
         schedule: '=',
         bubbleText: '=',
         baseline: '=',
-        status: '='
+        status: '=',
+        projectedAreaLabel: '=',
+        contributionAreaLabel: '='
       },
       link: function(scope, element, attrs) {
-        console.log("8888");
         return scope.$watch('schedule', function(newValue, oldValue) {
           var amt, area, bgBarWidth, commasFormatter, d, data, dotValue, downColor, firstDate, getBars, height, i, j, k, l, lastDate, len, len1, len2, len3, line, list, m, margin, maxBars, month, mtnData, now, nowColor, nowDatum, nowIndex, nowRectEl, ref, ref1, svg, tip, upColor, width, x, xAxis, xDateFormat, y, yAxis,
             yAxisTicks;
@@ -62,11 +63,23 @@
             }
           }
 
+          list = [];
+          amt = scope.baseline;
+          ref1 = scope.schedule;
+          for (m = 0, len3 = ref1.length; m < len3; m++) {
+            month = ref1[m];
+            amt = (amt + month.payment) * (1 + (configService.growthRate / 12));
+            list.push({
+              date: month.date,
+              value: amt
+            });
+          }
+          mtnData = getBars(list);
           margin = {
             top: 20,
             right: 0,
             bottom: 30,
-            left: 60
+            left: 100
           };
           width = 910 - margin.left - margin.right;
           height = 400 - margin.top - margin.bottom;
@@ -98,21 +111,33 @@
           x.domain(data.map(function(d) {
             return d.date;
           }));
-          if (mtnData != null) {
-            y.domain([
-              0, d3.max(mtnData, function(d) {
-                return d.value;
-              })
-            ]);
-          } else {
-            y.domain([
-              0, d3.max(data, function(d) {
-                return Math.max(d.projected_balance, d.balance);
-              })
-            ]);
-          }
+
+          y.domain([
+            0, d3.max(mtnData, function(d) {
+              return d.value;
+            })
+          ]);
+
           svg.append('g').attr('class', 'x axis').attr('transform', "translate(0, " + height + ")").call(xAxis);
           svg.append('g').attr('class', 'y axis').call(yAxis);
+
+          var projectedArea = d3.svg.area().x(function(d) {
+            return x(d.date);
+          }).y0(height).y1(function(d) {
+            return y(d.value);
+          });
+          svg.append('path').datum(mtnData).attr('class', 'projected-area').attr('d', projectedArea).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
+          var contributionArea = d3.svg.area().x(function(d) {
+            return x(d.date);
+          })
+          .y0(function(d) {
+            return height;
+          })
+          .y1(function(d) {
+            return y(d.dotValue);
+          });
+          svg.append('path').datum(data).attr('class', 'contribution-area').attr('d', contributionArea).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
           svg.selectAll('.xline').data(data).enter().append('line')
           .attr('x1', function(d) {
@@ -124,14 +149,11 @@
           .attr('y2', function(d) {
             return 0;
           })
+          .attr('y1', function(d) {
+            return height;
+          })
           .attr('class', 'xline')
           .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
-
-          svg.selectAll('.xline').attr('y1', function(d) {
-            return height - y(d3.max(data, function(d) {
-              return d.projected_balance;
-            }));
-          });
 
           var yAxisTickTransforms = [];
           svg.selectAll(".y .tick").each(function(data) {
@@ -199,8 +221,11 @@
           .attr('x2', function(d) {
             return x(d.date);
           })
-          .attr('y1', function(d) {
+          .attr('y2', function(d) {
             return y(d.dotValue);
+          })
+          .attr('y1', function(d) {
+            return height;
           })
           .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)")
           .attr('class', function(d) {
@@ -213,12 +238,6 @@
             } else {
               return 'ontrack xline-balance';
             }
-          });
-
-          svg.selectAll('.xline-balance').attr('y2', function(d) {
-            return height - y(d3.max(data, function(d) {
-              return d.projected_balance;
-            }));
           });
 
           svg.append('path').datum(data)
@@ -262,6 +281,24 @@
           }).attr('cy', function(d) {
             return y(d.dotValue);
           }).attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
+          var lastDatum = data[data.length - 1];
+          var labelPadding = 10;
+          svg.append("text")
+            .attr("x", x(lastDatum.date) - labelPadding)
+            .attr("y", y(height) - labelPadding)
+            .attr("font-size", "14px")
+            .attr("text-anchor", "end")
+            .text(scope.contributionAreaLabel)
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
+
+          svg.append("text")
+            .attr("x", x(lastDatum.date) - labelPadding)
+            .attr("y", y(lastDatum.dotValue) - labelPadding)
+            .attr("font-size", "14px")
+            .attr("text-anchor", "end")
+            .text(scope.projectedAreaLabel)
+            .attr('transform', "translate(" + (bgBarWidth / 4) + ", 0)");
 
           nowDatum = data[nowIndex];
           if ((nowDatum != null) && scope.bubbleText && nowDatum.dotValue >= nowDatum.projected_balance) {
