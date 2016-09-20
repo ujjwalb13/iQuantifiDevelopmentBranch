@@ -109,43 +109,6 @@
       return (1900 + dNow.getYear() + yearOffset);
     };
 
-    $scope.PlanGoalIcon = function (itemDataType) {
-
-      if (itemDataType === "baby")
-        return "goal-sm-baby.png";
-      else if (itemDataType === "car")
-        return "goal-sm-car.png";
-      else if (itemDataType === "college")
-        return "goal-sm-college.png";
-      else if (itemDataType === "custom")
-        return "goal-sm-college.png";
-      else if (itemDataType === "downsize")
-        return "goal-sm-downsize.png";
-      else if (itemDataType === "education")
-        return "goal-sm-education.png";
-      else if (itemDataType === "house")
-        return "goal-sm-house.png";
-      else if (itemDataType === "purchase")
-        return "goal-sm-purchase.png";
-      else if (itemDataType === "relocation")
-        return "goal-sm-relocation.png";
-      else if (itemDataType === "rent")
-        return "goal-sm-rent.png";
-      else if (itemDataType === "retirement")
-        return "goal-sm-retirement.png";
-      else if (itemDataType === "ring")
-        return "goal-sm-ring.png";
-      else if (itemDataType === "travel")
-        return "goal-sm-travel.png";
-      else if (itemDataType === "wedding")
-        return "goal-sm-wedding.png";
-      else if (itemDataType === "CreditCard")
-        return "debt-sm.png"
-      else
-        return "goal-sm-house.png";
-
-    };
-
     $scope.planChanges = null;
     $scope.$on('dirty-timeline', function () {
 
