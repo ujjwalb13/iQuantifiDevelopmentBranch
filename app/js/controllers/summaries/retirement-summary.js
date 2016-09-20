@@ -67,7 +67,6 @@
 
     var extraAttributeAccounts = function(accounts, totalAmount) {
       var pieAccounts = pie(accounts);
-      console.log(pieAccounts);
       return _.each(accounts, function(account, index) {
         account.color = color(pieAccounts[index].data.name);
         account.percentage = Math.round(account.amount * 100.0 / totalAmount);
@@ -90,8 +89,8 @@
       var paritionedAccounts = partitionAccounts(accounts);
 
       var otherIncomes = [
-        {name: "incom 1", age: 62, amount: 123412},
-        {name: "incom 2", age: 64, amount: 123412},
+        {name: "Social Security (Estimated)", age: data.social.primary.age_planned, amount: data.social.primary.amount_planned},
+        {name: "Pension (Estimated)", age: data.pension.primary.age_planned, amount: data.pension.primary.amount_planned},
       ];
 
       return {
@@ -118,10 +117,9 @@
       var paritionedAccounts = partitionAccounts(accounts);
 
       var otherIncomes = [
-        {name: "incom 1", age: 62, amount: 123412},
-        {name: "incom 2", age: 64, amount: 123412},
+        {name: "Social Security (Estimated)", age: data.social.spouse.age_planned, amount: data.social.spouse.amount_planned},
+        {name: "Pension (Estimated)", age: data.pension.spouse.age_planned, amount: data.pension.spouse.amount_planned},
       ];
-      console.log(accounts);
       return {
         name: data.retirement.spouse.first_name,
         totalAmount: totalAmount,
@@ -143,8 +141,8 @@
       $scope.actions = data.actions;
       $scope.completedActions = data.completed_actions;
 
-      var total = schedule.total_contributions_this_year;
-      $scope.percentComplete = getPercent(schedule.saved_this_year, total);
+      var total = goal.amount;
+      $scope.percentComplete = getPercent(schedule.balance, total);
       $scope.percentIncomplete = getPercent(schedule.saving_needed_this_year, total);
       $scope.projectedAreaLabel = 'Projected Growth';
       $scope.contributionAreaLabel = 'Total Current Balance + Recommended Contributions';
