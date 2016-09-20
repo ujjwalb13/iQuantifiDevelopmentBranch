@@ -1,17 +1,7 @@
 (function() {
   'use strict';
-  angular.module('summaries').controller('retirementSummaryCtrl', function($scope, $location, $routeParams, Retirement, $q) {
-
-    Retirement.summary({guid: $routeParams.guid}).$promise
-    .then(function(data) {
-      fetchGoalData(data);
-    });
-
-    $scope.goToEdit = function(goal) {
-      var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
-      $location.path(editUrl);
-    }
-
+  angular.module('summaries').controller('collegeSummaryCtrl', function($scope, $location, $routeParams, CollegeSummary, Action, $rootScope) {
+    
     var getNeed = function(current, target) {
       var amt;
       amt = target - current;
@@ -50,24 +40,35 @@
       return Math.max(percent, 0);
     };
 
-    var fetchGoalData = function(data) {
-      var goal, schedule
-      $scope.goal = goal = data.retirement
-      $scope.schedule = schedule = data.schedule
-
+    var fetchGoalData = function(goal, schedule) {
+      $scope.schedule = schedule;
+      $scope.collegeType = goal.is_public ? 'Public' : 'Private';
+      $scope.status = schedule.status;
       $scope.thisYear = moment().year();
       $scope.payment = schedule.payment;
-      $scope.status = schedule.status;
-      $scope.actions = data.actions;
-      $scope.completedActions = data.completed_actions;
-
+      $scope.goal.icon = "icon-gl-college";
       var total = schedule.total_contributions_this_year;
       $scope.percentComplete = getPercent(schedule.saved_this_year, total);
       $scope.percentIncomplete = getPercent(schedule.saving_needed_this_year, total);
       $scope.projectedAreaLabel = 'Projected Growth';
-      $scope.contributionAreaLabel = 'Total Current Balance + Recommended Contributions';
+      $scope.contributionAreaLabel = 'College Contributions';
     };
+
+    CollegeSummary.get({
+      guid: $routeParams.guid
+    }).$promise.then(function(object) {
+      $scope.goal = object.goal();
+      fetchGoalData($scope.goal, object.schedule);
+      $scope.completedActions = object.completed_actions;
+      $scope.actions = object.actions;
+      $scope.accounts = object.associated_accounts;
+    });
+
+    $scope.goToEdit = function(goal) {
+      var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
+      $location.path(editUrl);
+    }
+   
   });
 }).call(this);
 
-//# sourceMappingURL=summary.js.map
