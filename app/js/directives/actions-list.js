@@ -43,7 +43,6 @@
 
         $scope.openUrl = function (action) {
 
-          return "/#/mortgage";
 
           if (action.actionable_href.match(/^http/)) {
             return action.actionable_href;
@@ -53,7 +52,6 @@
         };
 
         $scope.target = function (href) {
-          return '_blank';
 
           if (href.match(/^http/)) {
             return '_blank';
