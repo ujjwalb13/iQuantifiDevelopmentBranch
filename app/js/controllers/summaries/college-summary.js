@@ -50,6 +50,8 @@
       var total = schedule.total_contributions_this_year;
       $scope.percentComplete = getPercent(schedule.saved_this_year, total);
       $scope.percentIncomplete = getPercent(schedule.saving_needed_this_year, total);
+      $scope.projectedAreaLabel = 'Projected Growth';
+      $scope.contributionAreaLabel = 'College Contributions';
     };
 
     CollegeSummary.get({
