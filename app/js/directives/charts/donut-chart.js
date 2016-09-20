@@ -99,7 +99,6 @@
       .append("text")
         .attr("dx", "20px")
         .attr("class", "legend-line1")
-        .attr("font-weight", "bold")
         .attr("font-size", "14px")
         .text(function(d){
           return d.data.label;
@@ -112,11 +111,10 @@
         .attr("dx", "20px")
         .attr("dy", "20px")
         .attr("class", "legend-line2")
-        .attr("font-weight", "bold")
         .attr("font-size", "14px")
         .text(function(d){
           var percent = Math.round(10000 * (d.endAngle - d.startAngle) / 2 / Math.PI)/100.0;
-          return "$" + d.value + " ("+ percent +"%)";
+          return percent +"%";
         });
 
       labels.exit().remove();

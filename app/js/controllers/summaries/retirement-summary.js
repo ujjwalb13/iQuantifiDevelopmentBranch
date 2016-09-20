@@ -50,10 +50,9 @@
       return Math.max(percent, 0);
     };
     var incomeData = [
-        {label: 'aaa', amount: 10},
-        {label: 'bbb', amount: 30},
-        {label: 'dddd', amount: 30},
-        {label: 'cc', amount: 60},
+        {label: 'IRA', amount: 10},
+        {label: '401K', amount: 30},
+        {label: 'brokerage', amount: 60},
       ]
     var fetchGoalData = function(data) {
       var goal, schedule
