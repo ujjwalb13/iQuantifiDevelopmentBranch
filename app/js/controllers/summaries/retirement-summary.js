@@ -49,6 +49,88 @@
       percent = Math.min(percent, 100);
       return Math.max(percent, 0);
     };
+    var incomeData = [
+        {label: 'IRA', amount: 10},
+        {label: '401K', amount: 30},
+        {label: 'brokerage', amount: 60},
+      ]
+
+    var getTotalCurrentBalances =  function(data) {
+      $scope.totalCurrentBalances = [getPrimaryAccounts(data), getSpouseAccounts(data)]
+    }
+
+    var color = d3.scale.category10();
+
+    var pie = d3.layout.pie()
+        .value(function(d) { return d.amount; })
+        .sort(null);
+
+    var extraAttributeAccounts = function(accounts, totalAmount) {
+      var pieAccounts = pie(accounts);
+      console.log(pieAccounts);
+      return _.each(accounts, function(account, index) {
+        account.color = color(pieAccounts[index].data.name);
+        account.percentage = Math.round(account.amount * 100.0 / totalAmount);
+        account.label = account.name;
+      })
+    }
+
+    var partitionAccounts = function(accounts) {
+      return _.partition(accounts, function(account) { return account.qualified == true })
+    }
+    var getPrimaryAccounts = function(data) {
+      var totalAmount = 100;
+
+      var accounts = [
+        {name: 'IRA', amount: 10, qualified: true},
+        {name: '401K', amount: 30, qualified: true},
+        {name: 'Brokerage', amount: 60, qualified: false},
+      ]
+      accounts = extraAttributeAccounts(accounts, totalAmount)
+      var paritionedAccounts = partitionAccounts(accounts);
+
+      var otherIncomes = [
+        {name: "incom 1", age: 62, amount: 123412},
+        {name: "incom 2", age: 64, amount: 123412},
+      ];
+
+      return {
+        name: data.retirement.person.first_name,
+        totalAmount: totalAmount,
+        accounts: accounts,
+        qualifiedAccounts: paritionedAccounts[0],
+        nonQualifiedAccounts: paritionedAccounts[1],
+        otherIncomes: otherIncomes
+      }
+    }
+
+    var getSpouseAccounts = function(data) {
+      var totalAmount = 100;
+
+      var accounts = [
+        {name: 'IRA', amount: 10, qualified: true},
+        {name: '401K', amount: 30, qualified: true},
+        {name: 'Brokerage', amount: 60, qualified: false},
+      ]
+
+      accounts = extraAttributeAccounts(accounts, totalAmount)
+
+      var paritionedAccounts = partitionAccounts(accounts);
+
+      var otherIncomes = [
+        {name: "incom 1", age: 62, amount: 123412},
+        {name: "incom 2", age: 64, amount: 123412},
+      ];
+      console.log(accounts);
+      return {
+        name: data.retirement.spouse.first_name,
+        totalAmount: totalAmount,
+        accounts: accounts,
+        qualifiedAccounts: paritionedAccounts[0],
+        nonQualifiedAccounts: paritionedAccounts[1],
+        otherIncomes: otherIncomes
+      }
+    }
 
     var fetchGoalData = function(data) {
       var goal, schedule
@@ -66,6 +148,8 @@
       $scope.percentIncomplete = getPercent(schedule.saving_needed_this_year, total);
       $scope.projectedAreaLabel = 'Projected Growth';
       $scope.contributionAreaLabel = 'Total Current Balance + Recommended Contributions';
+      $scope.incomeData = incomeData;
+      getTotalCurrentBalances(data);
     };
   });
 }).call(this);
