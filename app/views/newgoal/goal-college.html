@@ -18,18 +18,19 @@
   <div class="control-label col-lg-4 col-md-5 col-sm-5">
     <label class="control-label">State of Residence</label>
     <state-selector name="residenceState"
-                    model="obj.residence_state"
-                    state-changed="updateCosts()"
-                    ng-class="{'has-error': submitted && (errors.residence_state || objForm.residenceState.$invalid)}">
-    </state-selector>
+       model="obj.residence_state"
+       state-changed="updateCosts()"
+       ng-class="{'has-error': submitted && (errors.residence_state || objForm.residenceState.$invalid)}">
+     </state-selector> 
   </div>
+
   <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
     <label class="control-label">State Attending College</label>
     <state-selector name="collegeState"
-                    model="obj.college_state"
-                    state-changed="updateCosts()"
-                    ng-class="{'has-error': submitted && (errors.college_state || objForm.collegeState.$invalid)}">
-    </state-selector>
+       model="obj.college_state"
+       state-changed="updateCosts()"
+       ng-class="{'has-error': submitted && (errors.college_state || objForm.collegeState.$invalid)}">
+     </state-selector> 
   </div>
 </div>
 <div class="row form-group" ng-class="{'has-error': submitted && (errors.is_public || objForm.isPublic.$invalid)}">
