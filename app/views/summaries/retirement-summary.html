@@ -101,11 +101,11 @@
             </div>
           </div>
           <div class="content-wrapper">
-            <div class="section-header">Action Tracker
+            <div class="section-header" ng-if="schedule.data.length > 2">Action Tracker
             </div>
             <div class="row">
               <div class="col-md-12 col-xs-12">
-                <div class="chart-content">
+                <div class="chart-content" ng-if="schedule.data.length > 2">
                   <contribution-action-tracker schedule="schedule.data" bubble-text="schedule.bubble" baseline="schedule.baseline" status="schedule.status" projected-area-label="projectedAreaLabel" contribution-area-label="contributionAreaLabel">
                   </contribution-action-tracker>
                 </div>
