@@ -49,7 +49,12 @@
       percent = Math.min(percent, 100);
       return Math.max(percent, 0);
     };
-
+    var incomeData = [
+        {label: 'aaa', amount: 10},
+        {label: 'bbb', amount: 30},
+        {label: 'dddd', amount: 30},
+        {label: 'cc', amount: 60},
+      ]
     var fetchGoalData = function(data) {
       var goal, schedule
       $scope.goal = goal = data.retirement
@@ -64,6 +69,7 @@
       var total = schedule.total_contributions_this_year;
       $scope.percentComplete = getPercent(schedule.saved_this_year, total);
       $scope.percentIncomplete = getPercent(schedule.saving_needed_this_year, total);
+      $scope.incomeData = incomeData;
     };
   });
 }).call(this);
