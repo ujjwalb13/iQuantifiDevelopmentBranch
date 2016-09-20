@@ -1,12 +1,13 @@
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-xs-6" ng-repeat="person in totalCurrentBalances">
     <div class="person">
       <div class="header">
-        <span class="name">John</span>
-        <span class="amount"><strong>{{12342 | dollars}}</strong></span>
+        <span class="name">{{ person.name }}'s Accounts</span>
+        <span class="amount"><strong>{{ person.totalAmount | dollars }}</strong></span>
       </div>
       <div class="account-detail">
         <div class="donut-chart">
+          <donut-chart id="chart" data="person.accounts"></donut-chart>
         </div>
         <div class="table-static">
           <table class="account-table">
@@ -16,33 +17,25 @@
                 <td colspan="2" class="text-right balance-title"><strong>Current Balance</strong></td>
               </tr>
 
-              <tr>
+              <tr ng-repeat="account in person.qualifiedAccounts">
                 <td class="account-indicator">
-                  <i class="green"></i>
+                  <i style="background-color: {{account.color}}"></i>
                 </td>
-                <td class="account-name">IRA</td>
-                <td class="text-right">{{45}}%</td>
-                <td class="text-right">{{123 | dollars}}</td>
-              </tr>
-              <tr>
-                <td class="account-indicator">
-                  <i class="yellow"></i>
-                </td>
-                <td class="account-name">IRA</td>
-                <td class="text-right">{{45}}%</td>
-                <td class="text-right">{{123 | dollars}}</td>
+                <td class="account-name">{{ account.name }}</td>
+                <td class="text-right">{{ account.percentage }}%</td>
+                <td class="text-right">{{ account.amount | dollars }}</td>
               </tr>
               <tr>
                 <td colspan="3" class="group-name">Non-qualified Assets</td>
                 <td></td>
               </tr>
-             <tr>
+              <tr ng-repeat="account in person.nonQualifiedAccounts">
                 <td class="account-indicator">
-                  <i class="purple"></i>
+                  <i style="background-color: {{account.color}}"></i>
                 </td>
-                <td class="account-name">IRA</td>
-                <td class="text-right">{{45}}%</td>
-                <td class="text-right">{{123 | dollars}}</td>
+                <td class="account-name">{{ account.name }}</td>
+                <td class="text-right">{{ account.percentage }}%</td>
+                <td class="text-right">{{ account.amount | dollars }}</td>
               </tr>
             </tbody>
             <tfoot>
@@ -50,7 +43,7 @@
                 <td></td>
                 <td class="account-name"><strong>Total Balance</strong></td>
                 <td></td>
-                <td class="text-right"><strong>{{12342 | dollars}}</strong></td>
+                <td class="text-right"><strong>{{person.totalAmount | dollars}}</strong></td>
               </tr>
             </tfoot>
           </table>
@@ -58,7 +51,7 @@
       </div>
       <div class="table-static other-income">
         <div class="header">
-          John's Other Income At Retirement
+          {{ person.name }}'s Other Income At Retirement
         </div>
         <table>
           <thead>
@@ -69,17 +62,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>AAA</td>
-              <td>1234%</td>
-              <td>$1234</td>
+            <tr ng-repeat="income in person.otherIncomes">
+              <td>{{ income.name }}</td>
+              <td>{{ income.age}}%</td>
+              <td>{{ income.amount | dollars }}</td>
             </tr>
-            <tr>
-              <td>AAA</td>
-              <td>1234%</td>
-              <td>$1234</td>
-            </tr>
-
           </tbody>
         </table>
       </div>
