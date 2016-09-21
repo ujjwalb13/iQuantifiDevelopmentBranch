@@ -39,7 +39,6 @@
       ]).then(function(data) {
         $scope.lifePolicy = data[0];
         $scope.people = data[1];
-        $scope.lifePolicy.day = 1;
         $scope.lifePolicy.month = moment($scope.lifePolicy.start_on).month();
         return $scope.lifePolicy.year = moment($scope.lifePolicy.start_on).year();
       });
@@ -52,9 +51,8 @@
       if (isValid) {
         $scope.pending = true;
         $scope.lifePolicy.person_guid = $scope.lifePolicy.person.guid;
-        if (!$scope.isPhone) {
-          $scope.lifePolicy.start_on = $scope.lifePolicy.year + "-" + ($scope.lifePolicy.month + 1) + "-" + $scope.lifePolicy.day;
-        }
+        $scope.lifePolicy.start_on = $scope.lifePolicy.year + "-" + ($scope.lifePolicy.month + 1) + "-1";
+
         return $scope.lifePolicy.$save().then(function(result) {
           $rootScope.$broadcast('alert', {
             type: 'success',
@@ -132,7 +130,6 @@
       ]).then(function(data) {
         $scope.disabilityPolicy = data[0];
         $scope.people = data[1];
-        $scope.disabilityPolicy.day = 1;
         $scope.disabilityPolicy.month = moment($scope.disabilityPolicy.start_on).month();
         return $scope.disabilityPolicy.year = moment($scope.disabilityPolicy.start_on).year();
       });
@@ -145,9 +142,8 @@
       if (isValid) {
         $scope.pending = true;
         $scope.disabilityPolicy.person_guid = $scope.disabilityPolicy.person.guid;
-        if (!$scope.isPhone) {
-          $scope.disabilityPolicy.start_on = $scope.disabilityPolicy.year + "-" + ($scope.disabilityPolicy.month + 1) + "-" + $scope.disabilityPolicy.day;
-        }
+        $scope.disabilityPolicy.start_on = $scope.disabilityPolicy.year + "-" + ($scope.disabilityPolicy.month + 1) + "-1";
+
         return $scope.disabilityPolicy.$save().then(function(result) {
           $rootScope.$broadcast('alert', {
             type: 'success',
@@ -237,7 +233,6 @@
       ]).then(function(data) {
         $scope.carePolicy = data[0];
         $scope.people = data[1];
-        $scope.carePolicy.day = 1;
         $scope.carePolicy.month = moment($scope.carePolicy.start_on).month();
         return $scope.carePolicy.year = moment($scope.carePolicy.start_on).year();
       });
@@ -263,9 +258,8 @@
       if (isValid) {
         $scope.pending = true;
         $scope.carePolicy.person_guid = $scope.carePolicy.person.guid;
-        if (!$scope.isPhone) {
-          $scope.carePolicy.start_on = $scope.carePolicy.year + "-" + ($scope.carePolicy.month + 1) + "-" + $scope.carePolicy.day;
-        }
+        $scope.carePolicy.start_on = $scope.carePolicy.year + "-" + ($scope.carePolicy.month + 1) + "-1";
+
         return $scope.carePolicy.$save().then(function(result) {
           $rootScope.$broadcast('alert', {
             type: 'success',
