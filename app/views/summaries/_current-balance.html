@@ -49,7 +49,11 @@
           </table>
         </div>
       </div>
+<<<<<<< HEAD
       <div class="table-static other-income" ng-show="person.otherIncomes.length > 0">
+=======
+      <div class="table-static other-income" ng-if="person.otherIncomes.length > 0">
+>>>>>>> origin/DG-Rationale
         <div class="header">
           {{ person.name }}'s Other Income At Retirement
         </div>
@@ -63,9 +67,9 @@
           </thead>
           <tbody>
             <tr ng-repeat="income in person.otherIncomes">
-              <td><strong>{{ income.name }}</strong></td>
-              <td>{{ income.age}}%</td>
-              <td>{{ income.amount | dollars }}</td>
+              <td><strong>{{ income.IncomeSource }}</strong></td>
+              <td>{{ income.IncomeStartAge }}</td>
+              <td>{{ income.MonthlyIncomeAmount | dollars }}</td>
             </tr>
           </tbody>
         </table>
