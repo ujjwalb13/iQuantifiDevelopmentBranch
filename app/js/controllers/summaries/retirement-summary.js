@@ -91,10 +91,10 @@
       addExtraAttributes(accounts, totalAmount)
       var paritionedAccounts = partitionAccounts(accounts);
 
-      var otherIncomes = filterIncomes([
-        {name: "Social Security (Estimated)", age: data.social.primary.age_planned, amount: data.social.primary.amount_planned},
-        {name: "Pension (Estimated)", age: data.pension.primary.age_planned, amount: data.pension.primary.amount_planned},
-      ]);
+
+
+      var otherIncomes = data.PrimaryRetirementIncomes;
+
       return {
         name: data.retirement.person.first_name,
         totalAmount: totalAmount,
@@ -114,10 +114,9 @@
       addExtraAttributes(accounts, totalAmount)
       var paritionedAccounts = partitionAccounts(accounts);
 
-      var otherIncomes = filterIncomes([
-        {name: "Social Security (Estimated)", age: data.social.spouse.age_planned, amount: data.social.spouse.amount_planned},
-        {name: "Pension (Estimated)", age: data.pension.spouse.age_planned, amount: data.pension.spouse.amount_planned},
-      ]);
+
+      var otherIncomes = data.SpouseRetirementIncomes;
+
       return {
         name: data.retirement.spouse.first_name,
         totalAmount: totalAmount,
