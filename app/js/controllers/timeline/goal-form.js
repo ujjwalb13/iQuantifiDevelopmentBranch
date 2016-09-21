@@ -193,8 +193,11 @@
           $scope.showPrimarySocial = true;
         }
         if ($scope.person.spouse && utilService.getAge($scope.person.spouse.dob) >= 40) {
-          return $scope.showSpouseSocial = true;
+          $scope.showSpouseSocial = true;
         }
+
+        return $scope.showPrimarySocial || $scope.showSpouseSocial
+
       }
     };
     $scope.pensionAges = (function() {
@@ -218,6 +221,14 @@
       if ($scope.obj.pensions.spouse.amount > 0) {
         $scope.has.spousePension = true;
       }
+      if ($scope.obj.social.primary != null && $scope.obj.social.primary.amount_62 > 0) {
+        $scope.has.socialSecurity = true;
+      }
+      if ($scope.obj.social.spouse != null && $scope.obj.social.spouse.amount_62 > 0) {
+        $scope.has.socialSecurity = true;
+      }
+
+
     }
     $scope.$watch('has.rental', function(newValue, oldValue) {
       if (newValue && $scope.obj.rentals.length === 0) {
@@ -402,6 +413,10 @@
           $scope.has.rental;
           if (!$scope.has.rental) {
             $scope.obj.rentals = [];
+          }
+          if (!$scope.has.socialSecurity) {
+            $scope.obj.social.primary=null;
+            $scope.obj.social.spouse=null;
           }
           if (!$scope.has.primaryPension) {
             $scope.obj.pensions.primary.amount = 0;

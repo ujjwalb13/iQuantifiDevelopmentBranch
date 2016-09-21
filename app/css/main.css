@@ -10263,7 +10263,10 @@ form label {
 .icon-mm-income:before {
   background: url("/images/svg/icon-mm-income.svg") no-repeat;
 }
-
+/* line 346, ../../app/css/modules/_icons.scss */
+.icon-back-to-dashboard:before {
+  background: url("/images/svg/icon-BacktoDashboard.svg") no-repeat;
+}
 /* line 349, ../../app/css/modules/_icons.scss */
 .icon-mm-investment:before {
   background: url("/images/svg/icon-mm-invesment.svg") no-repeat;
