@@ -472,7 +472,7 @@ angular.module('agera').config(function($routeProvider) {
     templateUrl: '/views/demo/life-insurance.html'
   })
 
-  .when('/zlife-mortgage', {
+  .when('/mortgage', {
     templateUrl: '/views/demo/mortgage.html'
   })
 

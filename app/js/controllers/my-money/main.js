@@ -100,7 +100,7 @@
       return response;
     }
     Expense.query().$promise.then(function(response) {
-      $scope.expenses = roundExpenses(response);
+      $scope.expenses = response; //roundExpenses(response);
     });
     DebtAndPolicyPayment.query().$promise.then(function(response) {
       $scope.debtsAndPolicyPayments = roundDebtsAndPolicy(response);
