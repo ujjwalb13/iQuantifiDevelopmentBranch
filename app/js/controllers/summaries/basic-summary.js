@@ -59,7 +59,6 @@
     summaryService.get({
       guid: $routeParams.guid
     }).$promise.then(function (object) {
-      console.log(object)
       $scope.goal = object.goal();
       fetchGoalData($scope.goal, object.schedule);
       $scope.completedActions = object.completed_actions;
