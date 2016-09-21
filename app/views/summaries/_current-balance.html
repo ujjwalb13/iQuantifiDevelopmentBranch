@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-6" ng-repeat="person in totalCurrentBalances">
-    <div class="person">
+    <div class="person" ng-if="person.show">
       <div class="header">
         <span class="name">{{ person.name }}'s Accounts</span>
         <span class="amount"><strong>{{ person.totalAmount | dollars }}</strong></span>
@@ -49,7 +49,7 @@
           </table>
         </div>
       </div>
-      <div class="table-static other-income">
+      <div class="table-static other-income" ng-show="person.otherIncomes.length > 0">
         <div class="header">
           {{ person.name }}'s Other Income At Retirement
         </div>
