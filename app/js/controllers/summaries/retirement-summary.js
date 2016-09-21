@@ -79,6 +79,10 @@
       return _.partition(accounts, function(account) { return account.is_qualified == true })
     }
 
+    var filterIncomes = function(incomes) {
+      return _.filter(incomes, function(income) { return income.amount > 0 })
+    }
+
     var getPrimaryAccounts = function(data) {
       var primary_account = data.associated_accounts.primary
       var totalAmount = primary_account.total;
@@ -87,18 +91,18 @@
       addExtraAttributes(accounts, totalAmount)
       var paritionedAccounts = partitionAccounts(accounts);
 
-      var otherIncomes = [
+      var otherIncomes = filterIncomes([
         {name: "Social Security (Estimated)", age: data.social.primary.age_planned, amount: data.social.primary.amount_planned},
         {name: "Pension (Estimated)", age: data.pension.primary.age_planned, amount: data.pension.primary.amount_planned},
-      ];
-
+      ]);
       return {
         name: data.retirement.person.first_name,
         totalAmount: totalAmount,
         accounts: accounts,
         qualifiedAccounts: paritionedAccounts[0],
         nonQualifiedAccounts: paritionedAccounts[1],
-        otherIncomes: otherIncomes
+        otherIncomes: otherIncomes,
+        show: accounts.length > 0 || otherIncomes.length > 0
       }
     }
 
@@ -110,17 +114,18 @@
       addExtraAttributes(accounts, totalAmount)
       var paritionedAccounts = partitionAccounts(accounts);
 
-      var otherIncomes = [
+      var otherIncomes = filterIncomes([
         {name: "Social Security (Estimated)", age: data.social.spouse.age_planned, amount: data.social.spouse.amount_planned},
         {name: "Pension (Estimated)", age: data.pension.spouse.age_planned, amount: data.pension.spouse.amount_planned},
-      ];
+      ]);
       return {
         name: data.retirement.spouse.first_name,
         totalAmount: totalAmount,
         accounts: accounts,
         qualifiedAccounts: paritionedAccounts[0],
         nonQualifiedAccounts: paritionedAccounts[1],
-        otherIncomes: otherIncomes
+        otherIncomes: otherIncomes,
+        show: accounts.length > 0 || otherIncomes.length > 0
       }
     }
 
