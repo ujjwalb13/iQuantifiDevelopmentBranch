@@ -56,10 +56,10 @@
         $scope.percentIncomplete = getPercentIncomplete(currentPeriod.projected - $scope.schedule.balance - $scope.payment, total, $scope.percentComplete);
       }
     };
-
     summaryService.get({
       guid: $routeParams.guid
     }).$promise.then(function (object) {
+      console.log(object)
       $scope.goal = object.goal();
       fetchGoalData($scope.goal, object.schedule);
       $scope.completedActions = object.completed_actions;
@@ -67,10 +67,12 @@
       $scope.goal.icon = "icon-gl-house";
     });
 
-    $scope.goToEdit = function (goal) {
-      var editUrl = ["/goals/houses/", goal.guid, "/edit"].join("");
+
+    $scope.goToEdit = function(goal) {
+      var editUrl = "/" + (_.pluralize(goal.category)) + "/" + (_.pluralize(goal.goal_type.toLowerCase())) + "/" + goal.guid + "/edit";
       $location.path(editUrl);
     }
+   
 
     $scope.currentRightSummary = "downpayment";
     $scope.downpaymentActive = function () {
