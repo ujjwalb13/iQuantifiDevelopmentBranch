@@ -1304,7 +1304,9 @@ ul{
         table.account-table {
           width: 100%;
           border-top: none;
-
+          tbody tr td {
+            font-size: 14px;
+          }
           .account-indicator {
             i {
               width: 15px;
@@ -1324,6 +1326,7 @@ ul{
             }
           }
           .group-name {
+            font-size: 16px;
             padding-left: 0;
             color: #3b5152;
           }
@@ -1348,6 +1351,7 @@ ul{
         table tr {
           th, td {text-align: center}
           th:first-of-type, td:first-of-type {text-align: left;}
+          td { font-size: 14px; }
         }
       }
     }

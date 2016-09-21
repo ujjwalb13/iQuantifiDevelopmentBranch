@@ -16,7 +16,7 @@
     function drawChart(scope, svg, data) {
       var width, height, padding, donut_size, radius;
 
-      padding = 15;
+      padding = scope.padding || 15;
       width = parseInt(svg.style("width"));
       donut_size = width/3;
       height = donut_size + 2*padding;
@@ -85,7 +85,7 @@
           var d2 = interpolate(t);
           var pos = outerArc.centroid(d2);
           pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
-          if(midAngle(d2) > Math.PI) {pos[0] -= width/3;}
+          if(midAngle(d2) >= Math.PI) {pos[0] -= width/3;}
           if(midAngle(d2) > Math.PI) { pos[1] += padding; }
           return "translate("+ pos +")";
         };
@@ -152,7 +152,8 @@
       restrict: 'E',
       link: link,
       scope: {
-        data: '='
+        data: '=',
+        padding: '='
       }
     }
   });

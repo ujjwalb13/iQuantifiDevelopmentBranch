@@ -5,9 +5,9 @@
         <span class="name">{{ person.name }}'s Accounts</span>
         <span class="amount"><strong>{{ person.totalAmount | dollars }}</strong></span>
       </div>
-      <div class="account-detail">
+      <div class="account-detail" ng-if="person.accounts.length > 0">
         <div class="donut-chart">
-          <donut-chart id="chart" data="person.accounts"></donut-chart>
+          <donut-chart data="person.accounts" padding="20"></donut-chart>
         </div>
         <div class="table-static">
           <table class="account-table">
@@ -63,7 +63,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="income in person.otherIncomes">
-              <td>{{ income.name }}</td>
+              <td><strong>{{ income.name }}</strong></td>
               <td>{{ income.age}}%</td>
               <td>{{ income.amount | dollars }}</td>
             </tr>
