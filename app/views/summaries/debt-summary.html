@@ -58,12 +58,9 @@
                                     <tbody>
                                         <tr>
                                             <td><strong>Orgination Date</strong></td>
-                                            <td>{{ debt.transition_on | monthYear}}</td>
+                                            <td>{{ debt.originate_on | monthYear}}</td>
                                         </tr>
-                                        <tr>
-                                            <td><strong>Total Goal Amount</strong></td>
-                                            <td>{{ debt.amount | dollars }}</td>
-                                        </tr>
+
                                         <tr>
                                             <td><strong>Current Balance</strong></td>
                                             <td>{{ debt.amount | dollars }}</td>
@@ -76,10 +73,7 @@
                                             <td><strong>Terms</strong></td>
                                             <td>{{ debt.originate_terms / 12 }} years</td>
                                         </tr>
-                                        <tr>
-                                            <td><strong>Total Payoff</strong></td>
-                                            <td><p>{{ debt.amount | dollars }}</p></td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
